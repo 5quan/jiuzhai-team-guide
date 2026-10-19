@@ -48,30 +48,30 @@
   ],
   "days": [
     { "id": "arrival", "date": "2026-11-01", "shortDate": "11.01", "weekday": "周日", "label": "抵达九寨", "subtitle": "成都东 → 黄龙九寨 → 沟口酒店", "stay": "沟口酒店 · 第1晚", "spotIds": [], "events": [
-      { "time": "16:00", "title": "成都东站集合", "detail": "7人提前集合，吃晚餐或买好便餐；核对身份证与行李。", "status": "建议" },
-      { "time": "17:05—19:10", "title": "C5756 前往黄龙九寨", "detail": "按你提供的车次截图安排。乘坐意向已确定，出票状态未核验。", "status": "已定安排" },
-      { "time": "19:30—20:00", "title": "出站接驳，去沟口酒店", "detail": "提前确认接19:10到站的车次、晚点等候、下车位置。7位乘客至少比较9座及行李空间。", "status": "待订" },
-      { "time": "约22:00—22:30", "title": "入住、休息", "detail": "约2—2.5小时车程另加出站等候，抵达时刻为估算。提前告知酒店晚到保留房间。", "status": "估算" }
+      { "time": "16:00", "title": "成都东站集合", "detail": "7人提前集合，吃晚餐或买好便餐；核对身份证与行李。", "status": "建议", "routeId": "chengdu-meeting" },
+      { "time": "17:05—19:10", "title": "C5756 前往黄龙九寨", "detail": "按你提供的车次截图安排。乘坐意向已确定，出票状态未核验。", "status": "已定安排", "routeId": "arrival-rail" },
+      { "time": "19:30—20:00", "title": "出站接驳，去沟口酒店", "detail": "提前确认接19:10到站的车次、晚点等候、下车位置。7位乘客至少比较9座及行李空间。", "status": "待订", "routeId": "arrival-shuttle" },
+      { "time": "约22:00—22:30", "title": "入住、休息", "detail": "约2—2.5小时车程另加出站等候，抵达时刻为估算。提前告知酒店晚到保留房间。", "status": "估算", "routeId": "hotel-stay" }
     ] },
     { "id": "day1", "date": "2026-11-02", "shortDate": "11.02", "weekday": "周一", "label": "两条上游支沟", "subtitle": "日则沟 + 则查洼沟 · 全天游览", "stay": "原沟口酒店 · 第2晚", "spotIds": ["jianzhuhai", "panda", "wuhuahai", "pearl", "mirror", "changhai", "wucaichi", "nuorilang"], "events": [
-      { "time": "06:30—07:15", "title": "早餐，前往景区入口", "detail": "步行或酒店接送，按预约页确认当天开园时间。不要把早餐时间排到第一班车之后。", "status": "建议" },
-      { "time": "上午", "title": "箭竹海 → 熊猫海 → 五花海 → 珍珠滩", "detail": "观光车结合步行，五花海多留时间；镜海看时间与风况短停。实际先游哪条支沟配合车流分配。", "status": "建议路线" },
-      { "time": "12:30左右", "title": "诺日朗附近午餐、换乘", "detail": "7人约好集合位置，预留用餐、步行和候车时间。", "status": "建议" },
-      { "time": "下午", "title": "长海 → 五彩池", "detail": "乘车往返，沿开放栈道游览。若上午先分流到左沟，可与右沟交换顺序。", "status": "建议路线" },
-      { "time": "16:00—17:30", "title": "诺日朗瀑布，乘车出沟", "detail": "按体力和车次收尾，留出候车时间。闭园与支线末班不是同一概念，入园时确认回程安排。", "status": "缓冲" }
+      { "time": "06:30—07:15", "title": "早餐，前往景区入口", "detail": "步行或酒店接送，按预约页确认当天开园时间。不要把早餐时间排到第一班车之后。", "status": "建议", "routeId": "hotel-entry" },
+      { "time": "上午", "title": "箭竹海 → 熊猫海 → 五花海 → 珍珠滩", "detail": "观光车结合步行，五花海多留时间；镜海看时间与风况短停。实际先游哪条支沟配合车流分配。", "status": "建议路线", "routeId": "rize-morning" },
+      { "time": "12:30左右", "title": "诺日朗附近午餐、换乘", "detail": "7人约好集合位置，预留用餐、步行和候车时间。", "status": "建议", "routeId": "lunch-transfer" },
+      { "time": "下午", "title": "长海 → 五彩池", "detail": "乘车往返，沿开放栈道游览。若上午先分流到左沟，可与右沟交换顺序。", "status": "建议路线", "routeId": "zechawa-afternoon" },
+      { "time": "16:00—17:30", "title": "诺日朗瀑布，乘车出沟", "detail": "按体力和车次收尾，留出候车时间。闭园与支线末班不是同一概念，入园时确认回程安排。", "status": "缓冲", "routeId": "monday-exit" }
     ] },
     { "id": "day2", "date": "2026-11-03", "shortDate": "11.03", "weekday": "周二", "label": "群海慢游 · 返程", "subtitle": "树正沟半天 → 成都中转 → 重庆", "stay": "重庆机场附近 · 第3晚", "spotIds": ["rhino", "tiger", "shuzheng", "spark", "reed"], "events": [
-      { "time": "07:00左右", "title": "早餐、退房、寄存行李", "detail": "两天票分别预约，今天门票与观光车重新生效；酒店已退房，不依赖延迟退房。", "status": "建议" },
-      { "time": "08:00—11:30", "title": "犀牛海 → 老虎海 → 树正群海", "detail": "按停靠站与开放栈道取舍。火花海、芦苇海为可选，不为打卡耽误返程。", "status": "建议路线" },
-      { "time": "11:30—12:30", "title": "收尾并乘车出沟", "detail": "开始出沟不等于已到入口，保留候车和车程。酒店接回服务须覆盖中午。", "status": "时间提醒" },
-      { "time": "12:30—13:30", "title": "午餐、取行李、全员集合", "detail": "核对7人、证件、手机与行李，按约定上车点候车。", "status": "建议" },
-      { "time": "14:00", "title": "沟口出发去黄龙九寨站", "detail": "这是从沟口出发的时间，不是高铁发车时间。整体预留约3—3.5小时用于道路接驳与候车，尽量不拖到15:00。", "status": "已定安排" },
-      { "time": "傍晚至晚间", "title": "高铁经成都东中转至重庆", "detail": "具体车次待订，同站中转建议留45—60分钟。11月3日通常10月20日开售；抵达重庆后直接去机场附近酒店。", "status": "待订" }
+      { "time": "07:00左右", "title": "早餐、退房、寄存行李", "detail": "两天票分别预约，今天门票与观光车重新生效；酒店已退房，不依赖延迟退房。", "status": "建议", "routeId": "hotel-stay" },
+      { "time": "08:00—11:30", "title": "犀牛海 → 树正群海（老虎海步行备选）", "detail": "按参考图默认乘车到树正；想看老虎海可选择开放栈道步行。火花海、芦苇海为可选，不为打卡耽误返程。", "status": "建议路线", "routeId": "shuzheng-morning" },
+      { "time": "11:30—12:30", "title": "收尾并乘车出沟", "detail": "开始出沟不等于已到入口，保留候车和车程。酒店接回服务须覆盖中午。", "status": "时间提醒", "routeId": "tuesday-exit" },
+      { "time": "12:30—13:30", "title": "午餐、取行李、全员集合", "detail": "核对7人、证件、手机与行李，按约定上车点候车。", "status": "建议", "routeId": "luggage-lunch" },
+      { "time": "14:00", "title": "沟口出发去黄龙九寨站", "detail": "这是从沟口出发的时间，不是高铁发车时间。整体预留约3—3.5小时用于道路接驳与候车，尽量不拖到15:00。", "status": "已定安排", "routeId": "return-shuttle" },
+      { "time": "傍晚至晚间", "title": "高铁经成都东中转至重庆", "detail": "具体车次待订，同站中转建议留45—60分钟。11月3日通常10月20日开售；抵达重庆后直接去机场附近酒店。", "status": "待订", "routeId": "return-rail" }
     ] },
     { "id": "flight", "date": "2026-11-04", "shortDate": "11.04", "weekday": "周三", "label": "早班机回深圳", "subtitle": "机场附近酒店 → 航站楼 → 深圳", "stay": "结束行程", "spotIds": [], "events": [
-      { "time": "约03:30—04:00", "title": "起床、退房、预约送机", "detail": "7人与全部行李同时安排，酒店是否有凌晨送机、是否需要两辆车，提前确认。", "status": "估算" },
-      { "time": "04:35左右", "title": "目标到达正确航站楼", "detail": "按起飞前2小时到机场规划。机场暂按重庆江北候选，尚未用航班号核对机场和航站楼。", "status": "待核验" },
-      { "time": "06:35", "title": "重庆飞深圳", "detail": "起飞时间已由团队确认，航班号、航站楼与出票状态待补充。", "status": "已定安排" }
+      { "time": "约03:30—04:00", "title": "起床、退房、预约送机", "detail": "7人与全部行李同时安排，酒店是否有凌晨送机、是否需要两辆车，提前确认。", "status": "估算", "routeId": "airport-transfer" },
+      { "time": "04:35左右", "title": "目标到达正确航站楼", "detail": "按起飞前2小时到机场规划。机场暂按重庆江北候选，尚未用航班号核对机场和航站楼。", "status": "待核验", "routeId": "airport-checkin" },
+      { "time": "06:35", "title": "重庆飞深圳", "detail": "起飞时间已由团队确认，航班号、航站楼与出票状态待补充。", "status": "已定安排", "routeId": "flight-home" }
     ] }
   ],
   "transport": [
@@ -96,6 +96,623 @@
     { "id": "windy", "title": "Windy 完整天气预报", "url": "https://www.windy.com/33.200/103.900?33.200,103.900,11", "type": "天气工具", "note": "已定位四川九寨沟景区区域；嵌入图层实时显示，不代表出游日天气已确定。" },
     { "id": "china-weather", "title": "中国天气网 · 九寨沟风景区", "url": "https://www.weather.com.cn/weather/10127190601A.shtml", "type": "交叉参考", "note": "对照景区短期天气与预警。" },
     { "id": "airport", "title": "重庆机场国内出发指引", "url": "https://www.cqa.cn/jcgyd/43/", "type": "机场官方", "note": "建议提前2小时到航站楼，航班具体要求向承运航司核验。" },
-    { "id": "rail", "title": "铁路12306", "url": "https://www.12306.cn/", "type": "交通预订", "note": "核对指定日期车次、票价、余票与中转站。" }
-  ]
+    { "id": "rail", "title": "铁路12306", "url": "https://www.12306.cn/", "type": "交通预订", "note": "核对指定日期车次、票价、余票与中转站。" },
+    { "id": "route-detail", "title": "官方游览路线参考（2012年资料）", "url": "https://www.jiuzhai.com/news/scenic-news/1307-2012-06-12-01-32-46", "type": "九寨沟官方 · 历史路线", "note": "用于理解步行与换乘关系，不作为本次日期站点、车次或栈道开放承诺。" },
+    { "id": "route-safety", "title": "景区安全游览提示 · 2026年9月29日", "url": "https://www.jiuzhai.com/news/notice/11429-2026-09-29-08-10-14", "type": "九寨沟官方", "note": "步行不离开开放栈道，乘车按现场秩序与指引。" }
+  ],
+  "routing": {
+    "preference": "参考图的观光车＋步行组合",
+    "note": "方式参考团队提供的攻略图和官方游玩说明；站点停靠、开放栈道与上下行方向以当天调度为准。选择仅在本页暂存，刷新恢复推荐。",
+    "sourceIds": [
+      "routes",
+      "route-detail",
+      "route-safety"
+    ],
+    "places": [
+      {
+        "id": "chengdu-east",
+        "name": "成都东站",
+        "scope": "outside",
+        "note": "按车票与站内指引确认检票口；集合位置待团队确定。"
+      },
+      {
+        "id": "huanglong-station",
+        "name": "黄龙九寨站",
+        "scope": "outside",
+        "note": "接送车上车点与车辆信息待订车后确认。"
+      },
+      {
+        "id": "jiuzhai-hotel",
+        "name": "沟口酒店（待定）",
+        "scope": "outside",
+        "note": "尚无酒店地址，不提供精确地图定位。"
+      },
+      {
+        "id": "chongqing-station",
+        "name": "重庆到达高铁站（待订）",
+        "scope": "outside",
+        "note": "车次与到达站待确认，不预设重庆北或重庆西。"
+      },
+      {
+        "id": "chongqing-hotel",
+        "name": "重庆机场附近酒店（待定）",
+        "scope": "outside",
+        "note": "提前确认凌晨7人加行李的送机安排。"
+      },
+      {
+        "id": "airport-terminal",
+        "name": "重庆出发机场／航站楼（待核验）",
+        "scope": "outside",
+        "note": "用航班号核对机场与航站楼，06:35起飞，目标04:35到达。"
+      },
+      {
+        "id": "shenzhen-airport",
+        "name": "深圳到达机场",
+        "scope": "outside",
+        "note": "以实际航班信息为准。"
+      },
+      {
+        "id": "park-gate",
+        "name": "九寨沟景区入口",
+        "scope": "park",
+        "position": [
+          330,
+          1115
+        ],
+        "note": "示意位置；实际检票口与集合点以现场为准。"
+      },
+      {
+        "id": "nuorilang-center",
+        "name": "诺日朗中心站",
+        "scope": "park",
+        "anchorSpotId": "nuorilang",
+        "note": "地图以诺日朗区域提示换乘位置；中心站与瀑布不是同一个点，中间需步行。"
+      },
+      {
+        "id": "mirror-parking",
+        "name": "镜海停车场",
+        "scope": "park",
+        "anchorSpotId": "mirror",
+        "note": "图中镜海标记仅提示所在区域，停车场与镜海观景点不是同一个点。"
+      },
+      {
+        "id": "wucaichi-stop",
+        "name": "五彩池上车点",
+        "scope": "park",
+        "anchorSpotId": "wucaichi",
+        "note": "先按开放栈道走到实际候车区；图中只提示五彩池区域。"
+      },
+      {
+        "id": "nuorilang-stop",
+        "name": "诺日朗出沟方向上车点",
+        "scope": "park",
+        "anchorSpotId": "nuorilang",
+        "note": "从瀑布按指引步行到出沟方向站点；不在瀑布旁随意拦车。"
+      }
+    ],
+    "routes": [
+      {
+        "id": "chengdu-meeting",
+        "locations": [
+          "chengdu-east"
+        ],
+        "legs": [],
+        "note": "集合与候车在站内完成。"
+      },
+      {
+        "id": "arrival-rail",
+        "locations": [],
+        "legs": [
+          {
+            "id": "rail",
+            "from": "chengdu-east",
+            "to": "huanglong-station",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "rail",
+                "label": "高铁 C5756",
+                "note": "按已确定的17:05—19:10安排，出票状态待核验。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "arrival-shuttle",
+        "locations": [],
+        "legs": [
+          {
+            "id": "pickup",
+            "from": "huanglong-station",
+            "to": "jiuzhai-hotel",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "shuttle",
+                "label": "预订整车接站",
+                "note": "7人加行李比较9座及以上车辆，确认夜间到站等候与酒店送达。"
+              },
+              {
+                "mode": "shuttle",
+                "label": "正规接驳大巴",
+                "note": "先核实是否衔接19:10到站车次、末班和下车位置；费用另付。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "hotel-stay",
+        "locations": [
+          "jiuzhai-hotel"
+        ],
+        "legs": [],
+        "note": "酒店待定；晚到保留、早餐、寄存行李与景区接送需落实。"
+      },
+      {
+        "id": "hotel-entry",
+        "locations": [],
+        "legs": [
+          {
+            "id": "hotel-gate",
+            "from": "jiuzhai-hotel",
+            "to": "park-gate",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "pending",
+                "label": "待酒店位置确认",
+                "note": "先确认酒店到检票口的实际距离及接送服务，再选择步行或接送。"
+              },
+              {
+                "mode": "walk",
+                "label": "步行到检票口",
+                "note": "适用于已确认实际步行可达的酒店；地图不推算尚未确定酒店的步行时间。"
+              },
+              {
+                "mode": "shuttle",
+                "label": "酒店接送",
+                "note": "确认送达检票口附近、发车时间，以及周二中午回酒店取行李的接回服务。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "rize-morning",
+        "locations": [],
+        "legs": [
+          {
+            "id": "enter-jianzhu",
+            "from": "park-gate",
+            "to": "jianzhuhai",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按上行分流到达日则沟开放站点；如先分流左沟，可交换上午与下午顺序。"
+              }
+            ]
+          },
+          {
+            "id": "jianzhu-panda",
+            "from": "jianzhuhai",
+            "to": "panda",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "参考图推荐乘车到熊猫海，按实际开放停靠站排队。"
+              },
+              {
+                "mode": "walk",
+                "label": "步行栈道",
+                "note": "仅在对应栈道开放且全队愿意多走时选择；另留步行和观景时间。"
+              }
+            ]
+          },
+          {
+            "id": "panda-wuhua",
+            "from": "panda",
+            "to": "wuhuahai",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "参考图推荐乘车去五花海，把主要游览时间留在五花海。"
+              },
+              {
+                "mode": "walk",
+                "label": "步行栈道",
+                "note": "对应栈道开放时可徒步，需评估下行台阶、体力与上午剩余时间。"
+              }
+            ]
+          },
+          {
+            "id": "wuhua-pearl",
+            "from": "wuhuahai",
+            "to": "pearl",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行栈道",
+                "note": "按参考图经孔雀河道走到珍珠滩、瀑布，途中看景；只走现场开放路段。"
+              }
+            ]
+          },
+          {
+            "id": "pearl-mirror",
+            "from": "pearl",
+            "to": "mirror-parking",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行栈道",
+                "note": "瀑布游览后按指引走到镜海停车场；参考图此段为步行。镜海观景可看时间与风况取舍。"
+              }
+            ]
+          }
+        ],
+        "note": "右沟参考顺序。若车辆分流先到左沟，请交换上午与下午，不逆行追赶固定车次。"
+      },
+      {
+        "id": "lunch-transfer",
+        "locations": [],
+        "legs": [
+          {
+            "id": "mirror-center",
+            "from": "mirror-parking",
+            "to": "nuorilang-center",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "镜海停车场乘车回诺日朗换乘区，用餐与换乘还需步行；实际停靠听从调度。"
+              }
+            ]
+          }
+        ],
+        "note": "集合、吃饭和换乘留出时间；换乘区不是诺日朗瀑布观景点。"
+      },
+      {
+        "id": "zechawa-afternoon",
+        "locations": [],
+        "legs": [
+          {
+            "id": "center-changhai",
+            "from": "nuorilang-center",
+            "to": "changhai",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "在长海方向站台候车；跨沟往返采用观光车，不按图上直线步行。"
+              }
+            ]
+          },
+          {
+            "id": "changhai-pool",
+            "from": "changhai",
+            "to": "wucaichi",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行栈道",
+                "note": "参考图及官方路线均安排沿开放栈道下行到五彩池；没有在本段提供观光车选项。"
+              }
+            ]
+          },
+          {
+            "id": "pool-stop",
+            "from": "wucaichi",
+            "to": "wucaichi-stop",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行栈道",
+                "note": "观景后继续步行至五彩池上车点，勿把池边当作候车点。"
+              }
+            ]
+          },
+          {
+            "id": "pool-center",
+            "from": "wucaichi-stop",
+            "to": "nuorilang-center",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "在开放站点按调度乘车返回诺日朗换乘区，另留候车时间。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "monday-exit",
+        "locations": [],
+        "legs": [
+          {
+            "id": "center-waterfall",
+            "from": "nuorilang-center",
+            "to": "nuorilang",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行栈道",
+                "note": "参考图从中心站步行到瀑布与观景区，二者不是同一点。"
+              }
+            ]
+          },
+          {
+            "id": "waterfall-stop",
+            "from": "nuorilang",
+            "to": "nuorilang-stop",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行栈道",
+                "note": "看完瀑布按现场指引步行到出沟方向上车点。"
+              }
+            ]
+          },
+          {
+            "id": "nuorilang-exit",
+            "from": "nuorilang-stop",
+            "to": "park-gate",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "乘观光车下行出沟，是否中途换乘以调度为准；不要按闭园时间反推支线末班。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "shuzheng-morning",
+        "locations": [],
+        "legs": [
+          {
+            "id": "enter-rhino",
+            "from": "park-gate",
+            "to": "rhino",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "上车前说明计划在树正沟游览，确认是否可在犀牛海下车。"
+              }
+            ]
+          },
+          {
+            "id": "rhino-shuzheng",
+            "from": "rhino",
+            "to": "shuzheng",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "参考图犀牛海到树正乘观光车；默认省去中间的长段步行，停靠按调度。"
+              },
+              {
+                "mode": "walk",
+                "label": "经老虎海步行",
+                "note": "想看老虎海时，改走开放栈道到树正；需另留步行与观景时间。",
+                "via": [
+                  "tiger"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "按参考图默认乘车到树正；老虎海放在步行备选中。周二11:30开始收尾。"
+      },
+      {
+        "id": "tuesday-exit",
+        "locations": [],
+        "legs": [
+          {
+            "id": "shuzheng-exit",
+            "from": "shuzheng",
+            "to": "park-gate",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按现场指引到出沟方向站点，候车下行；目标12:30前出沟。"
+              },
+              {
+                "mode": "mixed",
+                "label": "经火花海步行后乘车",
+                "note": "参考图树正群海到火花海的步行段约60分钟，另加观景、候车和出沟车程；周二不作为默认。",
+                "via": [
+                  "spark"
+                ],
+                "warning": "此选项可能超过11:30—12:30收尾时段。优先直接乘车出沟，不能因此拖延14:00送站。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "luggage-lunch",
+        "locations": [],
+        "legs": [
+          {
+            "id": "gate-hotel",
+            "from": "park-gate",
+            "to": "jiuzhai-hotel",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "pending",
+                "label": "待酒店位置确认",
+                "note": "午餐与取行李预留到13:30；回酒店方式需事先落实。"
+              },
+              {
+                "mode": "walk",
+                "label": "步行回酒店",
+                "note": "仅在实际距离合适且全队有余力时选择，勿用示意图估算距离。"
+              },
+              {
+                "mode": "shuttle",
+                "label": "酒店接回",
+                "note": "确认退房后仍可接回、周二中午有车，不只看免费送景区。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "return-shuttle",
+        "locations": [],
+        "legs": [
+          {
+            "id": "hotel-station",
+            "from": "jiuzhai-hotel",
+            "to": "huanglong-station",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "shuttle",
+                "label": "预订整车送站",
+                "note": "14:00从沟口约定点出发，整体预留约3—3.5小时接驳及候车；高铁车次待订。"
+              },
+              {
+                "mode": "shuttle",
+                "label": "正规送站大巴",
+                "note": "先核实发车地点、时间与高铁衔接，额外预留候车及下车进站时间。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "return-rail",
+        "locations": [],
+        "legs": [
+          {
+            "id": "huanglong-chengdu",
+            "from": "huanglong-station",
+            "to": "chengdu-east",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "rail",
+                "label": "高铁 · 待订",
+                "note": "以11月3日实际车次为准，同站中转建议留45—60分钟。"
+              }
+            ]
+          },
+          {
+            "id": "chengdu-chongqing",
+            "from": "chengdu-east",
+            "to": "chongqing-station",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "rail",
+                "label": "中转高铁 · 待订",
+                "note": "先确认重庆实际到达站，再落实去机场附近酒店的车辆。"
+              }
+            ]
+          },
+          {
+            "id": "chongqing-hotel",
+            "from": "chongqing-station",
+            "to": "chongqing-hotel",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "shuttle",
+                "label": "接车／打车",
+                "note": "7人和行李确认一辆合规大车或分两辆车；费用另付或核对酒店是否包含。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "airport-transfer",
+        "locations": [],
+        "legs": [
+          {
+            "id": "hotel-airport",
+            "from": "chongqing-hotel",
+            "to": "airport-terminal",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "shuttle",
+                "label": "预约凌晨送机",
+                "note": "提前落实起床、退房和车辆，目标04:35到正确航站楼；是否酒店含送机待确认。"
+              },
+              {
+                "mode": "shuttle",
+                "label": "预约出租／网约车",
+                "note": "7人加行李通常需核实大车或分车，预订后确认凌晨接驾和费用。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      },
+      {
+        "id": "airport-checkin",
+        "locations": [
+          "airport-terminal"
+        ],
+        "legs": [],
+        "note": "办理值机、托运、安检并按实际登机口集合；航班号与航站楼待补充。"
+      },
+      {
+        "id": "flight-home",
+        "locations": [],
+        "legs": [
+          {
+            "id": "fly-shenzhen",
+            "from": "airport-terminal",
+            "to": "shenzhen-airport",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "flight",
+                "label": "航班06:35起飞",
+                "note": "起飞时间按团队确认，航班号、出票及到达时刻以实际订单为准。"
+              }
+            ]
+          }
+        ],
+        "note": ""
+      }
+    ]
+  }
 }

@@ -13,29 +13,29 @@
     "requests": [
       {
         "name": "/style.css",
-        "bytes": 15863
+        "bytes": 21103
       },
       {
         "name": "/app.js",
-        "bytes": 19090
+        "bytes": 31362
       },
       {
         "name": "/api/guide",
-        "bytes": 15519
+        "bytes": 28039
       }
     ],
     "longTasksMs": [
-      83,
-      134
+      77,
+      148
     ],
-    "navigationMs": 145,
+    "navigationMs": 161,
     "fourDaysBottom": 539,
     "viewportHeight": 844
   },
   "windy": {
     "loaded": true,
-    "canvases": 6
+    "canvases": 8
   },
   "pageErrors": [],
-  "checkedAt": "2026-10-19T09:54:24.440Z"
+  "checkedAt": "2026-10-19T10:20:53.379Z"
 }

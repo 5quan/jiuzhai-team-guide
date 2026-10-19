@@ -2,7 +2,7 @@ const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 let guide;
-const state = { view: 'home', nav: 'itinerary', mapDay: 'all', spot: 'wuhuahai', query: '', layer: 'clouds' };
+const state = { view: 'home', nav: 'itinerary', mapDay: 'all', spot: 'wuhuahai', query: '', layer: 'clouds', eventKey: null, legId: null, inlinePlace: null, routeChoices: new Map() };
 const weatherCache = new Map();
 let weatherRequest = 0;
 let toastTimer;
@@ -28,6 +28,184 @@ function external(url, text, classes = 'text-link') {
   return `<a class="${classes}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${text} ↗</a>`;
 }
 
+function eventContext(key = state.eventKey) {
+  if (!key || !guide.routing) return null;
+  const [dayId, index] = key.split(':');
+  const day = guide.days.find(item => item.id === dayId);
+  const event = day?.events[Number(index)];
+  const route = guide.routing.routes.find(item => item.id === event?.routeId);
+  return route ? { day, event, route } : null;
+}
+
+function locationInfo(id) {
+  const spot = guide.spots.find(item => item.id === id);
+  if (spot) return { ...spot, scope: 'park', note: spot.travel };
+  return guide.routing?.places.find(place => place.id === id);
+}
+
+function mapAnchor(id) {
+  const place = locationInfo(id);
+  if (!place || place.scope !== 'park') return null;
+  if (place.anchorSpotId) return { id: place.anchorSpotId, position: locationInfo(place.anchorSpotId).position };
+  return { id, position: place.position };
+}
+
+function legChoice(route, leg) {
+  return leg.options[state.routeChoices.get(`${route.id}/${leg.id}`) ?? leg.recommended] || leg.options[leg.recommended];
+}
+
+function routeLocations(context) {
+  if (!context) return [];
+  const ids = [...context.route.locations];
+  for (const leg of context.route.legs) ids.push(leg.from, ...(legChoice(context.route, leg).via || []), leg.to);
+  return [...new Set(ids)];
+}
+
+function routeAnchors(context) {
+  return [...new Map(routeLocations(context).map(mapAnchor).filter(Boolean).map(point => [point.id, point])).values()];
+}
+
+function dayEvent(day, event, index) {
+  const key = `${day.id}:${index}`;
+  const linked = guide.routing?.routes.some(route => route.id === event.routeId);
+  const time = linked ? `<button class="time-link" type="button" data-event-route="${esc(key)}" aria-expanded="false" aria-controls="event-map-${day.id}-${index}"><time>${esc(event.time)}</time><span>地图与交通 ⌄</span></button>` : `<time>${esc(event.time)}</time>`;
+  return `<li>${time}<div><div class="event-title"><h3>${esc(event.title)}</h3><span class="status ${['待订', '待核验', '时间提醒'].includes(event.status) ? 'warning' : ''}">${esc(event.status)}</span></div><p>${esc(event.detail)}</p></div>${linked ? `<section class="event-route-panel" id="event-map-${day.id}-${index}" aria-label="${esc(event.time)}地图与交通" hidden></section>` : ''}</li>`;
+}
+
+function closeEventRoute() {
+  if (!state.eventKey) return;
+  const button = $(`[data-event-route="${state.eventKey}"]`);
+  const panel = button && document.getElementById(button.getAttribute('aria-controls'));
+  if (panel) { panel.hidden = true; panel.replaceChildren(); }
+  button?.setAttribute('aria-expanded', 'false');
+  button?.closest('.day-card').classList.remove('with-route');
+  state.eventKey = null;
+  state.legId = null;
+  updateMapSelection();
+}
+
+function openEventRoute(key) {
+  const button = $(`[data-event-route="${key}"]`);
+  if (!button) return;
+  if (state.eventKey === key) { closeEventRoute(); button.focus({ preventScroll: true }); return; }
+  closeEventRoute();
+  state.eventKey = key;
+  const context = eventContext();
+  if (!context) return;
+  initMap();
+  state.legId = context.route.legs[0]?.id || null;
+  state.inlinePlace = routeAnchors(context)[0]?.id || null;
+  const panel = document.getElementById(button.getAttribute('aria-controls'));
+  panel.innerHTML = `<div class="inline-heading"><div><strong>${esc(context.day.shortDate)} ${esc(context.event.time)}</strong><p>${esc(context.event.title)}</p></div><button class="icon-button" type="button" data-close-event aria-label="收起地图与交通">收起</button></div><div class="inline-layout"><div class="inline-map-side"><div class="inline-map-slot"></div><div class="inline-place-buttons" role="group" aria-label="本时段位置"></div><div class="inline-place-info" aria-live="polite"></div><div class="outside-places"></div></div><div class="inline-transit"><h4>本段怎么走</h4><ol class="leg-list">${context.route.legs.map((leg, index) => `<li class="leg-card" data-leg-card="${esc(leg.id)}"><div class="leg-heading"><button type="button" class="leg-focus" data-leg-focus="${esc(leg.id)}" aria-pressed="${index === 0}"><span class="leg-index">${index + 1}</span><span class="leg-endpoints"></span></button><span class="mode-badge"></span></div>${leg.options.length > 1 ? `<label class="transport-label">交通方式<select data-transport="${esc(leg.id)}" aria-label="${esc(locationInfo(leg.from).name)}到${esc(locationInfo(leg.to).name)}交通方式">${leg.options.map((option, optionIndex) => `<option value="${optionIndex}">${esc(option.label)}${optionIndex === leg.recommended && option.mode !== 'pending' ? '（推荐）' : ''}</option>`).join('')}</select></label>` : ''}<p class="leg-note"></p><p class="leg-warning" hidden></p></li>`).join('')}</ol>${context.route.legs.length ? '' : '<p class="venue-note">本时段在同一地点活动，暂无景点间交通。</p>'}<p class="route-context-note">${esc(context.route.note)}</p><details class="route-basis"><summary>交通依据与位置说明</summary><p>${esc(guide.routing.note)}</p><p>沟内观光车使用当天车票；酒店、车站与机场接驳另计。小地图只提示所在区域，不用于步行导航。</p>${guide.routing.sourceIds.map(id => { const source = guide.sources.find(item => item.id === id); return external(source.url, esc(source.title)); }).join('')}</details></div></div>`;
+  panel.hidden = false;
+  button.setAttribute('aria-expanded', 'true');
+  button.closest('.day-card').classList.add('with-route');
+  buildInlineMap(panel, context);
+  updateInlineRoute();
+  const bounds = button.getBoundingClientRect();
+  if (bounds.top < 0 || bounds.bottom > window.innerHeight - 84) button.scrollIntoView({ block: 'nearest' });
+}
+
+function buildInlineMap(panel, context) {
+  const points = routeAnchors(context);
+  const mount = $('.inline-map-slot', panel);
+  if (!points.length) { mount.innerHTML = '<p class="outside-map-note">本段在沟外，地点信息列在下方。</p>'; return; }
+  const svg = $('.route-svg').cloneNode(true);
+  svg.classList.add('mini-map');
+  svg.setAttribute('aria-label', `${context.event.time}相关景点小地图`);
+  const xs = points.map(point => point.position[0]);
+  const ys = points.map(point => point.position[1]);
+  const width = Math.max(420, Math.min(800, Math.max(...xs) + 245) - Math.max(0, Math.min(...xs) - 190));
+  const height = Math.max(320, Math.min(1190, Math.max(...ys) + 90) - Math.max(0, Math.min(...ys) - 75));
+  const left = Math.min(800 - width, Math.max(0, Math.min(...xs) - 190));
+  const top = Math.min(1190 - height, Math.max(0, Math.min(...ys) - 75));
+  svg.setAttribute('viewBox', `${left} ${top} ${width} ${height}`);
+  $$('.spot-node', svg).forEach(node => {
+    node.dataset.inlinePlace = node.dataset.spot;
+    node.removeAttribute('data-spot');
+  });
+  const entrance = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  entrance.classList.add('spot-node', 'gate-node');
+  entrance.dataset.inlinePlace = 'park-gate';
+  entrance.setAttribute('role', 'button');
+  entrance.setAttribute('tabindex', '0');
+  entrance.setAttribute('aria-label', '查看景区入口');
+  entrance.innerHTML = '<rect x="245" y="1095" width="170" height="50" rx="9" fill="transparent" stroke="currentColor" stroke-width="6"/>';
+  svg.append(entrance);
+  mount.append(svg);
+}
+
+function updateInlineRoute() {
+  const context = eventContext();
+  if (!context) return;
+  const panel = $('.event-route-panel:not([hidden])');
+  if (!panel) return;
+  const refs = routeLocations(context);
+  const points = routeAnchors(context);
+  const activeLeg = context.route.legs.find(leg => leg.id === state.legId);
+  const legIds = activeLeg ? [activeLeg.from, ...(legChoice(context.route, activeLeg).via || []), activeLeg.to].map(mapAnchor).filter(Boolean).map(point => point.id) : [];
+  for (const leg of context.route.legs) {
+    const card = $(`[data-leg-card="${leg.id}"]`, panel);
+    const option = legChoice(context.route, leg);
+    const names = [leg.from, ...(option.via || []), leg.to].map(id => locationInfo(id).name);
+    $('.leg-endpoints', card).textContent = names.join(' → ');
+    $('.mode-badge', card).textContent = option.label;
+    $('.mode-badge', card).dataset.mode = option.mode;
+    $('.leg-note', card).textContent = option.note;
+    $('.leg-warning', card).hidden = !option.warning;
+    $('.leg-warning', card).textContent = option.warning || '';
+    $('.leg-focus', card).setAttribute('aria-pressed', String(leg.id === state.legId));
+    card.classList.toggle('active-leg', leg.id === state.legId);
+    const select = $('select', card);
+    if (select) select.value = String(state.routeChoices.get(`${context.route.id}/${leg.id}`) ?? leg.recommended);
+  }
+  if (!points.some(point => point.id === state.inlinePlace)) state.inlinePlace = points[0]?.id || null;
+  const aliasName = id => {
+    const original = refs.includes(id);
+    const aliases = refs.map(locationInfo).filter(place => place.anchorSpotId === id);
+    return original || !aliases.length ? locationInfo(id).name : `${locationInfo(id).name.replace('瀑布', '')}区域`;
+  };
+  $$('.mini-map .spot-node', panel).forEach(node => {
+    const id = node.dataset.inlinePlace;
+    const inRoute = points.some(point => point.id === id);
+    node.classList.toggle('in-time', inRoute);
+    node.classList.toggle('active-leg', legIds.includes(id));
+    node.classList.toggle('selected', state.inlinePlace === id);
+    node.classList.remove('dimmed');
+    node.setAttribute('aria-pressed', String(state.inlinePlace === id));
+    node.tabIndex = inRoute ? 0 : -1;
+    const label = $('.spot-label', node);
+    if (label && inRoute) label.textContent = aliasName(id).replace(' / 树正寨', '');
+  });
+  const placeButtons = $('.inline-place-buttons', panel);
+  const signature = points.map(point => point.id).join('/');
+  if (placeButtons.dataset.places !== signature) {
+    placeButtons.innerHTML = points.map(point => `<button type="button" data-inline-place="${esc(point.id)}">${esc(aliasName(point.id))}</button>`).join('');
+    placeButtons.dataset.places = signature;
+  }
+  $$('[data-inline-place]', placeButtons).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.inlinePlace === state.inlinePlace)));
+  const related = refs.map(locationInfo).filter(place => mapAnchor(place.id)?.id === state.inlinePlace);
+  $('.inline-place-info', panel).innerHTML = related.length ? `<strong>${related.map(place => esc(place.name)).join(' / ')}</strong>${related.map(place => `<p>${esc(place.note)}</p>`).join('')}` : '';
+  $('.outside-places', panel).innerHTML = refs.map(locationInfo).filter(place => place.scope === 'outside').map(place => `<div class="outside-place"><strong>${esc(place.name)}</strong><p>${esc(place.note)}</p></div>`).join('');
+  updateMapSelection();
+}
+
+function selectInlinePlace(id) {
+  if (!routeAnchors(eventContext()).some(point => point.id === id)) return;
+  state.inlinePlace = id;
+  updateInlineRoute();
+}
+
+function focusLeg(id) {
+  const context = eventContext();
+  const leg = context?.route.legs.find(item => item.id === id);
+  if (!leg) return;
+  state.legId = id;
+  state.inlinePlace = mapAnchor(leg.from)?.id || mapAnchor(leg.to)?.id || null;
+  updateInlineRoute();
+}
+
+
 function dayContent(day, index) {
   const brief = {
     arrival: '17:05 成都东 → 19:10 黄龙九寨',
@@ -35,7 +213,7 @@ function dayContent(day, index) {
     day2: '14:00 沟口出发 → 成都 → 重庆',
     flight: '06:35 重庆 → 深圳'
   };
-  return `<details class="day-card" id="day-${esc(day.id)}"><summary><span class="day-date"><strong>${esc(day.shortDate)}</strong><span>${esc(day.weekday)}</span></span><span class="day-overview"><span class="day-title"><span class="day-number">${index + 1}</span>${esc(day.label)}</span><span class="day-brief">${esc(brief[day.id] || day.subtitle)}</span><span class="day-stay">${esc(day.stay)}</span></span><span class="expand" aria-hidden="true">⌄</span></summary><div class="day-body"><ol class="timeline">${day.events.map(event => `<li><time>${esc(event.time)}</time><div><div class="event-title"><h3>${esc(event.title)}</h3><span class="status ${['待订', '待核验', '时间提醒'].includes(event.status) ? 'warning' : ''}">${esc(event.status)}</span></div><p>${esc(event.detail)}</p></div></li>`).join('')}</ol>${day.spotIds.length ? `<div class="route-shortcuts">${day.spotIds.map(id => `<button type="button" data-jump-spot="${esc(id)}">${esc(guide.spots.find(spot => spot.id === id).name)} ↗</button>`).join('')}</div>` : ''}</div></details>`;
+  return `<details class="day-card" id="day-${esc(day.id)}"><summary><span class="day-date"><strong>${esc(day.shortDate)}</strong><span>${esc(day.weekday)}</span></span><span class="day-overview"><span class="day-title"><span class="day-number">${index + 1}</span>${esc(day.label)}</span><span class="day-brief">${esc(brief[day.id] || day.subtitle)}</span><span class="day-stay">${esc(day.stay)}</span></span><span class="expand" aria-hidden="true">⌄</span></summary><div class="day-body"><ol class="timeline">${day.events.map((event, eventIndex) => dayEvent(day, event, eventIndex)).join('')}</ol>${day.spotIds.length ? `<div class="route-shortcuts">${day.spotIds.map(id => `<button type="button" data-jump-spot="${esc(id)}">${esc(guide.spots.find(spot => spot.id === id).name)} ↗</button>`).join('')}</div>` : ''}</div></details>`;
 }
 
 function render() {
@@ -121,10 +299,13 @@ function renderSpotList() {
 }
 
 function updateMapSelection() {
-  $$('.spot-node').forEach(node => {
+  const context = eventContext();
+  const activeIds = routeAnchors(context).map(point => point.id);
+  $$('#schematic .spot-node').forEach(node => {
     const selected = node.dataset.spot === state.spot;
     node.classList.toggle('selected', selected);
-    node.classList.toggle('dimmed', state.mapDay !== 'all' && node.dataset.day !== state.mapDay);
+    node.classList.toggle('in-time', activeIds.includes(node.dataset.spot));
+    node.classList.toggle('dimmed', activeIds.length ? !activeIds.includes(node.dataset.spot) : state.mapDay !== 'all' && node.dataset.day !== state.mapDay);
     node.setAttribute('aria-pressed', String(selected));
   });
 }
@@ -138,6 +319,7 @@ function selectSpot(id) {
 }
 
 function filterMap(day) {
+  closeEventRoute();
   state.mapDay = day;
   const selected = guide.spots.find(spot => spot.id === state.spot);
   if (day !== 'all' && selected.day !== Number(day)) state.spot = guide.spots.find(spot => spot.day === Number(day)).id;
@@ -221,6 +403,13 @@ document.addEventListener('click', event => {
     navigate(target);
     return;
   }
+  const time = event.target.closest('[data-event-route]');
+  if (time) { openEventRoute(time.dataset.eventRoute); return; }
+  if (event.target.closest('[data-close-event]')) { const key = state.eventKey; closeEventRoute(); $(`[data-event-route="${key}"]`)?.focus({ preventScroll: true }); return; }
+  const inlinePlace = event.target.closest('[data-inline-place]');
+  if (inlinePlace) { selectInlinePlace(inlinePlace.dataset.inlinePlace); return; }
+  const leg = event.target.closest('[data-leg-focus]');
+  if (leg) { focusLeg(leg.dataset.legFocus); return; }
   const spot = event.target.closest('[data-spot]');
   if (spot) selectSpot(spot.dataset.spot);
   const filter = event.target.closest('[data-map-day]');
@@ -238,8 +427,20 @@ document.addEventListener('click', event => {
 
 document.addEventListener('keydown', event => {
   const node = event.target.closest('.spot-node');
-  if (node && ['Enter', ' '].includes(event.key)) { event.preventDefault(); selectSpot(node.dataset.spot); }
+  if (node && ['Enter', ' '].includes(event.key)) { event.preventDefault(); if (node.dataset.inlinePlace) selectInlinePlace(node.dataset.inlinePlace); else selectSpot(node.dataset.spot); }
 });
+document.addEventListener('change', event => {
+  const select = event.target.closest('[data-transport]');
+  const context = eventContext();
+  const leg = context?.route.legs.find(item => item.id === select?.dataset.transport);
+  const index = Number(select?.value);
+  if (!leg || !Number.isInteger(index) || !leg.options[index]) return;
+  state.routeChoices.set(`${context.route.id}/${leg.id}`, index);
+  focusLeg(leg.id);
+});
+document.addEventListener('toggle', event => {
+  if (event.target.matches('.day-card') && !event.target.open && state.eventKey && event.target.contains($(`[data-event-route="${state.eventKey}"]`))) closeEventRoute();
+}, true);
 window.addEventListener('popstate', () => { if (guide) navigate(location.hash.slice(1) || 'itinerary', false); });
 window.addEventListener('hashchange', () => { if (guide) navigate(location.hash.slice(1) || 'itinerary', false); });
 window.addEventListener('beforeprint', () => {
