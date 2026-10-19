@@ -1,0 +1,154 @@
+{
+  "checkedAt": "2026-10-19T09:14:59.349Z",
+  "scope": "9 sequential lightweight requests; no load testing",
+  "results": [
+    {
+      "method": "HEAD",
+      "path": "/",
+      "status": 200,
+      "ms": 137,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-cache",
+        "etag": "\"bipGLm49Sx3-C7dq4oopnFwnIph0bE-nlbw8igKJAUk\"",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "status": 200,
+      "ms": 625,
+      "bytes": 46,
+      "sha256": "ea073ac8161a0024af3ca939161c9c0f644ac7d574de4981beae48be14912992",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-cache",
+        "etag": "\"6gc6yBYaACSvPKk5FhycD2RKx9V03kmBvq5IvhSRKZI\"",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/guide",
+      "status": 200,
+      "ms": 191,
+      "bytes": 15519,
+      "sha256": "ed654ae4ac1968ec8b5ee16eee8b9c94d202f1c5b7344b94b4c15a16b1e6bad1",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-cache",
+        "etag": "\"7WVK5KwZaOyLXuFu7ouclNIC8cW3NEuUtMFaFrHmutE\"",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "method": "HEAD",
+      "path": "/app.js",
+      "status": 200,
+      "ms": 112,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "text/javascript; charset=utf-8",
+        "cache-control": "no-cache",
+        "etag": "\"tNmDHw9ANRDNecQUQMUtUuaaOdOLOMcdgI7Dq1WqIaY\"",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/.env",
+      "status": 404,
+      "ms": 153,
+      "bytes": 21,
+      "sha256": "c8d3eae160a892e32837db3dcae515e843e5383fef52b8141940c8bcf8b6d59f",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-cache",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/server.mjs",
+      "status": 404,
+      "ms": 117,
+      "bytes": 21,
+      "sha256": "c8d3eae160a892e32837db3dcae515e843e5383fef52b8141940c8bcf8b6d59f",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-cache",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/data/guide.json",
+      "status": 404,
+      "ms": 116,
+      "bytes": 21,
+      "sha256": "c8d3eae160a892e32837db3dcae515e843e5383fef52b8141940c8bcf8b6d59f",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-cache",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/weather?layer=invalid",
+      "status": 400,
+      "ms": 119,
+      "bytes": 37,
+      "sha256": "04f942baf5fcbe2cecbd96d72ba07cafd2c8c734ce1b72a4b67c98eb28496872",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-cache",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/guide",
+      "status": 405,
+      "ms": 135,
+      "bytes": 36,
+      "sha256": "4261dcf99dbca22cb0534272d8fe2b45e3338d1c8d242df62ea6e53634337866",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-cache",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      }
+    }
+  ]
+}
