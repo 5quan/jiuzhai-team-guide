@@ -73,19 +73,26 @@ main { max-width: 1044px; padding: 16px 28px 24px; margin: auto; }
 .inline-heading .icon-button { min-width: 44px; flex-shrink: 0; }
 .inline-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 16px; align-items: start; }
 .inline-map-side { min-width: 0; }
-.inline-map-slot { overflow: hidden; background: #edf3eb; border: 1px solid var(--line); border-radius: 8px; }
-.route-svg.mini-map { width: 100%; height: 310px; max-height: none; }
+.inline-map-slot { overflow: auto; height: 320px; background: #edf3eb; border: 1px solid var(--line); border-radius: 8px; overscroll-behavior: contain; }
+.route-svg.mini-map { width: max(100%, 640px); height: auto; max-height: none; }
 .mini-map .valley-label { display: none; }
 .mini-map .route-line { stroke: #b7c7bb; stroke-width: 5; }
 .mini-map .spot-node:not(.in-time) { opacity: .12; pointer-events: none; }
 .mini-map .spot-node:not(.in-time) .spot-label { display: none; }
-.mini-map .spot-label { font-size: 37px; }
+.mini-map .spot-label { font-size: 26px; }
 .mini-map .route-number { font-size: 25px; }
 .spot-node.in-time .route-dot { stroke: #24594a; stroke-width: 8; }
 .mini-map .spot-node.active-leg .route-dot { fill: var(--green); }
 .mini-map .spot-node.selected .route-dot { stroke: var(--orange); }
 .mini-map .gate-node { color: var(--orange); }
 .inline-place-buttons { display: flex; flex-wrap: wrap; gap: 5px; margin: 9px 0; }
+.inline-map-hint { font-size: 10px !important; margin-top: 5px !important; }
+.inline-optional summary { min-height: 44px; padding: 10px 0; font-size: 12px; color: var(--green); cursor: pointer; }
+.inline-optional details > div { display: flex; flex-wrap: wrap; gap: 5px; }
+.inline-optional button { border: 1px solid var(--line); background: white; min-height: 44px; padding: 6px 8px; border-radius: 6px; font-size: 11px; }
+.inline-optional button[aria-pressed="true"] { border-color: var(--orange); background: #f8f0e4; }
+.inline-optional small { color: #926128; font-size: 9px; }
+.inline-optional p { font-size: 10px !important; }
 .inline-place-buttons button { border: 1px solid var(--line); border-radius: 6px; background: white; min-height: 44px; padding: 6px 9px; color: var(--green); font-size: 11px; }
 .inline-place-buttons button[aria-pressed="true"] { border-color: var(--green); background: var(--soft); font-weight: 650; }
 .inline-place-info { padding: 10px 0; border-top: 1px solid var(--line); }
@@ -141,6 +148,26 @@ main { max-width: 1044px; padding: 16px 28px 24px; margin: auto; }
 .map-legend span:nth-child(2) i, .spot-list [data-day="2"] i { background: var(--orange); }
 .map-legend small { font-size: 10px; margin-left: auto; }
 .map-viewport { padding: 10px 4px; }
+.map-pan-hint { padding: 9px 12px; font-size: 11px; color: var(--muted); border-bottom: 1px solid var(--line); }
+.map-actions { display: flex; align-items: center; gap: 8px; }
+.map-actions .icon-button { font-size: 12px; }
+.map-viewport.detailed-map { height: 540px; overflow: auto; padding: 8px 0; overscroll-behavior: contain; }
+.map-viewport.detailed-map > .route-svg { width: 100%; min-width: 720px; height: auto; max-height: none; }
+.map-viewport.is-overview { height: auto; overflow: hidden; }
+.map-viewport.is-overview > .route-svg { min-width: 0; width: 100%; }
+.spot-label { paint-order: stroke; stroke: #f0f4ee; stroke-width: 7px; stroke-linejoin: round; }
+.mini-map .spot-label { stroke: #edf3eb; }
+.detail-connector { fill: none; stroke: #bac8b9; stroke-width: 2.5; stroke-dasharray: 5 7; pointer-events: none; }
+.detailed-map .spot-label { font-size: 26px; }
+.detailed-map .node-facility .spot-label { font-size: 24px; }
+.node-facility .route-dot { fill: #f1f6ee; stroke: var(--green); stroke-width: 3; }
+.node-facility .route-number { fill: var(--green); font-size: 23px; }
+.node-walk .route-dot { fill: #69866c; }
+.node-viewpoint .route-dot { fill: #a87b44; }
+.node-passby .route-dot { fill: #edf3e8; stroke-dasharray: 5 3; }
+.node-passby .route-number { fill: var(--green); }
+.spot-list button span { min-width: 0; overflow-wrap: anywhere; }
+.spot-list button small { font-size: 9px; flex-shrink: 0; color: #8b6b3b; }
 .route-svg { display: block; width: 100%; height: auto; max-height: 620px; }
 .route-line { fill: none; stroke-width: 7; stroke-linecap: round; }
 .line-day1 { stroke: var(--blue); }
@@ -238,7 +265,8 @@ main { max-width: 1044px; padding: 16px 28px 24px; margin: auto; }
   .day-body { padding: 2px 12px 12px; }
   .inline-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .event-route-panel { padding: 10px; }
-  .route-svg.mini-map { height: 300px; }
+  .route-svg.mini-map { height: auto; }
+  .inline-map-slot { height: 300px; }
   .transport-label select { font-size: 16px; }
   .timeline li { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
   .timeline time { color: var(--green); }
@@ -284,5 +312,7 @@ main { max-width: 1044px; padding: 16px 28px 24px; margin: auto; }
   .timeline li { padding: 7px 0; }
   .map-layout { display: grid; grid-template-columns: 1fr 1fr; }
   .route-svg { max-height: 520px; }
+  .map-viewport.detailed-map { height: auto; overflow: visible; }
+  .map-viewport.detailed-map > .route-svg { min-width: 0; width: 100%; max-height: 780px; }
   .departure-note { margin-top: 8px; }
 }

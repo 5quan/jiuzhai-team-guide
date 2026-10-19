@@ -2,7 +2,7 @@ const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 let guide;
-const state = { view: 'home', nav: 'itinerary', mapDay: 'all', spot: 'wuhuahai', query: '', layer: 'clouds', eventKey: null, legId: null, inlinePlace: null, routeChoices: new Map() };
+const state = { view: 'home', nav: 'itinerary', mapDay: 'all', spot: 'wuhuahai', query: '', layer: 'clouds', eventKey: null, legId: null, inlinePlace: null, optionalPlace: null, routeChoices: new Map() };
 const weatherCache = new Map();
 let weatherRequest = 0;
 let toastTimer;
@@ -58,6 +58,7 @@ function routeLocations(context) {
   if (!context) return [];
   const ids = [...context.route.locations];
   for (const leg of context.route.legs) ids.push(leg.from, ...(legChoice(context.route, leg).via || []), leg.to);
+  if (context.route.optionalLocations?.includes(state.optionalPlace)) ids.push(state.optionalPlace);
   return [...new Set(ids)];
 }
 
@@ -81,6 +82,7 @@ function closeEventRoute() {
   button?.closest('.day-card').classList.remove('with-route');
   state.eventKey = null;
   state.legId = null;
+  state.optionalPlace = null;
   updateMapSelection();
 }
 
@@ -94,9 +96,9 @@ function openEventRoute(key) {
   if (!context) return;
   initMap();
   state.legId = context.route.legs[0]?.id || null;
-  state.inlinePlace = routeAnchors(context)[0]?.id || null;
+  state.inlinePlace = routeAnchors(context).find(point => guide.spots.some(spot => spot.id === point.id && spot.kind !== 'passby'))?.id || routeAnchors(context)[0]?.id || null;
   const panel = document.getElementById(button.getAttribute('aria-controls'));
-  panel.innerHTML = `<div class="inline-heading"><div><strong>${esc(context.day.shortDate)} ${esc(context.event.time)}</strong><p>${esc(context.event.title)}</p></div><button class="icon-button" type="button" data-close-event aria-label="收起地图与交通">收起</button></div><div class="inline-layout"><div class="inline-map-side"><div class="inline-map-slot"></div><div class="inline-place-buttons" role="group" aria-label="本时段位置"></div><div class="inline-place-info" aria-live="polite"></div><div class="outside-places"></div></div><div class="inline-transit"><h4>本段怎么走</h4><ol class="leg-list">${context.route.legs.map((leg, index) => `<li class="leg-card" data-leg-card="${esc(leg.id)}"><div class="leg-heading"><button type="button" class="leg-focus" data-leg-focus="${esc(leg.id)}" aria-pressed="${index === 0}"><span class="leg-index">${index + 1}</span><span class="leg-endpoints"></span></button><span class="mode-badge"></span></div>${leg.options.length > 1 ? `<label class="transport-label">交通方式<select data-transport="${esc(leg.id)}" aria-label="${esc(locationInfo(leg.from).name)}到${esc(locationInfo(leg.to).name)}交通方式">${leg.options.map((option, optionIndex) => `<option value="${optionIndex}">${esc(option.label)}${optionIndex === leg.recommended && option.mode !== 'pending' ? '（推荐）' : ''}</option>`).join('')}</select></label>` : ''}<p class="leg-note"></p><p class="leg-warning" hidden></p></li>`).join('')}</ol>${context.route.legs.length ? '' : '<p class="venue-note">本时段在同一地点活动，暂无景点间交通。</p>'}<p class="route-context-note">${esc(context.route.note)}</p><details class="route-basis"><summary>交通依据与位置说明</summary><p>${esc(guide.routing.note)}</p><p>沟内观光车使用当天车票；酒店、车站与机场接驳另计。小地图只提示所在区域，不用于步行导航。</p>${guide.routing.sourceIds.map(id => { const source = guide.sources.find(item => item.id === id); return external(source.url, esc(source.title)); }).join('')}</details></div></div>`;
+  panel.innerHTML = `<div class="inline-heading"><div><strong>${esc(context.day.shortDate)} ${esc(context.event.time)}</strong><p>${esc(context.event.title)}</p></div><button class="icon-button" type="button" data-close-event aria-label="收起地图与交通">收起</button></div><div class="inline-layout"><div class="inline-map-side"><div class="inline-map-slot"></div><p class="inline-map-hint">细图可上下左右滑动，点地点按钮在图内定位。</p><div class="inline-optional"></div><div class="inline-place-buttons" role="group" aria-label="本时段位置"></div><div class="inline-place-info" aria-live="polite"></div><div class="outside-places"></div></div><div class="inline-transit"><h4>本段怎么走</h4><ol class="leg-list">${context.route.legs.map((leg, index) => `<li class="leg-card" data-leg-card="${esc(leg.id)}"><div class="leg-heading"><button type="button" class="leg-focus" data-leg-focus="${esc(leg.id)}" aria-pressed="${index === 0}"><span class="leg-index">${index + 1}</span><span class="leg-endpoints"></span></button><span class="mode-badge"></span></div>${leg.options.length > 1 ? `<label class="transport-label">交通方式<select data-transport="${esc(leg.id)}" aria-label="${esc(locationInfo(leg.from).name)}到${esc(locationInfo(leg.to).name)}交通方式">${leg.options.map((option, optionIndex) => `<option value="${optionIndex}">${esc(option.label)}${optionIndex === leg.recommended && option.mode !== 'pending' ? '（推荐）' : ''}</option>`).join('')}</select></label>` : ''}<p class="leg-note"></p><p class="leg-warning" hidden></p></li>`).join('')}</ol>${context.route.legs.length ? '' : '<p class="venue-note">本时段在同一地点活动，暂无景点间交通。</p>'}<p class="route-context-note">${esc(context.route.note)}</p><details class="route-basis"><summary>交通依据与位置说明</summary><p>${esc(guide.routing.note)}</p><p>沟内观光车使用当天车票；酒店、车站与机场接驳另计。小地图只提示所在区域，不用于步行导航。</p>${guide.routing.sourceIds.map(id => { const source = guide.sources.find(item => item.id === id); return external(source.url, esc(source.title)); }).join('')}</details></div></div>`;
   panel.hidden = false;
   button.setAttribute('aria-expanded', 'true');
   button.closest('.day-card').classList.add('with-route');
@@ -107,31 +109,25 @@ function openEventRoute(key) {
 }
 
 function buildInlineMap(panel, context) {
-  const points = routeAnchors(context);
+  const optional = (context.route.optionalLocations || []).map(mapAnchor).filter(Boolean);
+  const points = [...routeAnchors(context), ...optional];
   const mount = $('.inline-map-slot', panel);
   if (!points.length) { mount.innerHTML = '<p class="outside-map-note">本段在沟外，地点信息列在下方。</p>'; return; }
   const svg = $('.route-svg').cloneNode(true);
+  const canvas = mapCanvas();
   svg.classList.add('mini-map');
   svg.setAttribute('aria-label', `${context.event.time}相关景点小地图`);
   const xs = points.map(point => point.position[0]);
   const ys = points.map(point => point.position[1]);
-  const width = Math.max(420, Math.min(800, Math.max(...xs) + 245) - Math.max(0, Math.min(...xs) - 190));
-  const height = Math.max(320, Math.min(1190, Math.max(...ys) + 90) - Math.max(0, Math.min(...ys) - 75));
-  const left = Math.min(800 - width, Math.max(0, Math.min(...xs) - 190));
-  const top = Math.min(1190 - height, Math.max(0, Math.min(...ys) - 75));
+  const width = Math.max(420, Math.min(canvas.width, Math.max(...xs) + 250) - Math.max(0, Math.min(...xs) - 200));
+  const height = Math.max(320, Math.min(canvas.height, Math.max(...ys) + 100) - Math.max(0, Math.min(...ys) - 80));
+  const left = Math.min(canvas.width - width, Math.max(0, Math.min(...xs) - 200));
+  const top = Math.min(canvas.height - height, Math.max(0, Math.min(...ys) - 80));
   svg.setAttribute('viewBox', `${left} ${top} ${width} ${height}`);
   $$('.spot-node', svg).forEach(node => {
     node.dataset.inlinePlace = node.dataset.spot;
     node.removeAttribute('data-spot');
   });
-  const entrance = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-  entrance.classList.add('spot-node', 'gate-node');
-  entrance.dataset.inlinePlace = 'park-gate';
-  entrance.setAttribute('role', 'button');
-  entrance.setAttribute('tabindex', '0');
-  entrance.setAttribute('aria-label', '查看景区入口');
-  entrance.innerHTML = '<rect x="245" y="1095" width="170" height="50" rx="9" fill="transparent" stroke="currentColor" stroke-width="6"/>';
-  svg.append(entrance);
   mount.append(svg);
 }
 
@@ -177,6 +173,13 @@ function updateInlineRoute() {
     const label = $('.spot-label', node);
     if (label && inRoute) label.textContent = aliasName(id).replace(' / 树正寨', '');
   });
+  const optionalChoices = $('.inline-optional', panel);
+  const optionalIds = context.route.optionalLocations || [];
+  if (optionalChoices.dataset.ready !== 'true') {
+    optionalChoices.innerHTML = optionalIds.length ? `<details><summary>沿线可选点（${optionalIds.length}）</summary><div>${optionalIds.map(id => `<button type="button" data-optional-place="${esc(id)}">${esc(locationInfo(id).name)} <small>可选</small></button>`).join('')}</div><p>仅预览位置，不加入固定行程；请保留候车和返程余量。</p></details>` : '';
+    optionalChoices.dataset.ready = 'true';
+  }
+  $$('[data-optional-place]', optionalChoices).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.optionalPlace === state.optionalPlace)));
   const placeButtons = $('.inline-place-buttons', panel);
   const signature = points.map(point => point.id).join('/');
   if (placeButtons.dataset.places !== signature) {
@@ -188,6 +191,7 @@ function updateInlineRoute() {
   $('.inline-place-info', panel).innerHTML = related.length ? `<strong>${related.map(place => esc(place.name)).join(' / ')}</strong>${related.map(place => `<p>${esc(place.note)}</p>`).join('')}` : '';
   $('.outside-places', panel).innerHTML = refs.map(locationInfo).filter(place => place.scope === 'outside').map(place => `<div class="outside-place"><strong>${esc(place.name)}</strong><p>${esc(place.note)}</p></div>`).join('');
   updateMapSelection();
+  centerInMap($('.inline-map-slot', panel), state.inlinePlace, true);
 }
 
 function selectInlinePlace(id) {
@@ -227,9 +231,9 @@ function render() {
         <a class="hours-line" href="#notes" data-nav="notes"><span>景区参考</span><strong>${esc(guide.park.open)}—${esc(guide.park.lastEntry)}入园 · ${esc(guide.park.close)}闭园</strong><span class="hours-note">以当日公告为准 ›</span></a>
       </section>
       <section id="route" class="section" aria-labelledby="map-title">
-        <div class="section-heading"><h2 id="map-title">景点地图</h2>${external(guide.map.officialPage, '官方导览')}</div>
+        <div class="section-heading"><h2 id="map-title">景点地图</h2><div class="map-actions"><button class="icon-button" id="map-extent" type="button" aria-pressed="false">全图</button>${external(guide.map.officialPage, '官方导览')}</div></div>
         <div class="map-filters segmented" role="group" aria-label="按游览日筛选地图"><button type="button" data-map-day="all" aria-pressed="true">全部</button><button type="button" data-map-day="1" aria-pressed="false">周一 · 上游两沟</button><button type="button" data-map-day="2" aria-pressed="false">周二 · 树正沟</button></div>
-        <div class="map-layout"><div class="map-card"><div class="map-legend"><span><i></i>周一</span><span><i></i>周二</span><small>示意图 · 不用于导航</small></div><div id="schematic" class="map-viewport"></div></div><div class="map-side"><article class="spot-detail" id="spot-detail" aria-live="polite"></article><div class="spot-search"><label for="spot-search">查找景点</label><input id="spot-search" type="search" placeholder="景点 / 支沟" autocomplete="off"><div class="spot-list" id="spot-list"></div></div></div></div>
+        <div class="map-layout"><div class="map-card"><div class="map-legend"><span><i></i>周一</span><span><i></i>周二</span><small>32处景点细节 + 5处设施 · 示意图</small></div><p class="map-pan-hint">滑动查看细图；点下方地点可直接定位。圆点为景点，方点为设施。</p><div id="schematic" class="map-viewport"></div></div><div class="map-side"><article class="spot-detail" id="spot-detail" aria-live="polite"></article><div class="spot-search"><label for="spot-search">查找景点</label><input id="spot-search" type="search" placeholder="景点 / 支沟" autocomplete="off"><div class="spot-list" id="spot-list"></div></div></div></div>
         <p class="footnote">实际开放、停靠站和游览方向听从现场调度。图中连线不代表可步行路线。</p>
       </section>
     </div>
@@ -249,6 +253,13 @@ function render() {
   $('#spot-search').addEventListener('input', event => { state.query = event.target.value.trim(); renderSpotList(); });
   $('#print-button').addEventListener('click', () => window.print());
   $('#reload-weather').addEventListener('click', () => switchWeather(state.layer, true));
+  $('#map-extent').addEventListener('click', () => {
+    initMap();
+    const overview = $('#schematic').classList.toggle('is-overview');
+    $('#map-extent').setAttribute('aria-pressed', String(overview));
+    $('#map-extent').textContent = overview ? '细图' : '全图';
+    if (!overview) centerInMap($('#schematic'), state.spot);
+  });
   mapObserver?.disconnect();
   mapObserver = new IntersectionObserver(entries => {
     if (state.view === 'home' && entries[0].isIntersecting) setNav('route');
@@ -278,25 +289,66 @@ function initMap() {
   renderSpotList();
 }
 
+function mapCanvas() {
+  return guide.map.canvas || { width: 800, height: 1190 };
+}
+
+function mapLocations() {
+  return [...guide.spots, ...(guide.routing?.places || []).filter(place => place.scope === 'park' && place.position)];
+}
+
+function kindName(spot) {
+  return ({ spot: '景点', walk: '步行段', viewpoint: '观景台', facility: '换乘设施', passby: '车览' })[spot.kind] || '景点';
+}
+
+function centerInMap(container, id, inline = false) {
+  if (!container || !id) return;
+  if (container.id === 'schematic' && container.classList.contains('is-overview')) {
+    container.classList.remove('is-overview');
+    $('#map-extent')?.setAttribute('aria-pressed', 'false');
+    if ($('#map-extent')) $('#map-extent').textContent = '全图';
+  }
+  const node = $(inline ? `[data-inline-place="${id}"]` : `[data-spot="${id}"]`, container);
+  if (!node) return;
+  const bounds = node.getBoundingClientRect();
+  const frame = container.getBoundingClientRect();
+  container.scrollLeft += bounds.left + bounds.width / 2 - frame.left - container.clientWidth / 2;
+  container.scrollTop += bounds.top + bounds.height / 2 - frame.top - container.clientHeight / 2;
+}
+
 function renderMap() {
-  const nodes = guide.spots.map((spot, index) => {
+  const canvas = mapCanvas();
+  const locations = mapLocations();
+  const nodes = locations.map((spot, index) => {
     const [x, y] = spot.position;
-    const left = spot.valley === '则查洼沟';
-    return `<g class="spot-node ${state.spot === spot.id ? 'selected' : ''}" data-spot="${esc(spot.id)}" data-day="${spot.day}" role="button" tabindex="0" aria-label="查看${esc(spot.name)}" aria-pressed="${state.spot === spot.id}"><circle class="hit-target" cx="${x}" cy="${y}" r="44"/><circle class="route-dot" cx="${x}" cy="${y}" r="23"/><text class="route-number" x="${x}" y="${y}">${index + 1}</text><text class="spot-label" x="${x + (left ? -36 : 36)}" y="${y + 9}" text-anchor="${left ? 'end' : 'start'}">${esc(spot.name.replace(' / 树正寨', ''))}</text></g>`;
+    const left = spot.labelSide ? spot.labelSide === 'left' : spot.valley === '则查洼沟';
+    const facility = spot.kind === 'facility';
+    const symbol = facility ? spot.id === 'park-gate' ? '入' : '车' : String(index + 1);
+    const dot = facility ? `<rect class="route-dot" x="${x - 21}" y="${y - 21}" width="42" height="42" rx="7"/>` : `<circle class="route-dot" cx="${x}" cy="${y}" r="21"/>`;
+    return `<g class="spot-node node-${esc(spot.kind || 'spot')}" data-spot="${esc(spot.id)}" data-day="${spot.day || 0}" role="button" tabindex="0" aria-label="查看${esc(spot.name)}${spot.optional ? '（可选）' : ''}" aria-pressed="false"><circle class="hit-target" cx="${x}" cy="${y}" r="44"/>${dot}<text class="route-number" x="${x}" y="${y}">${symbol}</text><text class="spot-label" x="${x + (left ? -36 : 36)}" y="${y + 9}" text-anchor="${left ? 'end' : 'start'}">${esc(spot.mapLabel || spot.name)}</text></g>`;
   }).join('');
-  $('#schematic').innerHTML = `<svg class="route-svg" viewBox="0 0 800 1190" role="group" aria-label="九寨沟三沟景点关系示意图"><text class="valley-label" x="55" y="420">则查洼沟</text><text class="valley-label" x="615" y="420">日则沟</text><text class="valley-label" x="560" y="855">树正沟</text><path class="route-line line-day1" d="M190 100Q185 155 230 200T245 370T330 580"/><path class="route-line line-day1" d="M600 80Q600 115 555 180T535 270T505 365T470 455T410 515T330 580"/><path class="route-line line-day2" d="M330 580Q375 630 350 680T340 765T310 855T290 940T320 1020T330 1115"/>${nodes}<rect x="245" y="1095" width="170" height="50" rx="9" fill="#24594a"/><text x="330" y="1128" class="entrance-label" text-anchor="middle">景区入口</text></svg>`;
+  const connections = locations.filter(spot => spot.parentId).map(spot => {
+    const parent = locationInfo(spot.parentId);
+    return `<path class="detail-connector" d="M${parent.position.join(' ')}L${spot.position.join(' ')}"/>`;
+  }).join('');
+  const detailed = Boolean(guide.map.canvas);
+  const branches = detailed ? '<path class="route-line line-day1" d="M200 100Q180 200 250 300T200 545T260 730T350 970"/><path class="route-line line-day1" d="M800 80Q800 160 760 220T740 350T730 470T680 600T640 710T590 800T510 890T350 970"/><path class="route-line line-day2" d="M350 970Q400 1000 450 1060T460 1230T450 1360T450 1440T440 1530T420 1720T410 1830T440 1930T440 2040"/>' : '<path class="route-line line-day1" d="M190 100Q185 155 230 200T245 370T330 580"/><path class="route-line line-day1" d="M600 80Q600 115 555 180T535 270T505 365T470 455T410 515T330 580"/><path class="route-line line-day2" d="M330 580Q375 630 350 680T340 765T310 855T290 940T320 1020T330 1115"/>';
+  $('#schematic').innerHTML = `<svg class="route-svg" viewBox="0 0 ${canvas.width} ${canvas.height}" role="group" aria-label="九寨沟抄作业版景点与交通设施详细示意图">${branches}<g aria-hidden="true">${connections}</g>${nodes}</svg>`;
+  $('#schematic').classList.toggle('detailed-map', detailed);
   updateMapSelection();
+  requestAnimationFrame(() => centerInMap($('#schematic'), state.spot));
 }
 
 function renderDetail() {
-  const spot = guide.spots.find(item => item.id === state.spot);
-  $('#spot-detail').innerHTML = `<div class="detail-heading"><h3>${esc(spot.name)}</h3><span class="status ${spot.day === 2 ? 'warning' : ''}">${spot.day === 1 ? '周一' : '周二'}</span></div><p class="detail-meta">${esc(spot.valley)} · ${esc(spot.minutes)} · ${esc(spot.altitude)}</p><p>${esc(spot.description)}</p><details class="spot-extra"><summary>乘车与游览提示</summary><p>${esc(spot.travel)}</p></details>`;
+  const spot = locationInfo(state.spot);
+  $('#spot-detail').innerHTML = `<div class="detail-heading"><h3>${esc(spot.name)}</h3><span class="status ${spot.optional ? 'warning' : ''}">${spot.optional ? '可选 · ' : ''}${esc(kindName(spot))}</span></div><p class="detail-meta">${esc(spot.valley || '景区交通设施')} · ${esc(spot.minutes || '按现场调度')} · ${esc(spot.altitude || '位置仅示意')}</p><p>${esc(spot.description || spot.note)}</p><details class="spot-extra"><summary>乘车与游览提示</summary><p>${esc(spot.travel || spot.note)}</p></details>`;
 }
 
 function renderSpotList() {
-  const filtered = guide.spots.filter(spot => (state.mapDay === 'all' || spot.day === Number(state.mapDay)) && `${spot.name}${spot.valley}`.includes(state.query));
-  $('#spot-list').innerHTML = filtered.length ? filtered.map(spot => `<button type="button" class="${state.spot === spot.id ? 'active' : ''}" data-spot="${esc(spot.id)}" data-day="${spot.day}" aria-pressed="${state.spot === spot.id}"><i></i>${esc(spot.name.replace(' / 树正寨', ''))}</button>`).join('') : '<p class="empty">没有匹配景点</p>';
+  const filtered = mapLocations().filter(spot => (state.mapDay === 'all' || !spot.day || spot.day === Number(state.mapDay)) && `${spot.name}${spot.valley || ''}${spot.mapLabel || ''}`.includes(state.query));
+  $('#spot-list').innerHTML = filtered.length ? filtered.map(spot => `<button type="button" class="${state.spot === spot.id ? 'active' : ''}" data-spot="${esc(spot.id)}" data-day="${spot.day || 0}" aria-pressed="${state.spot === spot.id}"><i></i><span>${esc(spot.name)}</span>${spot.optional ? '<small>可选</small>' : spot.kind === 'facility' ? '<small>设施</small>' : ''}</button>`).join('') : '<p class="empty">没有匹配景点</p>';
 }
+
 
 function updateMapSelection() {
   const context = eventContext();
@@ -305,24 +357,25 @@ function updateMapSelection() {
     const selected = node.dataset.spot === state.spot;
     node.classList.toggle('selected', selected);
     node.classList.toggle('in-time', activeIds.includes(node.dataset.spot));
-    node.classList.toggle('dimmed', activeIds.length ? !activeIds.includes(node.dataset.spot) : state.mapDay !== 'all' && node.dataset.day !== state.mapDay);
+    node.classList.toggle('dimmed', activeIds.length ? !activeIds.includes(node.dataset.spot) : state.mapDay !== 'all' && node.dataset.day !== '0' && node.dataset.day !== state.mapDay);
     node.setAttribute('aria-pressed', String(selected));
   });
 }
 
 function selectSpot(id) {
-  if (!guide.spots.some(spot => spot.id === id)) return;
+  if (!mapLocations().some(spot => spot.id === id)) return;
   state.spot = id;
   updateMapSelection();
   renderDetail();
   renderSpotList();
+  centerInMap($('#schematic'), id);
 }
 
 function filterMap(day) {
   closeEventRoute();
   state.mapDay = day;
-  const selected = guide.spots.find(spot => spot.id === state.spot);
-  if (day !== 'all' && selected.day !== Number(day)) state.spot = guide.spots.find(spot => spot.day === Number(day)).id;
+  const selected = locationInfo(state.spot);
+  if (day !== 'all' && selected.day && selected.day !== Number(day)) state.spot = guide.spots.find(spot => spot.day === Number(day)).id;
   $$('[data-map-day]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mapDay === day)));
   updateMapSelection();
   renderDetail();
@@ -406,6 +459,13 @@ document.addEventListener('click', event => {
   const time = event.target.closest('[data-event-route]');
   if (time) { openEventRoute(time.dataset.eventRoute); return; }
   if (event.target.closest('[data-close-event]')) { const key = state.eventKey; closeEventRoute(); $(`[data-event-route="${key}"]`)?.focus({ preventScroll: true }); return; }
+  const optional = event.target.closest('[data-optional-place]');
+  if (optional && eventContext()?.route.optionalLocations?.includes(optional.dataset.optionalPlace)) {
+    state.optionalPlace = state.optionalPlace === optional.dataset.optionalPlace ? null : optional.dataset.optionalPlace;
+    state.inlinePlace = mapAnchor(state.optionalPlace)?.id || routeAnchors(eventContext())[0]?.id || null;
+    updateInlineRoute();
+    return;
+  }
   const inlinePlace = event.target.closest('[data-inline-place]');
   if (inlinePlace) { selectInlinePlace(inlinePlace.dataset.inlinePlace); return; }
   const leg = event.target.closest('[data-leg-focus]');
