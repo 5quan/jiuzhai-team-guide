@@ -1,20 +1,41 @@
 {
   "checks": [
-    "14个可交互景点、桌面首屏加载",
-    "日程切换、周二返程提醒、键盘日期切换",
-    "地图筛选、点击景点、搜索与空结果提示",
-    "天气图层通过后端切换、Windy地点参数",
-    "官方地图切换及备用链接",
-    "打印包含全部四天且不重复当前日程",
-    "390px手机布局无横向溢出，日程与地图可用",
-    "320px小屏无横向溢出"
+    "4倍CPU降速下首页展示四天摘要与三晚安排；未请求Windy或任何第三方资源",
+    "原生行程卡展开收起，保留周二送站与票务提醒",
+    "14景点、两日筛选、搜索和景点详情可用",
+    "注意事项独立页面，保留票务、4段酒店接送、待定航班与资料来源",
+    "天气按需加载，图层可切换，离开移除iframe；浏览器返回可恢复页面",
+    "320/390/430/768/1280px四个导航页面无横向溢出，底部导航固定且可点击",
+    "打印展开全部四天并隐藏导航，打印后恢复折叠状态",
+    "直接打开注意事项链接与键盘展开行程可用"
   ],
-  "officialImage": "官方原图地址返回404，展示官方页面入口和自绘示意图",
+  "homePerformance": {
+    "requests": [
+      {
+        "name": "/style.css",
+        "bytes": 15863
+      },
+      {
+        "name": "/app.js",
+        "bytes": 19090
+      },
+      {
+        "name": "/api/guide",
+        "bytes": 15519
+      }
+    ],
+    "longTasksMs": [
+      83,
+      134
+    ],
+    "navigationMs": 145,
+    "fourDaysBottom": 539,
+    "viewportHeight": 844
+  },
   "windy": {
-    "url": "https://embed.windy.com/embed.html?type=map&location=coordinates&lat=33.2&lon=103.9&detailLat=33.2&detailLon=103.9&zoom=11&level=surface&overlay=clouds&product=ecmwf&metricTemp=%C2%B0C&metricRain=mm&metricWind=km%2Fh&marker=true&detail=true",
-    "canvases": 14,
-    "images": 58
+    "loaded": true,
+    "canvases": 6
   },
   "pageErrors": [],
-  "checkedAt": "2026-10-19T17:23:49+08:00"
+  "checkedAt": "2026-10-19T09:54:24.440Z"
 }

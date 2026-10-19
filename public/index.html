@@ -2,23 +2,27 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#173f36">
-  <meta name="description" content="七人九寨沟秋游手册：Windy天气、三沟地图、一天半游览与沟外住宿交通。">
-  <title>九寨同行 · 七人的秋日手册</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f6f2">
+  <meta name="description" content="九寨沟7人四天三晚行程、景点地图、天气和出行注意事项。">
+  <title>九寨同行 · 四天三晚</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
   <script src="/app.js" defer></script>
 </head>
 <body>
-  <a class="skip" href="#main">跳至攻略正文</a>
+  <a class="skip" href="#main">跳至正文</a>
   <header class="header">
-    <a class="brand" href="#" aria-label="九寨同行首页"><span class="brand-mark">九</span><span>九寨同行<small>OUR AUTUMN FIELD GUIDE</small></span></a>
-    <nav aria-label="页面导航"><a href="#route">景点地图</a><a href="#itinerary">日程</a><a href="#weather">天气</a><a href="#stay">住宿交通</a></nav>
-    <button class="button quiet" id="share-button" type="button">复制分享链接 ↗</button>
+    <a class="brand" href="#itinerary" data-nav="itinerary"><span class="brand-mark">九</span>九寨同行<span class="team-label">7人</span></a>
+    <button class="button quiet" id="share-button" type="button" aria-label="复制攻略链接">分享链接</button>
   </header>
-  <main id="main"><div class="loading" role="status">正在翻开我们的秋日手册…</div></main>
+  <main id="main"><p class="loading" role="status">加载行程…</p></main>
+  <nav class="bottom-nav" aria-label="攻略导航">
+    <a href="#itinerary" data-nav="itinerary" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 11h16m-12 4h3m2 0h3"/></svg><span>行程</span></a>
+    <a href="#route" data-nav="route"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Zm6-3v15m6-12v15"/></svg><span>地图</span></a>
+    <a href="#weather" data-nav="weather"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M9 1v1M2 8H1m2-6 1 1m11-1-1 1m3 10a4 4 0 0 0-8 0 3 3 0 1 0-2 6h11a3 3 0 0 0-1-6Z"/></svg><span>天气</span></a>
+    <a href="#notes" data-nav="notes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H6a2 2 0 0 0-2 2v14h16V6a2 2 0 0 0-2-2h-2M8 3h8v4H8Zm0 9h8m-8 4h6"/></svg><span>注意事项</span></a>
+  </nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <footer><span>九寨同行 · 为7人的秋天留一份共同的参考</span><span>出发前，再一起核对一次。</span></footer>
 </body>
 </html>
