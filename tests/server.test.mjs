@@ -18,14 +18,20 @@ before(async () => {
 });
 after(async () => { await new Promise(resolve => server.close(resolve)); });
 
-test('itinerary keeps the confirmed dates, 7 travellers and Tuesday departure distinct from train time', async () => {
+test('itinerary keeps October 29–31, two full park days and the third night near the station', async () => {
   const response = await fetch(`${origin}/api/guide`);
   assert.equal(response.status, 200);
   const guide = await response.json();
   assert.equal(guide.trip.people, 7);
-  assert.deepEqual(guide.days.map(day => day.date), ['2026-11-01', '2026-11-02', '2026-11-03', '2026-11-04']);
-  assert.ok(guide.days[2].events.some(event => event.time === '14:00' && event.title.includes('沟口')));
-  assert.ok(guide.days[3].events.some(event => event.time === '06:35'));
+  assert.deepEqual(guide.days.map(day => day.date), ['2026-10-29', '2026-10-30', '2026-10-31']);
+  assert.equal(guide.trip.start, '2026-10-29');
+  assert.equal(guide.trip.end, '2026-10-31');
+  assert.deepEqual(guide.days.map(day => day.weekday), ['周四', '周五', '周六']);
+  assert.ok(guide.days.slice(1).every(day => day.subtitle.includes('全天')));
+  assert.ok(guide.days[2].stay.includes('黄龙九寨站'));
+  assert.equal(guide.days[2].events.at(-1).routeId, 'station-hotel-transfer');
+  assert.ok(guide.trip.returnNote.includes('待定'));
+  assert.ok(!/重庆|06:35|04:35|11月[1-4]日|14:00送站/.test(JSON.stringify(guide)));
   assert.equal(guide.costs.teamTwoDays, 3920);
   assert.equal(guide.costs.perPersonTwoDays, 560);
   assert.equal(guide.costs.hotelTeamNight, 1400);
@@ -63,6 +69,11 @@ test('every itinerary spot exists and has a stable unique identifier', async () 
   const malformed = structuredClone(guide);
   malformed.days[0].spotIds.push('nonexistent');
   assert.throws(() => validateGuide(malformed));
+  for (const mutation of [copy => { copy.days = []; }, copy => { copy.trip.end = '2026-11-04'; }, copy => { copy.days[2].date = copy.days[1].date; }]) {
+    const copy = structuredClone(guide);
+    mutation(copy);
+    assert.throws(() => validateGuide(copy));
+  }
 });
 
 test('write endpoints are not exposed on a shared read-only website', async () => {

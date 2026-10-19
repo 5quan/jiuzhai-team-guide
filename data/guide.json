@@ -3,48 +3,59 @@
   "checkedAt": "2026-10-19",
   "trip": {
     "people": 7,
-    "start": "2026-11-01",
-    "end": "2026-11-04",
+    "start": "2026-10-29",
+    "end": "2026-10-31",
     "hotelBudgetPerPersonNight": 200,
-    "hotel": { "name": "沟口酒店待定", "area": "景区入口附近 · 连住两晚", "checkIn": "11月1日", "checkOut": "11月3日", "note": "优先实际步行10—20分钟到检票口，或明确含早晚接送的酒店。" }
+    "hotel": {
+      "name": "景区周边镇子酒店（待定）",
+      "area": "景区周边镇子 · 连住两晚",
+      "checkIn": "10月29日",
+      "checkOut": "10月31日",
+      "note": "确认往返景区接送、早餐、晚到保留和退房后行李寄存；具体镇子与酒店待订。"
+    },
+    "label": "三天 · 两日慢游",
+    "stationHotel": {
+      "name": "黄龙九寨站附近酒店（待定）",
+      "checkIn": "10月31日",
+      "note": "第三晚搬到高铁站附近住，确认晚到入住和到车站的接送；离店日期随新返程确认。"
+    },
+    "returnNote": "新返程日期、高铁车次、航班与中转方案待定。"
   },
   "park": {
     "open": "07:30",
     "lastEntry": "14:00",
     "close": "18:00",
-    "status": "公告参考，非11月专门确认",
-    "note": "07:30—14:00入园、18:00闭园来自2026年9月28日官方公告。11月2—3日以预约页和当日公告为准；7月早期公告曾列08:00开园。",
+    "status": "官方公告参考，出行前复核",
+    "note": "07:30—14:00入园、18:00闭园来自2026年9月28日官方公告。10月30—31日请以预约页及当日公告为准，提前确认支线末班车。",
     "sourceId": "hours",
     "phone": "0837-7739753"
   },
   "ticket": {
     "entrance": 190,
     "bus": 90,
-    "note": "11月2日、3日均在旺季。两天分别预约；第二天半日仍按当天全价计算。按7位成人无优惠测算，优惠资格需单独核验。",
+    "note": "10月30日、31日均在官方公布的旺季价格时段内。两天分别实名预约，按7位无优惠成人、每天门票190元＋观光车90元测算，优惠资格另行核验。",
     "validity": "官方2025年公告注明门票、车票当日有效；未找到适用本次日期的旺季两日优惠。下单前复核官方产品。",
-    "sourceIds": ["tickets", "validity"]
+    "sourceIds": [
+      "tickets",
+      "validity"
+    ]
   },
-  "weather": { "lat": 33.2, "lon": 103.9, "zoom": 11, "label": "九寨沟景区区域", "note": "山地各景点存在差异；不使用九寨沟县城或湖南同名地点替代景区。" },
+  "weather": {
+    "lat": 33.2,
+    "lon": 103.9,
+    "zoom": 11,
+    "label": "九寨沟景区区域",
+    "note": "山地各景点存在差异；不使用九寨沟县城或湖南同名地点替代景区。"
+  },
   "map": {
     "officialPage": "https://www.jiuzhai.com/intelligent-service/faq/10705-2025-10-11-03-44-19",
     "officialImage": null,
-    "note": "按参考图拆分景点、步行段、观景台和换乘设施的关系示意。可滑动细看；点位不是经纬度或精确站台位置，连线不代表开放栈道。",
+    "note": "三沟全景关系示意，蓝色轮廓对应海子；为适配横向画面调整留白与疏密，不按测绘比例绘制，不用于导航。",
     "canvas": {
-      "width": 1100,
-      "height": 2100
+      "width": 1600,
+      "height": 1150
     },
     "referencePoints": [
-      "changhai",
-      "changhai-cypress",
-      "changhai-boardwalk",
-      "wucaichi",
-      "wucaichi-boardwalk",
-      "upper-seasonal",
-      "lower-seasonal",
-      "forest",
-      "jianzhuhai",
-      "jianzhu-boardwalk",
-      "panda",
       "wuhuahai",
       "wuhua-boardwalk",
       "peacock",
@@ -58,94 +69,208 @@
       "rhino-view",
       "tiger",
       "shuzheng-waterfall",
-      "shuzheng",
       "shuzheng-village",
+      "shuzheng",
       "shuzheng-view",
       "shuzheng-inner",
       "spark",
       "double-falls",
       "double-lake",
       "reed",
+      "changhai",
+      "changhai-cypress",
+      "changhai-boardwalk",
+      "wucaichi",
+      "wucaichi-boardwalk",
+      "upper-seasonal",
+      "lower-seasonal",
+      "forest",
+      "jianzhuhai",
+      "jianzhu-boardwalk",
+      "panda",
       "park-gate",
       "nuorilang-center",
       "mirror-parking",
       "wucaichi-stop",
       "nuorilang-stop"
-    ]
+    ],
+    "paths": [
+      {
+        "name": "则查洼沟",
+        "d": "M546 137 C581 170 585 196 602 222 S648 278 627 337 S643 410 676 451 S699 534 776 582"
+      },
+      {
+        "name": "日则沟",
+        "d": "M1295 137 C1337 170 1275 189 1295 222 S1226 261 1238 290 S1187 329 1196 354 S1128 393 1149 422 S1128 443 1109 468 S1075 483 1060 500 S1047 515 1021 532 C980 554 923 566 889 554 S826 578 776 582"
+      },
+      {
+        "name": "树正沟",
+        "d": "M776 582 C769 606 783 617 802 637 S843 688 890 737 C913 759 924 777 897 795 S888 807 876 825 S865 847 848 865 S812 909 804 933 S784 962 769 982 S735 1014 720 1031 S675 1071 662 1092"
+      }
+    ],
+    "water": [
+      {
+        "id": "changhai",
+        "d": "M518.1 51.5 C509.1 65.9 518.1 76.7 510.9 92 C501 110 514.5 118.1 510 132.5 C505.5 147.8 519.9 169.4 538.8 177.5 C554.1 184.7 563.1 167.6 556.8 153.2 C551.4 135.2 555.9 119 546.9 101.9 C539.7 87.5 553.2 70.4 539.7 58.7 C533.4 52.4 528.9 44.3 518.1 51.5 Z"
+      },
+      {
+        "id": "wucaichi",
+        "d": "M584 206.7 C577.7 213 585.8 225.6 581.3 232.8 C592.1 243.6 607.4 240 612.8 227.4 C617.3 219.3 604.7 205.8 598.4 208.5 Z"
+      },
+      {
+        "id": "upper-seasonal",
+        "seasonal": true,
+        "d": "M608.9 317.2 C599.9 330.7 605.3 341.5 600.8 351.4 C615.2 364 629.6 352.3 630.5 340.6 C626.9 330.7 622.4 319 608.9 317.2 Z"
+      },
+      {
+        "id": "lower-seasonal",
+        "seasonal": true,
+        "d": "M653.5 427.6 C646.3 443.8 645.4 459.1 655.3 469 C666.1 471.7 674.2 460.9 671.5 446.5 C670.6 433.9 664.3 423.1 653.5 427.6 Z"
+      },
+      {
+        "id": "jianzhuhai",
+        "d": "M1215.5 262.1 C1204.7 268.4 1215.5 276.5 1207.4 290 C1204.7 304.4 1217.3 313.4 1230.8 307.1 C1241.6 299 1235.3 288.2 1238.9 277.4 C1239.8 265.7 1228.1 258.5 1215.5 262.1 Z"
+      },
+      {
+        "id": "panda",
+        "d": "M1173.5 327 C1161.8 333.3 1169.9 342.3 1161.8 354.9 C1160.9 370.2 1176.2 379.2 1185.2 368.4 C1191.5 360.3 1183.4 349.5 1188.8 341.4 C1191.5 331.5 1183.4 323.4 1173.5 327 Z"
+      },
+      {
+        "id": "wuhuahai",
+        "d": "M1109.4 390.5 C1094.1 397.7 1106.7 409.4 1094.1 416.6 C1085.1 427.4 1098.6 438.2 1111.2 432.8 C1121.1 444.5 1136.4 434.6 1131 422.9 C1142.7 412.1 1131 404.9 1128.3 395 C1121.1 388.7 1115.7 396.8 1109.4 390.5 Z"
+      },
+      {
+        "id": "mirror",
+        "d": "M855.7 532.4 C840.4 527.9 824.2 533.3 833.2 545.9 C844.9 552.2 853 561.2 867.4 555.8 C880.9 554 893.5 544.1 883.6 537.8 C873.7 534.2 869.2 543.2 855.7 532.4 Z"
+      },
+      {
+        "id": "nuorilang-lakes",
+        "d": "M860.4 587.2 Q875.7 579.1 892.8 588.1 L889.2 595.3 Q874.8 593.5 865.8 602.5 Z M882.9 602.5 Q895.5 597.1 908.1 605.2 L903.6 612.4 Q891 616.9 882.9 610.6 Z M900 617.8 Q911.7 610.6 923.4 620.5 L918 628.6 L903.6 625.9 Z"
+      },
+      {
+        "id": "rhino",
+        "d": "M851.3 684.8 C839.6 698.3 857.6 708.2 854.9 723.5 C854 740.6 864.8 750.5 865.7 767.6 C870.2 785.6 887.3 780.2 885.5 766.7 C881 750.5 886.4 737 873.8 722.6 C867.5 709.1 870.2 694.7 860.3 684.8 Z"
+      },
+      {
+        "id": "tiger",
+        "d": "M871.8 779.7 C861 786.9 861 799.5 867.3 806.7 C877.2 813.9 888 802.2 885.3 794.1 C885.3 786 879.9 776.1 871.8 779.7 Z"
+      },
+      {
+        "id": "shuzheng",
+        "d": "M839.9 833.5 Q820.1 826.3 813.8 838.9 L817.4 847 L836.3 844.3 Z M830.9 847.9 Q810.2 844.3 804.8 856.9 L812.9 864.1 L831.8 859.6 Z M826.4 865 Q804.8 862.3 800.3 874.9 L809.3 883.9 L823.7 875.8 Z M819.2 881.2 Q797.6 879.4 793.1 892.9 L802.1 899.2 L816.5 892 Z M811.1 897.4 Q794.9 893.8 786.8 905.5 L793.1 913.6 L810.2 907.3 Z"
+      },
+      {
+        "id": "spark",
+        "d": "M782.4 915 C767.1 915.9 765.3 930.3 772.5 940.2 C786 945.6 799.5 935.7 794.1 924 C791.4 919.5 789.6 914.1 782.4 915 Z"
+      },
+      {
+        "id": "double-lake",
+        "d": "M751 960.4 Q735.7 961.3 738.4 975.7 Q740.2 985.6 749.2 984.7 Q762.7 975.7 760 964.9 Z M742.9 984.7 Q728.5 989.2 733 1000 Q743.8 1009 751 998.2 L751 987.4 Z"
+      },
+      {
+        "id": "reed",
+        "d": "M696.6 1007.6 C688.5 1022 696.6 1027.4 686.7 1043.6 C680.4 1058 683.1 1066.1 690.3 1062.5 C695.7 1049.9 699.3 1041.8 702.9 1035.5 C707.4 1022 705.6 1012.1 696.6 1007.6 Z"
+      }
+    ],
+    "panorama": true
   },
   "spots": [
-    { "id": "changhai", "name": "长海", "valley": "则查洼沟", "day": 1, "position": [200,100], "minutes": "20—30分钟", "altitude": "约3101米", "tag": "雪山与开阔湖面", "description": "左支沟的主要景点。乘观光车到达，留时间看湖面和远山，再沿开放栈道前往五彩池。", "travel": "与五彩池连游；周一完成，周二不再深入。", "priority": "精选", "kind": "spot", "labelSide": "left", "optional": false },
-    { "id": "wucaichi", "name": "五彩池", "valley": "则查洼沟", "day": 1, "position": [250,300], "minutes": "20—30分钟", "altitude": "约3010米", "tag": "清透的蓝绿小海子", "description": "体量小、色彩鲜明，沿开放观景栈道观看。下行台阶放慢速度，注意返回乘车点的时间。", "travel": "长海 → 五彩池 → 乘车返回诺日朗。", "priority": "精选", "kind": "spot", "labelSide": "left", "optional": false },
-    { "id": "forest", "name": "原始森林", "valley": "日则沟", "day": 1, "position": [800,80], "minutes": "40—60分钟", "altitude": "高海拔区域", "tag": "有余力再去", "description": "本次一天半安排不作为必到点。若车辆分流至此，可按体力短停，不必为了打卡压缩五花海时间。", "travel": "开放情况和车辆上行终点以当天安排为准。", "priority": "可选", "kind": "spot", "labelSide": "right", "optional": true },
-    { "id": "jianzhuhai", "name": "箭竹海", "valley": "日则沟", "day": 1, "position": [760,220], "minutes": "20—30分钟", "altitude": "沟内上游", "tag": "湖面与山林", "description": "周一右支沟的起点参考。以湖边短距离步行为主，结合观光车逐段下行。", "travel": "箭竹海 → 熊猫海，按开放站点乘车。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
-    { "id": "panda", "name": "熊猫海", "valley": "日则沟", "day": 1, "position": [740,350], "minutes": "20—30分钟", "altitude": "沟内上游", "tag": "彩林与湖水", "description": "看湖面、彩林和倒影。7人一起行动时约好上车点，避免一部分人沿栈道走远。", "travel": "熊猫海 → 五花海，乘车或按现场开放栈道行进。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
-    { "id": "wuhuahai", "name": "五花海", "valley": "日则沟", "day": 1, "position": [730,470], "minutes": "45—60分钟", "altitude": "沟内核心湖区", "tag": "本次重点 · 多留一点时间", "description": "湖水、沉木与秋色层次丰富。先把主要观景点看完整，遇到阳光可适当延长停留。", "travel": "周一重点；若周二天气明显更好，可替换部分树正沟行程再看一次。", "priority": "重点", "kind": "spot", "labelSide": "right", "optional": false },
-    { "id": "pearl", "name": "珍珠滩瀑布", "valley": "日则沟", "day": 1, "position": [590,800], "minutes": "30—45分钟", "altitude": "约2433米", "tag": "瀑布与栈道", "description": "沿开放栈道观看珍珠滩及瀑布，雨后与水边栈道注意防滑。观景之后前往乘车点。", "travel": "珍珠滩 → 瀑布 → 乘车点；预留步行时间。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
-    { "id": "mirror", "name": "镜海", "valley": "日则沟", "day": 1, "position": [510,890], "minutes": "15—20分钟", "altitude": "诺日朗附近", "tag": "看风与时间决定", "description": "水面平静时适合看倒影。列为灵活停靠点，有风或时间不足时可略过。", "travel": "按车辆停靠和当天光线调整，不强求固定时间。", "priority": "可选", "kind": "spot", "labelSide": "left", "optional": true },
-    { "id": "nuorilang", "name": "诺日朗瀑布", "valley": "三沟交汇附近", "day": 1, "position": [450,1060], "minutes": "20—30分钟", "altitude": "约2343米", "tag": "换乘与休息枢纽附近", "description": "两条上游支沟在诺日朗中心附近换乘。午餐和换乘留出余量，再按开放步行路线看瀑布。", "travel": "换乘车辆与瀑布观景区不是同一个点，需预留步行。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
-    { "id": "rhino", "name": "犀牛海", "valley": "树正沟", "day": 2, "position": [460,1230], "minutes": "20—30分钟", "altitude": "约2301米", "tag": "第二天慢游起点", "description": "湖面宽阔，适合看秋色倒影。周二以此为参考起点，逐段向沟口方向游览。", "travel": "周二避免再往深处去；根据车流与开放站点调整起点。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
-    { "id": "tiger", "name": "老虎海", "valley": "树正沟", "day": 2, "position": [450,1360], "minutes": "15—20分钟", "altitude": "约2298米", "tag": "秋色与倒影", "description": "沿开放栈道短走，和树正瀑布、树正群海连游。保持7人集合节奏。", "travel": "不为走完每一段栈道压缩出沟缓冲。", "priority": "精选", "kind": "spot", "labelSide": "left", "optional": false },
-    { "id": "shuzheng", "name": "树正群海", "valley": "树正沟", "day": 2, "position": [440,1530], "minutes": "45—60分钟", "altitude": "约2187—2280米", "tag": "群海核心观景区", "description": "周二主要停留区。群海、树正寨和群海观景台分别标点，是否连游按剩余时间决定。", "travel": "11:30左右开始收尾；12:30前争取出沟。", "priority": "重点", "kind": "spot", "labelSide": "left", "optional": false },
-    { "id": "spark", "name": "火花海", "valley": "树正沟", "day": 2, "position": [420,1720], "minutes": "15—20分钟", "altitude": "约2211米", "tag": "有时间再停", "description": "出沟方向的可选景点，时间充裕时短停。周二返程优先于新增打卡。", "travel": "如队伍已疲劳或接近收尾时间，直接乘车出沟。", "priority": "可选", "kind": "spot", "labelSide": "right", "optional": true },
-    { "id": "reed", "name": "芦苇海", "valley": "树正沟", "day": 2, "position": [440,1930], "minutes": "视时间短停", "altitude": "沟内下游", "tag": "金色芦苇与水道", "description": "临近沟口方向的可选观景段。是否能便捷停靠、步行距离多远，入园时询问工作人员。", "travel": "不要把示意图上的相邻关系当成短距离步行。", "priority": "可选", "kind": "spot", "labelSide": "right", "optional": true },
-    { "id": "peacock", "name": "孔雀河道", "valley": "日则沟", "day": 1, "position": [680,600], "kind": "walk", "parentId": "wuhuahai", "labelSide": "right", "optional": false, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "已排步行段", "description": "参考图中五花海之后的河道步行段，现单独标出。", "travel": "从五花海沿开放栈道经此到珍珠滩；不把它当作观光车站。", "priority": "沿线", "sourceIds": ["spots"] },
-    { "id": "pearl-shoal", "name": "珍珠滩", "valley": "日则沟", "day": 1, "position": [640,710], "kind": "spot", "parentId": "pearl", "labelSide": "right", "optional": false, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "已排步行段", "description": "与珍珠滩瀑布分开标注，先经过滩流，再按开放栈道看瀑布。", "travel": "孔雀河道 → 珍珠滩 → 珍珠滩瀑布 → 镜海停车场。", "priority": "沿线", "sourceIds": ["spots"] },
-    { "id": "nuorilang-view", "name": "诺日朗观景台", "valley": "三沟交汇附近", "day": 1, "position": [680,1100], "kind": "viewpoint", "parentId": "nuorilang", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图称诺日朗观景平台，与瀑布本体和换乘中心分别标出。", "travel": "从开放步行区域按现场指引前往；注意返程候车时间。", "priority": "可选", "sourceIds": ["nuorilang-platform"] },
-    { "id": "shuzheng-village", "name": "树正寨", "valley": "树正沟", "day": 2, "position": [680,1510], "kind": "spot", "parentId": "shuzheng", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "与树正群海分开标注的村寨点位，按剩余时间短停。", "travel": "两晚都住沟外；这里仅作为游览可选点。", "priority": "可选", "sourceIds": ["spots"] },
-    { "id": "shuzheng-view", "name": "树正群海观景台", "valley": "树正沟", "day": 2, "position": [680,1590], "kind": "viewpoint", "parentId": "shuzheng", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图中的群海观景位置，具体平台入口听从现场指引。", "travel": "与群海、树正寨分别标点；周二11:30开始收尾。", "priority": "可选", "sourceIds": ["spots"] },
-    { "id": "rhino-view", "name": "犀牛海观景台", "valley": "树正沟", "day": 2, "position": [690,1285], "kind": "viewpoint", "parentId": "rhino", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图提示下车后向内侧观景台观看，现作为独立示意点。", "travel": "按开放步道短距离观景，先问清后续上车位置。", "priority": "可选", "sourceIds": ["spots"] },
-    { "id": "double-falls", "name": "双龙海瀑布", "valley": "树正沟", "day": 2, "position": [610,1790], "kind": "spot", "parentId": "spark", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图中火花海之后的瀑布，与双龙海湖面分开标注。", "travel": "仅在时间、体力和开放情况允许时短停；不影响14:00送站。", "priority": "可选", "sourceIds": ["double-falls-reference"] },
-    { "id": "wuhua-boardwalk", "name": "五花海观景栈道", "valley": "日则沟", "day": 1, "position": [850,530], "kind": "walk", "parentId": "wuhuahai", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "对应参考图的环湖及重点观景台。因未提供各平台的正式名称，作为一组开放观景位置示意。", "travel": "到五花海后按现场开放区域选择短走，不强求全环湖。", "priority": "可选", "sourceIds": ["spots"] },
-    { "id": "changhai-cypress", "name": "独臂老人柏", "valley": "则查洼沟", "day": 1, "position": [110,170], "kind": "spot", "parentId": "changhai", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图的老人柏，官网称长海独臂老人柏。", "travel": "在长海游览时按开放观景区寻找；不离开栈道靠近古树。", "priority": "可选", "sourceIds": ["changhai-cypress-source"] },
-    { "id": "changhai-boardwalk", "name": "长海临湖栈道", "valley": "则查洼沟", "day": 1, "position": [230,210], "kind": "walk", "parentId": "changhai", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图老人柏—临湖栈道的游览位置，和长海主体分开标出。", "travel": "按开放范围短走，之后前往五彩池。", "priority": "可选", "sourceIds": ["spots"] },
-    { "id": "wucaichi-boardwalk", "name": "五彩池临湖栈道", "valley": "则查洼沟", "day": 1, "position": [260,380], "kind": "walk", "parentId": "wucaichi", "labelSide": "right", "optional": false, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "已排步行段", "description": "对应参考图的临湖栈道游览，与湖面及上车点分开。", "travel": "五彩池观景后沿指引前往上车点。", "priority": "沿线", "sourceIds": ["route-detail"] },
-    { "id": "jianzhu-boardwalk", "name": "箭竹海临湖栈道", "valley": "日则沟", "day": 1, "position": [850,285], "kind": "walk", "parentId": "jianzhuhai", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "对应参考图箭竹海临湖栈道，作为短步行可选位置。", "travel": "留意对应栈道是否开放；不为走完栈道压缩五花海时间。", "priority": "可选", "sourceIds": ["spots"] },
-    { "id": "shuzheng-inner", "name": "树正内侧栈道", "valley": "树正沟", "day": 2, "position": [330,1630], "kind": "walk", "parentId": "shuzheng", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "对应参考图从树正群海往火花海的内侧栈道段。", "travel": "图示此段约60分钟步行，另需观景、候车和出沟时间；周二不默认走完。", "priority": "可选", "sourceIds": ["route-detail"] },
-    { "id": "upper-seasonal", "name": "上季节海", "valley": "则查洼沟", "day": 1, "position": [200,545], "kind": "passby", "parentId": "changhai", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图注明在乘车去长海时车览的季节海，不作为独立下车打卡点。", "travel": "乘车经过时观看，不承诺停车，也不以此另开徒步线路。", "priority": "可选", "sourceIds": ["routes"] },
-    { "id": "lower-seasonal", "name": "下季节海", "valley": "则查洼沟", "day": 1, "position": [260,730], "kind": "passby", "parentId": "changhai", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "与上季节海分开标出，作为去长海途中的车览参考。", "travel": "是否能看到湖面与水量取决于季节和车程，不安排随意下车。", "priority": "可选", "sourceIds": ["routes"] },
-    { "id": "shuzheng-waterfall", "name": "树正瀑布", "valley": "树正沟", "day": 2, "position": [450,1440], "kind": "spot", "parentId": "shuzheng", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图分级列表中的树正瀑布，和群海、树正寨分别标出。", "travel": "选择经老虎海到树正的开放栈道时连游，按体力和时间取舍。", "priority": "可选", "sourceIds": ["spots"] },
-    { "id": "nuorilang-lakes", "name": "诺日朗群海", "valley": "三沟交汇附近", "day": 1, "position": [600,970], "kind": "spot", "parentId": "nuorilang", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图分级列表中的群海，与诺日朗瀑布和中心站分别标点。", "travel": "午餐换乘有余量时再看，不把群海等同于中心站。", "priority": "可选", "sourceIds": ["spots"] },
-    { "id": "double-lake", "name": "双龙海", "valley": "树正沟", "day": 2, "position": [410,1830], "kind": "spot", "parentId": "spark", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图分级列表中的湖面，与双龙海瀑布分别标出。", "travel": "周二出沟方向可选，是否停靠与栈道开放以当天安排为准。", "priority": "可选", "sourceIds": ["spots"] }
+    { "id": "changhai", "name": "长海", "valley": "则查洼沟", "day": 2, "position": [546,137], "minutes": "30分钟", "altitude": "约3101米", "tag": "雪山与开阔湖面", "description": "左支沟的主要景点。乘观光车到达，留时间看湖面和远山，再沿开放栈道前往五彩池。", "travel": "第二天乘车到长海，游览后沿开放栈道前往五彩池。", "priority": "精选", "kind": "spot", "labelSide": "left", "optional": false },
+    { "id": "wucaichi", "name": "五彩池", "valley": "则查洼沟", "day": 2, "position": [602,222], "minutes": "10分钟", "altitude": "约3010米", "tag": "清透的蓝绿小海子", "description": "体量小、色彩鲜明，沿开放观景栈道观看。下行台阶放慢速度，注意返回乘车点的时间。", "travel": "长海 → 五彩池 → 乘车返回诺日朗。", "priority": "精选", "kind": "spot", "labelSide": "left", "optional": false },
+    { "id": "forest", "name": "原始森林", "valley": "日则沟", "day": 2, "position": [1295,137], "minutes": "50分钟", "altitude": "高海拔区域", "tag": "第二天正式行程", "description": "按两天休闲版列入第二天正式游览，安排50分钟。", "travel": "诺日朗中心乘车到原始森林，再乘车下行到箭竹海。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
+    { "id": "jianzhuhai", "name": "箭竹海", "valley": "日则沟", "day": 2, "position": [1238,290], "minutes": "40分钟", "altitude": "沟内上游", "tag": "湖面与山林", "description": "第二天日则沟上游的湖泊，与原始森林、熊猫海连游。以湖边短距离步行为主。", "travel": "第二天游览左侧栈道及临湖栈道，之后乘车到熊猫海。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
+    { "id": "panda", "name": "熊猫海", "valley": "日则沟", "day": 2, "position": [1196,354], "minutes": "10分钟", "altitude": "沟内上游", "tag": "彩林与湖水", "description": "看湖面、彩林和倒影。7人一起行动时约好上车点，避免一部分人沿栈道走远。", "travel": "熊猫海 → 五花海，乘车或按现场开放栈道行进。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
+    { "id": "wuhuahai", "name": "五花海", "valley": "日则沟", "day": 1, "position": [1149,422], "minutes": "60分钟", "altitude": "沟内核心湖区", "tag": "本次重点 · 多留一点时间", "description": "湖水、沉木与秋色层次丰富。先把主要观景点看完整，遇到阳光可适当延长停留。", "travel": "第一天重点，环湖或观景栈道按开放范围选择；先留足五花海观景时间。", "priority": "重点", "kind": "spot", "labelSide": "right", "optional": false },
+    { "id": "pearl", "name": "珍珠滩瀑布", "valley": "日则沟", "day": 1, "position": [1021,532], "minutes": "25分钟", "altitude": "约2433米", "tag": "瀑布与栈道", "description": "沿开放栈道观看珍珠滩及瀑布，雨后与水边栈道注意防滑。观景之后前往乘车点。", "travel": "珍珠滩 → 瀑布 → 乘车点；预留步行时间。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
+    { "id": "mirror", "name": "镜海", "valley": "日则沟", "day": 1, "position": [889,554], "minutes": "10分钟", "altitude": "诺日朗附近", "tag": "看风与时间决定", "description": "水面平静时适合看倒影。列为灵活停靠点，有风或时间不足时可略过。", "travel": "按车辆停靠和当天光线调整，不强求固定时间。", "priority": "可选", "kind": "spot", "labelSide": "left", "optional": false },
+    { "id": "nuorilang", "name": "诺日朗瀑布", "valley": "三沟交汇附近", "day": 1, "position": [802,637], "minutes": "30分钟", "altitude": "约2343米", "tag": "换乘与休息枢纽附近", "description": "两条上游支沟在诺日朗中心附近换乘。午餐和换乘留出余量，再按开放步行路线看瀑布。", "travel": "换乘车辆与瀑布观景区不是同一个点，需预留步行。", "priority": "精选", "kind": "spot", "labelSide": "left", "optional": false },
+    { "id": "rhino", "name": "犀牛海", "valley": "树正沟", "day": 1, "position": [890,737], "minutes": "15分钟", "altitude": "约2301米", "tag": "第一天 · 下午慢游", "description": "第一天下午从诺日朗向沟口方向下行的观景点，湖面宽阔，适合看彩林倒影。", "travel": "犀牛海 → 树正区域，默认按开放站点乘车；想看老虎海可选择开放栈道。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false },
+    { "id": "tiger", "name": "老虎海", "valley": "树正沟", "day": 1, "position": [897,795], "minutes": "15—20分钟", "altitude": "约2298米", "tag": "秋色与倒影", "description": "沿开放栈道短走，和树正瀑布、树正群海连游。保持7人集合节奏。", "travel": "不为走完每一段栈道压缩出沟缓冲。", "priority": "精选", "kind": "spot", "labelSide": "left", "optional": false },
+    { "id": "shuzheng", "name": "树正群海", "valley": "树正沟", "day": 1, "position": [848,865], "minutes": "参考群海段安排", "altitude": "约2187—2280米", "tag": "群海核心观景区", "description": "第一天下午主要停留区，群海、树正寨和观景台可按体力连游。", "travel": "第一天树正寨及观景台安排45分钟，随后乘车去火花海；第二天走内侧栈道。", "priority": "重点", "kind": "spot", "labelSide": "left", "optional": false, "days": [1,2] },
+    { "id": "spark", "name": "火花海", "valley": "树正沟", "day": 1, "position": [804,933], "minutes": "15—20分钟", "altitude": "约2211米", "tag": "第一天 · 下行观景", "description": "第一天树正沟下行的观景点，可经开放内侧栈道前往，按全队体力调整。", "travel": "第一天乘车前往；第二天从树正群海沿内侧栈道步行至此。", "priority": "精选", "kind": "spot", "labelSide": "right", "optional": false, "days": [1,2] },
+    { "id": "reed", "name": "芦苇海", "valley": "树正沟", "day": 1, "position": [720,1031], "minutes": "视时间短停", "altitude": "沟内下游", "tag": "金色芦苇与水道", "description": "临近沟口方向的可选观景段。是否能便捷停靠、步行距离多远，入园时询问工作人员。", "travel": "不要把示意图上的相邻关系当成短距离步行。", "priority": "可选", "kind": "spot", "labelSide": "right", "optional": true },
+    { "id": "peacock", "name": "孔雀河道", "valley": "日则沟", "day": 1, "position": [1109,468], "kind": "walk", "parentId": "wuhuahai", "labelSide": "right", "optional": false, "minutes": "20分钟", "altitude": "示意位置，非实测坐标", "tag": "已排步行段", "description": "参考图中五花海之后的河道步行段，现单独标出。", "travel": "从五花海沿开放栈道经此到珍珠滩；不把它当作观光车站。", "priority": "沿线", "sourceIds": ["spots"] },
+    { "id": "pearl-shoal", "name": "珍珠滩", "valley": "日则沟", "day": 1, "position": [1060,500], "kind": "spot", "parentId": "pearl", "labelSide": "right", "optional": false, "minutes": "含在瀑布段25分钟内", "altitude": "示意位置，非实测坐标", "tag": "已排步行段", "description": "与珍珠滩瀑布分开标注，先经过滩流，再按开放栈道看瀑布。", "travel": "孔雀河道 → 珍珠滩 → 珍珠滩瀑布 → 镜海停车场。", "priority": "沿线", "sourceIds": ["spots"] },
+    { "id": "nuorilang-view", "name": "诺日朗观景台", "valley": "三沟交汇附近", "day": 1, "position": [994,651], "kind": "viewpoint", "parentId": "nuorilang", "labelSide": "right", "optional": false, "minutes": "含在瀑布段30分钟内", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图称诺日朗观景平台，与瀑布本体和换乘中心分别标出。", "travel": "从开放步行区域按现场指引前往；注意返程候车时间。", "priority": "可选", "sourceIds": ["nuorilang-platform"] },
+    { "id": "shuzheng-village", "name": "树正寨", "valley": "树正沟", "day": 1, "position": [1005,844], "kind": "spot", "parentId": "shuzheng", "labelSide": "right", "optional": false, "minutes": "第一天观景45分钟", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "与树正群海分开标注的村寨点位，按剩余时间短停。", "travel": "前两晚住景区外周边镇子；树正寨是游览点，按剩余时间短停。", "priority": "可选", "sourceIds": ["spots"], "days": [1,2] },
+    { "id": "shuzheng-view", "name": "树正群海观景台", "valley": "树正沟", "day": 1, "position": [1014,888], "kind": "viewpoint", "parentId": "shuzheng", "labelSide": "right", "optional": false, "minutes": "含在群海观景段45分钟内", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图中的群海观景位置，具体平台入口听从现场指引。", "travel": "与群海、树正寨连游，按剩余时间和开放情况取舍。", "priority": "可选", "sourceIds": ["spots"] },
+    { "id": "rhino-view", "name": "犀牛海观景台", "valley": "树正沟", "day": 1, "position": [1009,759], "kind": "viewpoint", "parentId": "rhino", "labelSide": "right", "optional": true, "minutes": "含在犀牛海15分钟内", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图提示下车后向内侧观景台观看，现作为独立示意点。", "travel": "按开放步道短距离观景，先问清后续上车位置。", "priority": "可选", "sourceIds": ["spots"] },
+    { "id": "double-falls", "name": "双龙海瀑布", "valley": "树正沟", "day": 1, "position": [888,964], "kind": "spot", "parentId": "spark", "labelSide": "right", "optional": false, "minutes": "10分钟", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图中火花海之后的瀑布，与双龙海湖面分开标注。", "travel": "火花海下行后按开放栈道观看，之后到实际乘车点候车；留出出沟时间。", "priority": "可选", "sourceIds": ["double-falls-reference"] },
+    { "id": "wuhua-boardwalk", "name": "五花海观景栈道", "valley": "日则沟", "day": 1, "position": [1239,443], "kind": "walk", "parentId": "wuhuahai", "labelSide": "right", "optional": false, "minutes": "含在五花海60分钟内", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "对应参考图的环湖及重点观景台。因未提供各平台的正式名称，作为一组开放观景位置示意。", "travel": "到五花海后按现场开放区域选择短走，不强求全环湖。", "priority": "可选", "sourceIds": ["spots"] },
+    { "id": "changhai-cypress", "name": "独臂老人柏", "valley": "则查洼沟", "day": 2, "position": [458,150], "kind": "spot", "parentId": "changhai", "labelSide": "left", "optional": false, "minutes": "含在长海30分钟内", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图的老人柏，官网称长海独臂老人柏。", "travel": "在长海游览时按开放观景区寻找；不离开栈道靠近古树。", "priority": "可选", "sourceIds": ["changhai-cypress-source"] },
+    { "id": "changhai-boardwalk", "name": "长海临湖栈道", "valley": "则查洼沟", "day": 2, "position": [532,171], "kind": "walk", "parentId": "changhai", "labelSide": "left", "optional": false, "minutes": "含在长海30分钟内", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图老人柏—临湖栈道的游览位置，和长海主体分开标出。", "travel": "按开放范围短走，之后前往五彩池。", "priority": "可选", "sourceIds": ["spots"] },
+    { "id": "wucaichi-boardwalk", "name": "五彩池临湖栈道", "valley": "则查洼沟", "day": 2, "position": [644,247], "kind": "walk", "parentId": "wucaichi", "labelSide": "right", "optional": false, "minutes": "10分钟", "altitude": "示意位置，非实测坐标", "tag": "已排步行段", "description": "对应参考图的临湖栈道游览，与湖面及上车点分开。", "travel": "五彩池观景后沿指引前往上车点。", "priority": "沿线", "sourceIds": ["route-detail"] },
+    { "id": "jianzhu-boardwalk", "name": "箭竹海临湖栈道", "valley": "日则沟", "day": 2, "position": [1302,312], "kind": "walk", "parentId": "jianzhuhai", "labelSide": "right", "optional": false, "minutes": "含在箭竹海40分钟内", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "对应参考图箭竹海临湖栈道，作为短步行可选位置。", "travel": "留意对应栈道是否开放；不为走完栈道压缩五花海时间。", "priority": "可选", "sourceIds": ["spots"] },
+    { "id": "shuzheng-inner", "name": "树正内侧栈道", "valley": "树正沟", "day": 2, "position": [760,904], "kind": "walk", "parentId": "shuzheng", "labelSide": "left", "optional": false, "minutes": "60分钟", "altitude": "示意位置，非实测坐标", "tag": "第二天固定步行段", "description": "对应参考图从树正群海往火花海的内侧栈道段。", "travel": "第二天从树正群海沿开放内侧栈道走到火花海，参考60分钟。", "priority": "可选", "sourceIds": ["route-detail"], "days": [2] },
+    { "id": "upper-seasonal", "name": "上季节海", "valley": "则查洼沟", "day": 2, "position": [626,337], "kind": "passby", "parentId": "changhai", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图注明在乘车去长海时车览的季节海，不作为独立下车打卡点。", "travel": "乘车经过时观看，不承诺停车，也不以此另开徒步线路。", "priority": "可选", "sourceIds": ["routes"] },
+    { "id": "lower-seasonal", "name": "下季节海", "valley": "则查洼沟", "day": 2, "position": [676,451], "kind": "passby", "parentId": "changhai", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "与上季节海分开标出，作为去长海途中的车览参考。", "travel": "是否能看到湖面与水量取决于季节和车程，不安排随意下车。", "priority": "可选", "sourceIds": ["routes"] },
+    { "id": "shuzheng-waterfall", "name": "树正瀑布", "valley": "树正沟", "day": 1, "position": [876,825], "kind": "spot", "parentId": "shuzheng", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图分级列表中的树正瀑布，和群海、树正寨分别标出。", "travel": "选择经老虎海到树正的开放栈道时连游，按体力和时间取舍。", "priority": "可选", "sourceIds": ["spots"] },
+    { "id": "nuorilang-lakes", "name": "诺日朗群海", "valley": "三沟交汇附近", "day": 1, "position": [918,607], "kind": "spot", "parentId": "nuorilang", "labelSide": "right", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图分级列表中的群海，与诺日朗瀑布和中心站分别标点。", "travel": "午餐换乘有余量时再看，不把群海等同于中心站。", "priority": "可选", "sourceIds": ["spots"] },
+    { "id": "double-lake", "name": "双龙海", "valley": "树正沟", "day": 1, "position": [769,982], "kind": "spot", "parentId": "spark", "labelSide": "left", "optional": true, "minutes": "按体力与余量安排", "altitude": "示意位置，非实测坐标", "tag": "沿线可选", "description": "参考图分级列表中的湖面，与双龙海瀑布分别标出。", "travel": "第一天下行方向可选，是否停靠与栈道开放以当天安排为准。", "priority": "可选", "sourceIds": ["spots"] }
   ],
   "days": [
-    { "id": "arrival", "date": "2026-11-01", "shortDate": "11.01", "weekday": "周日", "label": "抵达九寨", "subtitle": "成都东 → 黄龙九寨 → 沟口酒店", "stay": "沟口酒店 · 第1晚", "spotIds": [], "events": [
-      { "time": "16:00", "title": "成都东站集合", "detail": "7人提前集合，吃晚餐或买好便餐；核对身份证与行李。", "status": "建议", "routeId": "chengdu-meeting" },
-      { "time": "17:05—19:10", "title": "C5756 前往黄龙九寨", "detail": "按你提供的车次截图安排。乘坐意向已确定，出票状态未核验。", "status": "已定安排", "routeId": "arrival-rail" },
-      { "time": "19:30—20:00", "title": "出站接驳，去沟口酒店", "detail": "提前确认接19:10到站的车次、晚点等候、下车位置。7位乘客至少比较9座及行李空间。", "status": "待订", "routeId": "arrival-shuttle" },
-      { "time": "约22:00—22:30", "title": "入住、休息", "detail": "约2—2.5小时车程另加出站等候，抵达时刻为估算。提前告知酒店晚到保留房间。", "status": "估算", "routeId": "hotel-stay" }
+    { "id": "arrival", "date": "2026-10-29", "shortDate": "10.29", "weekday": "周四", "label": "晚抵九寨", "subtitle": "晚间抵达 → 景区周边镇子入住", "stay": "景区周边镇子 · 第1晚", "spotIds": [], "events": [
+      { "time": "晚间 · 车次待定", "title": "抵达黄龙九寨站", "detail": "29日晚抵达已确认；高铁车次、出发站和到站时间按新订单补充。", "status": "待订", "routeId": "arrival-rail" },
+      { "time": "到站后", "title": "接站，前往景区周边镇子", "detail": "提前落实7人及全部行李的接站车辆，确认晚点等候与酒店晚到入住。", "status": "待订", "routeId": "arrival-shuttle" },
+      { "time": "入住后", "title": "休息，准备两天游览", "detail": "住景区周边镇子两晚，先确认早餐与次日去景区的接送。", "status": "建议", "routeId": "hotel-stay" }
     ] },
-    { "id": "day1", "date": "2026-11-02", "shortDate": "11.02", "weekday": "周一", "label": "两条上游支沟", "subtitle": "日则沟 + 则查洼沟 · 全天游览", "stay": "原沟口酒店 · 第2晚", "spotIds": ["jianzhuhai", "panda", "wuhuahai", "pearl", "mirror", "changhai", "wucaichi", "nuorilang"], "events": [
-      { "time": "06:30—07:15", "title": "早餐，前往景区入口", "detail": "步行或酒店接送，按预约页确认当天开园时间。不要把早餐时间排到第一班车之后。", "status": "建议", "routeId": "hotel-entry" },
-      { "time": "上午", "title": "箭竹海 → 熊猫海 → 五花海 → 珍珠滩", "detail": "观光车结合步行，五花海多留时间；镜海看时间与风况短停。实际先游哪条支沟配合车流分配。", "status": "建议路线", "routeId": "rize-morning" },
-      { "time": "12:30左右", "title": "诺日朗附近午餐、换乘", "detail": "7人约好集合位置，预留用餐、步行和候车时间。", "status": "建议", "routeId": "lunch-transfer" },
-      { "time": "下午", "title": "长海 → 五彩池", "detail": "乘车往返，沿开放栈道游览。若上午先分流到左沟，可与右沟交换顺序。", "status": "建议路线", "routeId": "zechawa-afternoon" },
-      { "time": "16:00—17:30", "title": "诺日朗瀑布，乘车出沟", "detail": "按体力和车次收尾，留出候车时间。闭园与支线末班不是同一概念，入园时确认回程安排。", "status": "缓冲", "routeId": "monday-exit" }
+    { "id": "day1", "date": "2026-10-30", "shortDate": "10.30", "weekday": "周五", "label": "五花海与群海慢游", "subtitle": "五花海 → 瀑布 → 树正群海 → 双龙海瀑布 · 全天", "stay": "同一周边镇子酒店 · 第2晚", "spotIds": ["wuhuahai","wuhua-boardwalk","peacock","pearl-shoal","pearl","mirror","nuorilang","nuorilang-view","rhino","rhino-view","shuzheng-village","shuzheng","shuzheng-view","spark","double-falls"], "startTime": "10:00", "events": [
+      { "time": "入园前", "title": "早餐、前往景区入口", "detail": "按酒店位置落实接送；31日先退房并寄存行李，出沟后接回取行李。", "status": "待落实", "routeId": "hotel-entry", "spotIds": [] },
+      { "id": "d1-entry", "title": "入园，乘车前往五花海", "duration": 30, "mode": "bus", "spotIds": ["park-gate","wuhuahai"], "detail": "按参考图入园后乘车到五花海，候车与停靠听从当天调度。", "from": "park-gate", "to": "wuhuahai", "via": ["nuorilang-center","mirror"], "time": "10:00—10:30", "period": "morning", "status": "参考图安排", "routeId": "d1-entry" },
+      { "id": "d1-wuhua", "title": "五花海", "duration": 60, "mode": "visit", "spotIds": ["wuhuahai","wuhua-boardwalk"], "detail": "参考图安排环湖游览，沿当天开放栈道看湖水与彩林。", "time": "10:30—11:30", "period": "morning", "status": "参考图安排", "routeId": "d1-wuhua" },
+      { "id": "d1-peacock", "title": "孔雀河道", "duration": 20, "mode": "walk", "spotIds": ["peacock","pearl-shoal"], "detail": "五花海之后沿开放栈道经孔雀河道下行。", "from": "wuhuahai", "to": "pearl-shoal", "via": ["peacock"], "time": "11:30—11:50", "period": "morning", "status": "参考图安排", "routeId": "d1-peacock" },
+      { "id": "d1-pearl", "title": "珍珠滩瀑布", "duration": 25, "mode": "visit", "spotIds": ["pearl-shoal","pearl"], "detail": "参考图安排两个观景点位，滩流与瀑布连游。", "time": "11:50—12:15", "period": "morning", "status": "参考图安排", "routeId": "d1-pearl" },
+      { "id": "d1-parking", "title": "步行至镜海停车场", "duration": 15, "mode": "walk", "spotIds": ["pearl","mirror-parking"], "detail": "参考图此段为步行，镜海停车场与湖边分开示意。", "from": "pearl", "to": "mirror-parking", "via": [], "time": "12:15—12:30", "period": "noon", "status": "参考图安排", "routeId": "d1-parking" },
+      { "id": "d1-mirror", "title": "镜海", "duration": 10, "mode": "visit", "spotIds": ["mirror"], "detail": "按参考图观景，结合风况看倒影；实际观景位置听从现场指引。", "time": "12:30—12:40", "period": "noon", "status": "参考图安排", "routeId": "d1-mirror" },
+      { "id": "d1-center", "title": "等车，前往诺日朗中心", "duration": 8, "mode": "bus", "spotIds": ["mirror-parking","nuorilang-center"], "detail": "此段包含参考图的等车和乘车用时。", "from": "mirror-parking", "to": "nuorilang-center", "via": [], "time": "12:40—12:48", "period": "noon", "status": "参考图安排", "routeId": "d1-center" },
+      { "id": "d1-lunch", "title": "午餐与休息", "duration": 40, "mode": "rest", "spotIds": ["nuorilang-center"], "detail": "沿用参考图预留的40分钟自由午餐时间，7人约定集合点。", "time": "12:48—13:28", "period": "noon", "status": "参考图安排", "routeId": "d1-lunch" },
+      { "id": "d1-walk-falls", "title": "从中心步行到诺日朗瀑布", "duration": 15, "mode": "walk", "spotIds": ["nuorilang-center","nuorilang"], "detail": "中心站与瀑布不同点，按开放步行指引前往。", "from": "nuorilang-center", "to": "nuorilang", "via": [], "time": "13:28—13:43", "period": "noon", "status": "参考图安排", "routeId": "d1-walk-falls" },
+      { "id": "d1-nuorilang", "title": "诺日朗瀑布与观景台", "duration": 30, "mode": "visit", "spotIds": ["nuorilang","nuorilang-view"], "detail": "按参考图游览瀑布及诺日朗观景平台。", "time": "13:43—14:13", "period": "noon", "status": "参考图安排", "routeId": "d1-nuorilang" },
+      { "id": "d1-falls-stop", "title": "从瀑布步行到上车点", "duration": 15, "mode": "walk", "spotIds": ["nuorilang","nuorilang-stop"], "detail": "走到实际出沟方向站点，不在瀑布旁候车。", "from": "nuorilang", "to": "nuorilang-stop", "via": [], "time": "14:13—14:28", "period": "afternoon", "status": "参考图安排", "routeId": "d1-falls-stop" },
+      { "id": "d1-rhino-bus", "title": "等车，前往犀牛海", "duration": 10, "mode": "bus", "spotIds": ["nuorilang-stop","rhino"], "detail": "按开放站点乘车，参考图此段为观光车。", "from": "nuorilang-stop", "to": "rhino", "via": [], "time": "14:28—14:38", "period": "afternoon", "status": "参考图安排", "routeId": "d1-rhino-bus" },
+      { "id": "d1-rhino", "title": "犀牛海", "duration": 15, "mode": "visit", "spotIds": ["rhino","rhino-view"], "detail": "下车后按参考图提示，向内侧观景台看湖面。", "time": "14:38—14:53", "period": "afternoon", "status": "参考图安排", "routeId": "d1-rhino" },
+      { "id": "d1-tree-bus", "title": "等车，前往树正寨", "duration": 8, "mode": "bus", "spotIds": ["rhino","shuzheng-village"], "detail": "按参考图乘车到树正寨区域，老虎海、树正瀑布是沿线可选。", "from": "rhino", "to": "shuzheng-village", "via": [], "time": "14:53—15:01", "period": "afternoon", "status": "参考图安排", "routeId": "d1-tree-bus" },
+      { "id": "d1-tree", "title": "树正寨与群海观景台", "duration": 45, "mode": "visit", "spotIds": ["shuzheng-village","shuzheng","shuzheng-view"], "detail": "寨子里走一走，游览树正群海观景台。", "time": "15:01—15:46", "period": "afternoon", "status": "参考图安排", "routeId": "d1-tree" },
+      { "id": "d1-spark-bus", "title": "等车，前往火花海", "duration": 8, "mode": "bus", "spotIds": ["shuzheng-village","spark"], "detail": "第一天按参考图乘观光车到火花海；内侧栈道留在第二天。", "from": "shuzheng-village", "to": "spark", "via": [], "time": "15:46—15:54", "period": "afternoon", "status": "参考图安排", "routeId": "d1-spark-bus" },
+      { "id": "d1-double-walk", "title": "步行至双龙海瀑布", "duration": 3, "mode": "walk", "spotIds": ["spark","double-falls"], "detail": "参考图此段为短距离步行，入口和开放范围以现场为准。", "from": "spark", "to": "double-falls", "via": [], "time": "15:54—15:57", "period": "afternoon", "status": "参考图安排", "routeId": "d1-double-walk" },
+      { "id": "d1-double", "title": "双龙海瀑布", "duration": 10, "mode": "visit", "spotIds": ["double-falls"], "detail": "按参考图停留观景，与双龙海湖面分别标点。", "time": "15:57—16:07", "period": "afternoon", "status": "参考图安排", "routeId": "d1-double" },
+      { "id": "d1-exit", "title": "等车，乘车出沟", "duration": 15, "mode": "bus", "spotIds": ["double-falls","park-gate"], "detail": "按指引到实际站点候车，之后回原周边镇子酒店。", "from": "double-falls", "to": "park-gate", "via": [], "time": "16:07—16:22", "period": "afternoon", "status": "参考图安排", "routeId": "d1-exit" },
+      { "time": "出沟后", "title": "回周边镇子酒店住第二晚", "detail": "回10月29日入住的同一家酒店，第三天再退房。", "status": "待落实", "routeId": "return-town", "spotIds": [] }
     ] },
-    { "id": "day2", "date": "2026-11-03", "shortDate": "11.03", "weekday": "周二", "label": "群海慢游 · 返程", "subtitle": "树正沟半天 → 成都中转 → 重庆", "stay": "重庆机场附近 · 第3晚", "spotIds": ["rhino", "tiger", "shuzheng", "spark", "reed"], "events": [
-      { "time": "07:00左右", "title": "早餐、退房、寄存行李", "detail": "两天票分别预约，今天门票与观光车重新生效；酒店已退房，不依赖延迟退房。", "status": "建议", "routeId": "hotel-stay" },
-      { "time": "08:00—11:30", "title": "犀牛海 → 树正群海（老虎海步行备选）", "detail": "按参考图默认乘车到树正；想看老虎海可选择开放栈道步行。火花海、芦苇海为可选，不为打卡耽误返程。", "status": "建议路线", "routeId": "shuzheng-morning" },
-      { "time": "11:30—12:30", "title": "收尾并乘车出沟", "detail": "开始出沟不等于已到入口，保留候车和车程。酒店接回服务须覆盖中午。", "status": "时间提醒", "routeId": "tuesday-exit" },
-      { "time": "12:30—13:30", "title": "午餐、取行李、全员集合", "detail": "核对7人、证件、手机与行李，按约定上车点候车。", "status": "建议", "routeId": "luggage-lunch" },
-      { "time": "14:00", "title": "沟口出发去黄龙九寨站", "detail": "这是从沟口出发的时间，不是高铁发车时间。整体预留约3—3.5小时用于道路接驳与候车，尽量不拖到15:00。", "status": "已定安排", "routeId": "return-shuttle" },
-      { "time": "傍晚至晚间", "title": "高铁经成都东中转至重庆", "detail": "具体车次待订，同站中转建议留45—60分钟。11月3日通常10月20日开售；抵达重庆后直接去机场附近酒店。", "status": "待订", "routeId": "return-rail" }
-    ] },
-    { "id": "flight", "date": "2026-11-04", "shortDate": "11.04", "weekday": "周三", "label": "早班机回深圳", "subtitle": "机场附近酒店 → 航站楼 → 深圳", "stay": "结束行程", "spotIds": [], "events": [
-      { "time": "约03:30—04:00", "title": "起床、退房、预约送机", "detail": "7人与全部行李同时安排，酒店是否有凌晨送机、是否需要两辆车，提前确认。", "status": "估算", "routeId": "airport-transfer" },
-      { "time": "04:35左右", "title": "目标到达正确航站楼", "detail": "按起飞前2小时到机场规划。机场暂按重庆江北候选，尚未用航班号核对机场和航站楼。", "status": "待核验", "routeId": "airport-checkin" },
-      { "time": "06:35", "title": "重庆飞深圳", "detail": "起飞时间已由团队确认，航班号、航站楼与出票状态待补充。", "status": "已定安排", "routeId": "flight-home" }
+    { "id": "day2", "date": "2026-10-31", "shortDate": "10.31", "weekday": "周六", "label": "长海与上游彩林", "subtitle": "长海 → 原始森林 → 箭竹海 → 内侧栈道 · 全天", "stay": "黄龙九寨站附近 · 第3晚", "spotIds": ["changhai","changhai-cypress","changhai-boardwalk","wucaichi","wucaichi-boardwalk","forest","jianzhuhai","jianzhu-boardwalk","panda","shuzheng-village","shuzheng","shuzheng-inner","spark"], "startTime": "10:00", "events": [
+      { "time": "入园前", "title": "早餐、前往景区入口", "detail": "按酒店位置落实接送；31日先退房并寄存行李，出沟后接回取行李。", "status": "待落实", "routeId": "hotel-entry", "spotIds": [] },
+      { "id": "d2-entry", "title": "入园，乘车前往长海", "duration": 40, "mode": "bus", "spotIds": ["park-gate","changhai"], "detail": "乘车途中车览上下季节海，不安排随意下车。", "from": "park-gate", "to": "changhai", "via": ["nuorilang-center","lower-seasonal","upper-seasonal"], "time": "10:00—10:40", "period": "morning", "status": "参考图安排", "routeId": "d2-entry" },
+      { "id": "d2-changhai", "title": "长海", "duration": 30, "mode": "visit", "spotIds": ["changhai","changhai-cypress","changhai-boardwalk"], "detail": "按参考图游览独臂老人柏和临湖栈道。", "time": "10:40—11:10", "period": "morning", "status": "参考图安排", "routeId": "d2-changhai" },
+      { "id": "d2-pool-walk", "title": "从长海步行到五彩池", "duration": 20, "mode": "walk", "spotIds": ["changhai","wucaichi"], "detail": "沿开放栈道下行，台阶放慢。", "from": "changhai", "to": "wucaichi", "via": [], "time": "11:10—11:30", "period": "morning", "status": "参考图安排", "routeId": "d2-pool-walk" },
+      { "id": "d2-pool", "title": "五彩池临湖栈道", "duration": 10, "mode": "visit", "spotIds": ["wucaichi","wucaichi-boardwalk"], "detail": "按参考图在临湖栈道观景。", "time": "11:30—11:40", "period": "morning", "status": "参考图安排", "routeId": "d2-pool" },
+      { "id": "d2-pool-stop", "title": "步行到五彩池上车点", "duration": 10, "mode": "walk", "spotIds": ["wucaichi-boardwalk","wucaichi-stop"], "detail": "看完五彩池，按指引走到实际上车点。", "from": "wucaichi", "to": "wucaichi-stop", "via": ["wucaichi-boardwalk"], "time": "11:40—11:50", "period": "morning", "status": "参考图安排", "routeId": "d2-pool-stop" },
+      { "id": "d2-center", "title": "返回诺日朗中心换乘", "duration": 30, "mode": "mixed", "spotIds": ["wucaichi-stop","nuorilang-center"], "detail": "参考图包含等车、乘车和换乘步行。", "from": "wucaichi-stop", "to": "nuorilang-center", "via": [], "time": "11:50—12:20", "period": "morning", "status": "参考图安排", "routeId": "d2-center" },
+      { "id": "d2-lunch", "title": "午餐与休息", "duration": 40, "mode": "rest", "spotIds": ["nuorilang-center"], "detail": "沿用参考图预留的40分钟自由午餐时间，再前往右沟上游。", "time": "12:20—13:00", "period": "noon", "status": "参考图安排", "routeId": "d2-lunch" },
+      { "id": "d2-forest-bus", "title": "乘车前往原始森林", "duration": 25, "mode": "bus", "spotIds": ["nuorilang-center","forest"], "detail": "按参考图前往原始森林，当日分流和开放安排以现场为准。", "from": "nuorilang-center", "to": "forest", "via": ["mirror","wuhuahai","panda","jianzhuhai"], "time": "13:00—13:25", "period": "noon", "status": "参考图安排", "routeId": "d2-forest-bus" },
+      { "id": "d2-forest", "title": "原始森林", "duration": 50, "mode": "visit", "spotIds": ["forest"], "detail": "保留参考图的正式行程与50分钟游览用时。", "time": "13:25—14:15", "period": "noon", "status": "参考图安排", "routeId": "d2-forest" },
+      { "id": "d2-arrow-bus", "title": "等车，前往箭竹海", "duration": 20, "mode": "bus", "spotIds": ["forest","jianzhuhai"], "detail": "原始森林之后乘车下行到箭竹海。", "from": "forest", "to": "jianzhuhai", "via": [], "time": "14:15—14:35", "period": "afternoon", "status": "参考图安排", "routeId": "d2-arrow-bus" },
+      { "id": "d2-arrow", "title": "箭竹海", "duration": 40, "mode": "visit", "spotIds": ["jianzhuhai","jianzhu-boardwalk"], "detail": "按参考图游览左侧栈道和临湖栈道，安排40分钟。", "time": "14:35—15:15", "period": "afternoon", "status": "参考图安排", "routeId": "d2-arrow" },
+      { "id": "d2-panda-bus", "title": "等车，前往熊猫海", "duration": 8, "mode": "bus", "spotIds": ["jianzhuhai","panda"], "detail": "按参考图乘观光车到熊猫海。", "from": "jianzhuhai", "to": "panda", "via": [], "time": "15:15—15:23", "period": "afternoon", "status": "参考图安排", "routeId": "d2-panda-bus" },
+      { "id": "d2-panda", "title": "熊猫海", "duration": 10, "mode": "visit", "spotIds": ["panda"], "detail": "按参考图停留观景，约好下一段上车位置。", "time": "15:23—15:33", "period": "afternoon", "status": "参考图安排", "routeId": "d2-panda" },
+      { "id": "d2-center-return", "title": "返回诺日朗中心换乘", "duration": 20, "mode": "bus", "spotIds": ["panda","nuorilang-center"], "detail": "下行返回中心站，换乘树正沟方向。", "from": "panda", "to": "nuorilang-center", "via": ["wuhuahai","mirror"], "time": "15:33—15:53", "period": "afternoon", "status": "参考图安排", "routeId": "d2-center-return" },
+      { "id": "d2-tree-bus", "title": "乘车前往树正寨", "duration": 8, "mode": "bus", "spotIds": ["nuorilang-center","shuzheng-village"], "detail": "按参考图前往树正区域，开始内侧栈道段。", "from": "nuorilang-center", "to": "shuzheng-village", "via": ["rhino"], "time": "15:53—16:01", "period": "afternoon", "status": "参考图安排", "routeId": "d2-tree-bus" },
+      { "id": "d2-inner", "title": "树正群海内侧栈道至火花海", "duration": 60, "mode": "walk", "spotIds": ["shuzheng","shuzheng-inner","spark"], "detail": "第二天固定安排：沿开放内侧栈道从树正群海走到火花海，参考60分钟。", "from": "shuzheng", "to": "spark", "via": ["shuzheng-inner"], "time": "16:01—17:01", "period": "afternoon", "status": "参考图安排", "routeId": "d2-inner" },
+      { "id": "d2-exit", "title": "等车，乘车出沟", "duration": 16, "mode": "bus", "spotIds": ["spark","park-gate"], "detail": "完整游览后出沟、取行李，再去黄龙九寨站附近酒店。", "from": "spark", "to": "park-gate", "via": [], "time": "17:01—17:17", "period": "afternoon", "status": "参考图安排", "routeId": "d2-exit" },
+      { "time": "出沟、取行李后", "title": "搬到黄龙九寨站附近酒店", "detail": "当晚只安排道路接驳和车站附近入住；接送时刻、车程和酒店待落实。新返程高铁、航班及日期均待定。", "status": "待订", "routeId": "station-hotel-transfer", "spotIds": [] }
     ] }
   ],
   "transport": [
-    { "title": "高铁站 ↔ 沟口酒店", "badge": "另付 · 待订", "text": "去程11月1日19:10到站后接；回程11月3日14:00从沟口出发。7人比较大巴与9座以上整车，报价需包含行李、夜间接站及等候规则。" },
-    { "title": "酒店 ↔ 景区入口", "badge": "两天共4段", "text": "步行可达最省事；或选明确含往返接送的酒店。特别确认周二中午能接回酒店取行李，不只看免费送景区。" },
-    { "title": "沟内景点之间", "badge": "当天车票内", "text": "每天90元普通观光车票用于当日沟内乘车换乘，正常换乘不逐段另付。不能用于酒店、高铁站接驳，也不能跨日使用。" },
-    { "title": "重庆到酒店与凌晨送机", "badge": "另付或酒店包含", "text": "周三06:35起飞，优先机场附近住宿。提前落实7人加行李的高铁站接车、凌晨送机及实际航站楼。" }
+    { "title": "10月29日晚接站", "badge": "另付 · 待订", "text": "到站后送至景区周边镇子酒店；车次与到站时刻待定。确认7人和行李空间、等候规则与晚到入住。" },
+    { "title": "酒店 ↔ 景区入口", "badge": "两天共4段", "text": "根据实际镇子及酒店位置安排接送；31日退房后需能寄存行李，出沟再接回酒店取。" },
+    { "title": "沟内景点之间", "badge": "当天车票内", "text": "每天90元普通观光车票用于当日沟内乘车换乘；酒店和高铁站接驳另计。步行只走开放栈道。" },
+    { "title": "10月31日晚搬到车站附近", "badge": "接送与酒店待订", "text": "完整游览后出沟、取行李，再送黄龙九寨站附近酒店。次日或之后的返程日期、车次和航班待定。" }
   ],
   "pending": [
-    { "title": "沟口酒店与分房", "detail": "每晚全队1400元；4间平均≤350元，或比较2间双床＋1间可住3人的房型。" },
-    { "title": "接站与送站车辆", "detail": "确认11月1日晚接站、11月3日14:00送站及7人的行李空间。" },
-    { "title": "11月2日、3日门票", "detail": "分别实名预约，两日成人全价预算560元/人；优惠资格按成员核验。" },
-    { "title": "重庆联程与航班资料", "detail": "返程高铁待订；补充06:35航班号以核对机场、航站楼与送机。" }
+    { "title": "周边镇子两晚住宿", "detail": "10月29、30日住同一家酒店；具体镇子、房型、早餐及景区接送待确认。预算仍按200元/人/晚。" },
+    { "title": "10月31日晚车站附近住宿", "detail": "黄龙九寨站附近酒店待订，确认晚到入住、离店日期及到车站接送；费用另行确认。" },
+    { "title": "接站和搬酒店车辆", "detail": "29日晚到站接往景区周边；31日完整游览后回原酒店取行李，再送车站附近酒店。落实7人与行李空间。" },
+    { "title": "10月30日、31日门票", "detail": "两日分别实名预约；7位无优惠成人暂按两天560元/人测算，优惠资格和票种按实际订单核验。" },
+    { "title": "往返高铁与新返程", "detail": "到达车次、新返程日期、高铁车次和航班均待定；以新订单补齐，不沿用旧返程。" }
   ],
   "sources": [
     { "id": "hours", "title": "景区开放时间 · 2026年9月28日公告", "url": "https://www.jiuzhai.com/news/notice/11422-2026-09-28-02-07-14", "type": "九寨沟官方", "note": "07:30—14:00入园、18:00闭园为该公告安排，出行前复核。" },
@@ -156,7 +281,6 @@
     { "id": "routes", "title": "景区推荐游玩方式", "url": "https://www.jiuzhai.com/intelligent-service/way-of-play", "type": "九寨沟官方", "note": "三沟结构、乘车与步行组合参考。" },
     { "id": "windy", "title": "Windy 完整天气预报", "url": "https://www.windy.com/33.200/103.900?33.200,103.900,11", "type": "天气工具", "note": "已定位四川九寨沟景区区域；嵌入图层实时显示，不代表出游日天气已确定。" },
     { "id": "china-weather", "title": "中国天气网 · 九寨沟风景区", "url": "https://www.weather.com.cn/weather/10127190601A.shtml", "type": "交叉参考", "note": "对照景区短期天气与预警。" },
-    { "id": "airport", "title": "重庆机场国内出发指引", "url": "https://www.cqa.cn/jcgyd/43/", "type": "机场官方", "note": "建议提前2小时到航站楼，航班具体要求向承运航司核验。" },
     { "id": "rail", "title": "铁路12306", "url": "https://www.12306.cn/", "type": "交通预订", "note": "核对指定日期车次、票价、余票与中转站。" },
     { "id": "route-detail", "title": "官方游览路线参考（2012年资料）", "url": "https://www.jiuzhai.com/news/scenic-news/1307-2012-06-12-01-32-46", "type": "九寨沟官方 · 历史路线", "note": "用于理解步行与换乘关系，不作为本次日期站点、车次或栈道开放承诺。" },
     { "id": "route-safety", "title": "景区安全游览提示 · 2026年9月29日", "url": "https://www.jiuzhai.com/news/notice/11429-2026-09-29-08-10-14", "type": "九寨沟官方", "note": "步行不离开开放栈道，乘车按现场秩序与指引。" },
@@ -165,8 +289,8 @@
     { "id": "double-falls-reference", "title": "双龙海瀑布 · 官方历史资料", "url": "https://www.jiuzhai.com/news/scenic-news/6399-2018-06-10-07-41-06", "type": "九寨沟官方 · 历史资料", "note": "仅核对地点名称，不使用历史开放安排作为本次游览承诺。" }
   ],
   "routing": {
-    "preference": "参考图的观光车＋步行组合",
-    "note": "方式参考团队提供的攻略图和官方游玩说明；站点停靠、开放栈道与上下行方向以当天调度为准。选择仅在本页暂存，刷新恢复推荐。",
+    "preference": "两天休闲版原表顺序、交通方式与分钟数",
+    "note": "默认路线严格对应用户提供的两天休闲版；钟点为按入园时间累计的预计，不代表车辆时刻表或当天开放承诺。",
     "sourceIds": [
       "routes",
       "route-detail",
@@ -174,10 +298,10 @@
     ],
     "places": [
       {
-        "id": "chengdu-east",
-        "name": "成都东站",
+        "id": "arrival-station",
+        "name": "出发高铁站（待定）",
         "scope": "outside",
-        "note": "按车票与站内指引确认检票口；集合位置待团队确定。"
+        "note": "以10月29日新车票确认出发站、车次和检票安排。"
       },
       {
         "id": "huanglong-station",
@@ -187,41 +311,23 @@
       },
       {
         "id": "jiuzhai-hotel",
-        "name": "沟口酒店（待定）",
+        "name": "景区周边镇子酒店（待定）",
         "scope": "outside",
-        "note": "尚无酒店地址，不提供精确地图定位。"
+        "note": "10月29、30日两晚住宿；具体镇子和酒店地址待定，不提供猜测定位。"
       },
       {
-        "id": "chongqing-station",
-        "name": "重庆到达高铁站（待订）",
+        "id": "station-hotel",
+        "name": "黄龙九寨站附近酒店（待定）",
         "scope": "outside",
-        "note": "车次与到达站待确认，不预设重庆北或重庆西。"
-      },
-      {
-        "id": "chongqing-hotel",
-        "name": "重庆机场附近酒店（待定）",
-        "scope": "outside",
-        "note": "提前确认凌晨7人加行李的送机安排。"
-      },
-      {
-        "id": "airport-terminal",
-        "name": "重庆出发机场／航站楼（待核验）",
-        "scope": "outside",
-        "note": "用航班号核对机场与航站楼，06:35起飞，目标04:35到达。"
-      },
-      {
-        "id": "shenzhen-airport",
-        "name": "深圳到达机场",
-        "scope": "outside",
-        "note": "以实际航班信息为准。"
+        "note": "10月31日晚入住；新返程与离店日期待确认，不把车站等同于酒店位置。"
       },
       {
         "id": "park-gate",
         "name": "九寨沟景区入口",
         "scope": "park",
         "position": [
-          440,
-          2040
+          662,
+          1092
         ],
         "note": "示意位置，实际检票与集合点以现场指引为准。",
         "mapLabel": "景区入口",
@@ -236,8 +342,8 @@
         "scope": "park",
         "note": "换乘中心与诺日朗瀑布不是同一个点；本图独立示意，非精确站台定位。",
         "position": [
-          350,
-          970
+          776,
+          582
         ],
         "mapLabel": "诺日朗中心站",
         "labelSide": "left",
@@ -251,8 +357,8 @@
         "scope": "park",
         "note": "停车场与镜海湖边不是同一个点；步行到实际候车区，示意位置不能当作导航。",
         "position": [
-          740,
-          860
+          1151,
+          563
         ],
         "mapLabel": "镜海停车场",
         "labelSide": "right",
@@ -266,12 +372,12 @@
         "scope": "park",
         "note": "五彩池观景后沿开放栈道到实际上车点；方形标记仅为设施位置示意。",
         "position": [
-          140,
-          430
+          630,
+          275
         ],
         "mapLabel": "五彩池上车点",
         "labelSide": "right",
-        "day": 1,
+        "day": 2,
         "kind": "facility",
         "valley": "则查洼沟"
       },
@@ -281,8 +387,8 @@
         "scope": "park",
         "note": "从瀑布按现场指引走到出沟方向站点；方形标记不是实测站台坐标。",
         "position": [
-          350,
-          1130
+          767,
+          677
         ],
         "mapLabel": "诺日朗出沟上车点",
         "labelSide": "left",
@@ -293,27 +399,19 @@
     ],
     "routes": [
       {
-        "id": "chengdu-meeting",
-        "locations": [
-          "chengdu-east"
-        ],
-        "legs": [],
-        "note": "集合与候车在站内完成。"
-      },
-      {
         "id": "arrival-rail",
         "locations": [],
         "legs": [
           {
-            "id": "rail",
-            "from": "chengdu-east",
+            "id": "arrival-train",
+            "from": "arrival-station",
             "to": "huanglong-station",
             "recommended": 0,
             "options": [
               {
                 "mode": "rail",
-                "label": "高铁 C5756",
-                "note": "按已确定的17:05—19:10安排，出票状态待核验。"
+                "label": "高铁 · 待订",
+                "note": "10月29日晚抵达，具体出发站、车次与到站时刻待新订单确认。"
               }
             ]
           }
@@ -325,20 +423,15 @@
         "locations": [],
         "legs": [
           {
-            "id": "pickup",
+            "id": "station-town",
             "from": "huanglong-station",
             "to": "jiuzhai-hotel",
             "recommended": 0,
             "options": [
               {
                 "mode": "shuttle",
-                "label": "预订整车接站",
-                "note": "7人加行李比较9座及以上车辆，确认夜间到站等候与酒店送达。"
-              },
-              {
-                "mode": "shuttle",
-                "label": "正规接驳大巴",
-                "note": "先核实是否衔接19:10到站车次、末班和下车位置；费用另付。"
+                "label": "预约接站车辆",
+                "note": "确认7人和全部行李、晚点等候、下车位置以及酒店晚到入住。"
               }
             ]
           }
@@ -351,11 +444,46 @@
           "jiuzhai-hotel"
         ],
         "legs": [],
-        "note": "酒店待定；晚到保留、早餐、寄存行李与景区接送需落实。"
+        "note": "前两晚住景区周边同一酒店，酒店名称和地址待订。"
+      },
+      {
+        "id": "station-hotel-transfer",
+        "locations": [],
+        "legs": [
+          {
+            "id": "gate-luggage",
+            "from": "park-gate",
+            "to": "jiuzhai-hotel",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "shuttle",
+                "label": "接回酒店取行李",
+                "note": "确认退房当天仍提供接回服务，核对7人和所有行李。"
+              }
+            ]
+          },
+          {
+            "id": "town-station-hotel",
+            "from": "jiuzhai-hotel",
+            "to": "station-hotel",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "shuttle",
+                "label": "预约送到车站附近酒店",
+                "note": "10月31日出沟、取行李后出发，接送时刻、车程、报价及晚到入住待确认。"
+              }
+            ]
+          }
+        ],
+        "note": "第三晚住黄龙九寨站附近；新返程日期、高铁和航班待定。"
       },
       {
         "id": "hotel-entry",
-        "locations": [],
+        "locations": [
+          "park-gate"
+        ],
         "legs": [
           {
             "id": "hotel-gate",
@@ -365,381 +493,19 @@
             "options": [
               {
                 "mode": "pending",
-                "label": "待酒店位置确认",
-                "note": "先确认酒店到检票口的实际距离及接送服务，再选择步行或接送。"
-              },
-              {
-                "mode": "walk",
-                "label": "步行到检票口",
-                "note": "适用于已确认实际步行可达的酒店；地图不推算尚未确定酒店的步行时间。"
-              },
-              {
-                "mode": "shuttle",
-                "label": "酒店接送",
-                "note": "确认送达检票口附近、发车时间，以及周二中午回酒店取行李的接回服务。"
+                "label": "酒店接送待落实",
+                "note": "具体镇子、酒店地址和接送时刻待确认。"
               }
             ]
           }
         ],
-        "note": ""
+        "note": "按酒店位置落实接送；31日先退房并寄存行李，出沟后接回取行李。"
       },
       {
-        "id": "rize-morning",
-        "locations": [],
-        "legs": [
-          {
-            "id": "enter-jianzhu",
-            "from": "park-gate",
-            "to": "jianzhuhai",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "按上行分流到达日则沟开放站点；如先分流左沟，可交换上午与下午顺序。"
-              }
-            ]
-          },
-          {
-            "id": "jianzhu-panda",
-            "from": "jianzhuhai",
-            "to": "panda",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "参考图推荐乘车到熊猫海，按实际开放停靠站排队。"
-              },
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "仅在对应栈道开放且全队愿意多走时选择；另留步行和观景时间。"
-              }
-            ]
-          },
-          {
-            "id": "panda-wuhua",
-            "from": "panda",
-            "to": "wuhuahai",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "参考图推荐乘车去五花海，把主要游览时间留在五花海。"
-              },
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "对应栈道开放时可徒步，需评估下行台阶、体力与上午剩余时间。"
-              }
-            ]
-          },
-          {
-            "id": "wuhua-peacock",
-            "from": "wuhuahai",
-            "to": "peacock",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "按参考图从五花海进入开放的孔雀河道栈道。"
-              }
-            ]
-          },
-          {
-            "id": "peacock-shoal",
-            "from": "peacock",
-            "to": "pearl-shoal",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "沿开放栈道走到珍珠滩，途中观景。"
-              }
-            ]
-          },
-          {
-            "id": "shoal-waterfall",
-            "from": "pearl-shoal",
-            "to": "pearl",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "从滩流区沿开放栈道继续到珍珠滩瀑布，注意水边防滑。"
-              }
-            ]
-          },
-          {
-            "id": "pearl-mirror",
-            "from": "pearl",
-            "to": "mirror-parking",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "瀑布游览后按指引走到镜海停车场；参考图此段为步行。镜海观景可看时间与风况取舍。"
-              }
-            ]
-          }
+        "id": "return-town",
+        "locations": [
+          "park-gate"
         ],
-        "note": "右沟参考顺序。若车辆分流先到左沟，请交换上午与下午，不逆行追赶固定车次。",
-        "optionalLocations": [
-          "jianzhu-boardwalk",
-          "wuhua-boardwalk",
-          "mirror"
-        ]
-      },
-      {
-        "id": "lunch-transfer",
-        "locations": [],
-        "legs": [
-          {
-            "id": "mirror-center",
-            "from": "mirror-parking",
-            "to": "nuorilang-center",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "镜海停车场乘车回诺日朗换乘区，用餐与换乘还需步行；实际停靠听从调度。"
-              }
-            ]
-          }
-        ],
-        "note": "集合、吃饭和换乘留出时间；换乘区不是诺日朗瀑布观景点。",
-        "optionalLocations": [
-          "mirror",
-          "nuorilang-lakes"
-        ]
-      },
-      {
-        "id": "zechawa-afternoon",
-        "locations": [],
-        "legs": [
-          {
-            "id": "center-changhai",
-            "from": "nuorilang-center",
-            "to": "changhai",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "在长海方向站台候车；跨沟往返采用观光车，不按图上直线步行。 上下季节海仅列作车览经过点，不安排停车。",
-                "via": [
-                  "lower-seasonal",
-                  "upper-seasonal"
-                ]
-              }
-            ]
-          },
-          {
-            "id": "changhai-pool",
-            "from": "changhai",
-            "to": "wucaichi",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "参考图及官方路线均安排沿开放栈道下行到五彩池；没有在本段提供观光车选项。"
-              }
-            ]
-          },
-          {
-            "id": "pool-boardwalk",
-            "from": "wucaichi",
-            "to": "wucaichi-boardwalk",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "沿开放临湖栈道游览，湖面和栈道在图上分开标出。"
-              }
-            ]
-          },
-          {
-            "id": "pool-stop",
-            "from": "wucaichi-boardwalk",
-            "to": "wucaichi-stop",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "按现场指引步行到候车区，不在五彩池边等车。"
-              }
-            ]
-          },
-          {
-            "id": "pool-center",
-            "from": "wucaichi-stop",
-            "to": "nuorilang-center",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "在开放站点按调度乘车返回诺日朗换乘区，另留候车时间。"
-              }
-            ]
-          }
-        ],
-        "note": "",
-        "optionalLocations": [
-          "changhai-cypress",
-          "changhai-boardwalk"
-        ]
-      },
-      {
-        "id": "monday-exit",
-        "locations": [],
-        "legs": [
-          {
-            "id": "center-waterfall",
-            "from": "nuorilang-center",
-            "to": "nuorilang",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "参考图从中心站步行到瀑布与观景区，二者不是同一点。"
-              }
-            ]
-          },
-          {
-            "id": "waterfall-stop",
-            "from": "nuorilang",
-            "to": "nuorilang-stop",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "walk",
-                "label": "步行栈道",
-                "note": "看完瀑布按现场指引步行到出沟方向上车点。"
-              }
-            ]
-          },
-          {
-            "id": "nuorilang-exit",
-            "from": "nuorilang-stop",
-            "to": "park-gate",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "乘观光车下行出沟，是否中途换乘以调度为准；不要按闭园时间反推支线末班。"
-              }
-            ]
-          }
-        ],
-        "note": "",
-        "optionalLocations": [
-          "nuorilang-view",
-          "nuorilang-lakes"
-        ]
-      },
-      {
-        "id": "shuzheng-morning",
-        "locations": [],
-        "legs": [
-          {
-            "id": "enter-rhino",
-            "from": "park-gate",
-            "to": "rhino",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "上车前说明计划在树正沟游览，确认是否可在犀牛海下车。"
-              }
-            ]
-          },
-          {
-            "id": "rhino-shuzheng",
-            "from": "rhino",
-            "to": "shuzheng",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "参考图犀牛海到树正乘观光车；默认省去中间的长段步行，停靠按调度。"
-              },
-              {
-                "mode": "walk",
-                "label": "经老虎海步行",
-                "note": "想看老虎海时，改走开放栈道到树正；需另留步行与观景时间。",
-                "via": [
-                  "tiger",
-                  "shuzheng-waterfall"
-                ]
-              }
-            ]
-          }
-        ],
-        "note": "按参考图默认乘车到树正；老虎海放在步行备选中。周二11:30开始收尾。",
-        "optionalLocations": [
-          "rhino-view",
-          "shuzheng-village",
-          "shuzheng-view"
-        ]
-      },
-      {
-        "id": "tuesday-exit",
-        "locations": [],
-        "legs": [
-          {
-            "id": "shuzheng-exit",
-            "from": "shuzheng",
-            "to": "park-gate",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "bus",
-                "label": "观光车",
-                "note": "按现场指引到出沟方向站点，候车下行；目标12:30前出沟。"
-              },
-              {
-                "mode": "mixed",
-                "label": "经火花海步行后乘车",
-                "note": "参考图树正群海到火花海的步行段约60分钟，另加观景、候车和出沟车程；周二不作为默认。 有余量时按开放栈道看双龙海瀑布，再按指引到实际乘车点，不能在瀑布旁拦车。",
-                "via": [
-                  "shuzheng-inner",
-                  "spark",
-                  "double-falls"
-                ],
-                "warning": "此选项可能超过11:30—12:30收尾时段。优先直接乘车出沟，不能因此拖延14:00送站。"
-              }
-            ]
-          }
-        ],
-        "note": "",
-        "optionalLocations": [
-          "shuzheng-village",
-          "shuzheng-view",
-          "shuzheng-inner",
-          "spark",
-          "double-falls",
-          "double-lake",
-          "reed"
-        ]
-      },
-      {
-        "id": "luggage-lunch",
-        "locations": [],
         "legs": [
           {
             "id": "gate-hotel",
@@ -748,149 +514,681 @@
             "recommended": 0,
             "options": [
               {
-                "mode": "pending",
-                "label": "待酒店位置确认",
-                "note": "午餐与取行李预留到13:30；回酒店方式需事先落实。"
-              },
-              {
-                "mode": "walk",
-                "label": "步行回酒店",
-                "note": "仅在实际距离合适且全队有余力时选择，勿用示意图估算距离。"
-              },
-              {
                 "mode": "shuttle",
-                "label": "酒店接回",
-                "note": "确认退房后仍可接回、周二中午有车，不只看免费送景区。"
+                "label": "回原酒店",
+                "note": "回10月29日入住的同一家酒店，第三天再退房。"
               }
             ]
           }
         ],
-        "note": ""
+        "note": "回10月29日入住的同一家酒店，第三天再退房。"
       },
       {
-        "id": "return-shuttle",
-        "locations": [],
-        "legs": [
-          {
-            "id": "hotel-station",
-            "from": "jiuzhai-hotel",
-            "to": "huanglong-station",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "shuttle",
-                "label": "预订整车送站",
-                "note": "14:00从沟口约定点出发，整体预留约3—3.5小时接驳及候车；高铁车次待订。"
-              },
-              {
-                "mode": "shuttle",
-                "label": "正规送站大巴",
-                "note": "先核实发车地点、时间与高铁衔接，额外预留候车及下车进站时间。"
-              }
-            ]
-          }
-        ],
-        "note": ""
-      },
-      {
-        "id": "return-rail",
-        "locations": [],
-        "legs": [
-          {
-            "id": "huanglong-chengdu",
-            "from": "huanglong-station",
-            "to": "chengdu-east",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "rail",
-                "label": "高铁 · 待订",
-                "note": "以11月3日实际车次为准，同站中转建议留45—60分钟。"
-              }
-            ]
-          },
-          {
-            "id": "chengdu-chongqing",
-            "from": "chengdu-east",
-            "to": "chongqing-station",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "rail",
-                "label": "中转高铁 · 待订",
-                "note": "先确认重庆实际到达站，再落实去机场附近酒店的车辆。"
-              }
-            ]
-          },
-          {
-            "id": "chongqing-hotel",
-            "from": "chongqing-station",
-            "to": "chongqing-hotel",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "shuttle",
-                "label": "接车／打车",
-                "note": "7人和行李确认一辆合规大车或分两辆车；费用另付或核对酒店是否包含。"
-              }
-            ]
-          }
-        ],
-        "note": ""
-      },
-      {
-        "id": "airport-transfer",
-        "locations": [],
-        "legs": [
-          {
-            "id": "hotel-airport",
-            "from": "chongqing-hotel",
-            "to": "airport-terminal",
-            "recommended": 0,
-            "options": [
-              {
-                "mode": "shuttle",
-                "label": "预约凌晨送机",
-                "note": "提前落实起床、退房和车辆，目标04:35到正确航站楼；是否酒店含送机待确认。"
-              },
-              {
-                "mode": "shuttle",
-                "label": "预约出租／网约车",
-                "note": "7人加行李通常需核实大车或分车，预订后确认凌晨接驾和费用。"
-              }
-            ]
-          }
-        ],
-        "note": ""
-      },
-      {
-        "id": "airport-checkin",
+        "id": "d1-entry",
         "locations": [
-          "airport-terminal"
+          "park-gate",
+          "wuhuahai"
+        ],
+        "legs": [
+          {
+            "id": "d1-entry-leg",
+            "from": "park-gate",
+            "to": "wuhuahai",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按参考图入园后乘车到五花海，候车与停靠听从当天调度。",
+                "via": [
+                  "nuorilang-center",
+                  "mirror"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "按参考图入园后乘车到五花海，候车与停靠听从当天调度。"
+      },
+      {
+        "id": "d1-wuhua",
+        "locations": [
+          "wuhuahai",
+          "wuhua-boardwalk"
         ],
         "legs": [],
-        "note": "办理值机、托运、安检并按实际登机口集合；航班号与航站楼待补充。"
+        "note": "参考图安排环湖游览，沿当天开放栈道看湖水与彩林。"
       },
       {
-        "id": "flight-home",
-        "locations": [],
+        "id": "d1-peacock",
+        "locations": [
+          "peacock",
+          "pearl-shoal"
+        ],
         "legs": [
           {
-            "id": "fly-shenzhen",
-            "from": "airport-terminal",
-            "to": "shenzhen-airport",
+            "id": "d1-peacock-leg",
+            "from": "wuhuahai",
+            "to": "pearl-shoal",
             "recommended": 0,
             "options": [
               {
-                "mode": "flight",
-                "label": "航班06:35起飞",
-                "note": "起飞时间按团队确认，航班号、出票及到达时刻以实际订单为准。"
+                "mode": "walk",
+                "label": "步行",
+                "note": "五花海之后沿开放栈道经孔雀河道下行。",
+                "via": [
+                  "peacock"
+                ]
               }
             ]
           }
         ],
-        "note": ""
+        "note": "五花海之后沿开放栈道经孔雀河道下行。"
+      },
+      {
+        "id": "d1-pearl",
+        "locations": [
+          "pearl-shoal",
+          "pearl"
+        ],
+        "legs": [],
+        "note": "参考图安排两个观景点位，滩流与瀑布连游。"
+      },
+      {
+        "id": "d1-parking",
+        "locations": [
+          "pearl",
+          "mirror-parking"
+        ],
+        "legs": [
+          {
+            "id": "d1-parking-leg",
+            "from": "pearl",
+            "to": "mirror-parking",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "参考图此段为步行，镜海停车场与湖边分开示意。"
+              }
+            ]
+          }
+        ],
+        "note": "参考图此段为步行，镜海停车场与湖边分开示意。"
+      },
+      {
+        "id": "d1-mirror",
+        "locations": [
+          "mirror"
+        ],
+        "legs": [],
+        "note": "按参考图观景，结合风况看倒影；实际观景位置听从现场指引。"
+      },
+      {
+        "id": "d1-center",
+        "locations": [
+          "mirror-parking",
+          "nuorilang-center"
+        ],
+        "legs": [
+          {
+            "id": "d1-center-leg",
+            "from": "mirror-parking",
+            "to": "nuorilang-center",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "此段包含参考图的等车和乘车用时。"
+              }
+            ]
+          }
+        ],
+        "note": "此段包含参考图的等车和乘车用时。"
+      },
+      {
+        "id": "d1-lunch",
+        "locations": [
+          "nuorilang-center"
+        ],
+        "legs": [],
+        "note": "沿用参考图预留的40分钟自由午餐时间，7人约定集合点。"
+      },
+      {
+        "id": "d1-walk-falls",
+        "locations": [
+          "nuorilang-center",
+          "nuorilang"
+        ],
+        "legs": [
+          {
+            "id": "d1-walk-falls-leg",
+            "from": "nuorilang-center",
+            "to": "nuorilang",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "中心站与瀑布不同点，按开放步行指引前往。"
+              }
+            ]
+          }
+        ],
+        "note": "中心站与瀑布不同点，按开放步行指引前往。"
+      },
+      {
+        "id": "d1-nuorilang",
+        "locations": [
+          "nuorilang",
+          "nuorilang-view"
+        ],
+        "legs": [],
+        "note": "按参考图游览瀑布及诺日朗观景平台。"
+      },
+      {
+        "id": "d1-falls-stop",
+        "locations": [
+          "nuorilang",
+          "nuorilang-stop"
+        ],
+        "legs": [
+          {
+            "id": "d1-falls-stop-leg",
+            "from": "nuorilang",
+            "to": "nuorilang-stop",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "走到实际出沟方向站点，不在瀑布旁候车。"
+              }
+            ]
+          }
+        ],
+        "note": "走到实际出沟方向站点，不在瀑布旁候车。"
+      },
+      {
+        "id": "d1-rhino-bus",
+        "locations": [
+          "nuorilang-stop",
+          "rhino"
+        ],
+        "legs": [
+          {
+            "id": "d1-rhino-bus-leg",
+            "from": "nuorilang-stop",
+            "to": "rhino",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按开放站点乘车，参考图此段为观光车。"
+              }
+            ]
+          }
+        ],
+        "note": "按开放站点乘车，参考图此段为观光车。"
+      },
+      {
+        "id": "d1-rhino",
+        "locations": [
+          "rhino",
+          "rhino-view"
+        ],
+        "legs": [],
+        "note": "下车后按参考图提示，向内侧观景台看湖面。"
+      },
+      {
+        "id": "d1-tree-bus",
+        "locations": [
+          "rhino",
+          "shuzheng-village"
+        ],
+        "legs": [
+          {
+            "id": "d1-tree-bus-leg",
+            "from": "rhino",
+            "to": "shuzheng-village",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按参考图乘车到树正寨区域，老虎海、树正瀑布是沿线可选。"
+              }
+            ]
+          }
+        ],
+        "note": "按参考图乘车到树正寨区域，老虎海、树正瀑布是沿线可选。"
+      },
+      {
+        "id": "d1-tree",
+        "locations": [
+          "shuzheng-village",
+          "shuzheng",
+          "shuzheng-view"
+        ],
+        "legs": [],
+        "note": "寨子里走一走，游览树正群海观景台。"
+      },
+      {
+        "id": "d1-spark-bus",
+        "locations": [
+          "shuzheng-village",
+          "spark"
+        ],
+        "legs": [
+          {
+            "id": "d1-spark-bus-leg",
+            "from": "shuzheng-village",
+            "to": "spark",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "第一天按参考图乘观光车到火花海；内侧栈道留在第二天。"
+              }
+            ]
+          }
+        ],
+        "note": "第一天按参考图乘观光车到火花海；内侧栈道留在第二天。"
+      },
+      {
+        "id": "d1-double-walk",
+        "locations": [
+          "spark",
+          "double-falls"
+        ],
+        "legs": [
+          {
+            "id": "d1-double-walk-leg",
+            "from": "spark",
+            "to": "double-falls",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "参考图此段为短距离步行，入口和开放范围以现场为准。"
+              }
+            ]
+          }
+        ],
+        "note": "参考图此段为短距离步行，入口和开放范围以现场为准。"
+      },
+      {
+        "id": "d1-double",
+        "locations": [
+          "double-falls"
+        ],
+        "legs": [],
+        "note": "按参考图停留观景，与双龙海湖面分别标点。"
+      },
+      {
+        "id": "d1-exit",
+        "locations": [
+          "double-falls",
+          "park-gate"
+        ],
+        "legs": [
+          {
+            "id": "d1-exit-leg",
+            "from": "double-falls",
+            "to": "park-gate",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按指引到实际站点候车，之后回原周边镇子酒店。"
+              }
+            ]
+          }
+        ],
+        "note": "按指引到实际站点候车，之后回原周边镇子酒店。"
+      },
+      {
+        "id": "d2-entry",
+        "locations": [
+          "park-gate",
+          "changhai"
+        ],
+        "legs": [
+          {
+            "id": "d2-entry-leg",
+            "from": "park-gate",
+            "to": "changhai",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "乘车途中车览上下季节海，不安排随意下车。",
+                "via": [
+                  "nuorilang-center",
+                  "lower-seasonal",
+                  "upper-seasonal"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "乘车途中车览上下季节海，不安排随意下车。"
+      },
+      {
+        "id": "d2-changhai",
+        "locations": [
+          "changhai",
+          "changhai-cypress",
+          "changhai-boardwalk"
+        ],
+        "legs": [],
+        "note": "按参考图游览独臂老人柏和临湖栈道。"
+      },
+      {
+        "id": "d2-pool-walk",
+        "locations": [
+          "changhai",
+          "wucaichi"
+        ],
+        "legs": [
+          {
+            "id": "d2-pool-walk-leg",
+            "from": "changhai",
+            "to": "wucaichi",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "沿开放栈道下行，台阶放慢。"
+              }
+            ]
+          }
+        ],
+        "note": "沿开放栈道下行，台阶放慢。"
+      },
+      {
+        "id": "d2-pool",
+        "locations": [
+          "wucaichi",
+          "wucaichi-boardwalk"
+        ],
+        "legs": [],
+        "note": "按参考图在临湖栈道观景。"
+      },
+      {
+        "id": "d2-pool-stop",
+        "locations": [
+          "wucaichi-boardwalk",
+          "wucaichi-stop"
+        ],
+        "legs": [
+          {
+            "id": "d2-pool-stop-leg",
+            "from": "wucaichi",
+            "to": "wucaichi-stop",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "看完五彩池，按指引走到实际上车点。",
+                "via": [
+                  "wucaichi-boardwalk"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "看完五彩池，按指引走到实际上车点。"
+      },
+      {
+        "id": "d2-center",
+        "locations": [
+          "wucaichi-stop",
+          "nuorilang-center"
+        ],
+        "legs": [
+          {
+            "id": "d2-center-leg",
+            "from": "wucaichi-stop",
+            "to": "nuorilang-center",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "mixed",
+                "label": "车＋步行",
+                "note": "参考图包含等车、乘车和换乘步行。"
+              }
+            ]
+          }
+        ],
+        "note": "参考图包含等车、乘车和换乘步行。"
+      },
+      {
+        "id": "d2-lunch",
+        "locations": [
+          "nuorilang-center"
+        ],
+        "legs": [],
+        "note": "沿用参考图预留的40分钟自由午餐时间，再前往右沟上游。"
+      },
+      {
+        "id": "d2-forest-bus",
+        "locations": [
+          "nuorilang-center",
+          "forest"
+        ],
+        "legs": [
+          {
+            "id": "d2-forest-bus-leg",
+            "from": "nuorilang-center",
+            "to": "forest",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按参考图前往原始森林，当日分流和开放安排以现场为准。",
+                "via": [
+                  "mirror",
+                  "wuhuahai",
+                  "panda",
+                  "jianzhuhai"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "按参考图前往原始森林，当日分流和开放安排以现场为准。"
+      },
+      {
+        "id": "d2-forest",
+        "locations": [
+          "forest"
+        ],
+        "legs": [],
+        "note": "保留参考图的正式行程与50分钟游览用时。"
+      },
+      {
+        "id": "d2-arrow-bus",
+        "locations": [
+          "forest",
+          "jianzhuhai"
+        ],
+        "legs": [
+          {
+            "id": "d2-arrow-bus-leg",
+            "from": "forest",
+            "to": "jianzhuhai",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "原始森林之后乘车下行到箭竹海。"
+              }
+            ]
+          }
+        ],
+        "note": "原始森林之后乘车下行到箭竹海。"
+      },
+      {
+        "id": "d2-arrow",
+        "locations": [
+          "jianzhuhai",
+          "jianzhu-boardwalk"
+        ],
+        "legs": [],
+        "note": "按参考图游览左侧栈道和临湖栈道，安排40分钟。"
+      },
+      {
+        "id": "d2-panda-bus",
+        "locations": [
+          "jianzhuhai",
+          "panda"
+        ],
+        "legs": [
+          {
+            "id": "d2-panda-bus-leg",
+            "from": "jianzhuhai",
+            "to": "panda",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按参考图乘观光车到熊猫海。"
+              }
+            ]
+          }
+        ],
+        "note": "按参考图乘观光车到熊猫海。"
+      },
+      {
+        "id": "d2-panda",
+        "locations": [
+          "panda"
+        ],
+        "legs": [],
+        "note": "按参考图停留观景，约好下一段上车位置。"
+      },
+      {
+        "id": "d2-center-return",
+        "locations": [
+          "panda",
+          "nuorilang-center"
+        ],
+        "legs": [
+          {
+            "id": "d2-center-return-leg",
+            "from": "panda",
+            "to": "nuorilang-center",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "下行返回中心站，换乘树正沟方向。",
+                "via": [
+                  "wuhuahai",
+                  "mirror"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "下行返回中心站，换乘树正沟方向。"
+      },
+      {
+        "id": "d2-tree-bus",
+        "locations": [
+          "nuorilang-center",
+          "shuzheng-village"
+        ],
+        "legs": [
+          {
+            "id": "d2-tree-bus-leg",
+            "from": "nuorilang-center",
+            "to": "shuzheng-village",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按参考图前往树正区域，开始内侧栈道段。",
+                "via": [
+                  "rhino"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "按参考图前往树正区域，开始内侧栈道段。"
+      },
+      {
+        "id": "d2-inner",
+        "locations": [
+          "shuzheng",
+          "shuzheng-inner",
+          "spark"
+        ],
+        "legs": [
+          {
+            "id": "d2-inner-leg",
+            "from": "shuzheng",
+            "to": "spark",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "第二天固定安排：沿开放内侧栈道从树正群海走到火花海，参考60分钟。",
+                "via": [
+                  "shuzheng-inner"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "第二天固定安排：沿开放内侧栈道从树正群海走到火花海，参考60分钟。"
+      },
+      {
+        "id": "d2-exit",
+        "locations": [
+          "spark",
+          "park-gate"
+        ],
+        "legs": [
+          {
+            "id": "d2-exit-leg",
+            "from": "spark",
+            "to": "park-gate",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "完整游览后出沟、取行李，再去黄龙九寨站附近酒店。"
+              }
+            ]
+          }
+        ],
+        "note": "完整游览后出沟、取行李，再去黄龙九寨站附近酒店。"
       }
     ]
+  },
+  "schedule": {
+    "reference": "用户提供的九寨沟两天休闲版",
+    "defaultEntry": "10:00",
+    "lunchMinutes": 40,
+    "note": "顺序、交通和逐段分钟数按用户提供的两天休闲版录入。钟点按预计入园时间累计，仅为估算；沿用原表逐行用时，不额外重复追加拍照或候车分钟。两天先后可互换，现场开放与调度优先。"
   }
 }

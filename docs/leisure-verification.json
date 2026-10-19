@@ -1,0 +1,73 @@
+{
+  "checkedAt": "2026-10-19T13:44:25.225Z",
+  "checks": [
+    "37个点位、15组水面轮廓，编号提词卡与地图一一对应",
+    "地图点击更新卡片，卡片点击定位；缩放、全图复原、搜索和按游览日筛选通过",
+    "320、390、430、768、1280px均左右并排，无页面横向溢出",
+    "14个时间段在手机和桌面逐一打开，地图与交通并排，收起后移除小地图",
+    "步行备选、可选点预览和时间段地图缩放、复原通过",
+    "新日期、两天全天游、第三晚住宿、待定返程及键盘操作通过",
+    "打印展开三天，地图恢复全图并完整显示提词卡",
+    "Chrome移动设备触控仿真：双指缩放、单指横纵拖动和点按景点通过，操作未带动页面滚动",
+    "最终回归：三天首页、地图跨搜索定位时恢复对应卡片、日期筛选的键盘可达性、沟外时间段的紧凑地点卡通过",
+    "打印时临时显示37张完整提词卡，结束后恢复原搜索、日期筛选和日期展开状态"
+  ],
+  "layouts": [
+    {
+      "width": 320,
+      "pageWidth": 320,
+      "parallel": true,
+      "aligned": true
+    },
+    {
+      "width": 390,
+      "pageWidth": 390,
+      "parallel": true,
+      "aligned": true
+    },
+    {
+      "width": 430,
+      "pageWidth": 430,
+      "parallel": true,
+      "aligned": true
+    },
+    {
+      "width": 768,
+      "pageWidth": 768,
+      "parallel": true,
+      "aligned": true
+    },
+    {
+      "width": 1280,
+      "pageWidth": 1280,
+      "parallel": true,
+      "aligned": true
+    }
+  ],
+  "labelAudit": {
+    "outside": [],
+    "overlaps": []
+  },
+  "pageErrors": [],
+  "print": {
+    "width": 189,
+    "scrollWidth": 189,
+    "height": 284,
+    "scrollHeight": 284
+  },
+  "gestures": {
+    "pinchZoom": 2.666666666666667,
+    "start": {
+      "x": 0,
+      "y": 0
+    },
+    "after": {
+      "x": 60,
+      "y": 60
+    },
+    "pageScrollUnchanged": true,
+    "tapSelected": "rhino",
+    "errors": []
+  },
+  "finalPageErrors": []
+}
