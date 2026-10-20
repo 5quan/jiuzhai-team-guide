@@ -183,7 +183,7 @@ function renderSchedule() {
   $('#inscription-settings').hidden = state.compact && !isMobile();
   $('[data-toggle-panel]').setAttribute('aria-expanded', String(!state.compact));
   const step = currentStep();
-  $('#inscription-date').textContent = `${day.shortDate} ${day.weekday} · ${steps.length}步${step ? ` · 当前 ${clock(step.start)}` : ''}`;
+  $('#inscription-date').textContent = isMobile() ? `${day.shortDate} ${day.weekday} · ${steps.length}步${step ? ` · 当前 ${clock(step.start)}` : ''}` : `${day.shortDate} ${day.weekday}`;
   placeInscription();
 }
 
@@ -744,6 +744,7 @@ async function boot() {
   } catch { $('#main').innerHTML = '<div class="error-box"><h1>行程暂时无法加载</h1><p>请检查连接，再重新加载。</p><button class="quiet-button" id="retry" type="button">重新加载</button></div>'; $('#retry').addEventListener('click', boot, {once:true}); }
 }
 boot();
+
 
 
 
