@@ -92,7 +92,7 @@ test('private configuration and traversal paths cannot be downloaded', async () 
 test('assets, HEAD requests, CSP and conditional caching work', async () => {
   const response = await fetch(origin);
   assert.equal(response.status, 200);
-  assert.match(await response.text(), /九寨同行/);
+  assert.match(await response.text(), /<title>九寨两日行记 · 地图与时间行程<\/title>/);
   assert.match(response.headers.get('content-security-policy'), /frame-src https:\/\/embed.windy.com/);
   const etag = response.headers.get('etag');
   const cached = await fetch(origin, { headers: { 'If-None-Match': etag } });

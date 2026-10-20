@@ -23,26 +23,23 @@ a { color: inherit; text-underline-offset: 4px; }
 h1, h2, h3, p { margin: 0; }
 h1, h2 { font-family: var(--serif); }
 [hidden] { display: none !important; }
-.header { display: flex; justify-content: space-between; align-items: center; height: 64px; max-width: 1680px; padding: 0 48px; margin: auto; border-bottom: 1px solid var(--line); }
-.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--pine); font-weight: 600; text-decoration: none; }
-.brand-mark { display: grid; place-items: center; width: 27px; height: 29px; border: 1px solid var(--pine); font: 22px var(--serif); }
-.team-label { font-size: 11px; font-weight: 400; color: var(--muted); border-left: 1px solid var(--line); padding-left: 10px; }
 .button, .quiet-button { min-height: 40px; padding: 6px 9px; border: 0; background: transparent; color: var(--pine); font-size: 12px; }
 .button:hover, .quiet-button:hover { background: var(--mist); }
 main { max-width: 1680px; margin: auto; }
-.journey-heading { display: flex; gap: 24px; align-items: center; justify-content: space-between; padding: 25px 48px 22px; }
-.travel-date { color: var(--muted); font-size: 11px; margin-bottom: 3px; }
-.journey-heading h1 { font-size: clamp(25px, 2.5vw, 36px); font-weight: 500; letter-spacing: 3px; line-height: 1.4; }
-.journey-stay { display: grid; gap: 4px; color: var(--muted); font-size: 12px; margin-left: auto; border-left: 1px solid #bacdc2; padding-left: 18px; }
-.day-switch { display: flex; padding: 0 48px; gap: 30px; border-bottom: 1px solid var(--line); }
-.day-switch button { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; padding: 13px 0 15px; min-height: 54px; border: 0; border-bottom: 3px solid transparent; background: transparent; text-align: left; }
-.day-switch button > span:first-child { color: var(--muted); font-size: 11px; }
-.day-switch strong { font: 20px var(--serif); font-weight: 600; }
-.day-switch button > span:last-child { font-size: 12px; color: var(--muted); }
+.journey-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 32px; }
+.journey-title { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.journey-heading h1 { font-size: 23px; font-weight: 500; letter-spacing: 1px; line-height: 1.4; white-space: nowrap; }
+.travel-date { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.journey-actions { display: flex; flex-shrink: 0; gap: 3px; }
+.journey-actions .quiet-button { min-width: 36px; min-height: 34px; padding: 4px 6px; font-size: 11px; }
+.day-switch { display: flex; padding: 0 32px; gap: 26px; border-bottom: 1px solid var(--line); }
+.day-switch button { display: flex; align-items: baseline; gap: 8px; padding: 6px 0; min-height: 40px; border: 0; border-bottom: 2px solid transparent; background: transparent; text-align: left; }
+.day-switch strong { font: 17px var(--serif); font-weight: 600; }
+.day-switch button > span { color: var(--muted); font-size: 11px; }
 .day-switch [aria-pressed=true] { border-bottom-color: var(--pine); color: var(--pine); }
 .day-switch [aria-pressed=false] { opacity: .6; }
-.landscape { position: relative; height: clamp(620px, calc(100svh - 300px), 1000px); isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); }
-.map-viewport { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; touch-action: none; scrollbar-width: thin; cursor: grab; }
+.landscape { position: relative; height: clamp(560px, calc(100svh - 290px), 720px); isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); }
+.map-viewport { position: absolute; inset: 0; overflow: hidden; overscroll-behavior: contain; touch-action: none; scrollbar-width: thin; cursor: grab; }
 .map-viewport:active { cursor: grabbing; }
 .route-svg { display: block; width: 100%; height: auto; margin: 0 auto; user-select: none; }
 .mountain-wash path { fill: url(#mountain-tone); }
@@ -71,21 +68,17 @@ main { max-width: 1680px; margin: auto; }
 .spot-node.selected .spot-label { font-weight: 700; fill: var(--pine); }
 .spot-node.is-active .route-dot { stroke: var(--pine); }
 .painting-title { position: absolute; top: 32px; left: 3.3%; display: flex; gap: 14px; align-items: flex-start; color: var(--pine); pointer-events: none; }
-.painting-title > span { writing-mode: vertical-rl; font: 43px/1.25 var(--serif); letter-spacing: 9px; }
+.painting-title > span { writing-mode: vertical-rl; font: 34px/1.25 var(--serif); letter-spacing: 6px; }
 .painting-title small { writing-mode: vertical-rl; font: 15px var(--serif); letter-spacing: 4px; padding-top: 5px; }
 .painting-title i { writing-mode: vertical-rl; padding: 4px 2px; margin-top: 74px; border: 1px solid #a36144; color: #a36144; font: normal 13px/1.2 var(--serif); }
-.itinerary-inscription { position: absolute; top: 215px; left: 3.3%; width: 318px; max-height: calc(100% - 285px); padding: 0 18px 13px; border-left: 2px solid #698e7d; background: rgba(249,252,250,.91); display: flex; flex-direction: column; }
-.inscription-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 13px 0 8px; border-bottom: 1px solid var(--line); }
+.itinerary-inscription { position: absolute; top: 180px; left: 3.3%; width: 210px; max-height: calc(100% - 245px); padding: 0 12px 10px; border-left: 2px solid #698e7d; background: rgba(249,252,250,.91); display: flex; flex-direction: column; }
+.inscription-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--line); }
 .inscription-heading p { font-size: 11px; color: var(--muted); }
-.inscription-heading h2 { font-size: 23px; font-weight: 500; letter-spacing: 1px; }
 .inscription-heading .quiet-button { font-size: 11px; padding: 5px; flex-shrink: 0; }
 #inscription-body { min-height: 0; display: flex; flex-direction: column; }
-.entry-setting { display: flex; align-items: center; gap: 8px; padding-top: 10px; font-size: 10px; color: var(--muted); }
-.entry-setting input { width: 83px; min-height: 36px; font-size: 13px; color: var(--pine); border: 0; border-bottom: 1px solid #bbcdc0; background: transparent; }
-.entry-setting > span { margin-left: auto; font-size: 10px; white-space: nowrap; }
-.timing-note, .reference-note { font-size: 10px; color: var(--muted); line-height: 1.5; }
-.timing-note { margin-top: 4px; }
-.reference-note { margin-top: 9px; }
+.entry-setting { display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 2px 5px; padding-top: 4px; font-size: 10px; color: var(--muted); }
+.entry-setting input { width: 78px; min-width: 0; min-height: 36px; font-size: 13px; color: var(--pine); border: 0; border-bottom: 1px solid #bbcdc0; background: transparent; }
+.entry-setting > span { grid-column: 1 / -1; justify-self: end; margin-left: auto; font-size: 10px; white-space: nowrap; }
 .timing-warning { color: #9a5f2e; font-size: 10px; margin-top: 7px; }
 .period-switch { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
 .period-switch button { flex: 1; min-height: 40px; border: 0; border-bottom: 2px solid transparent; color: var(--muted); background: transparent; font-size: 11px; padding: 7px 10px; }
@@ -93,20 +86,36 @@ main { max-width: 1680px; margin: auto; }
 .schedule-list { list-style: none; padding: 0 4px 0 0; margin: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; min-height: 70px; }
 .schedule-row { border-bottom: 1px solid #e1e9e3; }
 .schedule-row:last-child { border-bottom: 0; }
-.schedule-step { display: grid; grid-template-columns: 58px minmax(0,1fr); align-items: start; gap: 9px; width: 100%; min-height: 64px; padding: 11px 0; border: 0; background: transparent; text-align: left; }
-.schedule-step time { color: var(--muted); font-size: 12px; line-height: 1.6; font-variant-numeric: tabular-nums; }
-.schedule-step time small { display: block; color: #8b9a90; font-size: 9px; }
-.schedule-step strong { display: block; font-size: 13px; font-weight: 500; line-height: 1.55; overflow-wrap: anywhere; }
-.step-mode { font-size: 10px; color: var(--muted); }
-.mode-walk { color: #8c693d; }
-.schedule-row.selected .schedule-step strong, .schedule-row.selected .schedule-step time { color: var(--lake); font-weight: 600; }
-.step-detail { padding: 0 0 12px 67px; }
-.step-detail > p { font-size: 11px; color: var(--muted); line-height: 1.65; }
-.step-places { display: flex; gap: 4px 8px; flex-wrap: wrap; margin-top: 6px; }
-.step-places button { min-height: 32px; padding: 3px 0; border: 0; border-bottom: 1px solid #bdcec2; color: var(--pine); font-size: 10px; background: transparent; text-align: left; }
+.schedule-step { display: flex; align-items: baseline; gap: 7px; width: 100%; min-height: 44px; padding: 8px 0; border: 0; background: transparent; text-align: left; }
+.step-dash { display: none; }
+.step-summary { display: block; min-width: 0; flex: 1; }
+.schedule-step strong { font-size: 12px; font-weight: 500; line-height: 1.6; overflow-wrap: anywhere; }
+.step-meta { display: block; margin-top: 1px; font-size: 10px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.step-chevron { color: #8ba497; font-size: 13px; }
+.schedule-row.selected .schedule-step strong, .schedule-row.selected .step-meta { color: var(--lake); }
+.schedule-row.selected .step-dash { color: var(--lake); }
+.schedule-step:hover strong { color: var(--lake); }
+.step-detail { padding: 0 0 10px; }
+.step-places { display: flex; gap: 4px 8px; flex-wrap: wrap; margin-bottom: 7px; }
+.step-places button { min-height: 32px; padding: 3px 0; border: 0; border-bottom: 1px solid #bdcec2; color: var(--muted); font-size: 10px; background: transparent; text-align: left; }
 .step-places [aria-pressed=true] { color: var(--lake); border-bottom-color: var(--lake); }
-.itinerary-inscription.is-collapsed { max-height: none; padding-bottom: 0; }
-.itinerary-inscription.is-collapsed .inscription-heading { border-bottom: 0; }
+.spot-notes { margin: 0; display: grid; gap: 6px; }
+.spot-notes dt { color: var(--pine); font-size: 10px; letter-spacing: 1px; }
+.spot-notes dd { margin: 3px 0 0; font-size: 12px; color: var(--ink); line-height: 1.7; }
+.spot-notes .note-empty { height: 8px; border-bottom: 1px dotted #d4dfda; }
+.itinerary-inscription.is-compact { width: 180px; max-height: 210px; padding: 3px 10px; background: rgba(249,252,250,.76); }
+.is-compact .schedule-step { min-height: 40px; padding: 7px 0; }
+.is-compact .step-chevron { display: none; }
+.is-compact .schedule-row { border-bottom-color: rgba(212,223,218,.5); }
+.location-pointer { position: absolute; width: 24px; height: 40px; transform: translate(-50%, -100%); pointer-events: none; z-index: 1; filter: drop-shadow(0 1px 2px rgba(24,61,59,.2)); }
+.location-pointer svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.location-pointer path { fill: var(--autumn); stroke: var(--paper); stroke-width: 2; stroke-linejoin: round; }
+.location-pointer.points-up { transform: translate(-50%, 0) rotate(180deg); }
+.location-pointer.is-pointing svg { animation: point-location .65s ease-in-out 3; }
+@keyframes point-location { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.location-ripple { fill: rgba(112,190,210,.12); stroke: var(--lake); stroke-width: 1.8; transform-box: fill-box; transform-origin: center; opacity: 0; animation: location-ripple 1.2s ease-out both; }
+@keyframes location-ripple { 0% { transform: scale(.55); opacity: .8; } 100% { transform: scale(3.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .location-ripple { opacity: .55; } }
 .map-search { position: absolute; top: 26px; right: 36px; width: 210px; z-index: 2; }
 .map-search summary { display: flex; justify-content: space-between; cursor: pointer; padding: 9px 0; font-size: 12px; color: var(--pine); list-style: none; border-bottom: 1px solid #a7bfb1; background: rgba(249,252,250,.8); }
 .map-search summary::-webkit-details-marker { display: none; }
@@ -179,50 +188,40 @@ main { max-width: 1680px; margin: auto; }
 .skip:focus { top: 8px; }
 .print-itinerary { display: none; }
 @media (max-width: 1000px) and (min-width: 701px) {
-  .header { padding: 0 28px; }
-  .journey-heading { padding: 22px 28px; }
-  .day-switch { padding: 0 28px; }
-  .day-switch button > span:last-child { width: 100%; }
-  .landscape { height: 820px; }
-  .itinerary-inscription { width: 286px; }
+  .landscape { height: 680px; }
+  .itinerary-inscription { width: 210px; }
   .map-caption { max-width: 200px; }
 }
 @media (max-width: 700px) {
-  .header { height: 52px; padding: 0 16px; }
-  .brand { font-size: 13px; gap: 7px; }
-  .brand-mark { width: 24px; height: 25px; font-size: 19px; }
-  .journey-heading { padding: 16px 16px 13px; gap: 8px; }
-  .journey-heading h1 { font-size: 25px; letter-spacing: 2px; }
-  .journey-stay { display: none; }
+  .journey-heading { padding: 5px 12px; gap: 8px; }
+  .journey-title { gap: 8px; }
+  .journey-heading h1 { font-size: 18px; letter-spacing: .5px; }
   .travel-date { font-size: 10px; }
-  .day-switch { padding: 0 16px; gap: 22px; }
-  .day-switch button { flex: 1; gap: 2px 8px; padding: 9px 0 11px; }
-  .day-switch button > span:first-child { font-size: 10px; }
-  .day-switch button > span:last-child { font-size: 10px; width: 100%; }
-  .day-switch strong { font-size: 17px; }
-  .landscape { min-height: 640px; height: calc(100svh - 180px); max-height: 860px; }
+  .journey-actions { gap: 0; }
+  .journey-actions .quiet-button { min-width: 32px; min-height: 34px; padding: 4px; }
+  .day-switch { padding: 0 12px; gap: 24px; }
+  .day-switch button { min-height: 40px; padding: 6px 0; }
+  .day-switch strong { font-size: 16px; }
+  .day-switch button > span { font-size: 10px; }
+  .landscape { min-height: 440px; height: calc(100svh - 150px); max-height: 700px; }
   .painting-title { top: 20px; left: 16px; gap: 7px; }
   .painting-title > span { font-size: 28px; letter-spacing: 6px; }
   .painting-title small { font-size: 11px; letter-spacing: 3px; }
   .painting-title i { display: none; }
-  .itinerary-inscription { top: auto; left: 12px; bottom: 65px; width: min(290px, calc(100% - 62px)); max-height: 320px; padding: 0 12px 8px; }
-  .inscription-heading { padding: 8px 0 5px; }
-  .inscription-heading h2 { font-size: 19px; }
+  .itinerary-inscription { top: auto; left: 12px; bottom: 65px; width: min(180px, 50vw); max-height: 270px; padding: 0 10px 7px; }
+  .inscription-heading { padding: 2px 0; }
   .inscription-heading p { font-size: 10px; }
   .inscription-heading .quiet-button { min-height: 36px; }
-  .entry-setting { gap: 5px; padding-top: 4px; }
-  .entry-setting input { min-height: 32px; font-size: 16px; width: 90px; }
+  .entry-setting { gap: 4px; padding-top: 3px; }
+  .has-detail .entry-setting { display: none; }
+  .entry-setting input { min-height: 32px; font-size: 16px; width: 78px; }
   .entry-setting > span { font-size: 9px; }
-  .timing-note { font-size: 9px; }
   .period-switch button { min-height: 36px; padding: 5px 7px; }
   .schedule-list { min-height: 40px; }
-  .schedule-step { grid-template-columns: 54px minmax(0,1fr); gap: 8px; min-height: 60px; padding: 9px 0; }
+  .schedule-step { gap: 6px; min-height: 44px; padding: 9px 0; }
   .schedule-step strong { font-size: 12px; }
-  .schedule-step time { font-size: 11px; }
-  .step-detail { padding-left: 62px; }
-  .step-detail > p { font-size: 10px; }
-  .reference-note { display: none; }
-  .itinerary-inscription.is-collapsed { top: auto; }
+  .step-detail { padding-left: 0; }
+  .itinerary-inscription.is-compact { top: auto; width: min(154px, 44vw); max-height: 165px; padding: 3px 9px; }
   .map-search { right: 16px; top: 16px; width: 155px; }
   .map-search summary { font-size: 11px; padding: 7px 0; }
   .map-search[open] { width: min(230px, calc(100% - 78px)); }
@@ -257,10 +256,9 @@ main { max-width: 1680px; margin: auto; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 @media print {
   body { padding: 0; background: #fff; font-size: 11px; }
-  .header, .bottom-nav, .skip, .toast, .day-switch, .itinerary-inscription, .map-search, .map-caption, .map-controls, .journey-log, .quiet-button, [data-view=weather], [data-view=notes] { display: none !important; }
+  .header, .bottom-nav, .skip, .toast, .location-pointer, .day-switch, .itinerary-inscription, .map-search, .map-caption, .map-controls, .journey-log, .quiet-button, [data-view=weather], [data-view=notes] { display: none !important; }
   [data-view=home][hidden] { display: block !important; }
   .journey-heading { padding: 10px 0; }
-  .journey-stay { display: grid; }
   .landscape { height: auto; min-height: 0; max-height: none; overflow: visible; border: 0; }
   .map-viewport { position: relative; overflow: visible; height: auto; }
   .route-svg { width: 100% !important; transform: none !important; }

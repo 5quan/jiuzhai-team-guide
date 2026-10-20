@@ -1,49 +1,87 @@
 {
-  "checkedAt": "2026-10-19T14:32:46.001Z",
+  "checkedAt": "2026-10-20T05:09:25.882Z",
   "checks": [
-    "首页仅请求本站资源；37个点位、15组蓝色水面，地图铺满主画面",
-    "320—1440px六档宽度无横向溢出，行程浮层位于整幅地图内部",
-    "36个逐段行程在手机和桌面逐一点击，日期、时间与地点联动，定位点避开行程浮层",
-    "入园时间调整正确累计；超参考闭园时间提醒；搜索跨日地点切换到对应日期，沿线可选点不套用错误时段",
-    "行程收展、全图复原、缩放按钮、鼠标点图和键盘选点通过，焦点保留",
-    "住宿、待定返程和注意事项保留；天气按需挂载并在离开后卸载",
-    "打印包含三天43项完整行程，地图全幅显示",
-    "移动设备触控仿真：双指连续缩放、单指横纵拖动、点按跨日景点通过，未带动页面滚动"
+    "37个点位与15组水面保留；全天按钮和参考图小字已移除",
+    "320—1440px六档宽度无溢出；桌面行程210px、手机最多180px且不超过半屏，时间和时长固定在名称下方",
+    "重复品牌栏已移除，分享与打印合并到小标题行；六档屏宽的地图起点不超过100px，复制链接正常",
+    "桌面与手机逐一点选两天36段行程：详情单项展开、定位避开浮层、三道水纹、缩放不变",
+    "五花海仅填烤肠提醒；其他看点、注意事项留空；拖图收敛为纯日程列表，再点条目恢复详情",
+    "手机三档宽度、三档比例、四个极限方向均在默认位置半幅范围内，至少保留半幅交叠区域和可见湖泊，避免整图滑走",
+    "按钮与键盘限制1—2倍，方向键移动、全图复原、跨日搜索、焦点保留和预计时间调整通过",
+    "住宿、天气按需加载与三天43项打印行程保留",
+    "手机初始1.6倍概览匹配参考构图，两支沟同时可见；点击箭头始终指向选中点，并在水纹结束后保留",
+    "手机触控仿真：双指上限2倍、单指移动、自动简览、点按恢复详情、跨日点图及减少动态效果通过"
   ],
   "layouts": [
     {
       "width": 320,
       "page": 320,
+      "mapTop": 85,
+      "panelWidth": 160,
+      "panelRatio": 0.5,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 700,
       "mapRatio": 1,
       "overlap": true
     },
     {
       "width": 390,
       "page": 390,
+      "mapTop": 85,
+      "panelWidth": 180,
+      "panelRatio": 0.46153846153846156,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 700,
       "mapRatio": 1,
       "overlap": true
     },
     {
       "width": 430,
       "page": 430,
+      "mapTop": 85,
+      "panelWidth": 180,
+      "panelRatio": 0.4186046511627907,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 700,
       "mapRatio": 1,
       "overlap": true
     },
     {
       "width": 768,
       "page": 768,
+      "mapTop": 89,
+      "panelWidth": 210,
+      "panelRatio": 0.2734375,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 680,
       "mapRatio": 1,
       "overlap": true
     },
     {
       "width": 1280,
       "page": 1280,
+      "mapTop": 89,
+      "panelWidth": 210,
+      "panelRatio": 0.1640625,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 660,
       "mapRatio": 1,
       "overlap": true
     },
     {
       "width": 1440,
       "page": 1440,
+      "mapTop": 89,
+      "panelWidth": 210,
+      "panelRatio": 0.14583333333333334,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 660,
       "mapRatio": 1,
       "overlap": true
     }
@@ -122,15 +160,425 @@
     "390/d2-inner",
     "390/d2-exit"
   ],
-  "labelAudit": [],
-  "gestures": {
-    "pinchZoom": 5,
-    "pan": {
-      "left": 60,
-      "top": 60
+  "movementBounds": [
+    {
+      "width": 320,
+      "zoom": 1,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
     },
-    "pageScrollUnchanged": true,
-    "tapSwitchesDay": true
+    {
+      "width": 320,
+      "zoom": 1,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 10,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 2,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 2,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 2,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 2,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 10,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 2,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 2,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 2,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 2,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 10,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 2,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 2,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 2,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 2,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 6,
+      "lakeVisible": true,
+      "inside": true
+    }
+  ],
+  "gestures": {
+    "pinchZoom": 2,
+    "pageScrollUnchanged": true
   },
-  "errors": []
+  "errors": [],
+  "deployment": {
+    "checkedAt": "2026-10-20T05:11:44.880532+00:00",
+    "workspace": "/opt/jiuzhai-team-guide",
+    "healthy": true,
+    "onlineSmoke": {
+      "defaultZoom": 1.6,
+      "guidanceArrow": true,
+      "halfMapPan": true,
+      "blankViewProtected": true,
+      "compactHeader": true,
+      "narrowPanel": true,
+      "timesBelow": true,
+      "ripple": true,
+      "foodReminder": true,
+      "errors": []
+    },
+    "realMobileDeviceTested": false
+  }
 }
