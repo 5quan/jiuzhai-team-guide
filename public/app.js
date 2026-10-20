@@ -3,7 +3,7 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const modeNames = { bus: '观光车', walk: '步行', visit: '游览', rest: '午餐休息', mixed: '车＋步行' };
 const periodNames = { morning: '上午', noon: '午间', afternoon: '下午' };
-const state = { day: 'day1', period: 'morning', step: 'd1-wuhua', spot: 'wuhuahai', compact: false, expandedStep: null, guidedSpot: null, view: 'home', layer: 'clouds', starts: new Map(), sheet: 'peek', mapOps: false, nowStep: null };
+const state = { day: 'day1', period: 'morning', step: 'd1-wuhua', spot: 'wuhuahai', compact: false, expandedStep: null, guidedSpot: null, view: 'home', layer: 'clouds', starts: new Map(), nowStep: null };
 const weatherCache = new Map();
 const phone = window.matchMedia('(max-width: 700px)');
 const isMobile = () => phone.matches;
@@ -89,17 +89,15 @@ function render() {
           ${guide.days.filter(day => day.startTime).map((day, index) => `<button type="button" data-day="${esc(day.id)}" aria-pressed="${state.day === day.id}" aria-label="${esc(day.shortDate)} ${esc(day.weekday)} ${esc(day.label)}"><strong>第${index === 0 ? '一' : '二'}天</strong><span>${esc(day.shortDate)}</span></button>`).join('')}
         </div>
         <div class="landscape" id="landscape">
-          <div class="map-viewport" id="schematic" tabindex="0" aria-label="九寨沟全景示意图，双指缩放拖动，加减号缩放，点按景点查看行程"></div>
+          <div class="map-viewport" id="schematic" tabindex="0" aria-label="九寨沟全景示意图，单指拖动，双指缩放，点按景点查看行程"></div>
           <div class="painting-title" aria-hidden="true"><span>九寨沟</span><small>循水慢游</small><i>两日</i></div>
           <aside class="itinerary-inscription" id="inscription" aria-label="当天时间行程">
-            <button class="sheet-grip" id="sheet-grip" type="button" aria-label="上滑展开行程，下滑收起" aria-expanded="false" aria-controls="inscription-body"><i aria-hidden="true"></i></button>
-            <div class="inscription-heading"><p id="inscription-date"></p><button class="quiet-button sheet-toggle" data-sheet-toggle type="button" aria-expanded="false">展开</button><button class="quiet-button panel-toggle" data-toggle-panel type="button" aria-expanded="true" aria-controls="inscription-settings">简览</button></div>
-            <p class="sheet-peek" id="sheet-peek"></p>
-            <div id="inscription-body"><div id="inscription-settings"><div class="entry-setting"><label for="entry-time">入园</label><input id="entry-time" type="time" min="${esc(guide.park.open)}" max="${esc(guide.park.lastEntry)}" step="300"><span id="exit-time"></span></div><p class="timing-warning" id="timing-warning" hidden></p><div class="period-switch" role="group" aria-label="选择当天时段"><button type="button" data-period="morning">上午</button><button type="button" data-period="noon">午间</button><button type="button" data-period="afternoon">下午</button></div></div><ol class="schedule-list" id="schedule-list" aria-label="按时间顺序排列的行程"></ol><section class="sheet-extra" id="sheet-extra" aria-label="今晚住宿与返程"></section></div>
+            <div class="inscription-heading"><p id="inscription-date"></p><button class="quiet-button panel-toggle" data-toggle-panel type="button" aria-expanded="true" aria-controls="inscription-settings">简览</button></div>
+            <div id="inscription-body"><div id="inscription-settings"><div class="entry-setting"><label for="entry-time">入园</label><input id="entry-time" type="time" min="${esc(guide.park.open)}" max="${esc(guide.park.lastEntry)}" step="300"><span id="exit-time"></span></div><p class="timing-warning" id="timing-warning" hidden></p><div class="period-switch" role="group" aria-label="选择当天时段"><button type="button" data-period="morning">上午</button><button type="button" data-period="noon">午间</button><button type="button" data-period="afternoon">下午</button></div></div><ol class="schedule-list" id="schedule-list" aria-label="按时间顺序排列的行程"></ol></div>
           </aside>
           <details class="map-search" id="map-search"><summary aria-label="找景点"><span class="search-label">找景点</span><span class="search-icon" aria-hidden="true">⌕</span></summary><div><label for="spot-search">景点、栈道或换乘点</label><input id="spot-search" type="search" placeholder="例如：五花海" autocomplete="off"><div id="spot-results" aria-live="polite"></div></div></details>
           <article class="map-caption" id="map-caption" aria-live="polite"></article>
-          <div class="map-controls" role="group" aria-label="地图控制"><button type="button" data-zoom="in" aria-label="放大地图">＋</button><button type="button" data-zoom="out" aria-label="缩小地图">−</button><button type="button" id="map-ops" aria-pressed="false" aria-label="切换单指拖动地图">拖动</button><button type="button" id="map-extent">全图</button><button type="button" id="map-follow">本段</button><output id="map-scale" aria-label="地图缩放比例">1×</output></div>
+          <div class="map-controls" role="group" aria-label="地图控制"><button type="button" data-zoom="in" aria-label="放大地图">＋</button><button type="button" data-zoom="out" aria-label="缩小地图">−</button><button type="button" id="map-extent">全图</button><button type="button" id="map-follow">本段</button><output id="map-scale" aria-label="地图缩放比例">1×</output></div>
           <div class="map-legend" aria-label="地图图例"><span><i></i>第一天</span><span><i></i>第二天</span><span><i></i>海子</span><small>可缩放、滑动</small></div>
         </div>
         <p class="map-footnote">三沟与蓝色湖泊为关系示意。开放栈道、车辆停靠与末班车以当天安排为准。${external(guide.map.officialPage, '官方导览')}</p>
@@ -114,7 +112,6 @@ function render() {
   renderSchedule();
   renderCaption();
   renderSearch();
-  applySheet(state.sheet);
   $('#print-button').addEventListener('click', () => window.print());
   $('#share-button').addEventListener('click', shareGuide);
   $('#entry-time').addEventListener('change', event => {
@@ -127,9 +124,7 @@ function render() {
   $('#spot-search').addEventListener('input', renderSearch);
   $('#map-extent').addEventListener('click', () => { compactItinerary(); resetMap(mapLimits.min); });
   $('#map-follow').addEventListener('click', () => { compactItinerary(); focusStep(); rippleSpot(); });
-  $('#map-ops').addEventListener('click', toggleMapOps);
   $('#reload-weather').addEventListener('click', () => switchWeather(state.layer, true));
-  initSheet();
   navigate(location.hash.slice(1) || 'itinerary', false);
 }
 
@@ -159,14 +154,13 @@ function stepSpot(step) {
 
 function renderSpotNotes(id) {
   const spot = locationInfo(id);
-  const field = (label, values = []) => `<div><dt>${label}</dt><dd${values.length ? '' : ' class="note-empty" aria-label="' + label + '未填写"'}>${values.map(value => `<p>${esc(value)}</p>`).join('')}</dd></div>`;
+  const field = (label, values = []) => `<div${values.length ? '' : ' class="is-empty"'}><dt>${label}</dt><dd${values.length ? '' : ' class="note-empty" aria-label="' + label + '未填写"'}>${values.map(value => `<p>${esc(value)}</p>`).join('')}</dd></div>`;
   return `<dl class="spot-notes" aria-label="${esc(spot.name)}的看点与注意事项">${field('看点', spot.highlights)}${field('注意事项', spot.tips)}</dl>`;
 }
 
 function renderSchedule() {
   const day = guide.days.find(day => day.id === state.day);
   const steps = schedule();
-  $('#inscription-date').textContent = `${day.shortDate} ${day.weekday}`;
   $('#entry-time').value = state.starts.get(state.day) || day.startTime;
   $('#exit-time').textContent = `${clock(steps.at(-1).end)}出沟`;
   $('#timing-warning').hidden = steps.at(-1).end <= minutes(guide.park.close);
@@ -176,7 +170,7 @@ function renderSchedule() {
   let lastPeriod = null;
   const visible = isMobile() ? steps : steps.filter(step => step.period === state.period);
   $('#schedule-list').innerHTML = visible.length ? visible.map(step => {
-    const expanded = !isMobile() && !state.compact && state.expandedStep === step.id;
+    const expanded = !state.compact && state.expandedStep === step.id;
     const detailId = `detail-${step.id}`;
     const spotId = step.spotIds.includes(state.spot) ? state.spot : stepSpot(step);
     const divider = isMobile() && step.period !== lastPeriod ? `<li class="schedule-divider" role="presentation"><span>${periodNames[step.period]}</span></li>` : '';
@@ -189,10 +183,7 @@ function renderSchedule() {
   $('#inscription-settings').hidden = state.compact && !isMobile();
   $('[data-toggle-panel]').setAttribute('aria-expanded', String(!state.compact));
   const step = currentStep();
-  $('#sheet-peek').innerHTML = step
-    ? `<strong>${clock(step.start)}—${clock(step.end)} · ${esc(itineraryName(step))}</strong><span>${esc(locationInfo(state.spot)?.name || '')} · 共 ${steps.length} 步 · 上滑看全程</span>`
-    : '';
-  $('#sheet-extra').innerHTML = `<h4>今晚住</h4><p>${esc(day.stay)}</p><p>${esc(guide.trip.stationHotel.name)} · 10月31日</p><p>${esc(guide.trip.returnNote)}</p>`;
+  $('#inscription-date').textContent = `${day.shortDate} ${day.weekday} · ${steps.length}步${step ? ` · 当前 ${clock(step.start)}` : ''}`;
   placeInscription();
 }
 
@@ -239,7 +230,7 @@ function chooseStep(id, fit = true) {
   const step = schedule().find(step => step.id === id);
   if (!step) return;
   const restoreFocus = document.activeElement?.dataset.step === id;
-  const expand = !isMobile() && (state.compact || state.expandedStep !== id);
+  const expand = state.compact || state.expandedStep !== id;
   state.step = id;
   state.spot = stepSpot(step);
   state.period = step.period;
@@ -248,10 +239,17 @@ function chooseStep(id, fit = true) {
   const scroll = $('#schedule-list').scrollTop;
   renderSchedule();
   $('#schedule-list').scrollTop = scroll;
-  revealStep();
+  if (state.expandedStep === id) {
+    const row = $(`[data-step-row="${id}"]`);
+    const list = $('#schedule-list');
+    if (row) list.scrollTop += row.getBoundingClientRect().top - list.getBoundingClientRect().top - 2;
+  } else revealStep();
   updateMap();
   renderCaption();
-  if (fit) focusStep();
+  if (fit) {
+    if (isMobile() && Number($('#schematic').dataset.zoom || 1) < 1.2) setMapZoom(1.5);
+    focusStep();
+  }
   rippleSpot();
   if (restoreFocus) $(`[data-step="${id}"]`).focus({ preventScroll: true });
 }
@@ -281,7 +279,7 @@ function chooseSpot(id, fromItinerary = false) {
   renderCaption();
   $('#map-search').open = false;
   if (state.day !== previousDay) notify(`已切到${guide.days.find(day => day.id === state.day).shortDate}的行程`);
-  if (isMobile() && state.sheet === 'peek') applySheet('peek');
+  if (isMobile() && Number($('#schematic').dataset.zoom || 1) < 1.2) setMapZoom(1.6);
   focusPoints([spot.position]);
   rippleSpot();
   if (restoreMapFocus) $(`#schematic [data-spot="${esc(id)}"]`).focus({ preventScroll: true });
@@ -341,20 +339,7 @@ function updateMap() {
 
 function mapHomePose() {
   const frame = $('#schematic');
-  const bounds = frame.getBoundingClientRect();
   const box = $('#schematic .route-svg').getBoundingClientRect();
-  if (isMobile()) {
-    // Centre the drawing between the title band and the top edge of the sheet.
-    const sheetTop = $('#inscription')?.getBoundingClientRect().top ?? bounds.bottom;
-    const top = bounds.height * .12;
-    const bottom = Math.max(top + 80, Math.min(bounds.height, sheetTop - bounds.top - 12));
-    return {
-      left: (frame.clientWidth - box.width) / 2,
-      top: (top + bottom) / 2 - box.height / 2,
-      width: box.width,
-      height: box.height
-    };
-  }
   return {
     left: (frame.clientWidth - box.width) / 2,
     top: (frame.clientHeight - box.height) / 2,
@@ -550,20 +535,13 @@ function nearestSpot(clientX, clientY) {
   return bestDistance <= 44 ? best : null;
 }
 
-function toggleMapOps() {
-  state.mapOps = !state.mapOps;
-  const button = $('#map-ops');
-  button.setAttribute('aria-pressed', String(state.mapOps));
-  $('#schematic').classList.toggle('map-ops', state.mapOps);
-  if (!isMobile()) return;
-  notify(state.mapOps ? '已打开拖动：单指移动地图，双指缩放' : '单指滑动不再移动地图，双指可缩放');
-}
-
 function bindMapGestures() {
   const container = $('#schematic');
   const pointers = new Map();
   let moved = false;
   let origin;
+  let lastTap = null;
+  let suppressClick = false;
   const span = () => {
     const [a,b] = [...pointers.values()];
     return b && { distance: Math.hypot(a.x - b.x, a.y - b.y), x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
@@ -580,8 +558,6 @@ function bindMapGestures() {
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     if (Math.hypot(event.clientX - origin.x, event.clientY - origin.y) > 8 || pointers.size > 1) moved = true;
     if (!moved) return;
-    const panAllowed = event.pointerType === 'mouse' || state.mapOps || pointers.size > 1;
-    if (!panAllowed) return;
     compactItinerary();
     if (!container.hasPointerCapture(event.pointerId)) container.setPointerCapture(event.pointerId);
     if (pointers.size > 1) {
@@ -593,7 +569,21 @@ function bindMapGestures() {
   for (const type of ['pointerup','pointercancel','lostpointercapture']) container.addEventListener(type, event => {
     if (type !== 'lostpointercapture' || event.target === container) pointers.delete(event.pointerId);
   });
+  // Double tap toggles between the whole map and a close view around the tapped point.
+  container.addEventListener('pointerup', event => {
+    if (moved || pointers.size > 1 || event.target.closest('.map-search, .map-controls, button, summary, a')) return;
+    const now = performance.now();
+    const tap = { x: event.clientX, y: event.clientY, time: now };
+    if (lastTap && now - lastTap.time < 330 && Math.hypot(tap.x - lastTap.x, tap.y - lastTap.y) < 32) {
+      lastTap = null;
+      suppressClick = true;
+      if (Number(container.dataset.zoom || 1) > 1.25) resetMap(mapLimits.min);
+      else setMapZoom(1.9, tap);
+      rippleSpot();
+    } else lastTap = tap;
+  });
   container.addEventListener('click', event => {
+    if (suppressClick) { suppressClick = false; event.preventDefault(); event.stopPropagation(); return; }
     if (moved) { moved = false; event.preventDefault(); event.stopPropagation(); return; }
     if (event.target.closest('.spot-node, button, summary, a, .map-controls, .map-search')) return;
     const hit = nearestSpot(event.clientX, event.clientY);
@@ -619,100 +609,6 @@ function bindMapGestures() {
   resetMap();
 }
 
-/* ---------- mobile bottom sheet ---------- */
-function sheetMetrics() {
-  const sheet = $('#inscription');
-  const height = sheet.getBoundingClientRect().height;
-  const peek = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sheet-peek')) || 116;
-  const half = Math.min(height, Math.max(peek + 40, window.innerHeight * .46));
-  return { sheet, height, peek, half };
-}
-
-function sheetOffset() {
-  const transform = getComputedStyle($('#inscription')).transform;
-  if (!transform || transform === 'none') return 0;
-  try { return new DOMMatrixReadOnly(transform).m42; } catch { return 0; }
-}
-
-function applySheet(mode) {
-  const sheet = $('#inscription');
-  if (!isMobile()) {
-    sheet.removeAttribute('data-sheet');
-    sheet.classList.remove('dragging');
-    sheet.style.transform = '';
-    $('#landscape')?.classList.remove('sheet-open');
-    return;
-  }
-  state.sheet = ['peek','half','full'].includes(mode) ? mode : 'peek';
-  sheet.dataset.sheet = state.sheet;
-  sheet.classList.remove('dragging');
-  sheet.style.transform = '';
-  const toggle = $('[data-sheet-toggle]');
-  if (toggle) {
-    const expanded = state.sheet !== 'peek';
-    toggle.textContent = expanded ? '收起' : '展开';
-    toggle.setAttribute('aria-expanded', String(expanded));
-    $('#sheet-grip')?.setAttribute('aria-expanded', String(expanded));
-  }
-  $('#landscape')?.classList.toggle('sheet-open', state.sheet !== 'peek');
-}
-
-function initSheet() {
-  const sheet = $('#inscription');
-  const grip = $('#sheet-grip');
-  if (!grip) return;
-  let startY = 0;
-  let startOffset = 0;
-  let height = 0;
-  let pointerId = null;
-  let moved = false;
-  let metric = { peek: 116, half: 320 };
-  const release = () => {
-    pointerId = null;
-    sheet.classList.remove('dragging');
-  };
-  grip.addEventListener('pointerdown', event => {
-    if (!isMobile()) return;
-    const m = sheetMetrics();
-    height = m.height;
-    metric = { peek: m.peek, half: m.half };
-    startY = event.clientY;
-    startOffset = sheetOffset();
-    moved = false;
-    pointerId = event.pointerId;
-    grip.setPointerCapture(pointerId);
-    sheet.classList.add('dragging');
-  });
-  grip.addEventListener('pointermove', event => {
-    if (event.pointerId !== pointerId) return;
-    const dy = event.clientY - startY;
-    if (Math.abs(dy) > 6) moved = true;
-    const maxOffset = Math.max(0, height - metric.peek);
-    const offset = Math.min(maxOffset, Math.max(0, startOffset + dy));
-    sheet.style.transform = `translateY(${offset}px)`;
-  });
-  grip.addEventListener('pointerup', event => {
-    if (event.pointerId !== pointerId) return;
-    const dy = event.clientY - startY;
-    const offset = Math.min(Math.max(0, height - metric.peek), Math.max(0, startOffset + dy));
-    release();
-    if (!moved) { applySheet(state.sheet === 'peek' ? 'half' : 'peek'); return; }
-    const visible = height - offset;
-    let mode;
-    if (dy < -120) mode = 'full';
-    else if (dy < -44) mode = state.sheet === 'peek' ? 'half' : 'full';
-    else if (dy > 320) mode = 'peek';
-    else if (dy > 120) mode = state.sheet === 'full' ? 'half' : 'peek';
-    else if (dy > 44) mode = 'peek';
-    else mode = [['peek', metric.peek], ['half', metric.half], ['full', height]].sort((a, b) => Math.abs(a[1] - visible) - Math.abs(b[1] - visible))[0][0];
-    applySheet(mode);
-  });
-  grip.addEventListener('pointercancel', release);
-  grip.addEventListener('lostpointercapture', release);
-  $('.sheet-peek').addEventListener('click', () => { if (isMobile()) applySheet('half'); });
-  $('[data-sheet-toggle]').addEventListener('click', () => applySheet(state.sheet === 'peek' ? 'half' : 'peek'));
-}
-
 function renderNotes() {
   const costs = guide.costs;
   $('#notes').innerHTML = `<div class="page-heading"><div><p>住宿、交通与票务</p><h1 id="notes-title" tabindex="-1">出行须知</h1></div><span class="checked">核对 ${esc(guide.checkedAt)}</span></div><section class="note-section"><h2>待落实</h2><ul class="pending-list">${guide.pending.map(item => `<li><h3>${esc(item.title)}</h3><p>${esc(item.detail)}</p></li>`).join('')}</ul></section><section class="note-section"><h2>两天游览与当天开放</h2><p>${esc(guide.park.note)}</p><p>${esc(guide.schedule.note)} 按10:00入园累计，第一天约16:22出沟，第二天约17:17出沟；实际可能因车流、观景和开放情况变化。</p></section><section class="note-section"><h2>两天门票与观光车</h2><p>每天每位成人：门票¥${guide.ticket.entrance}＋观光车¥${guide.ticket.bus}。两天每人¥${costs.perPersonTwoDays}，7人共¥${costs.teamTwoDays}。</p><p>${esc(guide.ticket.note)} ${esc(guide.ticket.validity)}</p>${external(guide.sources.find(source => source.id === 'tickets').url, '官方票务')}</section><section class="note-section"><h2>三晚住宿</h2><p>10月29、30日：${esc(guide.trip.hotel.name)}。${esc(guide.trip.hotel.note)}</p><p>前两晚预算每人每晚¥${guide.trip.hotelBudgetPerPersonNight}，全队两晚¥${costs.hotelTeamTwoNights}。</p><p>10月31日：${esc(guide.trip.stationHotel.name)}。${esc(guide.trip.stationHotel.note)} 第三晚及道路接送费用另行确认。</p></section><section class="note-section"><h2>道路接送与返程</h2>${guide.transport.map(item => `<div class="transport-item"><h3>${esc(item.title)}<small>${esc(item.badge)}</small></h3><p>${esc(item.text)}</p></div>`).join('')}<p>${esc(guide.trip.returnNote)}</p></section><details class="sources note-section"><summary>资料来源与地图说明</summary><p>${esc(guide.map.note)}</p>${guide.sources.map(source => `<div class="source-item">${external(source.url, source.title)}<p>${esc(source.note)}</p></div>`).join('')}</details>`;
@@ -733,7 +629,7 @@ function navigate(target, focus = true) {
     renderSchedule();
     if (isMobile()) revealStep(); else window.scrollTo(0,0);
   } else if (target === 'route') {
-    if (isMobile()) applySheet('peek'); else $('#route').scrollIntoView({ block:'start' });
+    if (isMobile()) { resetMap(mapLimits.min); revealStep(); } else $('#route').scrollIntoView({ block:'start' });
   } else {
     window.scrollTo(0,0);
     if (focus) $(`#${target}-title`).focus({ preventScroll:true });
@@ -784,7 +680,7 @@ function tripMoment() {
 
 document.addEventListener('click', event => {
   const nav = event.target.closest('[data-nav]');
-  if (nav && guide) { event.preventDefault(); const target = nav.dataset.nav; if (location.hash !== `#${target}`) history.pushState(null,'',`#${target}`); navigate(target); if (isMobile() && target === 'itinerary') applySheet('half'); return; }
+  if (nav && guide) { event.preventDefault(); const target = nav.dataset.nav; if (location.hash !== `#${target}`) history.pushState(null,'',`#${target}`); navigate(target); return; }
   const day = event.target.closest('.day-switch [data-day]');
   if (day) { chooseDay(day.dataset.day); return; }
   const period = event.target.closest('[data-period]');
@@ -820,10 +716,8 @@ window.addEventListener('hashchange', () => { if (guide) navigate(location.hash.
 window.addEventListener('beforeprint', () => { if (guide) renderPrint(); });
 phone.addEventListener('change', () => {
   if (!guide) return;
-  if (isMobile()) applySheet(state.sheet === 'peek' ? 'peek' : 'half');
-  else applySheet('peek');
   renderSchedule();
-  resetMap(isMobile() ? mobileFocusZoom : mapLimits.min);
+  resetMap(mapLimits.min);
 });
 async function shareGuide() { try { if (!navigator.clipboard?.writeText) throw new Error(); await navigator.clipboard.writeText(location.href.split('#')[0]); notify('攻略链接已复制'); } catch { notify('请复制地址栏链接分享'); } }
 function registerOffline() {
@@ -850,5 +744,8 @@ async function boot() {
   } catch { $('#main').innerHTML = '<div class="error-box"><h1>行程暂时无法加载</h1><p>请检查连接，再重新加载。</p><button class="quiet-button" id="retry" type="button">重新加载</button></div>'; $('#retry').addEventListener('click', boot, {once:true}); }
 }
 boot();
+
+
+
 
 

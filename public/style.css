@@ -210,7 +210,7 @@ main { max-width: 1680px; margin: auto; }
   .map-caption { max-width: 200px; }
 }
 
-/* ---------- phone: full-bleed map + draggable itinerary sheet ---------- */
+/* ---------- phone: map on top, itinerary underneath, one screen ---------- */
 @media (max-width: 700px) {
   html, body { height: 100%; }
   body { overflow: hidden; padding-bottom: 0; font-size: 15px; }
@@ -218,78 +218,52 @@ main { max-width: 1680px; margin: auto; }
   [data-view] { min-height: 0; }
   [data-view=home] { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom)); }
   [data-view=weather], [data-view=notes] { flex: 1 1 auto; min-height: 0; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 16px); }
-  .journey-heading { flex: none; padding: calc(6px + env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 6px max(12px, env(safe-area-inset-left)); gap: 8px; }
+  .journey-heading { flex: none; padding: calc(2px + env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 0 max(12px, env(safe-area-inset-left)); gap: 8px; }
   .journey-title { gap: 8px; }
-  .journey-heading h1 { font-size: 19px; letter-spacing: .5px; }
+  .journey-heading h1 { font-size: 18px; letter-spacing: .5px; }
   .travel-date { font-size: 11px; }
   .journey-actions { gap: 0; }
   .journey-actions .quiet-button { min-width: 44px; min-height: 44px; padding: 4px; font-size: 12px; }
   .day-switch { flex: none; padding: 0 max(12px, env(safe-area-inset-right)) 0 max(12px, env(safe-area-inset-left)); gap: 22px; }
-  .day-switch button { min-height: 44px; padding: 6px 0; }
+  .day-switch button { min-height: 40px; padding: 4px 0; }
   .day-switch strong { font-size: 16px; }
   .day-switch button > span { font-size: 11px; }
   section#route { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
-  .landscape { flex: 1 1 auto; min-height: 0; height: auto; max-height: none; border-bottom: 0; }
-  .map-footnote, .journey-log { display: none; }
-  .painting-title { top: 8px; left: max(14px, env(safe-area-inset-left)); gap: 6px; }
-  .painting-title > span { font-size: 21px; letter-spacing: 4px; }
-  .painting-title small { font-size: 10px; letter-spacing: 2px; }
-  .painting-title i { display: none; }
-  .map-search { top: calc(10px + env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); width: auto; }
-  .map-search summary { justify-content: center; width: 46px; height: 46px; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: rgba(249,252,250,.95); }
-  .map-search summary span { font-size: 21px; }
+  .landscape { flex: 1 1 auto; min-height: 0; height: auto; max-height: none; border-bottom: 0; display: flex; flex-direction: column; }
+  .map-viewport { position: relative; inset: auto; flex: 1 1 auto; min-height: 170px; }
+  .map-footnote, .journey-log, .painting-title, .map-caption, .map-legend, .map-controls { display: none; }
+  .map-search { top: calc(8px + env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); width: auto; }
+  .map-search summary { justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: rgba(249,252,250,.95); }
+  .map-search summary span { font-size: 20px; }
   .map-search .search-label { display: none; }
-  .map-search[open] { width: min(360px, calc(100% - 2 * max(10px, env(safe-area-inset-right)))); }
+  .map-search[open] { width: min(340px, calc(100% - 2 * max(10px, env(safe-area-inset-right)))); }
   .map-search[open] summary { width: auto; height: 40px; padding: 0 12px; border-radius: 12px 12px 0 0; justify-content: space-between; }
   .map-search[open] .search-label { display: inline; }
   .map-search > div { border-radius: 0 0 12px 12px; }
-  .map-caption { display: none; }
-  .map-controls { right: max(10px, env(safe-area-inset-right)); bottom: calc(var(--sheet-peek) + 14px); gap: 0; border-radius: 12px; transition: opacity .2s; }
-  .map-controls button { min-width: 44px; min-height: 44px; }
-  #map-ops { display: inline-flex; align-items: center; justify-content: center; }
-  .map-controls output { display: none; }
-  .map-legend { display: none; }
-  .map-legend small { display: none; }
-  .landscape.sheet-open .map-controls, .landscape.sheet-open .map-legend { opacity: 0; pointer-events: none; }
 
-  /* bottom sheet */
-  .itinerary-inscription { position: fixed; left: 0; right: 0; bottom: calc(var(--nav-h) + env(safe-area-inset-bottom)); top: auto; width: auto; max-height: none; height: calc(100vh - var(--nav-h) - env(safe-area-inset-bottom) - 8px); height: calc(100svh - var(--nav-h) - env(safe-area-inset-bottom) - 8px); padding: 0 max(14px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left)); border: 0; border-top: 1px solid var(--line); border-radius: 18px 18px 0 0; box-shadow: 0 -8px 28px rgba(24,61,59,.14); background: var(--paper); z-index: 8; overflow: hidden; transform: translateY(calc(100% - var(--sheet-peek))); transition: transform .26s cubic-bezier(.32,.72,0,1); }
-  .itinerary-inscription[data-sheet=half] { transform: translateY(calc(100% - var(--sheet-half))); }
-  .itinerary-inscription[data-sheet=full] { transform: translateY(0); }
-  .itinerary-inscription.dragging { transition: none; }
-  .itinerary-inscription.is-compact { width: auto; max-height: none; padding: 0 max(14px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left)); background: var(--paper); }
-  .sheet-grip { display: flex; align-items: center; justify-content: center; width: 100%; height: 26px; padding: 0; border: 0; background: transparent; touch-action: none; }
-  .sheet-grip i { display: block; width: 42px; height: 5px; border-radius: 3px; background: #c3d3cc; }
-  .inscription-heading { padding: 0 0 8px; border-bottom: 1px solid var(--line); }
-  .inscription-heading p { font-size: 13px; }
-  .inscription-heading .quiet-button { min-height: 44px; font-size: 13px; }
-  .sheet-toggle { display: inline-flex; align-items: center; }
+  /* the itinerary is always on screen, right under the map */
+  .itinerary-inscription { position: relative; inset: auto; width: auto; max-height: none; flex: 0 0 auto; height: clamp(248px, 42svh, 372px); margin: 0; padding: 0 max(14px, env(safe-area-inset-right)) 6px max(14px, env(safe-area-inset-left)); border: 0; border-top: 1px solid var(--line); border-radius: 14px 14px 0 0; background: var(--paper); box-shadow: 0 -6px 18px rgba(24,61,59,.08); display: flex; flex-direction: column; }
+  .itinerary-inscription.is-compact { width: auto; max-height: none; padding: 0 max(14px, env(safe-area-inset-right)) 6px max(14px, env(safe-area-inset-left)); background: var(--paper); }
+  .inscription-heading { flex: none; padding: 7px 0 5px; border-bottom: 1px solid var(--line); }
+  .inscription-heading p { font-size: 12px; letter-spacing: .2px; }
   .panel-toggle { display: none; }
-  .sheet-peek { display: block; padding: 10px 2px 4px; font-size: 14px; color: var(--pine); line-height: 1.5; }
-  .sheet-peek strong { font-weight: 600; }
-  .sheet-peek span { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
-  #inscription-body { min-height: 0; flex: 1 1 auto; overflow: hidden; }
-  .itinerary-inscription[data-sheet=half] #inscription-body, .itinerary-inscription[data-sheet=full] #inscription-body { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
-  .itinerary-inscription[data-sheet=peek] #inscription-body { visibility: hidden; }
-  .itinerary-inscription[data-sheet=peek] .sheet-peek { visibility: visible; }
-  .itinerary-inscription[data-sheet=half] .sheet-peek, .itinerary-inscription[data-sheet=full] .sheet-peek { display: none; }
-  #inscription-settings { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
-  .entry-setting { display: flex; align-items: center; gap: 6px; font-size: 13px; padding: 0; }
-  .entry-setting input { min-height: 40px; width: 88px; font-size: 16px; }
-  .entry-setting > span { grid-column: auto; }
+  #inscription-body { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; overflow: hidden; }
+  #inscription-settings { flex: none; display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .entry-setting { display: flex; align-items: center; gap: 6px; padding: 0; font-size: 13px; }
+  .entry-setting input { min-height: 36px; width: 84px; font-size: 16px; }
+  .entry-setting > span { grid-column: auto; font-size: 12px; }
   .period-switch { display: none; }
-  .timing-warning { flex-basis: 100%; font-size: 12px; }
-  .schedule-list { flex: 1 1 auto; min-height: 0; padding: 0; }
-  .schedule-step { min-height: 52px; padding: 10px 0; gap: 8px; }
+  .timing-warning { flex-basis: 100%; font-size: 12px; margin: 0; }
+  .schedule-list { flex: 1 1 auto; min-height: 0; padding: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  .schedule-step { min-height: 50px; padding: 9px 0; gap: 8px; }
   .schedule-step strong { font-size: 14px; }
   .step-meta { font-size: 12px; }
-  .schedule-divider { font-size: 12px; padding: 10px 0 6px; }
-  .route-number { font-size: 16px; }
-  .spot-label { font-size: 23px; }
-  .step-places button { min-height: 44px; font-size: 13px; }
-  .sheet-extra { display: block; margin-top: 10px; padding: 12px 0 4px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
-  .sheet-extra h4 { margin: 0 0 4px; color: var(--pine); font-size: 13px; font-weight: 600; }
-  .sheet-extra p { margin: 0 0 6px; line-height: 1.7; }
+  .schedule-divider { position: static; font-size: 12px; padding: 8px 0 5px; background: transparent; }
+  .step-chevron { display: none; }
+  .step-detail { padding-bottom: 8px; }
+  .step-places button { min-height: 40px; font-size: 13px; }
+  .spot-notes dd { font-size: 13px; }
+  .spot-notes .is-empty { display: none; }
   .secondary-view { padding: 24px max(16px, env(safe-area-inset-right)) 24px max(16px, env(safe-area-inset-left)); max-width: none; }
   .page-heading h1 { font-size: 28px; }
   .page-heading { gap: 8px; }
@@ -333,6 +307,9 @@ main { max-width: 1680px; margin: auto; }
   .print-itinerary strong { margin-right: 12px; }
   .print-itinerary li p { color: #555; margin-top: 3px; }
 }
+
+
+
 
 
 

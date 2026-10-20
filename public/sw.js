@@ -1,4 +1,4 @@
-const CACHE = 'jiuzhai-2026-10-20';
+const CACHE = 'jiuzhai-2026-10-20b';
 const SHELL = ['/', '/style.css', '/app.js', '/favicon.svg'];
 
 self.addEventListener('install', event => {
@@ -43,3 +43,4 @@ self.addEventListener('fetch', event => {
       .catch(() => caches.match(request))
   );
 });
+
