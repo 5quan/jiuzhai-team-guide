@@ -88,7 +88,7 @@ export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuid
       if (pathname.includes('\\') || pathname.includes('\0') || pathname.includes('%') || pathname.split('/').includes('..')) { send(400, { error: 'Invalid path' }); return; }
       // The deployed frontend has a fixed asset set; unknown paths do no disk I/O.
       const asset = pathname === '/' ? 'index.html' : pathname.slice(1);
-      if (!['index.html', 'app.js', 'style.css', 'favicon.svg'].includes(asset)) { send(404, { error: 'Not found' }); return; }
+      if (!['index.html', 'app.js', 'style.css', 'favicon.svg', 'sw.js'].includes(asset)) { send(404, { error: 'Not found' }); return; }
       const content = await cache(`asset:${asset}`, async () => {
         const publicRoot = await realpath(path.join(root, 'public'));
         const canonical = await realpath(path.join(publicRoot, asset));

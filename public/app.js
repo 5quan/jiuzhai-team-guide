@@ -2,8 +2,11 @@ const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const modeNames = { bus: '观光车', walk: '步行', visit: '游览', rest: '午餐休息', mixed: '车＋步行' };
-const state = { day: 'day1', period: 'morning', step: 'd1-wuhua', spot: 'wuhuahai', compact: false, expandedStep: null, guidedSpot: null, view: 'home', layer: 'clouds', starts: new Map() };
+const periodNames = { morning: '上午', noon: '午间', afternoon: '下午' };
+const state = { day: 'day1', period: 'morning', step: 'd1-wuhua', spot: 'wuhuahai', compact: false, expandedStep: null, guidedSpot: null, view: 'home', layer: 'clouds', starts: new Map(), sheet: 'peek', mapOps: false, nowStep: null };
 const weatherCache = new Map();
+const phone = window.matchMedia('(max-width: 700px)');
+const isMobile = () => phone.matches;
 let guide;
 let weatherRequest = 0;
 let toastTimer;
@@ -11,7 +14,7 @@ let mapResize;
 let rippleTimer;
 const mapLimits = { min: 1, max: 2 };
 const mapOffset = { x: 0, y: 0 };
-const mobileMapZoom = 1.6;
+const mobileFocusZoom = 1.5;
 
 function notify(message) {
   $('#toast').textContent = message;
@@ -70,6 +73,10 @@ function routeFor(step) {
   return guide.routing.routes.find(route => route.id === step?.routeId);
 }
 
+function dayIndex(id) {
+  return guide.days.findIndex(day => day.id === id);
+}
+
 function render() {
   $('#main').innerHTML = `
     <div data-view="home">
@@ -82,15 +89,17 @@ function render() {
           ${guide.days.filter(day => day.startTime).map((day, index) => `<button type="button" data-day="${esc(day.id)}" aria-pressed="${state.day === day.id}" aria-label="${esc(day.shortDate)} ${esc(day.weekday)} ${esc(day.label)}"><strong>第${index === 0 ? '一' : '二'}天</strong><span>${esc(day.shortDate)}</span></button>`).join('')}
         </div>
         <div class="landscape" id="landscape">
-          <div class="map-viewport" id="schematic" tabindex="0" aria-label="九寨沟全景示意图，可拖动或用方向键移动，加减号缩放"></div>
+          <div class="map-viewport" id="schematic" tabindex="0" aria-label="九寨沟全景示意图，双指缩放拖动，加减号缩放，点按景点查看行程"></div>
           <div class="painting-title" aria-hidden="true"><span>九寨沟</span><small>循水慢游</small><i>两日</i></div>
           <aside class="itinerary-inscription" id="inscription" aria-label="当天时间行程">
-            <div class="inscription-heading"><p id="inscription-date"></p><button class="quiet-button" data-toggle-panel type="button" aria-expanded="true" aria-controls="inscription-settings">简览</button></div>
-            <div id="inscription-body"><div id="inscription-settings"><div class="entry-setting"><label for="entry-time">入园</label><input id="entry-time" type="time" min="${esc(guide.park.open)}" max="${esc(guide.park.lastEntry)}" step="300"><span id="exit-time"></span></div><p class="timing-warning" id="timing-warning" hidden></p><div class="period-switch" role="group" aria-label="选择当天时段"><button type="button" data-period="morning">上午</button><button type="button" data-period="noon">午间</button><button type="button" data-period="afternoon">下午</button></div></div><ol class="schedule-list" id="schedule-list" aria-label="按时间顺序排列的行程"></ol></div>
+            <button class="sheet-grip" id="sheet-grip" type="button" aria-label="上滑展开行程，下滑收起" aria-expanded="false" aria-controls="inscription-body"><i aria-hidden="true"></i></button>
+            <div class="inscription-heading"><p id="inscription-date"></p><button class="quiet-button sheet-toggle" data-sheet-toggle type="button" aria-expanded="false">展开</button><button class="quiet-button panel-toggle" data-toggle-panel type="button" aria-expanded="true" aria-controls="inscription-settings">简览</button></div>
+            <p class="sheet-peek" id="sheet-peek"></p>
+            <div id="inscription-body"><div id="inscription-settings"><div class="entry-setting"><label for="entry-time">入园</label><input id="entry-time" type="time" min="${esc(guide.park.open)}" max="${esc(guide.park.lastEntry)}" step="300"><span id="exit-time"></span></div><p class="timing-warning" id="timing-warning" hidden></p><div class="period-switch" role="group" aria-label="选择当天时段"><button type="button" data-period="morning">上午</button><button type="button" data-period="noon">午间</button><button type="button" data-period="afternoon">下午</button></div></div><ol class="schedule-list" id="schedule-list" aria-label="按时间顺序排列的行程"></ol><section class="sheet-extra" id="sheet-extra" aria-label="今晚住宿与返程"></section></div>
           </aside>
-          <details class="map-search" id="map-search"><summary>找景点 <span aria-hidden="true">⌕</span></summary><div><label for="spot-search">景点、栈道或换乘点</label><input id="spot-search" type="search" placeholder="例如：五花海" autocomplete="off"><div id="spot-results" aria-live="polite"></div></div></details>
+          <details class="map-search" id="map-search"><summary aria-label="找景点"><span class="search-label">找景点</span><span class="search-icon" aria-hidden="true">⌕</span></summary><div><label for="spot-search">景点、栈道或换乘点</label><input id="spot-search" type="search" placeholder="例如：五花海" autocomplete="off"><div id="spot-results" aria-live="polite"></div></div></details>
           <article class="map-caption" id="map-caption" aria-live="polite"></article>
-          <div class="map-controls" role="group" aria-label="地图控制"><button type="button" data-zoom="in" aria-label="放大地图">＋</button><button type="button" data-zoom="out" aria-label="缩小地图">−</button><button type="button" id="map-extent">全图</button><button type="button" id="map-follow">本段</button><output id="map-scale" aria-label="地图缩放比例">1×</output></div>
+          <div class="map-controls" role="group" aria-label="地图控制"><button type="button" data-zoom="in" aria-label="放大地图">＋</button><button type="button" data-zoom="out" aria-label="缩小地图">−</button><button type="button" id="map-ops" aria-pressed="false" aria-label="切换单指拖动地图">拖动</button><button type="button" id="map-extent">全图</button><button type="button" id="map-follow">本段</button><output id="map-scale" aria-label="地图缩放比例">1×</output></div>
           <div class="map-legend" aria-label="地图图例"><span><i></i>第一天</span><span><i></i>第二天</span><span><i></i>海子</span><small>可缩放、滑动</small></div>
         </div>
         <p class="map-footnote">三沟与蓝色湖泊为关系示意。开放栈道、车辆停靠与末班车以当天安排为准。${external(guide.map.officialPage, '官方导览')}</p>
@@ -105,6 +114,7 @@ function render() {
   renderSchedule();
   renderCaption();
   renderSearch();
+  applySheet(state.sheet);
   $('#print-button').addEventListener('click', () => window.print());
   $('#share-button').addEventListener('click', shareGuide);
   $('#entry-time').addEventListener('change', event => {
@@ -115,9 +125,11 @@ function render() {
     renderCaption();
   });
   $('#spot-search').addEventListener('input', renderSearch);
-  $('#map-extent').addEventListener('click', () => { compactItinerary(); resetMap(); });
+  $('#map-extent').addEventListener('click', () => { compactItinerary(); resetMap(mapLimits.min); });
   $('#map-follow').addEventListener('click', () => { compactItinerary(); focusStep(); rippleSpot(); });
+  $('#map-ops').addEventListener('click', toggleMapOps);
   $('#reload-weather').addEventListener('click', () => switchWeather(state.layer, true));
+  initSheet();
   navigate(location.hash.slice(1) || 'itinerary', false);
 }
 
@@ -154,7 +166,6 @@ function renderSpotNotes(id) {
 function renderSchedule() {
   const day = guide.days.find(day => day.id === state.day);
   const steps = schedule();
-  const filtered = steps.filter(step => step.period === state.period);
   $('#inscription-date').textContent = `${day.shortDate} ${day.weekday}`;
   $('#entry-time').value = state.starts.get(state.day) || day.startTime;
   $('#exit-time').textContent = `${clock(steps.at(-1).end)}出沟`;
@@ -162,22 +173,31 @@ function renderSchedule() {
   $('#timing-warning').textContent = `预计出沟晚于参考闭园时间${guide.park.close}，请提前入园，并以当天安排为准。`;
   $$('.day-switch [data-day]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.day === state.day)));
   $$('[data-period]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.period === state.period)));
-  $('#schedule-list').innerHTML = filtered.length ? filtered.map(step => {
-    const expanded = !state.compact && state.expandedStep === step.id;
+  let lastPeriod = null;
+  const visible = isMobile() ? steps : steps.filter(step => step.period === state.period);
+  $('#schedule-list').innerHTML = visible.length ? visible.map(step => {
+    const expanded = !isMobile() && !state.compact && state.expandedStep === step.id;
     const detailId = `detail-${step.id}`;
     const spotId = step.spotIds.includes(state.spot) ? state.spot : stepSpot(step);
-    return `<li class="schedule-row${step.id === state.step ? ' selected' : ''}" data-step-row="${esc(step.id)}"><button type="button" class="schedule-step" data-step="${esc(step.id)}" aria-pressed="${step.id === state.step}" aria-expanded="${expanded}" aria-controls="${detailId}"><span class="step-dash" aria-hidden="true">—</span><span class="step-summary"><strong>${esc(itineraryName(step))}</strong><span class="step-meta"><time>${clock(step.start)}</time> / ${step.duration}分</span></span><span class="step-chevron" aria-hidden="true">${expanded ? '−' : '+'}</span></button><div class="step-detail" id="${detailId}"${expanded ? '' : ' hidden'}>${step.spotIds.length > 1 ? `<div class="step-places" role="group" aria-label="本段地点">${step.spotIds.map(id => `<button type="button" data-spot="${esc(id)}" aria-pressed="${spotId === id}">${esc(locationInfo(id).name)}</button>`).join('')}</div>` : ''}${renderSpotNotes(spotId)}</div></li>`;
+    const divider = isMobile() && step.period !== lastPeriod ? `<li class="schedule-divider" role="presentation"><span>${periodNames[step.period]}</span></li>` : '';
+    lastPeriod = step.period;
+    return `${divider}<li class="schedule-row${step.id === state.step ? ' selected' : ''}" data-step-row="${esc(step.id)}"><button type="button" class="schedule-step" data-step="${esc(step.id)}" aria-pressed="${step.id === state.step}" aria-expanded="${expanded}" aria-controls="${detailId}"><span class="step-dash" aria-hidden="true">—</span><span class="step-summary"><strong>${esc(itineraryName(step))}${step.id === state.nowStep ? '<span class="step-now">现在</span>' : ''}</strong><span class="step-meta"><time>${clock(step.start)}</time> / ${step.duration}分</span></span><span class="step-chevron" aria-hidden="true">${expanded ? '−' : '+'}</span></button><div class="step-detail" id="${detailId}"${expanded ? '' : ' hidden'}>${step.spotIds.length > 1 ? `<div class="step-places" role="group" aria-label="本段地点">${step.spotIds.map(id => `<button type="button" data-spot="${esc(id)}" aria-pressed="${spotId === id}">${esc(locationInfo(id).name)}</button>`).join('')}</div>` : ''}${renderSpotNotes(spotId)}</div></li>`;
   }).join('') : '<li class="empty">该时段没有安排，请切换其他时段。</li>';
-  $('#inscription').classList.toggle('is-compact', state.compact);
+  $('#inscription').classList.toggle('is-compact', state.compact && !isMobile());
   $('#inscription').classList.toggle('has-detail', !state.compact && Boolean(state.expandedStep));
-  $('.inscription-heading').hidden = state.compact;
-  $('#inscription-settings').hidden = state.compact;
+  $('.inscription-heading').hidden = state.compact && !isMobile();
+  $('#inscription-settings').hidden = state.compact && !isMobile();
   $('[data-toggle-panel]').setAttribute('aria-expanded', String(!state.compact));
+  const step = currentStep();
+  $('#sheet-peek').innerHTML = step
+    ? `<strong>${clock(step.start)}—${clock(step.end)} · ${esc(itineraryName(step))}</strong><span>${esc(locationInfo(state.spot)?.name || '')} · 共 ${steps.length} 步 · 上滑看全程</span>`
+    : '';
+  $('#sheet-extra').innerHTML = `<h4>今晚住</h4><p>${esc(day.stay)}</p><p>${esc(guide.trip.stationHotel.name)} · 10月31日</p><p>${esc(guide.trip.returnNote)}</p>`;
   placeInscription();
 }
 
 function compactItinerary() {
-  if (state.compact) return;
+  if (isMobile() || state.compact) return;
   state.compact = true;
   state.expandedStep = null;
   const scroll = $('#schedule-list').scrollTop;
@@ -198,8 +218,10 @@ function chooseDay(id) {
   if (!guide.days.some(day => day.id === id && day.startTime)) return;
   state.day = id;
   state.period = 'morning';
-  state.step = schedule().find(step => step.mode === 'visit')?.id || schedule()[0].id;
-  state.spot = stepSpot(currentStep());
+  const steps = schedule();
+  const first = steps.find(step => step.mode === 'visit') || steps[0];
+  state.step = first.id;
+  state.spot = stepSpot(first);
   state.compact = false;
   state.expandedStep = null;
   renderSchedule();
@@ -207,14 +229,17 @@ function chooseDay(id) {
   updateMap();
   renderCaption();
   state.guidedSpot = null;
-  resetDefaultMap();
+  setMapZoom(isMobile() ? mobileFocusZoom : mapLimits.min);
+  const position = locationInfo(state.spot)?.position;
+  if (position) focusPoints([position]); else resetMap(mapLimits.min);
+  rippleSpot();
 }
 
 function chooseStep(id, fit = true) {
   const step = schedule().find(step => step.id === id);
   if (!step) return;
   const restoreFocus = document.activeElement?.dataset.step === id;
-  const expand = state.compact || state.expandedStep !== id;
+  const expand = !isMobile() && (state.compact || state.expandedStep !== id);
   state.step = id;
   state.spot = stepSpot(step);
   state.period = step.period;
@@ -234,6 +259,7 @@ function chooseStep(id, fit = true) {
 function chooseSpot(id, fromItinerary = false) {
   const spot = locationInfo(id);
   if (!spot?.position) return;
+  const previousDay = state.day;
   const restoreMapFocus = document.activeElement?.classList.contains('spot-node');
   const restoreListFocus = fromItinerary && document.activeElement?.dataset.spot === id;
   let steps = schedule();
@@ -254,6 +280,8 @@ function chooseSpot(id, fromItinerary = false) {
   updateMap();
   renderCaption();
   $('#map-search').open = false;
+  if (state.day !== previousDay) notify(`已切到${guide.days.find(day => day.id === state.day).shortDate}的行程`);
+  if (isMobile() && state.sheet === 'peek') applySheet('peek');
   focusPoints([spot.position]);
   rippleSpot();
   if (restoreMapFocus) $(`#schematic [data-spot="${esc(id)}"]`).focus({ preventScroll: true });
@@ -269,7 +297,7 @@ function renderCaption() {
 function renderSearch() {
   const query = $('#spot-search').value.trim();
   const points = locations().filter(spot => `${spot.name}${spot.valley || ''}`.includes(query));
-  $('#spot-results').innerHTML = points.length ? points.map(spot => `<button type="button" data-spot="${esc(spot.id)}"><span>${symbolFor(spot)}</span>${esc(spot.name)}</button>`).join('') : '<p class="empty">没有匹配地点，试试“长海”或“树正”。</p>';
+  $('#spot-results').innerHTML = points.length ? points.map(spot => `<button type="button" data-spot="${esc(spot.id)}"><span>${symbolFor(spot)}</span>${esc(spot.name)}<small class="result-day">第${spot.day === 2 ? '二' : '一'}天</small></button>`).join('') : '<p class="empty">没有匹配地点，试试“长海”或“树正”。</p>';
 }
 
 function renderMap() {
@@ -281,13 +309,13 @@ function renderMap() {
   const nodes = locations().map(spot => {
     const [x, y] = spot.position;
     const left = spot.labelSide === 'left';
-    const shape = spot.kind === 'facility' ? `<rect class="route-dot" x="${x - 12}" y="${y - 12}" width="24" height="24" rx="3"/>` : `<circle class="route-dot" cx="${x}" cy="${y}" r="13"/>`;
-    return `<g class="spot-node${mainNames.has(spot.id) ? '' : ' node-detail'}${spot.kind === 'facility' ? ' node-facility' : ''}" data-spot="${esc(spot.id)}" data-day="${spot.day}" role="button" tabindex="0" aria-label="${symbolFor(spot)} ${esc(spot.name)}" aria-pressed="false"><circle class="hit-target" cx="${x}" cy="${y}" r="22"/>${shape}<text class="route-number" x="${x}" y="${y}">${symbolFor(spot)}</text><text class="spot-label" x="${x + (left ? -24 : 24)}" y="${y + 7}" text-anchor="${left ? 'end' : 'start'}">${esc(spot.mapLabel || spot.name)}</text></g>`;
+    const shape = spot.kind === 'facility' ? `<rect class="route-dot" x="${x - 12}" y="${y - 12}" width="24" height="24" rx="3"/>` : `<circle class="route-dot" cx="${x}" cy="${y}" r="15"/>`;
+    return `<g class="spot-node${mainNames.has(spot.id) ? '' : ' node-detail'}${spot.kind === 'facility' ? ' node-facility' : ''}" data-spot="${esc(spot.id)}" data-day="${spot.day}" role="button" tabindex="0" aria-label="${symbolFor(spot)} ${esc(spot.name)}" aria-pressed="false"><circle class="hit-target" cx="${x}" cy="${y}" r="30"/>${shape}<text class="route-number" x="${x}" y="${y}">${symbolFor(spot)}</text><text class="spot-label" x="${x + (left ? -24 : 24)}" y="${y + 7}" text-anchor="${left ? 'end' : 'start'}">${esc(spot.mapLabel || spot.name)}</text></g>`;
   }).join('');
   $('#schematic').innerHTML = `<svg class="route-svg" viewBox="0 0 ${width} ${height}" role="group" aria-label="九寨沟三沟与湖泊全景示意图"><defs><linearGradient id="mountain-tone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ccdbd5" stop-opacity=".62"/><stop offset="1" stop-color="#edf3f0" stop-opacity=".05"/></linearGradient></defs>${mountains}<g class="map-geography" aria-hidden="true"><text x="580" y="370" transform="rotate(73 580 370)">则查洼沟</text><text x="1375" y="365" transform="rotate(-66 1375 365)">日则沟</text><text x="1050" y="850" transform="rotate(10 1050 850)">树正沟</text><text class="north-mark" x="1490" y="72">↑ 北</text></g><g class="map-water">${waters}</g><g aria-hidden="true">${roads}<path id="active-route" class="active-route"/></g>${nodes}<g id="map-ripple" aria-hidden="true" pointer-events="none"></g></svg><div class="location-pointer" id="location-pointer" aria-hidden="true" hidden><svg viewBox="0 0 24 40"><path d="M8 2H16V21H23L12 38L1 21H8Z"/></svg></div>`;
   bindMapGestures();
   updateMap();
-  requestAnimationFrame(resetDefaultMap);
+  requestAnimationFrame(() => resetDefaultMap());
 }
 
 function updateMap() {
@@ -313,11 +341,22 @@ function updateMap() {
 
 function mapHomePose() {
   const frame = $('#schematic');
+  const bounds = frame.getBoundingClientRect();
   const box = $('#schematic .route-svg').getBoundingClientRect();
-  const mobile = window.innerWidth <= 700;
-  const referenceX = locationInfo('wuhuahai').position[0] / guide.map.canvas.width;
+  if (isMobile()) {
+    // Centre the drawing between the title band and the top edge of the sheet.
+    const sheetTop = $('#inscription')?.getBoundingClientRect().top ?? bounds.bottom;
+    const top = bounds.height * .12;
+    const bottom = Math.max(top + 80, Math.min(bounds.height, sheetTop - bounds.top - 12));
+    return {
+      left: (frame.clientWidth - box.width) / 2,
+      top: (top + bottom) / 2 - box.height / 2,
+      width: box.width,
+      height: box.height
+    };
+  }
   return {
-    left: mobile ? frame.clientWidth * .71 - referenceX * box.width : (frame.clientWidth - box.width) / 2,
+    left: (frame.clientWidth - box.width) / 2,
     top: (frame.clientHeight - box.height) / 2,
     width: box.width,
     height: box.height
@@ -387,7 +426,7 @@ function placeInscription() {
   panel.style.top = '';
   panel.style.bottom = '';
   panel.style.maxHeight = '';
-  if (window.innerWidth > 700 || state.compact) return;
+  if (isMobile() || state.compact) return;
   const spot = locationInfo(state.spot);
   if (!spot?.position) return;
   const frame = $('#schematic').getBoundingClientRect();
@@ -436,25 +475,34 @@ function resetMap(zoom = mapLimits.min) {
 }
 
 function resetDefaultMap() {
-  resetMap(window.innerWidth <= 700 ? mobileMapZoom : mapLimits.min);
+  resetMap(mapLimits.min);
 }
 
 function focusPoints(points) {
   if (!points.length) return;
   const container = $('#schematic');
   const { width, height } = guide.map.canvas;
-  const mobile = window.innerWidth <= 700;
   const frame = container.getBoundingClientRect();
-  const panel = $('#inscription').getBoundingClientRect();
-  const left = !mobile ? Math.max(20, panel.right - frame.left + 35) : 20;
-  const availableWidth = Math.max(100, container.clientWidth - left - 30);
-  const availableHeight = mobile ? Math.max(160, panel.top - frame.top - 45) : container.clientHeight - 110;
+  const box = $('.route-svg', container).getBoundingClientRect();
+  let targetX;
+  let targetY;
+  if (isMobile()) {
+    const sheet = $('#inscription').getBoundingClientRect();
+    const top = frame.height * .12 + 26;
+    const bottom = Math.max(top + 120, sheet.top - frame.top - 16);
+    targetX = frame.left + frame.width / 2;
+    targetY = frame.top + (top + bottom) / 2;
+  } else {
+    const panel = $('#inscription').getBoundingClientRect();
+    const left = Math.max(20, panel.right - frame.left + 35);
+    const availableWidth = Math.max(100, container.clientWidth - left - 30);
+    const availableHeight = container.clientHeight - 110;
+    targetX = frame.left + left + availableWidth / 2;
+    targetY = frame.top + availableHeight / 2;
+  }
   const cx = points.reduce((sum, point) => sum + point[0], 0) / points.length;
   const cy = points.reduce((sum, point) => sum + point[1], 0) / points.length;
-  const svg = $('.route-svg', container).getBoundingClientRect();
-  const targetX = frame.left + left + availableWidth / 2;
-  const targetY = frame.top + (mobile ? availableHeight / 2 + 20 : container.clientHeight / 2);
-  positionMap(mapOffset.x + targetX - svg.left - cx / width * svg.width, mapOffset.y + targetY - svg.top - cy / height * svg.height);
+  positionMap(mapOffset.x + targetX - box.left - cx / width * box.width, mapOffset.y + targetY - box.top - cy / height * box.height);
   placeInscription();
 }
 
@@ -483,6 +531,34 @@ function rippleSpot() {
   rippleTimer = setTimeout(() => layer.replaceChildren(), 1800);
 }
 
+function nearestSpot(clientX, clientY) {
+  const svg = $('#schematic .route-svg');
+  if (!svg) return null;
+  const box = svg.getBoundingClientRect();
+  if (!box.width) return null;
+  const scaleX = box.width / guide.map.canvas.width;
+  const scaleY = box.height / guide.map.canvas.height;
+  let best = null;
+  let bestDistance = Infinity;
+  for (const spot of locations()) {
+    if (!spot.position) continue;
+    const x = box.left + spot.position[0] * scaleX;
+    const y = box.top + spot.position[1] * scaleY;
+    const distance = Math.hypot(clientX - x, clientY - y);
+    if (distance < bestDistance) { bestDistance = distance; best = spot; }
+  }
+  return bestDistance <= 44 ? best : null;
+}
+
+function toggleMapOps() {
+  state.mapOps = !state.mapOps;
+  const button = $('#map-ops');
+  button.setAttribute('aria-pressed', String(state.mapOps));
+  $('#schematic').classList.toggle('map-ops', state.mapOps);
+  if (!isMobile()) return;
+  notify(state.mapOps ? '已打开拖动：单指移动地图，双指缩放' : '单指滑动不再移动地图，双指可缩放');
+}
+
 function bindMapGestures() {
   const container = $('#schematic');
   const pointers = new Map();
@@ -493,7 +569,7 @@ function bindMapGestures() {
     return b && { distance: Math.hypot(a.x - b.x, a.y - b.y), x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
   };
   container.addEventListener('pointerdown', event => {
-    if (event.button !== 0) return;
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
     if (!pointers.size) { moved = false; origin = { x: event.clientX, y: event.clientY }; }
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
   });
@@ -502,8 +578,10 @@ function bindMapGestures() {
     if (!previous) return;
     const before = span();
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-    if (Math.hypot(event.clientX - origin.x, event.clientY - origin.y) > 6 || pointers.size > 1) moved = true;
+    if (Math.hypot(event.clientX - origin.x, event.clientY - origin.y) > 8 || pointers.size > 1) moved = true;
     if (!moved) return;
+    const panAllowed = event.pointerType === 'mouse' || state.mapOps || pointers.size > 1;
+    if (!panAllowed) return;
     compactItinerary();
     if (!container.hasPointerCapture(event.pointerId)) container.setPointerCapture(event.pointerId);
     if (pointers.size > 1) {
@@ -515,7 +593,12 @@ function bindMapGestures() {
   for (const type of ['pointerup','pointercancel','lostpointercapture']) container.addEventListener(type, event => {
     if (type !== 'lostpointercapture' || event.target === container) pointers.delete(event.pointerId);
   });
-  container.addEventListener('click', event => { if (moved) { event.preventDefault(); event.stopPropagation(); moved = false; } }, true);
+  container.addEventListener('click', event => {
+    if (moved) { moved = false; event.preventDefault(); event.stopPropagation(); return; }
+    if (event.target.closest('.spot-node, button, summary, a, .map-controls, .map-search')) return;
+    const hit = nearestSpot(event.clientX, event.clientY);
+    if (hit) { event.preventDefault(); event.stopPropagation(); chooseSpot(hit.id); }
+  }, true);
   container.addEventListener('wheel', event => {
     event.preventDefault();
     compactItinerary();
@@ -536,6 +619,100 @@ function bindMapGestures() {
   resetMap();
 }
 
+/* ---------- mobile bottom sheet ---------- */
+function sheetMetrics() {
+  const sheet = $('#inscription');
+  const height = sheet.getBoundingClientRect().height;
+  const peek = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sheet-peek')) || 116;
+  const half = Math.min(height, Math.max(peek + 40, window.innerHeight * .46));
+  return { sheet, height, peek, half };
+}
+
+function sheetOffset() {
+  const transform = getComputedStyle($('#inscription')).transform;
+  if (!transform || transform === 'none') return 0;
+  try { return new DOMMatrixReadOnly(transform).m42; } catch { return 0; }
+}
+
+function applySheet(mode) {
+  const sheet = $('#inscription');
+  if (!isMobile()) {
+    sheet.removeAttribute('data-sheet');
+    sheet.classList.remove('dragging');
+    sheet.style.transform = '';
+    $('#landscape')?.classList.remove('sheet-open');
+    return;
+  }
+  state.sheet = ['peek','half','full'].includes(mode) ? mode : 'peek';
+  sheet.dataset.sheet = state.sheet;
+  sheet.classList.remove('dragging');
+  sheet.style.transform = '';
+  const toggle = $('[data-sheet-toggle]');
+  if (toggle) {
+    const expanded = state.sheet !== 'peek';
+    toggle.textContent = expanded ? '收起' : '展开';
+    toggle.setAttribute('aria-expanded', String(expanded));
+    $('#sheet-grip')?.setAttribute('aria-expanded', String(expanded));
+  }
+  $('#landscape')?.classList.toggle('sheet-open', state.sheet !== 'peek');
+}
+
+function initSheet() {
+  const sheet = $('#inscription');
+  const grip = $('#sheet-grip');
+  if (!grip) return;
+  let startY = 0;
+  let startOffset = 0;
+  let height = 0;
+  let pointerId = null;
+  let moved = false;
+  let metric = { peek: 116, half: 320 };
+  const release = () => {
+    pointerId = null;
+    sheet.classList.remove('dragging');
+  };
+  grip.addEventListener('pointerdown', event => {
+    if (!isMobile()) return;
+    const m = sheetMetrics();
+    height = m.height;
+    metric = { peek: m.peek, half: m.half };
+    startY = event.clientY;
+    startOffset = sheetOffset();
+    moved = false;
+    pointerId = event.pointerId;
+    grip.setPointerCapture(pointerId);
+    sheet.classList.add('dragging');
+  });
+  grip.addEventListener('pointermove', event => {
+    if (event.pointerId !== pointerId) return;
+    const dy = event.clientY - startY;
+    if (Math.abs(dy) > 6) moved = true;
+    const maxOffset = Math.max(0, height - metric.peek);
+    const offset = Math.min(maxOffset, Math.max(0, startOffset + dy));
+    sheet.style.transform = `translateY(${offset}px)`;
+  });
+  grip.addEventListener('pointerup', event => {
+    if (event.pointerId !== pointerId) return;
+    const dy = event.clientY - startY;
+    const offset = Math.min(Math.max(0, height - metric.peek), Math.max(0, startOffset + dy));
+    release();
+    if (!moved) { applySheet(state.sheet === 'peek' ? 'half' : 'peek'); return; }
+    const visible = height - offset;
+    let mode;
+    if (dy < -120) mode = 'full';
+    else if (dy < -44) mode = state.sheet === 'peek' ? 'half' : 'full';
+    else if (dy > 320) mode = 'peek';
+    else if (dy > 120) mode = state.sheet === 'full' ? 'half' : 'peek';
+    else if (dy > 44) mode = 'peek';
+    else mode = [['peek', metric.peek], ['half', metric.half], ['full', height]].sort((a, b) => Math.abs(a[1] - visible) - Math.abs(b[1] - visible))[0][0];
+    applySheet(mode);
+  });
+  grip.addEventListener('pointercancel', release);
+  grip.addEventListener('lostpointercapture', release);
+  $('.sheet-peek').addEventListener('click', () => { if (isMobile()) applySheet('half'); });
+  $('[data-sheet-toggle]').addEventListener('click', () => applySheet(state.sheet === 'peek' ? 'half' : 'peek'));
+}
+
 function renderNotes() {
   const costs = guide.costs;
   $('#notes').innerHTML = `<div class="page-heading"><div><p>住宿、交通与票务</p><h1 id="notes-title" tabindex="-1">出行须知</h1></div><span class="checked">核对 ${esc(guide.checkedAt)}</span></div><section class="note-section"><h2>待落实</h2><ul class="pending-list">${guide.pending.map(item => `<li><h3>${esc(item.title)}</h3><p>${esc(item.detail)}</p></li>`).join('')}</ul></section><section class="note-section"><h2>两天游览与当天开放</h2><p>${esc(guide.park.note)}</p><p>${esc(guide.schedule.note)} 按10:00入园累计，第一天约16:22出沟，第二天约17:17出沟；实际可能因车流、观景和开放情况变化。</p></section><section class="note-section"><h2>两天门票与观光车</h2><p>每天每位成人：门票¥${guide.ticket.entrance}＋观光车¥${guide.ticket.bus}。两天每人¥${costs.perPersonTwoDays}，7人共¥${costs.teamTwoDays}。</p><p>${esc(guide.ticket.note)} ${esc(guide.ticket.validity)}</p>${external(guide.sources.find(source => source.id === 'tickets').url, '官方票务')}</section><section class="note-section"><h2>三晚住宿</h2><p>10月29、30日：${esc(guide.trip.hotel.name)}。${esc(guide.trip.hotel.note)}</p><p>前两晚预算每人每晚¥${guide.trip.hotelBudgetPerPersonNight}，全队两晚¥${costs.hotelTeamTwoNights}。</p><p>10月31日：${esc(guide.trip.stationHotel.name)}。${esc(guide.trip.stationHotel.note)} 第三晚及道路接送费用另行确认。</p></section><section class="note-section"><h2>道路接送与返程</h2>${guide.transport.map(item => `<div class="transport-item"><h3>${esc(item.title)}<small>${esc(item.badge)}</small></h3><p>${esc(item.text)}</p></div>`).join('')}<p>${esc(guide.trip.returnNote)}</p></section><details class="sources note-section"><summary>资料来源与地图说明</summary><p>${esc(guide.map.note)}</p>${guide.sources.map(source => `<div class="source-item">${external(source.url, source.title)}<p>${esc(source.note)}</p></div>`).join('')}</details>`;
@@ -551,9 +728,16 @@ function navigate(target, focus = true) {
   });
   if (state.view !== 'weather') { weatherRequest++; $('#weather-mount').replaceChildren(); }
   else if (!$('#windy-frame')) switchWeather(state.layer);
-  if (target === 'itinerary') { state.compact = false; renderSchedule(); window.scrollTo(0,0); }
-  else if (target === 'route') $('#route').scrollIntoView({ block:'start' });
-  else { window.scrollTo(0,0); if (focus) $(`#${target}-title`).focus({ preventScroll:true }); }
+  if (target === 'itinerary') {
+    state.compact = false;
+    renderSchedule();
+    if (isMobile()) revealStep(); else window.scrollTo(0,0);
+  } else if (target === 'route') {
+    if (isMobile()) applySheet('peek'); else $('#route').scrollIntoView({ block:'start' });
+  } else {
+    window.scrollTo(0,0);
+    if (focus) $(`#${target}-title`).focus({ preventScroll:true });
+  }
 }
 
 async function switchWeather(layer, force = false) {
@@ -583,9 +767,24 @@ function renderPrint() {
   }).join('')}</ol></section>`).join('');
 }
 
+function tripMoment() {
+  const now = new Date();
+  const iso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  const day = guide.days.find(item => item.date === iso && item.startTime);
+  if (!day) return null;
+  const minute = now.getHours() * 60 + now.getMinutes();
+  const steps = schedule(day.id);
+  return {
+    day,
+    steps,
+    current: steps.find(step => minute >= step.start && minute < step.end) || null,
+    next: steps.find(step => step.start > minute) || null
+  };
+}
+
 document.addEventListener('click', event => {
   const nav = event.target.closest('[data-nav]');
-  if (nav && guide) { event.preventDefault(); const target = nav.dataset.nav; if (location.hash !== `#${target}`) history.pushState(null,'',`#${target}`); navigate(target); return; }
+  if (nav && guide) { event.preventDefault(); const target = nav.dataset.nav; if (location.hash !== `#${target}`) history.pushState(null,'',`#${target}`); navigate(target); if (isMobile() && target === 'itinerary') applySheet('half'); return; }
   const day = event.target.closest('.day-switch [data-day]');
   if (day) { chooseDay(day.dataset.day); return; }
   const period = event.target.closest('[data-period]');
@@ -619,9 +818,37 @@ document.addEventListener('keydown', event => {
 window.addEventListener('popstate', () => { if (guide) navigate(location.hash.slice(1) || 'itinerary', false); });
 window.addEventListener('hashchange', () => { if (guide) navigate(location.hash.slice(1) || 'itinerary', false); });
 window.addEventListener('beforeprint', () => { if (guide) renderPrint(); });
+phone.addEventListener('change', () => {
+  if (!guide) return;
+  if (isMobile()) applySheet(state.sheet === 'peek' ? 'peek' : 'half');
+  else applySheet('peek');
+  renderSchedule();
+  resetMap(isMobile() ? mobileFocusZoom : mapLimits.min);
+});
 async function shareGuide() { try { if (!navigator.clipboard?.writeText) throw new Error(); await navigator.clipboard.writeText(location.href.split('#')[0]); notify('攻略链接已复制'); } catch { notify('请复制地址栏链接分享'); } }
+function registerOffline() {
+  if (!('serviceWorker' in navigator)) return;
+  if (!(location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) return;
+  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(() => {}); });
+}
 async function boot() {
-  try { guide = await getJSON('/api/guide'); render(); }
-  catch { $('#main').innerHTML = '<div class="error-box"><h1>行程暂时无法加载</h1><p>请检查连接，再重新加载。</p><button class="quiet-button" id="retry" type="button">重新加载</button></div>'; $('#retry').addEventListener('click', boot, {once:true}); }
+  try {
+    guide = await getJSON('/api/guide');
+    const moment = tripMoment();
+    if (moment) {
+      state.day = moment.day.id;
+      const target = moment.current || moment.next;
+      if (target) { state.step = target.id; state.spot = stepSpot(target); state.period = target.period; state.nowStep = moment.current?.id || null; }
+    }
+    render();
+    if (moment) {
+      setMapZoom(mobileFocusZoom);
+      const position = locationInfo(state.spot)?.position;
+      if (position) focusPoints([position]);
+    }
+    registerOffline();
+  } catch { $('#main').innerHTML = '<div class="error-box"><h1>行程暂时无法加载</h1><p>请检查连接，再重新加载。</p><button class="quiet-button" id="retry" type="button">重新加载</button></div>'; $('#retry').addEventListener('click', boot, {once:true}); }
 }
 boot();
+
+
