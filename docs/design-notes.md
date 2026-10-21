@@ -166,3 +166,4 @@ README使用web0.1.0标题，项目定位为“普通的两天行程参考手册
 - 长地点名用语义断点（观景台／上车点／换乘、步行到／乘车到、栈道到）插入 `<wbr>`，并设 `word-break: keep-all`，窄栏内换行时不会只剩一个字。
 - 展开时保持 `--itinerary-top` 不变，按地图底部剩余空间放大列表视窗；收起时重新按四地点窗口计算，恢复紧凑高度。
 - 浏览器验证：`tests/itinerary-focus.browser.cjs` 检查收起宽度 132px、景点间距 0、展开顶部不动且高度增加、宽度不变、收起后高度复原；六档宽度无溢出。截图见 `itinerary-focus-mobile.png`、`itinerary-focus-expanded-mobile.png`、`itinerary-focus-desktop.png`、`itinerary-focus-expanded-desktop.png`。
+- 已发布到 <https://47.111.21.130/>（提交 `17dcc88`）。线上 390px 实测：收起 132×142、展开 132×296、展开前后顶部均为 433px、景点间距 0、详情在行程栏内、无独立详情卡；容器 healthy。
