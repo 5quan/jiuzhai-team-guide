@@ -150,6 +150,20 @@ function render() {
   $('#reload-weather').addEventListener('click', () => switchWeather(state.layer, true));
   navigate(location.hash.slice(1) || 'itinerary', false);
   loadWeather();
+  loadChatDot();
+}
+
+// 主页聊天入口的小红点：AI 主动发过话、且本机还没点进去看过时显示。
+async function loadChatDot() {
+  try {
+    const response = await fetch('/api/chat/unread', { credentials: 'same-origin', cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    const seen = Number(localStorage.getItem('chat-seen-at') || 0);
+    const unread = Boolean(data.at) && data.at > seen;
+    document.querySelector('.buddy')?.classList.toggle('has-dot', unread);
+    document.querySelector('.bottom-nav a[href="/chat"]')?.classList.toggle('has-dot', unread);
+  } catch { /* 未登录或网络失败时不显示红点 */ }
 }
 
 // 主页那行天气：现在 + 下一小时。取不到就整行隐藏，不占位。
@@ -285,7 +299,7 @@ function renderSchedule() {
       const open = !state.compact && state.expandedStep === item.id;
       return `<div class="schedule-row${item.id === state.step ? ' selected' : ''}" data-step-row="${esc(item.id)}"><button type="button" class="schedule-leg" data-step="${esc(item.id)}" aria-label="${clock(item.start)} ${esc(timelineTravel(item))}至${esc(timelinePlace(stop))}" aria-pressed="${item.id === state.step}" aria-expanded="${open}" aria-controls="detail-${esc(item.id)}"><span class="timeline-ink">${timelineTravelMarkup(item)}${item.id === state.nowStep ? '<span class="step-now">现在</span>' : ''}</span></button>${renderTimelineDetail(item, open)}</div>`;
     }).join('');
-    const duration = ['visit', 'rest'].includes(step.mode) ? ` · ${step.duration}分钟` : '';
+    const duration = step.mode === 'visit' ? ` · 游览${step.duration}分钟` : step.mode === 'rest' ? ` · 休息${step.duration}分钟` : '';
     const time = moving ? `${clock(step.start)}—${clock(step.end)}` : clock(step.start);
     return `<li class="timeline-stop${active ? ' is-active' : ''}" data-node-id="${esc(step.id)}">${moving ? '' : `<div class="timeline-connection">${incoming}</div>`}<div class="schedule-row${step.id === state.step ? ' selected' : ''}" data-step-row="${esc(step.id)}"><button type="button" class="schedule-step${moving ? ' is-moving' : ''}" data-step="${esc(step.id)}" aria-pressed="${step.id === state.step}" aria-expanded="${expanded}" aria-controls="detail-${esc(step.id)}">${moving ? `<span class="timeline-self-leg"><span class="timeline-ink">${timelineTravelMarkup(step)}</span></span>` : ''}<span class="timeline-node"><span class="step-summary"><strong><span class="timeline-ink">${esc(timelinePlace(stop))}${step.id === state.nowStep ? '<span class="step-now">现在</span>' : ''}</span></strong><span class="step-meta"><span class="timeline-ink"><time>${time}</time>${duration}</span></span></span></span></button>${renderTimelineDetail(step, expanded)}</div></li>`;
   }).join('') : '<li class="empty">该时段没有安排，请切换其他时段。</li>';
@@ -942,6 +956,7 @@ async function boot() {
   } catch { $('#main').innerHTML = '<div class="error-box"><h1>行程暂时无法加载</h1><p>请检查连接，再重新加载。</p><button class="quiet-button" id="retry" type="button">重新加载</button></div>'; $('#retry').addEventListener('click', boot, {once:true}); }
 }
 boot();
+
 
 
 

@@ -10,6 +10,9 @@ let abortController = null;
 let pendingImages = [];
 let version = 0;
 
+// 主页小红点靠这个时间戳判断是否已读：只要在聊天页看过一次就更新。
+function markChatSeen() { try { localStorage.setItem('chat-seen-at', String(Date.now())); } catch { /* 隐私模式下忽略 */ } }
+
 function notice(message = '', error = false) {
   $('notice').textContent = message;
   $('notice').classList.toggle('error', error);
@@ -66,7 +69,7 @@ function showUser(value) {
   $('empty').hidden = false;
   $('load-more').hidden = true;
   controls();
-  if (user) loadProactive();
+  if (user) { markChatSeen(); loadProactive(); }
 }
 
 function avatarNode() {
@@ -222,6 +225,7 @@ async function loadMessages(older = false, scroll = false) {
     turns = [...byId.values()].sort((a, b) => a.id - b.id);
   }
   if (older || turns.length <= 50) $('load-more').hidden = !result.hasMore;
+  markChatSeen();
   render(scroll);
   if (older) $('history').scrollTop += $('history').scrollHeight - height;
   clearTimeout(pollTimer);
@@ -515,4 +519,5 @@ async function init() {
   catch (error) { if (!user) showUser(null); notice(error.message, error.message !== '请先登录。'); }
 }
 init();
+
 

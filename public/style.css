@@ -403,4 +403,11 @@ main { max-width: 1680px; margin: auto; }
 
 
 /* 主页天气一行 */
-.weather-now { margin: 3px 0 0; font-size: 12px; color: var(--muted); letter-spacing: .02em; }
+.weather-now { margin: 3px 0 0; font-size: 12px; color: var(--muted); letter-spacing: .02em; white-space: nowrap; }
+@media (max-width: 600px) { .journey-title { flex-wrap: wrap; row-gap: 1px; } .weather-now { flex: 0 0 100%; font-size: 11px; } }
+
+
+/* 未读红点 */
+.has-dot { position: relative; }
+.has-dot::after { content: ''; position: absolute; top: 1px; right: 1px; width: 9px; height: 9px; border-radius: 50%; background: #cf4726; border: 2px solid #faf6ed; }
+.bottom-nav a.has-dot::after { top: 8px; right: calc(50% - 16px); }

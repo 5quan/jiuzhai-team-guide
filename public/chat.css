@@ -30,7 +30,8 @@ details { border-bottom: 1px solid var(--line); padding: 0 0 12px; }
 summary { cursor: pointer; font-size: 13px; }
 #key-form { display: grid; gap: 12px; padding-top: 12px; max-width: 600px; }
 .key-actions { display: flex; gap: 8px; }
-.history { height: clamp(220px, 50dvh, 650px); overflow-y: auto; overscroll-behavior: contain; padding: 24px 4px; }
+.history { height: clamp(220px, 50dvh, 650px); overflow-y: auto; overscroll-behavior: contain; padding: 24px 4px; display: flex; flex-direction: column; }
+#messages { margin-top: auto; }
 #load-more { display: block; margin: 0 auto 20px; }
 .message { margin: 0 0 24px; max-width: 88%; }
 .message.user { margin-left: auto; }
@@ -71,14 +72,14 @@ textarea { resize: none; min-height: 44px; max-height: 120px; line-height: 1.5; 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .toggle { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 14px; flex-wrap: wrap; }
 .toggle input[type="checkbox"] { width: auto; margin: 0; accent-color: var(--accent); }
-@media(max-width: 600px) { .chat-shell { padding: 0 16px; } header { align-items: flex-start; } .account { justify-content: flex-end; max-width: 190px; } .account span { width: 100%; text-align: right; } .account button { padding: 5px 8px; } .message { max-width: 94%; } .history { height: 45dvh; } .composer > div { align-items: flex-start; } #send-hint { max-width: 210px; } }
+@media(max-width: 600px) { .chat-shell { padding: 0 16px; } header { align-items: flex-start; } .account { justify-content: flex-end; max-width: 190px; } .account span { width: 100%; text-align: right; } .account button { padding: 5px 8px; } .message { max-width: 94%; } .history { height: min(52dvh, 460px); } .composer > div { align-items: flex-start; } #send-hint { max-width: 210px; } }
 
 /* 对话头像 */
 .message.assistant { display: flex; gap: 10px; align-items: flex-start; max-width: 92%; }
-.message.assistant .avatar { width: 40px; height: 40px; flex: none; object-fit: contain; background: none; border: 0; filter: drop-shadow(0 1px 2px rgba(83, 60, 40, .18)); }
+.message.assistant .avatar { width: 48px; height: 48px; flex: none; object-fit: contain; background: none; border: 0; filter: drop-shadow(0 1px 2px rgba(83, 60, 40, .18)); }
 .message.assistant .body { min-width: 0; flex: 1; }
-.message.assistant.follow { padding-left: 44px; }
-@media (max-width: 600px) { .message.assistant .avatar { width: 34px; height: 34px; } .message.assistant.follow { padding-left: 44px; } }
+.message.assistant.follow { padding-left: 58px; }
+@media (max-width: 600px) { .message.assistant .avatar { width: 44px; height: 44px; } .message.assistant.follow { padding-left: 54px; } }
 
 
 /* 手绘背景移到聊天页：模糊后铺满，再压一层米色蒙版，只留氛围不抢内容 */
@@ -86,5 +87,7 @@ body.chat-page { background: #faf6ed; }
 body.chat-page::before { content: ''; position: fixed; inset: 0; background: url('/chat-bg.webp') center / cover no-repeat; filter: blur(4px); transform: scale(1.06); pointer-events: none; z-index: 0; }
 body.chat-page::after { content: ''; position: fixed; inset: 0; background: rgba(250, 246, 237, .93); pointer-events: none; z-index: 0; }
 body.chat-page .chat-shell { position: relative; z-index: 1; }
+
+
 
 
