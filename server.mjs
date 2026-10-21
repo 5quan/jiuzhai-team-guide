@@ -7,6 +7,7 @@ import { loadGuide, publicGuide, weatherLinks } from './lib/guide.mjs';
 import { createLimiter, createCache } from './lib/security.mjs';
 import { createChat } from './lib/chat.mjs';
 import { loadMemes } from './lib/memes.mjs';
+import { loadKnowledge } from './lib/knowledge.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const defaultGuide = path.join(root, 'data', 'guide.json');
@@ -18,7 +19,7 @@ function representation(body, type = 'application/json; charset=utf-8') {
   return { bytes, type, etag: `"${createHash('sha256').update(bytes).digest('base64url')}"` };
 }
 
-export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuide, cacheTtlMs = 1000, rateLimit = {}, guide = null, memes = loadMemes(path.join(root, 'public', 'memes')), chat = process.env.CHAT_ENABLED === '1' ? {
+export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuide, cacheTtlMs = 1000, rateLimit = {}, guide = null, memes = loadMemes(path.join(root, 'public', 'memes')), knowledge = loadKnowledge(path.join(root, 'data', 'knowledge.json')), chat = process.env.CHAT_ENABLED === '1' ? {
   dbFile: process.env.CHAT_DB || path.join(root, 'storage', 'chat.sqlite'),
   encryptionKey: process.env.CHAT_ENCRYPTION_KEY, inviteCode: process.env.CHAT_INVITE_CODE,
   publicOrigin: process.env.CHAT_ORIGIN, model: process.env.DEEPSEEK_MODEL || 'deepseek-flash',
@@ -26,7 +27,7 @@ export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuid
   search: { enabled: process.env.CHAT_SEARCH !== '0' }
 } : null } = {}) {
   // chat 里显式传的 memes 优先（测试与自定义部署），否则用 public/memes 下加载的。
-  const chatService = chat ? createChat({ ...chat, guide, memes: chat.memes ?? memes }) : null;
+  const chatService = chat ? createChat({ ...chat, guide: chat.guide ?? guide, memes: chat.memes ?? memes, knowledge: chat.knowledge ?? knowledge }) : null;
   // 挂到 server 上仅供测试与运维手动触发，不参与 HTTP 路由。
   const limit = createLimiter(rateLimit);
   const cache = createCache({ ttlMs: cacheTtlMs });

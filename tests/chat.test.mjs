@@ -412,6 +412,26 @@ test('a leading question mark never splits a bubble', () => {
   assert.deepEqual(splitSegments('真的吗？'), ['真的吗？']);
 });
 
+test('scenic knowledge is injected into the system prompt for the current day', async t => {
+  let system = '';
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' });
+  const guide = { days: [{ date: today, spotIds: ['wuhuahai'] }], referenceDays: [] };
+  const knowledge = { spots: { wuhuahai: '九寨精华，水色分层。' }, tips: ['海拔高，慢慢走。'] };
+  const { call, register } = await fixture(t, async (url, options) => {
+    if (url.endsWith('/models')) return Response.json({ data: [] });
+    const body = JSON.parse(options.body);
+    if (body.response_format) return Response.json({ choices: [{ message: { content: '{"episode":"","add":[],"update":[],"forget":[]}' } }] });
+    system = body.messages[0].content;
+    return Response.json({ choices: [{ message: { content: '好' } }] });
+  }, { guide, knowledge });
+  const cookie = await register('alice');
+  await call('/key', { key }, cookie);
+  await call('/send', { requestId: 'knowledge-request-001', content: '五花海有什么好看的' }, cookie);
+  assert.match(system, /景区常识/);
+  assert.match(system, /九寨精华/);
+  assert.match(system, /海拔高/);
+});
+
 test('the opener asks once, requires a key, and never repeats', async t => {
   let modelCalls = 0;
   const { call, register } = await fixture(t, async url => {

@@ -8,6 +8,6 @@
   "scripts": {
     "start": "node --env-file-if-exists=.env server.mjs",
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check server.mjs && node --check lib/guide.mjs && node --check lib/security.mjs && node --check lib/chat.mjs && node --check lib/persona.mjs && node --check lib/attachments.mjs && node --check lib/memory.mjs && node --check lib/memes.mjs && node --check lib/search.mjs && node --check scripts/import-memes.mjs && node --check public/chat.js && node --check public/memory.js && node --check public/app.js && node --check public/timeline.js && node --check public/sw.js"
+    "check": "node --check server.mjs && node --check lib/guide.mjs && node --check lib/security.mjs && node --check lib/chat.mjs && node --check lib/persona.mjs && node --check lib/attachments.mjs && node --check lib/memory.mjs && node --check lib/memes.mjs && node --check lib/search.mjs && node --check lib/knowledge.mjs && node --check scripts/import-memes.mjs && node --check public/chat.js && node --check public/memory.js && node --check public/splash.js && node --check public/app.js && node --check public/timeline.js && node --check public/sw.js"
   }
 }
