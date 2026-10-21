@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf6ed">
+  <meta name="referrer" content="no-referrer">
+  <title>她记得的事 · 九寨同行</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/chat.css">
+  <link rel="stylesheet" href="/memory.css">
+  <script src="/memory.js" defer></script>
+</head>
+<body>
+  <main class="chat-shell">
+    <header>
+      <div><a class="back" href="/chat">← 回到聊天</a><h1>她记得的事</h1></div>
+      <div class="account"><span id="username"></span></div>
+    </header>
+    <p class="notice" id="notice" role="status" aria-live="polite">正在读取…</p>
+
+    <section id="denied" hidden>
+      <p>记忆只对登录后的账号可见。<a href="/chat">去登录</a></p>
+    </section>
+
+    <section id="memory" hidden>
+      <p class="subtle">这些是 AI 从聊天里记下来的、关于你的事。你可以删掉任何一条，删掉后它不会再被提起。</p>
+
+      <details open>
+        <summary>关于你的事实 <span id="facts-count" class="count"></span></summary>
+        <ul id="facts" class="memory-list"></ul>
+        <p id="facts-empty" class="subtle" hidden>还没有记住任何事实。多聊几句，它会自己整理。</p>
+      </details>
+
+      <details>
+        <summary>被更新过的旧信息 <span id="history-count" class="count"></span></summary>
+        <ul id="history" class="memory-list"></ul>
+        <p id="history-empty" class="subtle" hidden>暂时没有。</p>
+      </details>
+
+      <details>
+        <summary>聊过的片段 <span id="episodes-count" class="count"></span></summary>
+        <ul id="episodes" class="memory-list"></ul>
+        <p id="episodes-empty" class="subtle" hidden>还没有整理出片段。</p>
+      </details>
+
+      <details>
+        <summary>这次行程</summary>
+        <div id="trip" class="subtle"></div>
+      </details>
+    </section>
+  </main>
+</body>
+</html>

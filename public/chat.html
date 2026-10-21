@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf6ed">
+  <meta name="referrer" content="no-referrer">
+  <title>AI 助手 · 九寨同行</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/chat.css">
+  <script src="/chat.js" defer></script>
+</head>
+<body>
+  <main class="chat-shell">
+    <header><div><a class="back" href="/">← 返回行程</a><h1>AI 助手</h1></div><div class="account" id="account" hidden><span id="username"></span><a class="back" href="/memory">她记得的事</a><button id="settings" type="button">Key 设置</button><button id="logout" type="button">退出</button></div></header>
+    <p class="notice" id="notice" role="status" aria-live="polite">正在连接…</p>
+    <section id="auth" class="auth" hidden>
+      <h2>接着聊，从这里开始</h2>
+      <p>登录后，你的聊天记录会保存在账号中。</p>
+      <form id="auth-form">
+        <label>用户名<input name="username" required pattern="[A-Za-z0-9_]{3,32}" minlength="3" maxlength="32" autocomplete="username" autocapitalize="none" spellcheck="false"><small>3–32 位字母、数字或下划线</small></label>
+        <label>密码<input name="password" type="password" required minlength="10" maxlength="128" autocomplete="current-password"><small>10–128 位；请使用独立密码</small></label>
+        <label id="invite-label" hidden>邀请码<input name="invite" type="password" maxlength="256" autocomplete="off"></label>
+        <button class="primary" id="auth-submit" type="submit">登录</button>
+        <button id="switch-auth" type="button">有邀请码？注册账号</button>
+      </form>
+      <p class="subtle">暂不支持自助找回密码，请妥善保存登录信息。</p>
+    </section>
+    <section id="conversation" class="conversation" hidden>
+      <details id="key-panel">
+        <summary>DeepSeek Key 设置</summary>
+        <form id="key-form"><label>你的 API Key<input name="key" type="password" required minlength="10" maxlength="256" autocomplete="off" spellcheck="false" placeholder="填入 DeepSeek API Key"></label><div class="key-actions"><button class="primary" type="submit">验证并保存</button><button id="remove-key" type="button">移除 Key</button></div></form>
+        <p class="subtle">Key 在服务器加密保存。发送的消息和相关历史会交给 DeepSeek 处理，费用由你的 DeepSeek 账户承担。每累计 5 轮对话，会额外调用一次模型把关键信息整理成记忆（同样走你的 Key），记忆内容可以在「她记得的事」里查看和删除。</p>
+        <label class="toggle"><input type="checkbox" id="proactive-toggle"> 让她偶尔主动找我<span id="proactive-hint" class="subtle"></span></label>
+      </details>
+      <div class="history" id="history"><button id="load-more" type="button" hidden>查看更早的记录</button><div id="messages" aria-label="聊天记录"></div><p id="empty">你好，想聊些什么？<br><span>这是你的固定会话，随时回来接着聊。</span></p></div>
+      <form id="send-form" class="composer">
+        <div id="attachments" class="attachments" hidden></div>
+        <label class="sr-only" for="message">消息</label>
+        <textarea id="message" rows="3" maxlength="8000" placeholder="跟她说点什么…" required></textarea>
+        <div class="composer-bar">
+          <div class="composer-left">
+            <label class="attach" id="attach" for="image-input">＋ 图片</label>
+            <input id="image-input" type="file" accept="image/jpeg,image/png,image/gif,image/webp" multiple hidden>
+            <span id="send-hint">她会一句一句回 · Ctrl / ⌘ + Enter 发送</span>
+          </div>
+          <div class="composer-right">
+            <button id="stop" type="button" hidden>停止</button>
+            <button class="primary" id="send" type="submit">发送</button>
+          </div>
+        </div>
+      </form>
+      <p class="privacy">AI 回答可能有误，请核实重要信息。上下文包含人设、你让她记住的事和最近的对话；每 5 轮会额外整理一次记忆，费用走你的 DeepSeek 账户。</p>
+    </section>
+  </main>
+</body>
+</html>

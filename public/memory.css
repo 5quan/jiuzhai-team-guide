@@ -1,0 +1,12 @@
+.memory-list { list-style: none; margin: 12px 0; padding: 0; display: grid; gap: 10px; }
+.memory-list li { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; padding: 11px 14px; background: #fffdf8; border: 1px solid var(--line); border-radius: 8px; }
+.memory-list .text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.memory-list .text strong { font-weight: 600; }
+.memory-list .text .when { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
+.memory-list .text .old { color: var(--muted); text-decoration: line-through; }
+.memory-list button { padding: 5px 10px; min-height: 34px; font-size: 12px; white-space: nowrap; }
+.memory-list button.danger:hover { background: #f7e4df; border-color: #d9a293; color: #a13f2d; }
+.count { color: var(--muted); font-size: 12px; font-weight: 400; }
+#memory details { padding: 14px 0; }
+#memory summary { font-size: 15px; }
+#trip { padding-top: 10px; line-height: 1.9; }

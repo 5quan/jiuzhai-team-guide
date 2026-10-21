@@ -103,6 +103,19 @@ test('assets, HEAD requests, CSP and conditional caching work', async () => {
     assert.equal(await head.text(), '');
     assert.match(head.headers.get('content-type'), /javascript/);
   }
+  // 记忆页与聊天页一样是内部路由，不暴露真实文件名。
+  const memoryPage = await fetch(`${origin}/memory`);
+  assert.equal(memoryPage.status, 200);
+  assert.match(await memoryPage.text(), /她记得的事/);
+  assert.equal((await fetch(`${origin}/memory.js`)).status, 200);
+  assert.equal((await fetch(`${origin}/memory.css`)).status, 200);
+  // 表情包只允许「分类/文件名.图片扩展名」这一层。
+  const meme = await fetch(`${origin}/memes/happy/placeholder.png`);
+  assert.equal(meme.status, 200);
+  assert.match(meme.headers.get('content-type'), /image\/png/);
+  assert.match(meme.headers.get('cache-control'), /max-age/);
+  assert.equal((await fetch(`${origin}/memes/happy/readme.txt`)).status, 404);
+  assert.equal((await fetch(`${origin}/memes/happy/..%2f..%2fpackage.json`)).status, 400);
   assert.equal((await fetch(`${origin}/api/missing`)).status, 404);
 });
 

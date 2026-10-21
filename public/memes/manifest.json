@@ -1,0 +1,45 @@
+{
+  "name": "大肥鱼表情包（占位）",
+  "id": "dafeiyu-placeholder",
+  "note": "当前是占位图，用 scripts/import-memes.mjs 换成真实表情包。",
+  "source": "https://github.com/shirachino/astrbot-deepseek-meme-pack",
+  "license": "CC0",
+  "categories": {
+    "happy": {
+      "description": "开心、成功确认、被逗笑的时候"
+    },
+    "like": {
+      "description": "表示喜欢、赞同、推荐的时候"
+    },
+    "surprised": {
+      "description": "遇到意料之外的信息的时候"
+    },
+    "confused": {
+      "description": "没听懂、需要对方再解释的时候"
+    },
+    "sad": {
+      "description": "表达遗憾、安慰、心情低落的时候"
+    },
+    "baka": {
+      "description": "轻微吐槽、对方犯小错的时候"
+    },
+    "fool": {
+      "description": "自嘲、缓和气氛的时候"
+    },
+    "see": {
+      "description": "偷瞄、盯着进度看的时候"
+    },
+    "sigh": {
+      "description": "无奈、无语、感慨的时候"
+    },
+    "sleep": {
+      "description": "熬夜、累了、劝人休息的时候"
+    },
+    "meow": {
+      "description": "卖萌、安抚情绪的时候"
+    },
+    "laugh": {
+      "description": "大笑、嘲笑、调侃的时候"
+    }
+  }
+}

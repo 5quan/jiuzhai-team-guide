@@ -2,7 +2,7 @@ services:
   guide:
     build: .
     ports:
-      - "${GUIDE_PORT:-3000}:3000"
+      - "${GUIDE_BIND:-127.0.0.1}:${GUIDE_PORT:-3000}:3000"
     restart: unless-stopped
     cpus: 0.50
     mem_limit: 256m
@@ -12,8 +12,15 @@ services:
       PORT: 3000
       HOST: 0.0.0.0
       GUIDE_FILE: /app/data/guide.json
+      CHAT_ENABLED: ${CHAT_ENABLED:-0}
+      CHAT_DB: /app/storage/chat.sqlite
+      CHAT_ORIGIN: ${CHAT_ORIGIN:-}
+      CHAT_INVITE_CODE: ${CHAT_INVITE_CODE:-}
+      CHAT_ENCRYPTION_KEY: ${CHAT_ENCRYPTION_KEY:-}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-flash}
     volumes:
       - ./data:/app/data:ro
+      - chat-storage:/app/storage
     read_only: true
     security_opt:
       - no-new-privileges:true
@@ -23,3 +30,5 @@ services:
       options:
         max-size: "5m"
         max-file: "2"
+volumes:
+  chat-storage:

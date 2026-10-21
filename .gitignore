@@ -6,3 +6,8 @@ node_modules/
 *.key
 *.log
 coverage/
+storage/
+test-output/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
