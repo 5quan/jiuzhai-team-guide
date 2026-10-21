@@ -20,7 +20,7 @@
 | 地图装饰 | 部分完成（矢量山体、水系、栈道；未再加固定风景画） |
 | 检索工具（tool call） | 待做 |
 
-> **2026-10-22 本地改动，尚未发布**：行程栏改为半透明宣纸米色底；景点名单独小衬底；景点钟点默认收起、点开再展开，交通用时始终可见；非当前时段的景点圆点淡化。线上目前仍是 `web0.2.0` 的上一版行程页。
+> **2026-10-22 已发布**：行程栏改为半透明宣纸米色底；景点名单独小衬底；景点钟点默认收起、点开再展开，交通用时始终可见；非当前时段的景点圆点淡化。提交 `a65680d`，线上容器健康，浏览器实测底纹透明度、收起状态和点位淡化均生效。版本号仍沿用 `web0.2.0`。
 
 ## 架构（按职责分文件）
 
@@ -100,11 +100,10 @@ PLAYWRIGHT_MODULE=D:\project\fun\shot\node_modules\playwright node tests/chat.br
 
 ## 下一步建议（按优先级）
 
-1. **发布本轮行程页改动** —— 本地验证通过后 `git push origin main`，服务器按下方部署步骤重建；线上仍是旧行程页
-2. **导入真实表情包** —— `node scripts/import-memes.mjs <解压目录> happy,like,surprised,confused,sad,baka,fool,see,sigh,sleep,meow,laugh`，再重建镜像
-3. **检索工具** —— 给 `chat/completions` 传 `tools`，处理 `tool_calls`；难点是流式下要等 tool_call 收完再续流
-4. **地图装饰** —— 纯代码可做：远山渐变阴影、海子从深蓝到浅青、纸纹噪点
-5. **关掉 666 明文端口** —— `.env` 改 `GUIDE_BIND=127.0.0.1`，`docker compose up -d`
+1. **导入真实表情包** —— `node scripts/import-memes.mjs <解压目录> happy,like,surprised,confused,sad,baka,fool,see,sigh,sleep,meow,laugh`，再重建镜像
+2. **检索工具** —— 给 `chat/completions` 传 `tools`，处理 `tool_calls`；难点是流式下要等 tool_call 收完再续流
+3. **地图装饰** —— 纯代码可做：远山渐变阴影、海子从深蓝到浅青、纸纹噪点
+4. **关掉 666 明文端口** —— `.env` 改 `GUIDE_BIND=127.0.0.1`，`docker compose up -d`
 
 ## 容易踩的坑
 
