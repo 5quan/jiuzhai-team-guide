@@ -1,0 +1,162 @@
+{
+  "checkedAt": "2026-10-20T08:21:58.848Z",
+  "url": "http://47.111.21.130:666/",
+  "unitTests": {
+    "local": 20,
+    "server": 20
+  },
+  "layouts": [
+    {
+      "edgesOutside": true,
+      "imageLoaded": true,
+      "mobileArtwork": true,
+      "nodes": 37,
+      "opacity": "1",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "periods": 2,
+      "rowHeight": 40,
+      "scale": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+      "titleFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "titleHalo": true,
+      "waters": 15,
+      "width": 320
+    },
+    {
+      "edgesOutside": true,
+      "imageLoaded": true,
+      "mobileArtwork": true,
+      "nodes": 37,
+      "opacity": "1",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "periods": 2,
+      "rowHeight": 40,
+      "scale": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+      "titleFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "titleHalo": true,
+      "waters": 15,
+      "width": 390
+    },
+    {
+      "edgesOutside": true,
+      "imageLoaded": true,
+      "mobileArtwork": true,
+      "nodes": 37,
+      "opacity": "1",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "periods": 2,
+      "rowHeight": 40,
+      "scale": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+      "titleFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "titleHalo": true,
+      "waters": 15,
+      "width": 430
+    },
+    {
+      "edgesOutside": true,
+      "imageLoaded": true,
+      "mobileArtwork": true,
+      "nodes": 37,
+      "opacity": "1",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "periods": 2,
+      "rowHeight": 40,
+      "scale": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+      "titleFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "titleHalo": true,
+      "waters": 15,
+      "width": 700
+    },
+    {
+      "edgesOutside": false,
+      "imageLoaded": true,
+      "mobileArtwork": false,
+      "nodes": 37,
+      "opacity": "1",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "periods": 2,
+      "rowHeight": 40,
+      "scale": "none",
+      "titleFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "titleHalo": true,
+      "waters": 15,
+      "width": 768
+    },
+    {
+      "edgesOutside": false,
+      "imageLoaded": true,
+      "mobileArtwork": false,
+      "nodes": 37,
+      "opacity": "1",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "periods": 2,
+      "rowHeight": 40,
+      "scale": "none",
+      "titleFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "titleHalo": true,
+      "waters": 15,
+      "width": 1440
+    }
+  ],
+  "onlineMobile": {
+    "dayOneLunch": true,
+    "edgesOutside": true,
+    "imageLoaded": true,
+    "nodes": 37,
+    "opacity": "1",
+    "overflow": false,
+    "periodCount": 2,
+    "rowHeight": 40,
+    "scale": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+    "timeFont": "\"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif",
+    "titleFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+    "titleHalo": true,
+    "transparentPanel": "rgba(0, 0, 0, 0)",
+    "waters": 15,
+    "width": 390,
+    "zoom": "600px"
+  },
+  "onlineDesktop": {
+    "artworkVisible": true,
+    "imageSource": "/paper-landscape-v1.webp",
+    "nodes": 37,
+    "overflow": false,
+    "periodCount": 2,
+    "titleHalo": true,
+    "waters": 15,
+    "width": 1440
+  },
+  "interactions": {
+    "dayTwoLunch": true,
+    "zoom": {
+      "artworkBox": {
+        "height": 290,
+        "left": -30,
+        "top": 283.5,
+        "width": 435
+      },
+      "imageLoaded": true,
+      "selected": "7诺日朗群海",
+      "svgWidth": "375px"
+    },
+    "searchResult": "1\n五花海\n第一天\n2\n五花海观景栈道\n第一天",
+    "crossDay": {
+      "body": true,
+      "caption": "10:30—11:30 · 游览60分钟1五花海",
+      "selected": "1五花海",
+      "selectedDay": "第一天10.30",
+      "toast": "已切到10.30的行程"
+    }
+  },
+  "consoleErrors": [],
+  "container": "healthy",
+  "dataUnchanged": true,
+  "backup": "/opt/jiuzhai-team-guide-backups/20261020-161958",
+  "rollbackImage": "jiuzhai-team-guide-guide:before-combined-20261020-161958",
+  "realMobileDeviceTested": false
+}

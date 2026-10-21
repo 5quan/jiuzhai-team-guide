@@ -8,11 +8,11 @@ import { createLimiter, createCache } from './lib/security.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const defaultGuide = path.join(root, 'data', 'guide.json');
-const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.json': 'application/json; charset=utf-8' };
+const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.json': 'application/json; charset=utf-8' };
 const csp = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.jiuzhai.com; frame-src https://embed.windy.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'";
 
 function representation(body, type = 'application/json; charset=utf-8') {
-  const bytes = Buffer.from(typeof body === 'string' ? body : JSON.stringify(body));
+  const bytes = Buffer.isBuffer(body) ? body : Buffer.from(typeof body === 'string' ? body : JSON.stringify(body));
   return { bytes, type, etag: `"${createHash('sha256').update(bytes).digest('base64url')}"` };
 }
 
@@ -88,7 +88,7 @@ export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuid
       if (pathname.includes('\\') || pathname.includes('\0') || pathname.includes('%') || pathname.split('/').includes('..')) { send(400, { error: 'Invalid path' }); return; }
       // The deployed frontend has a fixed asset set; unknown paths do no disk I/O.
       const asset = pathname === '/' ? 'index.html' : pathname.slice(1);
-      if (!['index.html', 'app.js', 'style.css', 'favicon.svg', 'sw.js'].includes(asset)) { send(404, { error: 'Not found' }); return; }
+      if (!['index.html', 'app.js', 'timeline.js', 'style.css', 'favicon.svg', 'sw.js', 'paper-landscape-v1.webp'].includes(asset)) { send(404, { error: 'Not found' }); return; }
       const content = await cache(`asset:${asset}`, async () => {
         const publicRoot = await realpath(path.join(root, 'public'));
         const canonical = await realpath(path.join(publicRoot, asset));
@@ -97,7 +97,7 @@ export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuid
           error.code = 'ENOENT';
           throw error;
         }
-        return representation(await readFile(canonical, 'utf8'), mime[path.extname(canonical)]);
+        return representation(await readFile(canonical), mime[path.extname(canonical)]);
       });
       send(200, content);
     } catch (error) {

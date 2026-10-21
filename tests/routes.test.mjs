@@ -13,22 +13,25 @@ test('every arrival, park and hotel event references a valid route', async () =>
   assert.equal(routes.get('hotel-stay').locations[0], 'jiuzhai-hotel');
 });
 
-test('both park days preserve every reference-image duration and transport mode in order', async () => {
+test('both park days follow the confirmed forest move and recomputed timings', async () => {
   const guide = await loadGuide(guideFile);
   const expected = [
-    [[30,'bus'],[60,'visit'],[20,'walk'],[25,'visit'],[15,'walk'],[10,'visit'],[8,'bus'],[40,'rest'],[15,'walk'],[30,'visit'],[15,'walk'],[10,'bus'],[15,'visit'],[8,'bus'],[45,'visit'],[8,'bus'],[3,'walk'],[10,'visit'],[15,'bus']],
-    [[40,'bus'],[30,'visit'],[20,'walk'],[10,'visit'],[10,'walk'],[30,'mixed'],[40,'rest'],[25,'bus'],[50,'visit'],[20,'bus'],[40,'visit'],[8,'bus'],[10,'visit'],[20,'bus'],[8,'bus'],[60,'walk'],[16,'bus']]
+    [[60,'bus'],[50,'visit'],[30,'bus'],[60,'visit'],[20,'walk'],[25,'visit'],[15,'walk'],[10,'visit'],[8,'bus'],[40,'rest'],[15,'walk'],[30,'visit'],[15,'walk'],[10,'bus'],[15,'visit'],[8,'bus'],[45,'visit'],[8,'bus'],[3,'walk'],[10,'visit'],[15,'bus']],
+    [[40,'bus'],[30,'visit'],[20,'walk'],[10,'visit'],[10,'walk'],[30,'mixed'],[40,'rest'],[25,'bus'],[40,'visit'],[8,'bus'],[10,'visit'],[20,'bus'],[8,'bus'],[60,'walk'],[16,'bus']]
   ];
   for (const [index,day] of guide.days.slice(1).entries()) {
     const steps = day.events.filter(event => event.duration);
     assert.deepEqual(steps.map(event => [event.duration,event.mode]), expected[index]);
     assert.equal(steps.filter(event => event.mode === 'rest').length,1);
     assert.equal(steps.find(event => event.mode === 'rest').duration,40);
-    assert.equal(day.startTime,'10:00');
-    let minute=600;
+    assert.equal(day.startTime,index===0?'09:30':'10:00');
+    let minute=index===0?570:600;
     const clock=value=>`${String(Math.floor(value/60)).padStart(2,'0')}:${String(value%60).padStart(2,'0')}`;
     for(const step of steps){const start=minute;minute+=step.duration;assert.equal(step.time,`${clock(start)}—${clock(minute)}`);}
-    assert.equal(minute,index===0?982:1037);
+    assert.equal(minute,index===0?1062:967);
+    const afternoon=steps.findIndex(step=>step.period==='afternoon');
+    assert.ok(steps.slice(afternoon).every(step=>step.period==='afternoon'));
+    assert.ok(steps.findIndex(step=>step.mode==='rest')<afternoon);
   }
 });
 
@@ -47,10 +50,24 @@ test('day one rides to Spark Lake and day two walks the inner boardwalk for 60 m
   assert.equal(guide.spots.find(spot=>spot.id==='shuzheng-inner').optional,false);
 });
 
-test('forest, Arrow Bamboo Lake and reference observation stops are scheduled rather than optional', async () => {
+test('forest moves to day one while day two connects the center directly to Arrow Bamboo Lake', async () => {
   const guide = await loadGuide(guideFile);
+  const first = guide.days[1].events;
   const events = guide.days[2].events;
-  assert.equal(events.find(event=>event.id==='d2-forest').duration,50);
+  const routes = new Map(guide.routing.routes.map(route=>[route.id,route]));
+  assert.equal(first.find(event=>event.id==='d1-forest').duration,50);
+  assert.deepEqual(first.filter(event=>event.duration).slice(0,4).map(event=>event.id),['d1-entry','d1-forest','d1-wuhua-bus','d1-wuhua']);
+  assert.ok(!events.some(event=>event.spotIds?.includes('forest')));
+  assert.equal(guide.spots.find(spot=>spot.id==='forest').day,1);
+  for(const event of [first.find(event=>event.id==='d1-entry'),first.find(event=>event.id==='d1-wuhua-bus'),events.find(event=>event.id==='d2-arrow-bus')]) {
+    const leg=routes.get(event.routeId).legs[0];
+    assert.equal(event.estimated,true);
+    assert.equal(leg.from,event.from);
+    assert.equal(leg.to,event.to);
+    assert.deepEqual(leg.options[0].via,event.via);
+  }
+  assert.equal(events.find(event=>event.id==='d2-arrow-bus').from,'nuorilang-center');
+  assert.ok(!routes.has('d2-forest')&&!routes.has('d2-forest-bus'));
   assert.equal(events.find(event=>event.id==='d2-arrow').duration,40);
   for(const id of ['forest','jianzhu-boardwalk','changhai-cypress','nuorilang-view','shuzheng-village','double-falls']) {
     assert.equal(guide.spots.find(spot=>spot.id===id).optional,false);

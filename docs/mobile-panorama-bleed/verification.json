@@ -1,0 +1,165 @@
+{
+  "checkedAt": "2026-10-20T08:14:04.385Z",
+  "checks": [
+    {
+      "width": 320,
+      "visible": true,
+      "opacity": "1",
+      "transform": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+      "box": {
+        "x": -25.599990844726562,
+        "y": 309.7618713378906,
+        "width": 371.199951171875,
+        "height": 247.46060180664062
+      },
+      "frame": {
+        "x": 0,
+        "y": 87,
+        "width": 320,
+        "height": 694
+      },
+      "edgeBrushesOutside": true,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "itineraryFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "timeFont": "\"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif",
+      "zoomDragAndSelectionPassed": true,
+      "errors": [],
+      "failed": []
+    },
+    {
+      "width": 390,
+      "visible": true,
+      "opacity": "1",
+      "transform": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+      "box": {
+        "x": -31.199996948242188,
+        "y": 282.70001220703125,
+        "width": 452.4000244140625,
+        "height": 301.5999755859375
+      },
+      "frame": {
+        "x": 0,
+        "y": 87,
+        "width": 390,
+        "height": 694
+      },
+      "edgeBrushesOutside": true,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "itineraryFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "timeFont": "\"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif",
+      "zoomDragAndSelectionPassed": true,
+      "errors": [],
+      "failed": []
+    },
+    {
+      "width": 430,
+      "visible": true,
+      "opacity": "1",
+      "transform": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+      "box": {
+        "x": -34.399993896484375,
+        "y": 267.2393798828125,
+        "width": 498.79998779296875,
+        "height": 332.521240234375
+      },
+      "frame": {
+        "x": 0,
+        "y": 87,
+        "width": 430,
+        "height": 694
+      },
+      "edgeBrushesOutside": true,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "itineraryFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "timeFont": "\"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif",
+      "zoomDragAndSelectionPassed": true,
+      "errors": [],
+      "failed": []
+    },
+    {
+      "width": 700,
+      "visible": true,
+      "opacity": "1",
+      "transform": "matrix(1.16, 0, 0, 1.16, 0, 0)",
+      "box": {
+        "x": -56,
+        "y": 162.83938598632812,
+        "width": 812,
+        "height": 541.3212890625
+      },
+      "frame": {
+        "x": 0,
+        "y": 87,
+        "width": 700,
+        "height": 694
+      },
+      "edgeBrushesOutside": true,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "itineraryFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "timeFont": "\"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif",
+      "zoomDragAndSelectionPassed": true,
+      "errors": [],
+      "failed": []
+    },
+    {
+      "width": 768,
+      "visible": false,
+      "opacity": "1",
+      "transform": "none",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "frame": {
+        "x": 0,
+        "y": 89,
+        "width": 768,
+        "height": 680
+      },
+      "edgeBrushesOutside": false,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "itineraryFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "timeFont": "\"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif",
+      "errors": [],
+      "failed": []
+    },
+    {
+      "width": 1440,
+      "visible": false,
+      "opacity": "1",
+      "transform": "none",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "frame": {
+        "x": 0,
+        "y": 89,
+        "width": 1440,
+        "height": 830
+      },
+      "edgeBrushesOutside": false,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "itineraryFont": "STSong, \"Songti SC\", \"Noto Serif CJK SC\", \"Noto Serif SC\", \"Source Han Serif SC\", \"Source Han Serif CN\", SimSun, serif",
+      "timeFont": "\"Microsoft YaHei\", \"PingFang SC\", system-ui, sans-serif",
+      "errors": [],
+      "failed": []
+    }
+  ]
+}

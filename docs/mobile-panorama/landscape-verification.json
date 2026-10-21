@@ -1,0 +1,572 @@
+{
+  "checkedAt": "2026-10-20T07:50:31.924Z",
+  "checks": [
+    "37个点位与15组水面保留；全天按钮和参考图小字已移除",
+    "320—1440px六档宽度无溢出；地图铺满画面，手机题词不超过半屏，时间和时长固定在名称下方",
+    "重复品牌栏已移除，分享与打印合并到小标题行；六档屏宽的地图起点不超过100px，复制链接正常",
+    "桌面与手机逐一点选两天36段行程：详情单项展开、定位避开浮层、三道水纹、缩放不变",
+    "五花海仅填烤肠提醒；其他看点、注意事项留空；拖图收敛为纯日程列表，再点条目恢复详情",
+    "手机三档宽度、三档比例、四个极限方向均在默认位置半幅范围内，至少保留半幅交叠区域和可见湖泊，避免整图滑走",
+    "按钮与键盘限制1—2倍，双击缩放、方向键移动、搜索日期标注、跨日提示、焦点保留和预计时间调整通过",
+    "住宿、天气按需加载与三天43项打印行程保留",
+    "手机初始1.6倍概览匹配参考构图，两支沟同时可见；点击箭头始终指向选中点，并在水纹结束后保留",
+    "手机触控仿真：双指上限2倍、单指移动、自动简览、点按恢复详情、跨日点图及减少动态效果通过"
+  ],
+  "layouts": [
+    {
+      "width": 320,
+      "clientWidth": 320,
+      "page": 320,
+      "mapTop": 87,
+      "panelWidth": 140.796875,
+      "panelRatio": 0.439990234375,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 800,
+      "mapRatio": 1,
+      "overlap": true
+    },
+    {
+      "width": 390,
+      "clientWidth": 390,
+      "page": 390,
+      "mapTop": 87,
+      "panelWidth": 171.59375,
+      "panelRatio": 0.43998397435897435,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 800,
+      "mapRatio": 1,
+      "overlap": true
+    },
+    {
+      "width": 430,
+      "clientWidth": 430,
+      "page": 430,
+      "mapTop": 87,
+      "panelWidth": 176,
+      "panelRatio": 0.40930232558139534,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 800,
+      "mapRatio": 1,
+      "overlap": true
+    },
+    {
+      "width": 768,
+      "clientWidth": 768,
+      "page": 768,
+      "mapTop": 89,
+      "panelWidth": 180,
+      "panelRatio": 0.234375,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 680,
+      "mapRatio": 1,
+      "overlap": true
+    },
+    {
+      "width": 1280,
+      "clientWidth": 1280,
+      "page": 1280,
+      "mapTop": 89,
+      "panelWidth": 180,
+      "panelRatio": 0.140625,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 780,
+      "mapRatio": 1,
+      "overlap": true
+    },
+    {
+      "width": 1440,
+      "clientWidth": 1440,
+      "page": 1440,
+      "mapTop": 89,
+      "panelWidth": 180,
+      "panelRatio": 0.125,
+      "timesBelow": true,
+      "contentFits": true,
+      "stageHeight": 780,
+      "mapRatio": 1,
+      "overlap": true
+    }
+  ],
+  "selectionChecks": [
+    "1280/d1-entry",
+    "1280/d1-wuhua",
+    "1280/d1-peacock",
+    "1280/d1-pearl",
+    "1280/d1-parking",
+    "1280/d1-mirror",
+    "1280/d1-center",
+    "1280/d1-lunch",
+    "1280/d1-walk-falls",
+    "1280/d1-nuorilang",
+    "1280/d1-falls-stop",
+    "1280/d1-rhino-bus",
+    "1280/d1-rhino",
+    "1280/d1-tree-bus",
+    "1280/d1-tree",
+    "1280/d1-spark-bus",
+    "1280/d1-double-walk",
+    "1280/d1-double",
+    "1280/d1-exit",
+    "1280/d2-entry",
+    "1280/d2-changhai",
+    "1280/d2-pool-walk",
+    "1280/d2-pool",
+    "1280/d2-pool-stop",
+    "1280/d2-center",
+    "1280/d2-lunch",
+    "1280/d2-forest-bus",
+    "1280/d2-forest",
+    "1280/d2-arrow-bus",
+    "1280/d2-arrow",
+    "1280/d2-panda-bus",
+    "1280/d2-panda",
+    "1280/d2-center-return",
+    "1280/d2-tree-bus",
+    "1280/d2-inner",
+    "1280/d2-exit",
+    "390/d1-entry",
+    "390/d1-wuhua",
+    "390/d1-peacock",
+    "390/d1-pearl",
+    "390/d1-parking",
+    "390/d1-mirror",
+    "390/d1-center",
+    "390/d1-lunch",
+    "390/d1-walk-falls",
+    "390/d1-nuorilang",
+    "390/d1-falls-stop",
+    "390/d1-rhino-bus",
+    "390/d1-rhino",
+    "390/d1-tree-bus",
+    "390/d1-tree",
+    "390/d1-spark-bus",
+    "390/d1-double-walk",
+    "390/d1-double",
+    "390/d1-exit",
+    "390/d2-entry",
+    "390/d2-changhai",
+    "390/d2-pool-walk",
+    "390/d2-pool",
+    "390/d2-pool-stop",
+    "390/d2-center",
+    "390/d2-lunch",
+    "390/d2-forest-bus",
+    "390/d2-forest",
+    "390/d2-arrow-bus",
+    "390/d2-arrow",
+    "390/d2-panda-bus",
+    "390/d2-panda",
+    "390/d2-center-return",
+    "390/d2-tree-bus",
+    "390/d2-inner",
+    "390/d2-exit"
+  ],
+  "movementBounds": [
+    {
+      "width": 320,
+      "zoom": 1,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 10,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 2,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 2,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 2,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 320,
+      "zoom": 2,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 10,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 2,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 2,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 2,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 390,
+      "zoom": 2,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 16,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 23,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1.6,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 10,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 1.6,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 2,
+      "direction": [
+        1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 2,
+      "direction": [
+        1,
+        -1
+      ],
+      "visible": 8,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 2,
+      "direction": [
+        -1,
+        1
+      ],
+      "visible": 7,
+      "lakeVisible": true,
+      "inside": true
+    },
+    {
+      "width": 430,
+      "zoom": 2,
+      "direction": [
+        -1,
+        -1
+      ],
+      "visible": 6,
+      "lakeVisible": true,
+      "inside": true
+    }
+  ],
+  "gestures": {
+    "pinchZoom": 2,
+    "pageScrollUnchanged": true
+  },
+  "errors": []
+}

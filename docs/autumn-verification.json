@@ -1,0 +1,104 @@
+{
+  "checkedAt": "2026-10-20T07:05:45.959Z",
+  "unitTestsPassed": 19,
+  "layouts": [
+    {
+      "clientWidth": 305,
+      "left": 14,
+      "overlap": true,
+      "panelWidth": 134.1875,
+      "scrollWidth": 305,
+      "transparent": true,
+      "width": 320
+    },
+    {
+      "clientWidth": 375,
+      "left": 14,
+      "overlap": true,
+      "panelWidth": 165,
+      "scrollWidth": 375,
+      "transparent": true,
+      "width": 390
+    },
+    {
+      "clientWidth": 415,
+      "left": 14,
+      "overlap": true,
+      "panelWidth": 176,
+      "scrollWidth": 415,
+      "transparent": true,
+      "width": 430
+    },
+    {
+      "clientWidth": 768,
+      "left": 25.34375,
+      "overlap": true,
+      "panelWidth": 180,
+      "scrollWidth": 768,
+      "transparent": true,
+      "width": 768
+    },
+    {
+      "clientWidth": 1265,
+      "left": 41.734375,
+      "overlap": true,
+      "panelWidth": 180,
+      "scrollWidth": 1265,
+      "transparent": true,
+      "width": 1280
+    },
+    {
+      "clientWidth": 1425,
+      "left": 47.015625,
+      "overlap": true,
+      "panelWidth": 180,
+      "scrollWidth": 1425,
+      "transparent": true,
+      "width": 1440
+    }
+  ],
+  "notes": {
+    "background": "rgb(250, 246, 237)",
+    "heading": "rgb(83, 60, 40)",
+    "text": "rgb(83, 60, 40)"
+  },
+  "weather": {
+    "heading": "rgb(83, 60, 40)",
+    "mount": "rgb(240, 232, 213)",
+    "selected": "rgb(148, 93, 23)"
+  },
+  "focus": {
+    "arrowColor": "rgb(216, 166, 42)",
+    "covered": false,
+    "pointer": true,
+    "ripples": 3,
+    "visible": true
+  },
+  "textContrastOnCanvas": {
+    "ink": 9.52,
+    "muted": 5.14,
+    "itinerary": 6.13,
+    "selected": 5.07
+  },
+  "crossDaySearch": true,
+  "realMobileDeviceTested": false,
+  "errors": [],
+  "deployment": {
+    "checkedAt": "2026-10-20T07:07:43.516Z",
+    "healthy": true,
+    "servedFilesMatch": 5,
+    "backup": "/opt/jiuzhai-team-guide-backups/20261020-150621",
+    "online": {
+      "canvas": "rgb(250, 246, 237)",
+      "itinerary": "rgb(128, 83, 31)",
+      "lake": "rgb(0, 141, 124)",
+      "left": 14,
+      "origin": "http://47.111.21.130:666",
+      "selected": "rgb(148, 93, 23)",
+      "theme": "#faf6ed",
+      "transparent": "rgba(0, 0, 0, 0)",
+      "width": 390
+    },
+    "errors": []
+  }
+}

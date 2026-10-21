@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import { createServer } from '../server.mjs';
 import { loadGuide, publicGuide, validateGuide, weatherLinks } from '../lib/guide.mjs';
-import { mkdtemp, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
@@ -97,11 +97,32 @@ test('assets, HEAD requests, CSP and conditional caching work', async () => {
   const etag = response.headers.get('etag');
   const cached = await fetch(origin, { headers: { 'If-None-Match': etag } });
   assert.equal(cached.status, 304);
-  const head = await fetch(`${origin}/app.js`, { method: 'HEAD' });
-  assert.equal(head.status, 200);
-  assert.equal(await head.text(), '');
-  assert.match(head.headers.get('content-type'), /javascript/);
+  for (const script of ['app.js', 'timeline.js']) {
+    const head = await fetch(`${origin}/${script}`, { method: 'HEAD' });
+    assert.equal(head.status, 200);
+    assert.equal(await head.text(), '');
+    assert.match(head.headers.get('content-type'), /javascript/);
+  }
   assert.equal((await fetch(`${origin}/api/missing`)).status, 404);
+});
+
+test('the paper landscape is served as intact binary data without widening the asset allowlist', async () => {
+  const assetPath = '/paper-landscape-v1.webp';
+  const original = await readFile(new URL(`../public${assetPath}`, import.meta.url));
+  const response = await fetch(origin + assetPath);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('content-type'), 'image/webp');
+  assert.equal(Number(response.headers.get('content-length')), original.length);
+  assert.deepEqual(Buffer.from(await response.arrayBuffer()), original);
+  const head = await fetch(origin + assetPath, { method: 'HEAD' });
+  assert.equal(head.status, 200);
+  assert.equal(Number(head.headers.get('content-length')), original.length);
+  assert.equal((await head.arrayBuffer()).byteLength, 0);
+  const cached = await fetch(origin + assetPath, { headers: { 'If-None-Match': response.headers.get('etag') } });
+  assert.equal(cached.status, 304);
+  for (const unknown of ['/other.webp', '/data/guide.webp', '/public/paper-landscape-v1.webp']) {
+    assert.equal((await fetch(origin + unknown)).status, 404);
+  }
 });
 
 test('changing the mounted data file updates the shared guide without rebuilding', async () => {

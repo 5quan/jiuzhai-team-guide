@@ -1,0 +1,1113 @@
+{
+  "status": "published",
+  "automatedTests": 25,
+  "layouts": [
+    {
+      "contentFits": true,
+      "emptyConnectionsHidden": true,
+      "height": 237,
+      "noNumbers": true,
+      "pageFits": true,
+      "visibleNodes": 3,
+      "width": 320
+    },
+    {
+      "contentFits": true,
+      "emptyConnectionsHidden": true,
+      "height": 209,
+      "noNumbers": true,
+      "pageFits": true,
+      "visibleNodes": 4,
+      "width": 390
+    },
+    {
+      "contentFits": true,
+      "emptyConnectionsHidden": true,
+      "height": 209,
+      "noNumbers": true,
+      "pageFits": true,
+      "visibleNodes": 4,
+      "width": 430
+    },
+    {
+      "contentFits": true,
+      "emptyConnectionsHidden": true,
+      "height": 209,
+      "noNumbers": true,
+      "pageFits": true,
+      "visibleNodes": 4,
+      "width": 700
+    },
+    {
+      "contentFits": true,
+      "emptyConnectionsHidden": true,
+      "height": 209,
+      "noNumbers": true,
+      "pageFits": true,
+      "visibleNodes": 4,
+      "width": 768
+    },
+    {
+      "contentFits": true,
+      "emptyConnectionsHidden": true,
+      "height": 209,
+      "noNumbers": true,
+      "pageFits": true,
+      "visibleNodes": 4,
+      "width": 1440
+    }
+  ],
+  "selections": [
+    {
+      "contentFits": true,
+      "id": "d1-entry",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M662 1092 L776 582 L889 554 L1149 422 L1196 354 L1238 290 L1295 137",
+      "scrollTop": 0,
+      "visibleNodes": 2,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-forest",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-wuhua-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1295 137 L1238 290 L1196 354 L1149 422",
+      "scrollTop": 64,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-wuhua",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 64,
+      "visibleNodes": 2,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-peacock",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1149 422 L1109 468 L1060 500",
+      "scrollTop": 128,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-pearl",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 189,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-parking",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1021 532 L1151 563",
+      "scrollTop": 233,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-mirror",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 217,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-center",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1151 563 L776 582",
+      "scrollTop": 282,
+      "visibleNodes": 2,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-lunch",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 217,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-walk-falls",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M776 582 L802 637",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-nuorilang",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-falls-stop",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M802 637 L767 677",
+      "scrollTop": 82,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-rhino-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M767 677 L890 737",
+      "scrollTop": 143,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-rhino",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 143,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-tree-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M890 737 L1005 844",
+      "scrollTop": 207,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-tree",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 226,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-spark-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1005 844 L804 933",
+      "scrollTop": 230,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-double-walk",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M804 933 L888 964",
+      "scrollTop": 230,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-double",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 216,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-exit",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M888 964 L662 1092",
+      "scrollTop": 281,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-entry",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M662 1092 L776 582 L676 451 L626 337 L546 137",
+      "scrollTop": 0,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-changhai",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 0,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-pool-walk",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M546 137 L602 222",
+      "scrollTop": 64,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-pool",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 99,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-pool-stop",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M602 222 L644 247 L630 275",
+      "scrollTop": 99,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-center",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M630 275 L776 582",
+      "scrollTop": 99,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-lunch",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 65,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-arrow-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M776 582 L889 554 L1149 422 L1196 354 L1238 290",
+      "scrollTop": 67,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-arrow",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 139,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-panda-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1238 290 L1196 354",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-panda",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 0,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-center-return",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1196 354 L1149 422 L889 554 L776 582",
+      "scrollTop": 64,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-tree-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M776 582 L890 737 L1005 844",
+      "scrollTop": 64,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-inner",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M848 865 L760 904 L804 933",
+      "scrollTop": 78,
+      "visibleNodes": 4,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-exit",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M804 933 L662 1092",
+      "scrollTop": 138,
+      "visibleNodes": 3,
+      "width": 390,
+      "zoom": "1.6"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-entry",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M662 1092 L776 582 L889 554 L1149 422 L1196 354 L1238 290 L1295 137",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-forest",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-wuhua-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1295 137 L1238 290 L1196 354 L1149 422",
+      "scrollTop": 64,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-wuhua",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 64,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-peacock",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1149 422 L1109 468 L1060 500",
+      "scrollTop": 128,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-pearl",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 189,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-parking",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1021 532 L1151 563",
+      "scrollTop": 214,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-mirror",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 203,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-center",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1151 563 L776 582",
+      "scrollTop": 236,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-lunch",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 203,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-walk-falls",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M776 582 L802 637",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-nuorilang",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-falls-stop",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M802 637 L767 677",
+      "scrollTop": 64,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-rhino-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M767 677 L890 737",
+      "scrollTop": 125,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-rhino",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 125,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-tree-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M890 737 L1005 844",
+      "scrollTop": 189,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-tree",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 208,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-spark-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1005 844 L804 933",
+      "scrollTop": 231,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-double-walk",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M804 933 L888 964",
+      "scrollTop": 231,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-double",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 198,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d1-exit",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M888 964 L662 1092",
+      "scrollTop": 263,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-entry",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M662 1092 L776 582 L676 451 L626 337 L546 137",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-changhai",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 0,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-pool-walk",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M546 137 L602 222",
+      "scrollTop": 64,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-pool",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 65,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-pool-stop",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M602 222 L644 247 L630 275",
+      "scrollTop": 85,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-center",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M630 275 L776 582",
+      "scrollTop": 85,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-lunch",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 65,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-arrow-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M776 582 L889 554 L1149 422 L1196 354 L1238 290",
+      "scrollTop": 65,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-arrow",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 107,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-panda-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1238 290 L1196 354",
+      "scrollTop": 0,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-panda",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "",
+      "scrollTop": 0,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-center-return",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M1196 354 L1149 422 L889 554 L776 582",
+      "scrollTop": 64,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-tree-bus",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M776 582 L890 737 L1005 844",
+      "scrollTop": 64,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-inner",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M848 865 L760 904 L804 933",
+      "scrollTop": 78,
+      "visibleNodes": 4,
+      "width": 1440,
+      "zoom": "1"
+    },
+    {
+      "contentFits": true,
+      "id": "d2-exit",
+      "labelCovered": false,
+      "markerCovered": false,
+      "route": "M804 933 L662 1092",
+      "scrollTop": 106,
+      "visibleNodes": 3,
+      "width": 1440,
+      "zoom": "1"
+    }
+  ],
+  "groups": [
+    {
+      "day": "day1",
+      "width": 390,
+      "period": "morning",
+      "ids": [
+        "d1-entry",
+        "d1-forest",
+        "d1-wuhua-bus",
+        "d1-wuhua",
+        "d1-peacock",
+        "d1-pearl",
+        "d1-parking",
+        "d1-mirror",
+        "d1-center",
+        "d1-lunch"
+      ]
+    },
+    {
+      "day": "day1",
+      "width": 390,
+      "period": "afternoon",
+      "ids": [
+        "d1-walk-falls",
+        "d1-nuorilang",
+        "d1-falls-stop",
+        "d1-rhino-bus",
+        "d1-rhino",
+        "d1-tree-bus",
+        "d1-tree",
+        "d1-spark-bus",
+        "d1-double-walk",
+        "d1-double",
+        "d1-exit"
+      ]
+    },
+    {
+      "day": "day2",
+      "width": 390,
+      "period": "morning",
+      "ids": [
+        "d2-entry",
+        "d2-changhai",
+        "d2-pool-walk",
+        "d2-pool",
+        "d2-pool-stop",
+        "d2-center",
+        "d2-lunch",
+        "d2-arrow-bus",
+        "d2-arrow"
+      ]
+    },
+    {
+      "day": "day2",
+      "width": 390,
+      "period": "afternoon",
+      "ids": [
+        "d2-panda-bus",
+        "d2-panda",
+        "d2-center-return",
+        "d2-tree-bus",
+        "d2-inner",
+        "d2-exit"
+      ]
+    },
+    {
+      "day": "day1",
+      "width": 1440,
+      "period": "morning",
+      "ids": [
+        "d1-entry",
+        "d1-forest",
+        "d1-wuhua-bus",
+        "d1-wuhua",
+        "d1-peacock",
+        "d1-pearl",
+        "d1-parking",
+        "d1-mirror",
+        "d1-center",
+        "d1-lunch"
+      ]
+    },
+    {
+      "day": "day1",
+      "width": 1440,
+      "period": "afternoon",
+      "ids": [
+        "d1-walk-falls",
+        "d1-nuorilang",
+        "d1-falls-stop",
+        "d1-rhino-bus",
+        "d1-rhino",
+        "d1-tree-bus",
+        "d1-tree",
+        "d1-spark-bus",
+        "d1-double-walk",
+        "d1-double",
+        "d1-exit"
+      ]
+    },
+    {
+      "day": "day2",
+      "width": 1440,
+      "period": "morning",
+      "ids": [
+        "d2-entry",
+        "d2-changhai",
+        "d2-pool-walk",
+        "d2-pool",
+        "d2-pool-stop",
+        "d2-center",
+        "d2-lunch",
+        "d2-arrow-bus",
+        "d2-arrow"
+      ]
+    },
+    {
+      "day": "day2",
+      "width": 1440,
+      "period": "afternoon",
+      "ids": [
+        "d2-panda-bus",
+        "d2-panda",
+        "d2-center-return",
+        "d2-tree-bus",
+        "d2-inner",
+        "d2-exit"
+      ]
+    }
+  ],
+  "periodOrderMatches": true,
+  "timingChanges": [
+    {
+      "exit": "15:07出沟",
+      "start": "09:00",
+      "warning": false
+    },
+    {
+      "exit": "18:07出沟",
+      "start": "12:00",
+      "warning": true
+    },
+    {
+      "exit": "16:07出沟",
+      "start": "10:00",
+      "warning": false
+    }
+  ],
+  "crossDaySearch": {
+    "day": "day1",
+    "forestColor": "rgb(158, 73, 54)",
+    "notice": "已切到10.30的行程",
+    "selected": "forest"
+  },
+  "colors": [
+    {
+      "day": "day1",
+      "points": [
+        {
+          "fill": "rgb(158, 73, 54)",
+          "id": "forest",
+          "today": true
+        },
+        {
+          "fill": "rgb(158, 73, 54)",
+          "id": "wuhuahai",
+          "today": true
+        },
+        {
+          "fill": "rgb(224, 172, 44)",
+          "id": "changhai",
+          "today": false
+        },
+        {
+          "fill": "rgb(158, 73, 54)",
+          "id": "shuzheng",
+          "today": true
+        }
+      ]
+    },
+    {
+      "day": "day2",
+      "points": [
+        {
+          "fill": "rgb(224, 172, 44)",
+          "id": "forest",
+          "today": false
+        },
+        {
+          "fill": "rgb(224, 172, 44)",
+          "id": "wuhuahai",
+          "today": false
+        },
+        {
+          "fill": "rgb(158, 73, 54)",
+          "id": "changhai",
+          "today": true
+        },
+        {
+          "fill": "rgb(158, 73, 54)",
+          "id": "shuzheng",
+          "today": true
+        }
+      ]
+    }
+  ],
+  "printedEventsInData": 43,
+  "consoleErrors": [],
+  "realMobileTested": false,
+  "artworkUnchanged": true,
+  "deployed": true,
+  "onlineMobile": {
+    "artworkLoaded": true,
+    "contentFits": true,
+    "exit": "17:42出沟",
+    "firstPlaces": [
+      "原始森林",
+      "五花海",
+      "孔雀河道",
+      "珍珠滩瀑布"
+    ],
+    "forestColor": "rgb(158, 73, 54)",
+    "listHeight": 209,
+    "noNumbers": true,
+    "otherDayColor": "rgb(224, 172, 44)",
+    "pageFits": true,
+    "selected": "forest",
+    "start": "09:30",
+    "url": "http://47.111.21.130:666/",
+    "visibleNodes": 4,
+    "width": 390
+  },
+  "onlineTransfer": {
+    "caption": "11:20—11:50 · 预计观光车30分钟五花海",
+    "expanded": "true",
+    "label": "预计大巴30分钟",
+    "route": "M1295 137 L1238 290 L1196 354 L1149 422",
+    "selected": "wuhuahai"
+  },
+  "onlineDay2": {
+    "arrowTransport": "预计大巴25分钟",
+    "changhaiColor": "rgb(158, 73, 54)",
+    "entry": "10:00",
+    "exit": "16:07出沟",
+    "forestColor": "rgb(224, 172, 44)",
+    "forestEvent": false
+  },
+  "onlineDesktop": {
+    "firstPlace": "原始森林",
+    "forestColor": "rgb(158, 73, 54)",
+    "noNumbers": true,
+    "pageFits": true,
+    "width": 1440
+  },
+  "container": "healthy",
+  "guideApiMatches": true,
+  "servedRuntimeFilesVerified": 3,
+  "backup": "/opt/jiuzhai-team-guide-backups/20261021-104721",
+  "rollbackImage": "jiuzhai-team-guide-guide:before-compact-forest-20261021-104721"
+}

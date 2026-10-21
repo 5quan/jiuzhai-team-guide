@@ -1,0 +1,157 @@
+{
+  "checkedAt": "2026-10-20T07:51:09.204Z",
+  "checks": [
+    {
+      "width": 320,
+      "panoramaVisible": true,
+      "opacity": "0.45",
+      "svgArtworkVisible": false,
+      "image": {
+        "x": 0,
+        "y": 326.828125,
+        "width": 320,
+        "height": 213.328125
+      },
+      "frame": {
+        "x": 0,
+        "y": 87,
+        "width": 320,
+        "height": 694
+      },
+      "contained": true,
+      "aspectRatio": 1.5,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "zoomAndDragKeepPanorama": true,
+      "printArtworkRestored": true,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "panoramaVisible": true,
+      "opacity": "0.45",
+      "svgArtworkVisible": false,
+      "image": {
+        "x": 0,
+        "y": 303.5,
+        "width": 390,
+        "height": 260
+      },
+      "frame": {
+        "x": 0,
+        "y": 87,
+        "width": 390,
+        "height": 694
+      },
+      "contained": true,
+      "aspectRatio": 1.5,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "zoomAndDragKeepPanorama": true,
+      "printArtworkRestored": true,
+      "errors": []
+    },
+    {
+      "width": 430,
+      "panoramaVisible": true,
+      "opacity": "0.45",
+      "svgArtworkVisible": false,
+      "image": {
+        "x": 0,
+        "y": 290.171875,
+        "width": 430,
+        "height": 286.65625
+      },
+      "frame": {
+        "x": 0,
+        "y": 87,
+        "width": 430,
+        "height": 694
+      },
+      "contained": true,
+      "aspectRatio": 1.5,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "zoomAndDragKeepPanorama": true,
+      "printArtworkRestored": true,
+      "errors": []
+    },
+    {
+      "width": 700,
+      "panoramaVisible": true,
+      "opacity": "0.45",
+      "svgArtworkVisible": false,
+      "image": {
+        "x": 0,
+        "y": 200.171875,
+        "width": 700,
+        "height": 466.65625
+      },
+      "frame": {
+        "x": 0,
+        "y": 87,
+        "width": 700,
+        "height": 694
+      },
+      "contained": true,
+      "aspectRatio": 1.5,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "zoomAndDragKeepPanorama": true,
+      "printArtworkRestored": true,
+      "errors": []
+    },
+    {
+      "width": 768,
+      "panoramaVisible": false,
+      "opacity": "1",
+      "svgArtworkVisible": true,
+      "image": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "frame": {
+        "x": 0,
+        "y": 89,
+        "width": 768,
+        "height": 680
+      },
+      "contained": false,
+      "aspectRatio": 1.5,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "panoramaVisible": false,
+      "opacity": "1",
+      "svgArtworkVisible": true,
+      "image": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "frame": {
+        "x": 0,
+        "y": 89,
+        "width": 1440,
+        "height": 830
+      },
+      "contained": false,
+      "aspectRatio": 1.5,
+      "pageFits": true,
+      "nodes": 37,
+      "waters": 15,
+      "errors": []
+    }
+  ]
+}

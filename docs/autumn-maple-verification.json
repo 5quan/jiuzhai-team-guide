@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-10-20T07:13:48.398Z",
+  "unitTestsPassed": 19,
+  "layouts": [
+    {
+      "brown": "rgb(128, 83, 31)",
+      "lake": "rgb(0, 141, 124)",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "selected": "rgb(161, 63, 45)",
+      "width": 320
+    },
+    {
+      "brown": "rgb(128, 83, 31)",
+      "lake": "rgb(0, 141, 124)",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "selected": "rgb(161, 63, 45)",
+      "width": 390
+    },
+    {
+      "brown": "rgb(128, 83, 31)",
+      "lake": "rgb(0, 141, 124)",
+      "overflow": false,
+      "panelBackground": "rgba(0, 0, 0, 0)",
+      "selected": "rgb(161, 63, 45)",
+      "width": 1440
+    }
+  ],
+  "focus": {
+    "pointer": true,
+    "reminder": true
+  },
+  "day2": {
+    "dot": "rgb(176, 71, 47)",
+    "legend": "rgb(176, 71, 47)"
+  },
+  "palette": {
+    "yellow": "#d8a62a",
+    "brown": "#80531f",
+    "maple": "#a13f2d",
+    "forest": "#627344",
+    "lake": "#008d7c"
+  },
+  "realMobileDeviceTested": false,
+  "errors": [],
+  "deployment": {
+    "healthy": true,
+    "checkedAt": "2026-10-20T07:15:39.447Z",
+    "backup": "/opt/jiuzhai-team-guide-backups/20261020-151426",
+    "online": {
+      "brown": "rgb(128, 83, 31)",
+      "lake": "rgb(0, 141, 124)",
+      "origin": "http://47.111.21.130:666",
+      "redMountain": "#b94a2f",
+      "selected": "rgb(161, 63, 45)",
+      "transparent": "rgba(0, 0, 0, 0)"
+    },
+    "errors": []
+  }
+}

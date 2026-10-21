@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-10-20T07:43:33.376Z",
+  "checks": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "artwork": {
+        "href": "/paper-landscape-v1.webp",
+        "naturalWidth": 1536,
+        "naturalHeight": 1024,
+        "preserveAspectRatio": "xMidYMid meet",
+        "opacity": "1",
+        "pointerEvents": "none",
+        "geometryUnchanged": true,
+        "nodes": 37,
+        "waters": 15,
+        "oldMountainPaths": 0
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "artwork": {
+        "href": "/paper-landscape-v1.webp",
+        "naturalWidth": 1536,
+        "naturalHeight": 1024,
+        "preserveAspectRatio": "xMidYMid meet",
+        "opacity": "1",
+        "pointerEvents": "none",
+        "geometryUnchanged": true,
+        "nodes": 37,
+        "waters": 15,
+        "oldMountainPaths": 0
+      },
+      "errors": [],
+      "failed": []
+    }
+  ]
+}
