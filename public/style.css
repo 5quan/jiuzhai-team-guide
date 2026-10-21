@@ -394,7 +394,7 @@ main { max-width: 1680px; margin: auto; }
 }
 
 /* 开屏动画 */
-.splash { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: #faf6ed; cursor: pointer; transition: opacity .45s ease; }
+.splash { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: #faf6ed; cursor: pointer; transition: opacity .6s ease; }
 .splash.hide { opacity: 0; pointer-events: none; }
 .splash img { width: auto; height: auto; max-width: min(78vw, 78vh); max-height: 78vh; object-fit: contain; image-rendering: -webkit-optimize-contrast; }
 .splash-skip { position: absolute; bottom: max(26px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); font-size: 12px; color: #806344; letter-spacing: .1em; }
