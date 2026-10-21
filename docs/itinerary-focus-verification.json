@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-21T16:46:18.308Z",
+  "checkedAt": "2026-10-21T17:04:56.254Z",
   "collapsed": {
     "panelBackground": "rgba(250, 246, 237, 0.62)",
     "nameBackground": "rgba(255, 250, 238, 0.9)",
@@ -9,22 +9,42 @@
     "currentOpacity": "1",
     "otherPeriodOpacity": "0.32",
     "otherDayOpacity": "0.32",
-    "compact": true
+    "compact": true,
+    "panelWidth": 132,
+    "panelHeight": 142,
+    "panelTop": 433.328125,
+    "maxStopGap": 0
   },
   "opened": {
     "expanded": "true",
     "timeVisible": true,
     "detailVisible": true,
+    "detailInline": true,
+    "detailBelowRow": true,
+    "panelTop": 433.328125,
+    "panelHeight": 296,
+    "panelWidth": 132,
     "compact": false
   },
   "closed": {
     "expanded": "false",
     "timeHidden": true,
-    "compact": true
+    "compact": true,
+    "panelHeight": 142
   },
   "fadedAfternoon": {
     "currentOpacity": "1",
     "morningOpacity": "0.32"
+  },
+  "expandedLayout": {
+    "left": 10,
+    "right": 142,
+    "top": 255.46875,
+    "bottom": 551.46875,
+    "width": 132,
+    "height": 296,
+    "navTop": 781.859375,
+    "viewport": 390
   },
   "errors": []
 }

@@ -112,7 +112,7 @@ const path = require('node:path');
     await page.locator('[data-step="d1-wuhua"]').click();
     assert.match(await page.locator('#detail-d1-wuhua').innerText(), /吃一根烤肠/);
     assert.ok(await page.locator('#detail-d1-wuhua .spot-notes p').evaluate(node=>{
-      const text=node.getBoundingClientRect(),list=document.querySelector('#map-detail').getBoundingClientRect();
+      const text=node.getBoundingClientRect(),list=document.querySelector('#schedule-list').getBoundingClientRect();
       return text.top>=list.top && text.bottom<=list.bottom;
     }), 'The supplied food reminder should be visible when opening Wuhua Lake');
     assert.equal(await page.locator('#detail-d1-wuhua .note-empty').count(), 1);
@@ -137,7 +137,7 @@ const path = require('node:path');
     await page.mouse.up();
     assert.notEqual(await page.locator('#schematic .route-svg').evaluate(node=>node.style.transform),beforeDrag);
     assert.ok(await page.locator('#inscription').evaluate(node=>node.classList.contains('is-compact')));
-    assert.ok(await page.locator('#inscription').evaluate(node=>node.getBoundingClientRect().width<=184 && node.getBoundingClientRect().width<=innerWidth*.46));
+    assert.ok(await page.locator('#inscription').evaluate(node=>node.getBoundingClientRect().width<=150 && node.getBoundingClientRect().width<=innerWidth*.46));
     assert.equal(await page.locator('#inscription-settings').isVisible(),false);
     assert.equal(await page.locator('.inscription-heading').isVisible(),false);
     assert.equal(await page.locator('.step-detail:visible').count(),0);

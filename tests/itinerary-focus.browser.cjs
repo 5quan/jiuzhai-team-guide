@@ -24,9 +24,12 @@ const path = require('node:path');
 
     const collapsed = await page.evaluate(() => {
       const panel = document.querySelector('#inscription');
+      const panelBox = panel.getBoundingClientRect();
+      const list = document.querySelector('#schedule-list');
       const names = [...document.querySelectorAll('#schedule-list .place-name')];
       const metas = [...document.querySelectorAll('#schedule-list .step-meta')];
       const transports = [...document.querySelectorAll('#schedule-list .schedule-leg, #schedule-list .timeline-self-leg')];
+      const stops = [...document.querySelectorAll('#schedule-list .timeline-stop')].map(stop => stop.getBoundingClientRect());
       const opacity = id => getComputedStyle(document.querySelector(`#schematic [data-spot="${id}"]`)).opacity;
       return {
         panelBackground: getComputedStyle(panel).backgroundColor,
@@ -37,13 +40,20 @@ const path = require('node:path');
         currentOpacity: opacity('forest'),
         otherPeriodOpacity: opacity('rhino'),
         otherDayOpacity: opacity('changhai'),
-        compact: panel.classList.contains('is-compact')
+        compact: panel.classList.contains('is-compact'),
+        panelWidth: panelBox.width,
+        panelHeight: panelBox.height,
+        panelTop: panelBox.top,
+        maxStopGap: Math.max(...stops.slice(1).map((box, index) => box.top - stops[index].bottom))
       };
     });
     assert.equal(collapsed.names > 0, true);
     assert.equal(collapsed.timesCollapsed, true, 'place times should start collapsed to names only');
     assert.equal(collapsed.transportVisible, true, 'transport durations must stay visible');
     assert.equal(collapsed.compact, true);
+    assert.ok(collapsed.panelWidth < 150, 'the itinerary backdrop should hug its content, not keep an empty column');
+    assert.ok(collapsed.panelHeight < 190, 'the collapsed itinerary should stack tightly');
+    assert.ok(collapsed.maxStopGap <= 1.5, 'collapsed stops should sit against each other');
     assert.match(collapsed.panelBackground, /^rgba\(250, 246, 237, 0\.\d+\)$/);
     const panelAlpha = Number(collapsed.panelBackground.split(',').at(-1).replace(')', '').trim());
     assert.ok(panelAlpha > .3 && panelAlpha < .9, 'the itinerary needs a light, still see-through paper wash');
@@ -53,24 +63,42 @@ const path = require('node:path');
     assert.ok(Number(collapsed.otherDayOpacity) < .5, 'the other day fades');
 
     await page.locator('[data-step="d1-wuhua"]').click();
-    await page.waitForTimeout(80);
+    await page.waitForTimeout(220);
     const opened = await page.evaluate(() => {
       const row = document.querySelector('[data-step-row="d1-wuhua"]');
+      const panel = document.querySelector('#inscription').getBoundingClientRect();
+      const detail = document.querySelector('#detail-d1-wuhua');
+      const detailBox = detail.getBoundingClientRect();
+      const buttonBox = row.querySelector('[data-step]').getBoundingClientRect();
       return {
         expanded: row.querySelector('[data-step]').getAttribute('aria-expanded'),
         timeVisible: !row.querySelector('.step-meta').hidden,
-        detailVisible: !document.querySelector('#map-detail').hidden,
+        detailVisible: !detail.hidden,
+        detailInline: document.querySelector('#inscription').contains(detail),
+        detailBelowRow: detailBox.top >= buttonBox.bottom - .5,
+        panelTop: panel.top,
+        panelHeight: panel.height,
+        panelWidth: panel.width,
         compact: document.querySelector('#inscription').classList.contains('is-compact')
       };
     });
-    assert.deepEqual(opened, { expanded: 'true', timeVisible: true, detailVisible: true, compact: false });
+    assert.equal(opened.expanded, 'true');
+    assert.equal(opened.timeVisible, true);
+    assert.equal(opened.detailVisible, true);
+    assert.equal(opened.detailInline, true, 'the open details should stay inside the itinerary');
+    assert.equal(opened.detailBelowRow, true, 'the open details should extend below the place name');
+    assert.equal(opened.compact, false);
+    assert.ok(Math.abs(opened.panelTop - collapsed.panelTop) <= .5, 'opening a stop must keep the itinerary top anchored');
+    assert.ok(opened.panelHeight > collapsed.panelHeight + 30, 'the open stop must extend the itinerary downward');
+    assert.ok(Math.abs(opened.panelWidth - collapsed.panelWidth) <= .5, 'opening a stop must not widen the itinerary');
     await page.locator('[data-step="d1-wuhua"]').click();
-    await page.waitForTimeout(80);
+    await page.waitForTimeout(280);
     const closed = await page.evaluate(() => {
       const row = document.querySelector('[data-step-row="d1-wuhua"]');
-      return { expanded: row.querySelector('[data-step]').getAttribute('aria-expanded'), timeHidden: row.querySelector('.step-meta').hidden, compact: document.querySelector('#inscription').classList.contains('is-compact') };
+      return { expanded: row.querySelector('[data-step]').getAttribute('aria-expanded'), timeHidden: row.querySelector('.step-meta').hidden, compact: document.querySelector('#inscription').classList.contains('is-compact'), panelHeight: document.querySelector('#inscription').getBoundingClientRect().height };
     });
-    assert.deepEqual(closed, { expanded: 'false', timeHidden: true, compact: true });
+    assert.deepEqual({ ...closed, panelHeight: 0 }, { expanded: 'false', timeHidden: true, compact: true, panelHeight: 0 });
+    assert.ok(closed.panelHeight <= collapsed.panelHeight + 2, 'closing a stop must return to the compact stack');
 
     await page.locator('[data-period="afternoon"]').click();
     await page.waitForTimeout(100);
@@ -89,7 +117,7 @@ const path = require('node:path');
         return { left: panel.left, right: panel.right, bottom: panel.bottom, viewport: innerWidth, navTop: nav.top, scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth, panelWidth: panel.width };
       });
       assert.ok(layout.left >= 0 && layout.right <= layout.viewport + .5 && layout.scrollWidth === layout.clientWidth, `${width} overflow`);
-      assert.ok(layout.panelWidth <= (width <= 700 ? 184 : 192) + .5, `${width} panel width`);
+      assert.ok(layout.panelWidth <= 160.5, `${width} panel width: ${layout.panelWidth}`);
       assert.ok(layout.bottom <= layout.navTop + .5, `${width} panel behind bottom nav`);
     }
 
@@ -98,13 +126,27 @@ const path = require('node:path');
     await page.locator('[data-period="morning"]').click();
     await page.waitForTimeout(120);
     await page.screenshot({ path: path.join(output, 'itinerary-focus-mobile.png'), fullPage: true });
+    await page.locator('[data-step="d1-wuhua"]').click();
+    await page.waitForTimeout(200);
+    const expandedLayout = await page.evaluate(() => {
+      const panel = document.querySelector('#inscription').getBoundingClientRect();
+      const nav = document.querySelector('.bottom-nav').getBoundingClientRect();
+      return { left: panel.left, right: panel.right, top: panel.top, bottom: panel.bottom, width: panel.width, height: panel.height, navTop: nav.top, viewport: innerWidth };
+    });
+    assert.ok(expandedLayout.left >= 0 && expandedLayout.right <= expandedLayout.viewport + .5 && expandedLayout.bottom <= expandedLayout.navTop + .5, 'expanded itinerary must stay inside the phone');
+    await page.screenshot({ path: path.join(output, 'itinerary-focus-expanded-mobile.png'), fullPage: true });
+    await page.locator('[data-step="d1-wuhua"]').click();
+    await page.waitForTimeout(250);
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.waitForTimeout(120);
     await page.screenshot({ path: path.join(output, 'itinerary-focus-desktop.png'), fullPage: true });
+    await page.locator('[data-step="d1-wuhua"]').click();
+    await page.waitForTimeout(200);
+    await page.screenshot({ path: path.join(output, 'itinerary-focus-expanded-desktop.png'), fullPage: true });
 
     assert.deepEqual(errors, []);
-    fs.writeFileSync(path.join(output, 'itinerary-focus-verification.json'), `${JSON.stringify({ checkedAt: new Date().toISOString(), collapsed, opened, closed, fadedAfternoon, errors }, null, 2)}\n`);
-    console.log(JSON.stringify({ ok: true, collapsed, opened, closed, fadedAfternoon, errors }));
+    fs.writeFileSync(path.join(output, 'itinerary-focus-verification.json'), `${JSON.stringify({ checkedAt: new Date().toISOString(), collapsed, opened, closed, fadedAfternoon, expandedLayout, errors }, null, 2)}\n`);
+    console.log(JSON.stringify({ ok: true, collapsed, opened, closed, fadedAfternoon, expandedLayout, errors }));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

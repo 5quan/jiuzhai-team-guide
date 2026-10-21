@@ -118,7 +118,6 @@ function render() {
           </aside>
           <details class="map-search" id="map-search"><summary aria-label="找景点"><span class="search-label">找景点</span><span class="search-icon" aria-hidden="true">⌕</span></summary><div><label for="spot-search">景点、栈道或换乘点</label><input id="spot-search" type="search" placeholder="例如：五花海" autocomplete="off"><div id="spot-results" aria-live="polite"></div></div></details>
           <article class="map-caption" id="map-caption" aria-live="polite"></article>
-          <section class="map-detail" id="map-detail" aria-label="所选行程详情" hidden></section>
           <div class="map-controls" role="group" aria-label="地图控制"><button type="button" data-zoom="in" aria-label="放大地图">＋</button><button type="button" data-zoom="out" aria-label="缩小地图">−</button><button type="button" id="map-follow">本段</button><output id="map-scale" aria-label="地图缩放比例">1×</output></div>
           <div class="map-legend" aria-label="地图图例"><span><i></i>当天行程</span><span><i></i>另一天</span><span><i></i>海子</span><small>可缩放、滑动</small></div>
         </div>
@@ -230,7 +229,7 @@ function itineraryName(step) {
   const labels = {
     'd1-entry': '乘车到原始森林', 'd1-wuhua-bus': '乘车到五花海', 'd1-peacock': '徒步孔雀河道',
     'd1-parking': '步行到镜海停车场', 'd1-center': '乘车到诺日朗中心',
-    'd1-walk-falls': '步行到诺日朗瀑布', 'd1-nuorilang': '诺日朗瀑布、观景台',
+    'd1-walk-falls': '步行到诺日朗瀑布', 'd1-nuorilang': '诺日朗瀑布观景台',
     'd1-falls-stop': '步行到上车点', 'd1-rhino-bus': '乘车到犀牛海',
     'd1-tree-bus': '乘车到树正寨', 'd1-tree': '树正寨、群海',
     'd1-spark-bus': '乘车到火花海', 'd1-double-walk': '步行到双龙海瀑布',
@@ -275,9 +274,17 @@ function renderSpotNotes(id) {
   return `<dl class="spot-notes" aria-label="${esc(spot.name)}的看点与注意事项">${field('看点', spot.highlights)}${field('注意事项', spot.tips)}</dl>`;
 }
 
+function breakableName(name) {
+  // Long place names may wrap in the narrow itinerary; break at a meaningful suffix.
+  return esc(name)
+    .replace(/(观景台|上车点|换乘)$/, '<wbr>$1')
+    .replace(/^(步行到|乘车到|徒步)/, '$1<wbr>')
+    .replace(/栈道(?=到|→)/, '栈道<wbr>');
+}
+
 function renderTimelineDetail(step, expanded) {
   const spotId = step.spotIds.includes(state.spot) ? state.spot : timelineSpot(step);
-  return `<div class="step-detail" id="detail-${esc(step.id)}"${expanded ? '' : ' hidden'}><p class="detail-title">${esc(itineraryName(step))}</p>${step.spotIds.length > 1 ? `<div class="step-places" role="group" aria-label="本段地点">${step.spotIds.map(id => `<button type="button" data-spot="${esc(id)}" aria-pressed="${spotId === id}"><span class="timeline-ink">${esc(locationInfo(id).name)}</span></button>`).join('')}</div>` : ''}${renderSpotNotes(spotId)}</div>`;
+  return `<div class="step-detail" id="detail-${esc(step.id)}"${expanded ? '' : ' hidden'}>${step.spotIds.length > 1 ? `<div class="step-places" role="group" aria-label="本段地点">${step.spotIds.map(id => `<button type="button" data-spot="${esc(id)}" aria-pressed="${spotId === id}"><span class="timeline-ink">${breakableName(locationInfo(id).name)}</span></button>`).join('')}</div>` : ''}${renderSpotNotes(spotId)}</div>`;
 }
 
 function renderSchedule() {
@@ -302,15 +309,10 @@ function renderSchedule() {
     }).join('');
     const duration = step.mode === 'visit' ? ` · 游览${step.duration}分钟` : step.mode === 'rest' ? ` · 休息${step.duration}分钟` : '';
     const time = moving ? `${clock(step.start)}—${clock(step.end)}` : clock(step.start);
-    return `<li class="timeline-stop${active ? ' is-active' : ''}" data-node-id="${esc(step.id)}">${moving ? '' : `<div class="timeline-connection">${incoming}</div>`}<div class="schedule-row${step.id === state.step ? ' selected' : ''}" data-step-row="${esc(step.id)}"><button type="button" class="schedule-step${moving ? ' is-moving' : ''}" data-step="${esc(step.id)}" aria-pressed="${step.id === state.step}" aria-expanded="${expanded}" aria-controls="detail-${esc(step.id)}">${moving ? `<span class="timeline-self-leg"><span class="timeline-ink">${timelineTravelMarkup(step)}</span></span>` : ''}<span class="timeline-node"><span class="step-summary"><strong><span class="timeline-ink place-name">${esc(timelinePlace(stop))}${step.id === state.nowStep ? '<span class="step-now">现在</span>' : ''}</span></strong><span class="step-meta"${expanded ? '' : ' hidden'}><span class="timeline-ink"><time>${time}</time>${duration}</span></span></span></span></button>${renderTimelineDetail(step, expanded)}</div></li>`;
+    return `<li class="timeline-stop${active ? ' is-active' : ''}" data-node-id="${esc(step.id)}">${moving ? '' : `<div class="timeline-connection">${incoming}</div>`}<div class="schedule-row${step.id === state.step ? ' selected' : ''}" data-step-row="${esc(step.id)}"><button type="button" class="schedule-step${moving ? ' is-moving' : ''}" data-step="${esc(step.id)}" aria-pressed="${step.id === state.step}" aria-expanded="${expanded}" aria-controls="detail-${esc(step.id)}">${moving ? `<span class="timeline-self-leg"><span class="timeline-ink">${timelineTravelMarkup(step)}</span></span>` : ''}<span class="timeline-node"><span class="step-summary"><strong><span class="timeline-ink place-name">${breakableName(timelinePlace(stop))}${step.id === state.nowStep ? '<span class="step-now">现在</span>' : ''}</span></strong><span class="step-meta"${expanded ? '' : ' hidden'}><span class="timeline-ink"><time>${time}</time>${duration}</span></span></span></span></button>${renderTimelineDetail(step, expanded)}</div></li>`;
   }).join('') : '<li class="empty">该时段没有安排，请切换其他时段。</li>';
   $('#inscription').classList.toggle('is-compact', state.compact);
   $('#inscription').classList.toggle('has-detail', !state.compact && Boolean(state.expandedStep));
-  const detail = state.expandedStep && $(`#detail-${state.expandedStep}`);
-  const detailPanel = $('#map-detail');
-  detailPanel.replaceChildren();
-  detailPanel.hidden = !detail || state.compact;
-  if (detail && !state.compact) detailPanel.append(detail);
   $('.inscription-heading').hidden = state.compact;
 
   $('[data-toggle-panel]').setAttribute('aria-expanded', String(!state.compact));
@@ -324,14 +326,29 @@ function renderSchedule() {
 function fitTimelineWindow() {
   const list = $('#schedule-list');
   if (!list?.getBoundingClientRect().height) return;
-  const tops = $$('.timeline-node', list).map(node => node.getBoundingClientRect().top);
-  const spans = tops.slice(4).map((top, index) => top - tops[index]);
-  if (spans.length) list.style.setProperty('--timeline-window', `${Math.floor(Math.min(...spans) - 1)}px`);
-  else list.style.removeProperty('--timeline-window');
   const panel = $('#inscription');
   const frame = $('#schematic').getBoundingClientRect();
   const legend = $('.map-legend').getBoundingClientRect();
   const bottomSpace = legend.height ? frame.bottom - legend.top + 12 : 16;
+
+  // While a stop is open, keep its top anchored and let the panel grow downward.
+  if (!state.compact && state.expandedStep) {
+    const panelTop = Math.max(8, Math.round(panel.getBoundingClientRect().top - frame.top));
+    panel.style.setProperty('--itinerary-top', `${panelTop}px`);
+    const header = panel.offsetHeight - list.offsetHeight;
+    const available = frame.height - panelTop - bottomSpace - header - 2;
+    list.style.setProperty('--timeline-window', `${Math.max(96, Math.floor(available))}px`);
+    return;
+  }
+
+  // The compact state measures once, then keeps that width when a stop opens.
+  panel.style.removeProperty('--itinerary-width');
+  panel.style.setProperty('--itinerary-width', `${Math.ceil(panel.getBoundingClientRect().width)}px`);
+
+  const tops = $$('.timeline-node', list).map(node => node.getBoundingClientRect().top);
+  const spans = tops.slice(4).map((top, index) => top - tops[index]);
+  if (spans.length) list.style.setProperty('--timeline-window', `${Math.floor(Math.min(...spans) - 1)}px`);
+  else list.style.removeProperty('--timeline-window');
   const lastTop = frame.height - panel.getBoundingClientRect().height - bottomSpace;
   panel.style.setProperty('--itinerary-top', `${Math.round(Math.max(8, Math.min(frame.height / 2, lastTop)))}px`);
 }
@@ -426,7 +443,7 @@ function chooseSpot(id, fromItinerary = false) {
   focusPoints([spot.position]);
   rippleSpot();
   if (restoreMapFocus) $(`#schematic [data-spot="${esc(id)}"]`).focus({ preventScroll: true });
-  if (restoreListFocus) $(`#map-detail [data-spot="${esc(id)}"]`)?.focus({ preventScroll: true });
+  if (restoreListFocus) $(`#inscription [data-spot="${esc(id)}"]`)?.focus({ preventScroll: true });
 }
 
 function renderCaption() {
@@ -908,7 +925,7 @@ document.addEventListener('click', event => {
   const step = event.target.closest('[data-step]');
   if (step) { chooseStep(step.dataset.step); return; }
   const spot = event.target.closest('[data-spot]');
-  if (spot) { chooseSpot(spot.dataset.spot, Boolean(spot.closest('#inscription, #map-detail'))); return; }
+  if (spot) { chooseSpot(spot.dataset.spot, Boolean(spot.closest('#inscription'))); return; }
   const zoom = event.target.closest('[data-zoom]');
   if (zoom) { compactItinerary(); setMapZoom(Number($('#schematic').dataset.zoom || 1) * (zoom.dataset.zoom === 'in' ? 1.4 : 1 / 1.4)); return; }
   if (event.target.closest('[data-toggle-panel]')) { compactItinerary(); return; }
