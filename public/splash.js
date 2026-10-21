@@ -10,7 +10,7 @@
     if (sessionStorage.getItem('splash-seen') === '1') { splash.remove(); return; }
   } catch { /* 隐私模式下 sessionStorage 可能不可用，照常播放 */ }
 
-  const HOLD = 2000;
+  const HOLD = 2500;
   let closed = false;
   let timer = 0;
 

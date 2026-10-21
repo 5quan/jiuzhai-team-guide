@@ -68,21 +68,34 @@ function showUser(value) {
   if (user) loadProactive();
 }
 
+function avatarNode() {
+  const avatar = document.createElement('img');
+  avatar.className = 'avatar';
+  avatar.src = '/avatar.webp';
+  avatar.alt = '';
+  avatar.loading = 'lazy';
+  return avatar;
+}
+
 function message(role, content, created, options = {}) {
   const item = document.createElement('article');
   item.className = `message ${role}${options.follow ? ' follow' : ''}`;
+  const body = document.createElement('div');
+  body.className = 'body';
   if (!options.follow) {
     const meta = document.createElement('div');
     meta.className = 'meta';
     const who = role === 'user' ? '你' : (options.name || '大肥鱼');
     meta.textContent = `${who} · ${new Date(created).toLocaleString('zh-CN')}`;
-    item.append(meta);
+    body.append(meta);
   }
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   // Both model and user text are untrusted; never interpret as HTML.
   bubble.textContent = content;
-  item.append(bubble);
+  body.append(bubble);
+  if (role === 'assistant' && !options.follow) item.append(avatarNode());
+  item.append(body);
   return item;
 }
 
@@ -102,19 +115,22 @@ function imageGrid(images) {
 function typingBubble(name) {
   const item = document.createElement('article');
   item.className = 'message assistant';
+  const body = document.createElement('div');
+  body.className = 'body';
   const meta = document.createElement('div');
   meta.className = 'meta';
   meta.textContent = `${name || '大肥鱼'} · ${new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}`;
   const bubble = document.createElement('div');
   bubble.className = 'bubble typing';
   bubble.append(document.createElement('i'), document.createElement('i'), document.createElement('i'));
-  item.append(meta, bubble);
+  body.append(meta, bubble);
+  item.append(avatarNode(), body);
   return item;
 }
 
 function memeBubble(meme, created) {
   const item = document.createElement('article');
-  item.className = 'message assistant follower';
+  item.className = 'message assistant follow';
   const bubble = document.createElement('div');
   bubble.className = 'bubble meme';
   const img = document.createElement('img');
@@ -129,8 +145,8 @@ function memeBubble(meme, created) {
 function render(scroll = false) {
   const list = document.createDocumentFragment();
   for (const turn of turns) {
-    // 主动消息没有用户提问，不渲染用户气泡。
-    if (turn.kind !== 'proactive') {
+    // 只有普通用户发言才渲染用户气泡；主动消息和开场白都没有提问。
+    if (turn.kind === 'user') {
       const userItem = message('user', turn.prompt, turn.created);
       if (turn.images?.length) userItem.append(imageGrid(turn.images));
       list.append(userItem);
@@ -233,6 +249,7 @@ $('auth-form').addEventListener('submit', async event => {
     showUser(await api(registration ? '/register' : '/login', data));
     notice(user.hasKey ? '' : '请先保存自己的 DeepSeek Key。');
     await loadMessages(false, true);
+    maybeOpen();
   } catch (error) { notice(error.message, true); }
   finally { $('auth-submit').disabled = false; $('switch-auth').disabled = false; }
 });
@@ -251,6 +268,7 @@ async function saveKey(key) {
     $('key-form').reset();
     $('key-panel').open = !user.hasKey;
     notice(user.hasKey ? 'Key 已验证并保存，可以开始聊天。' : 'Key 已移除，聊天记录仍保留。');
+    if (user.hasKey) maybeOpen();
   } catch (error) { notice(error.message, true); }
   finally { busy = false; controls(); }
 }
@@ -454,6 +472,19 @@ $('proactive-toggle').addEventListener('change', async event => {
 });
 
 let pollTick;
+async function maybeOpen() {
+  if (!user?.hasKey || turns.length) return;
+  notice('她正在打字…');
+  try {
+    const result = await api('/opener', {});
+    if (result.opened && result.turn) {
+      turns.push(result.turn);
+      render(true);
+    }
+    notice('');
+  } catch { notice(''); /* 开场白失败不阻塞聊天 */ }
+}
+
 async function pollNew() {
   if (document.visibilityState !== 'visible' || busy || !user) return;
   const lastId = turns.at(-1)?.id || 0;
@@ -471,7 +502,7 @@ pollTick = setInterval(pollNew, 60000);
 window.addEventListener('pageshow', event => { if (event.persisted) location.reload(); });
 async function init() {
   if (!window.isSecureContext) { notice('请通过 HTTPS 打开此页面后再登录。', true); return; }
-  try { showUser(await api('/me')); notice(user.hasKey ? '' : '请先保存自己的 DeepSeek Key。'); await loadMessages(false, true); }
+  try { showUser(await api('/me')); notice(user.hasKey ? '' : '请先保存自己的 DeepSeek Key。'); await loadMessages(false, true); maybeOpen(); }
   catch (error) { if (!user) showUser(null); notice(error.message, error.message !== '请先登录。'); }
 }
 init();

@@ -71,3 +71,10 @@ textarea { resize: vertical; min-height: 85px; max-height: 240px; }
 .toggle { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 14px; flex-wrap: wrap; }
 .toggle input[type="checkbox"] { width: auto; margin: 0; accent-color: var(--accent); }
 @media(max-width: 600px) { .chat-shell { padding: 0 16px; } header { align-items: flex-start; } .account { justify-content: flex-end; max-width: 190px; } .account span { width: 100%; text-align: right; } .account button { padding: 5px 8px; } .message { max-width: 94%; } .history { height: 45dvh; } .composer > div { align-items: flex-start; } #send-hint { max-width: 210px; } }
+
+/* 对话头像 */
+.message.assistant { display: flex; gap: 10px; align-items: flex-start; max-width: 92%; }
+.message.assistant .avatar { width: 34px; height: 34px; border-radius: 50%; flex: none; object-fit: cover; border: 1px solid var(--line); background: #fff; }
+.message.assistant .body { min-width: 0; flex: 1; }
+.message.assistant.follow { padding-left: 44px; }
+@media (max-width: 600px) { .message.assistant .avatar { width: 30px; height: 30px; } .message.assistant.follow { padding-left: 40px; } }

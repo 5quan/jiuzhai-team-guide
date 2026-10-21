@@ -7,6 +7,7 @@ import { DatabaseSync } from 'node:sqlite';
 import http from 'node:http';
 import { createServer } from '../server.mjs';
 import { buildContext, createChat } from '../lib/chat.mjs';
+import { splitSegments } from '../lib/attachments.mjs';
 
 const invite = 'test-invite-code-123456';
 const encryptionKey = 'ab'.repeat(32);
@@ -402,6 +403,41 @@ test('search failures and non-real-time messages fall back without blocking the 
   // 日常闲聊不触发搜索。
   assert.equal((await call('/send', { requestId: 'search-request-0003', content: '我有点累了' }, cookie)).status, 200);
   assert.equal(searchCalls, 1);
+});
+
+test('a leading question mark never splits a bubble', () => {
+  assert.deepEqual(splitSegments('?真的假的'), ['?真的假的']);
+  assert.deepEqual(splitSegments('诶 ?你叫什么'), ['诶 ?你叫什么']);
+  assert.deepEqual(splitSegments('第一句。第二句。'), ['第一句。', '第二句。']);
+  assert.deepEqual(splitSegments('真的吗？'), ['真的吗？']);
+});
+
+test('the opener asks once, requires a key, and never repeats', async t => {
+  let modelCalls = 0;
+  const { call, register } = await fixture(t, async url => {
+    if (url.endsWith('/models')) return Response.json({ data: [] });
+    modelCalls++;
+    return Response.json({ choices: [{ message: { content: '诶 ?你叫什么' } }] });
+  });
+  const cookie = await register('alice');
+  assert.equal((await call('/opener', {}, cookie)).status, 400);
+  await call('/key', { key }, cookie);
+  assert.equal(modelCalls, 0);
+
+  const first = await call('/opener', {}, cookie);
+  assert.equal(first.status, 200);
+  assert.equal(first.data.opened, true);
+  assert.equal(first.data.turn.kind, 'opener');
+  assert.equal(first.data.turn.reply, '诶 ?你叫什么');
+
+  const second = await call('/opener', {}, cookie);
+  assert.equal(second.data.opened, false);
+  assert.equal(modelCalls, 1);
+
+  // 已经有记录的用户不会再次触发。
+  const turns = (await call('/messages', undefined, cookie)).data.turns;
+  assert.equal(turns.length, 1);
+  assert.equal(turns[0].kind, 'opener');
 });
 
 test('streaming failure is reported as an event and keeps generated text', async t => {
