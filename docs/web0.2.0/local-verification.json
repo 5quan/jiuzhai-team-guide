@@ -1,0 +1,268 @@
+{
+  "layouts": [
+    {
+      "height": 568,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "morning",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 320
+    },
+    {
+      "height": 568,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "afternoon",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 320
+    },
+    {
+      "height": 667,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "morning",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 375
+    },
+    {
+      "height": 667,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "afternoon",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 375
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "morning",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "afternoon",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 390
+    },
+    {
+      "height": 932,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "morning",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 430
+    },
+    {
+      "height": 932,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "afternoon",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 430
+    },
+    {
+      "height": 1000,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "morning",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 1440
+    },
+    {
+      "height": 1000,
+      "overflow": false,
+      "panelAboveNav": true,
+      "period": "afternoon",
+      "style": "rgba(0, 0, 0, 0)",
+      "visibleNodes": 4,
+      "width": 1440
+    }
+  ],
+  "clicks": [
+    {
+      "detail": true,
+      "id": "s1-entry",
+      "selected": "changhai",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-changhai",
+      "selected": "changhai",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-pool-walk",
+      "selected": "wucaichi",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-pool",
+      "selected": "wucaichi-boardwalk",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-pool-stop",
+      "selected": "wucaichi-stop",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-center",
+      "selected": "nuorilang-center",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-lunch",
+      "selected": "nuorilang-center",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-wuhua-bus",
+      "selected": "wuhuahai",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-wuhua",
+      "selected": "wuhuahai",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-pearl-bus",
+      "selected": "pearl-shoal",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-pearl",
+      "selected": "pearl",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-parking",
+      "selected": "mirror-parking",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-center-return",
+      "selected": "nuorilang-center",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-walk-falls",
+      "selected": "nuorilang",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-nuorilang",
+      "selected": "nuorilang",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-falls-stop",
+      "selected": "nuorilang-stop",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-rhino-bus",
+      "selected": "rhino",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-rhino",
+      "selected": "rhino",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-tree-bus",
+      "selected": "shuzheng-village",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-tree",
+      "selected": "shuzheng-village",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-inner",
+      "selected": "shuzheng-inner",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-spark",
+      "selected": "spark",
+      "visible": true,
+      "zoom": "1.6"
+    },
+    {
+      "detail": true,
+      "id": "s1-exit",
+      "selected": "park-gate",
+      "visible": true,
+      "zoom": "1.6"
+    }
+  ],
+  "confirmed": {
+    "undated": true,
+    "entry": "10:00",
+    "exit": "17:57",
+    "lunch": "12:20—13:00",
+    "printRows": 23,
+    "independentEntryTimes": true,
+    "planRestores": true,
+    "searchOutsidePlan": true,
+    "twoDayCrossDate": true
+  }
+}

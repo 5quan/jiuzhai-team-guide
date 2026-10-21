@@ -1,4 +1,4 @@
-const CACHE = 'jiuzhai-web0.1.0';
+const CACHE = 'jiuzhai-web0.2.0';
 const SHELL = ['/', '/style.css', '/timeline.js', '/app.js', '/favicon.svg', '/paper-landscape-v1.webp'];
 
 self.addEventListener('install', event => {

@@ -60,3 +60,14 @@ test('an arrival and a visit to its boardwalk use one node rather than duplicate
   assert.equal(nodes[0].step.id, 'visit');
   assert.deepEqual(Array.from(nodes[0].steps, step => step.id), ['walk', 'visit']);
 });
+
+test('one-day grouping preserves all actions and the 40-minute lunch at the center', () => {
+  const steps = guide.referenceDays[0].events;
+  const nodes = build(steps);
+  const grouped = nodes.flatMap(node => Array.from(node.steps));
+  assert.deepEqual(grouped.map(step => step.id), steps.map(step => step.id));
+  assert.equal(grouped.reduce((sum, step) => sum + step.duration, 0), 477);
+  assert.deepEqual(Array.from(nodes.find(node => node.step.id === 's1-lunch').steps, step => step.id), ['s1-center', 's1-lunch']);
+  assert.equal(nodes[0].step.id, 's1-changhai');
+  assert.equal(nodes.at(-1).step.id, 's1-exit');
+});

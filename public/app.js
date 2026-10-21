@@ -2,7 +2,8 @@ const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const modeNames = { bus: '观光车', walk: '步行', visit: '游览', rest: '午餐休息', mixed: '车＋步行' };
-const state = { day: 'day1', period: 'morning', step: 'd1-forest', spot: 'forest', compact: true, expandedStep: null, guidedSpot: null, view: 'home', layer: 'clouds', starts: new Map(), nowStep: null };
+const state = { plan: 'two-days', day: 'day1', period: 'morning', step: 'd1-forest', spot: 'forest', compact: true, expandedStep: null, guidedSpot: null, view: 'home', layer: 'clouds', starts: new Map(), nowStep: null };
+const planViews = new Map();
 const weatherCache = new Map();
 const phone = window.matchMedia('(max-width: 700px)');
 const isMobile = () => phone.matches;
@@ -42,9 +43,30 @@ function locations() {
   return guide.map.referencePoints.map(locationInfo).filter(Boolean);
 }
 
+function allDays() {
+  return [...guide.days, ...(guide.referenceDays || [])];
+}
+
+function plans() {
+  return guide.plans || [{ id: 'two-days', label: '两天慢游', dayIds: guide.days.filter(day => day.startTime).map(day => day.id) }];
+}
+
+function planDays() {
+  const plan = plans().find(plan => plan.id === state.plan);
+  return plan.dayIds.map(id => allDays().find(day => day.id === id));
+}
+
+function printDays() {
+  return state.plan === 'two-days' ? guide.days : planDays();
+}
+
+function dayLabel(day) {
+  return day.date ? `${day.shortDate} ${day.weekday}` : day.label;
+}
+
 function daysForSpot(spot) {
-  const days = guide.days.filter(day => day.startTime && (day.spotIds.includes(spot.id) || day.events.some(event => event.duration && event.spotIds.includes(spot.id))));
-  return days.length ? days : guide.days.filter(day => day.id === `day${spot.day}`);
+  const days = planDays().filter(day => day.spotIds.includes(spot.id) || day.events.some(event => event.duration && event.spotIds.includes(spot.id)));
+  return days.length || state.plan !== 'two-days' ? days : planDays().filter(day => day.id === `day${spot.day}`);
 }
 
 function minutes(value) {
@@ -58,7 +80,7 @@ function clock(value) {
 }
 
 function schedule(dayId = state.day) {
-  const day = guide.days.find(day => day.id === dayId);
+  const day = allDays().find(day => day.id === dayId);
   let current = minutes(state.starts.get(dayId) || day.startTime);
   const steps = day.events.filter(event => event.duration);
   const lunch = steps.findIndex(event => event.mode === 'rest');
@@ -82,11 +104,10 @@ function render() {
     <div data-view="home">
       <section class="journey-heading" id="itinerary">
         <div class="journey-title"><h1>九寨两日行记</h1><p class="travel-date">10.29—31 · 7人</p></div>
-        <div class="journey-actions"><details class="time-settings"><summary>时间</summary><div id="inscription-settings"><div class="entry-setting"><label for="entry-time">入园</label><input id="entry-time" type="time" min="${esc(guide.park.open)}" max="${esc(guide.park.lastEntry)}" step="300"><span id="exit-time"></span></div><p class="timing-warning" id="timing-warning" hidden></p></div></details><button class="quiet-button" id="share-button" type="button" aria-label="复制攻略链接">分享</button><button class="quiet-button" id="print-button" type="button">打印</button></div>
+        <div class="journey-actions"><details class="time-settings"><summary>设置</summary><div id="inscription-settings"><fieldset class="plan-setting"><legend>行程计划</legend>${plans().map(plan => `<label><input type="radio" name="plan" value="${esc(plan.id)}"${state.plan === plan.id ? ' checked' : ''}>${esc(plan.label)}</label>`).join('')}</fieldset><div class="entry-setting"><label for="entry-time">入园</label><input id="entry-time" type="time" min="${esc(guide.park.open)}" max="${esc(guide.park.lastEntry)}" step="300"><span id="exit-time"></span></div><p class="timing-warning" id="timing-warning" hidden></p></div></details><button class="quiet-button" id="share-button" type="button" aria-label="复制攻略链接">分享</button><button class="quiet-button" id="print-button" type="button">打印</button></div>
       </section>
       <section id="route" aria-label="两天休闲游地图与时间行程">
         <div class="day-switch" role="group" aria-label="选择游览日期">
-          ${guide.days.filter(day => day.startTime).map((day, index) => `<button type="button" data-day="${esc(day.id)}" aria-pressed="${state.day === day.id}" aria-label="${esc(day.shortDate)} ${esc(day.weekday)} ${esc(day.label)}"><strong>第${index === 0 ? '一' : '二'}天</strong><span>${esc(day.shortDate)}</span></button>`).join('')}
         </div>
         <div class="landscape" id="landscape">
           <div class="mobile-artwork" aria-hidden="true"><img src="/paper-landscape-v1.webp" alt="" decoding="async"></div>
@@ -107,9 +128,10 @@ function render() {
       <details class="journey-log"><summary><strong>抵达、住宿与晚间接送</strong><span>29日晚到达 · 31日晚搬到车站附近</span></summary><div class="travel-days">${guide.days.map(day => `<section><h3>${esc(day.shortDate)} ${esc(day.label)}</h3><p class="stay-note">${esc(day.stay)}</p>${day.events.filter(event => !event.duration).map(event => `<p><strong>${esc(event.time)} · ${esc(event.title)}</strong><span>${esc(event.detail)}</span></p>`).join('')}</section>`).join('')}</div><p class="return-note">${esc(guide.trip.returnNote)}</p></details>
       <section class="print-itinerary" id="print-itinerary" aria-label="打印用完整行程"></section>
     </div>
-    <section class="secondary-view" data-view="weather" id="weather" hidden><div class="page-heading"><div><p>10月30日、31日游览参考</p><h1 id="weather-title" tabindex="-1">山间天气</h1></div>${external(guide.weather.fullUrl, '完整预报')}</div><p class="page-note">在预报图中选择日期，重点看云量、低云与降水。目标日期未进入预报时效时，请临近出行再查看。</p><div class="weather-toolbar"><div class="period-switch" role="group" aria-label="天气图层">${[['clouds','云量'],['rain','降水'],['temp','温度'],['wind','风']].map(([layer,label]) => `<button type="button" data-layer="${layer}" aria-pressed="${state.layer === layer}">${label}</button>`).join('')}</div><button class="quiet-button" id="reload-weather" type="button">重新加载</button></div><div id="weather-mount" class="weather-mount"></div><p class="map-footnote">实时天气由Windy提供。${external(guide.sources.find(source => source.id === 'china-weather').url, '中国天气网')}</p></section>
+      <section class="secondary-view" data-view="weather" id="weather" hidden><div class="page-heading"><div><p id="weather-date">10月30日、31日游览参考</p><h1 id="weather-title" tabindex="-1">山间天气</h1></div>${external(guide.weather.fullUrl, '完整预报')}</div><p class="page-note">在预报图中选择日期，重点看云量、低云与降水。目标日期未进入预报时效时，请临近出行再查看。</p><div class="weather-toolbar"><div class="period-switch" role="group" aria-label="天气图层">${[['clouds','云量'],['rain','降水'],['temp','温度'],['wind','风']].map(([layer,label]) => `<button type="button" data-layer="${layer}" aria-pressed="${state.layer === layer}">${label}</button>`).join('')}</div><button class="quiet-button" id="reload-weather" type="button">重新加载</button></div><div id="weather-mount" class="weather-mount"></div><p class="map-footnote">实时天气由Windy提供。${external(guide.sources.find(source => source.id === 'china-weather').url, '中国天气网')}</p></section>
     <section class="secondary-view" data-view="notes" id="notes" hidden></section>`;
   weatherCache.set('clouds', guide.weather);
+  renderPlan();
   renderMap();
   renderSchedule();
   renderCaption();
@@ -117,16 +139,57 @@ function render() {
   $('#print-button').addEventListener('click', () => window.print());
   $('#share-button').addEventListener('click', shareGuide);
   $('#entry-time').addEventListener('change', event => {
-    if (!event.target.validity.valid || !event.target.value) { event.target.value = state.starts.get(state.day) || guide.days.find(day => day.id === state.day).startTime; notify('请选择当日参考入园时段内的时间。'); return; }
+    if (!event.target.validity.valid || !event.target.value) { event.target.value = state.starts.get(state.day) || allDays().find(day => day.id === state.day).startTime; notify('请选择当日参考入园时段内的时间。'); return; }
     state.starts.set(state.day, event.target.value);
     state.period = schedule().find(step => step.id === state.step)?.period || 'morning';
     renderSchedule();
     renderCaption();
   });
+  $$('input[name="plan"]').forEach(input => input.addEventListener('change', () => choosePlan(input.value)));
   $('#spot-search').addEventListener('input', renderSearch);
   $('#map-follow').addEventListener('click', () => { compactItinerary(); focusStep(); rippleSpot(); });
   $('#reload-weather').addEventListener('click', () => switchWeather(state.layer, true));
   navigate(location.hash.slice(1) || 'itinerary', false);
+}
+
+function renderPlan() {
+  const single = state.plan === 'one-day';
+  $('.journey-heading h1').textContent = single ? '九寨一天精华游' : '九寨两日行记';
+  $('.travel-date').textContent = single ? '约8小时' : '10.29—31 · 7人';
+  document.title = `${single ? '九寨一天精华游' : '九寨两日行记'} · 地图与时间行程`;
+  $('#route').setAttribute('aria-label', `${single ? '一天精华游' : '两天慢游'}地图与时间行程`);
+  $('.day-switch').setAttribute('aria-label', single ? '当前行程计划' : '选择游览日期');
+  $('.day-switch').innerHTML = single ? '<p class="plan-overview"><strong>一天精华游</strong><span>长海 · 五花海 · 树正群海</span></p>' : planDays().map((day, index) => `<button type="button" data-day="${esc(day.id)}" aria-pressed="${state.day === day.id}" aria-label="${esc(dayLabel(day))} ${esc(day.label)}"><strong>第${index === 0 ? '一' : '二'}天</strong><span>${esc(day.shortDate)}</span></button>`).join('');
+  $('.painting-title i').textContent = single ? '一日' : '两日';
+  $('.map-legend span:nth-child(2)').lastChild.textContent = single ? '计划外' : '另一天';
+  $('.journey-log').hidden = single;
+  $('#weather-date').textContent = single ? '按实际出行日期查看预报' : '10月30日、31日游览参考';
+  let note = $('#plan-note');
+  if (!note) { note = document.createElement('p'); note.id = 'plan-note'; note.className = 'map-footnote plan-note'; $('#route').append(note); }
+  note.hidden = !single;
+  note.textContent = single ? planDays()[0].note : '';
+  $$('input[name="plan"]').forEach(input => { input.checked = input.value === state.plan; });
+}
+
+function choosePlan(id) {
+  if (id === state.plan || !plans().some(plan => plan.id === id)) return;
+  planViews.set(state.plan, { day: state.day, period: state.period, step: state.step, spot: state.spot });
+  state.plan = id;
+  const saved = planViews.get(id);
+  state.day = saved?.day || planDays()[0].id;
+  const first = schedule().find(step => step.mode === 'visit') || schedule()[0];
+  Object.assign(state, saved || { period: 'morning', step: first.id, spot: stepSpot(first) }, { compact: true, expandedStep: null, guidedSpot: null, nowStep: null });
+  try { localStorage.setItem('jiuzhai-plan', id); } catch { /* Private browsing may disable storage. */ }
+  const url = new URL(location.href);
+  url.searchParams.set('plan', id);
+  history.replaceState(null, '', url.href);
+  renderPlan();
+  renderSchedule();
+  revealStep();
+  updateMap();
+  renderCaption();
+  renderPrint();
+  resetDefaultMap();
 }
 
 function itineraryName(step) {
@@ -154,12 +217,12 @@ function stepSpot(step) {
 }
 
 function timelineSpot(step) {
-  return { 'd1-peacock': 'peacock', 'd2-inner': 'shuzheng-inner' }[step.id] || stepSpot(step);
+  return { 'd1-peacock': 'peacock', 'd2-inner': 'shuzheng-inner', 's1-inner': 'shuzheng-inner' }[step.id] || stepSpot(step);
 }
 
 function timelinePlace(stop) {
   if (stop.step.mode === 'visit') return itineraryName(stop.step);
-  return { 'd1-peacock': '孔雀河道', 'd2-inner': '内侧栈道→火花海', 'd1-exit': '景区出口', 'd2-exit': '景区出口' }[stop.step.id] || locationInfo(stop.spotId).mapLabel || locationInfo(stop.spotId).name;
+  return { 'd1-peacock': '孔雀河道', 'd2-inner': '内侧栈道→火花海', 's1-inner': '内侧栈道→火花海', 'd1-exit': '景区出口', 'd2-exit': '景区出口', 's1-exit': '景区出口' }[stop.step.id] || locationInfo(stop.spotId).mapLabel || locationInfo(stop.spotId).name;
 }
 
 function timelineTravel(step) {
@@ -184,7 +247,7 @@ function renderTimelineDetail(step, expanded) {
 }
 
 function renderSchedule() {
-  const day = guide.days.find(day => day.id === state.day);
+  const day = allDays().find(day => day.id === state.day);
   const steps = schedule();
   $('#schedule-list').tabIndex = 0;
   $('#entry-time').value = state.starts.get(state.day) || day.startTime;
@@ -217,7 +280,7 @@ function renderSchedule() {
   $('.inscription-heading').hidden = state.compact;
 
   $('[data-toggle-panel]').setAttribute('aria-expanded', String(!state.compact));
-  $('#inscription-date').innerHTML = `<span class="timeline-ink">${esc(day.shortDate)} ${esc(day.weekday)}</span>`;
+  $('#inscription-date').innerHTML = `<span class="timeline-ink">${esc(dayLabel(day))}</span>`;
   $$('#inscription .period-switch button, #inscription [data-toggle-panel]').forEach(button => {
     if (!button.querySelector('.timeline-ink')) button.innerHTML = `<span class="timeline-ink">${esc(button.textContent)}</span>`;
   });
@@ -258,7 +321,7 @@ function revealStep() {
 }
 
 function chooseDay(id) {
-  if (!guide.days.some(day => day.id === id && day.startTime)) return;
+  if (!planDays().some(day => day.id === id)) return;
   state.day = id;
   state.period = 'morning';
   const steps = schedule();
@@ -308,7 +371,7 @@ function chooseSpot(id, fromItinerary = false) {
   const restoreListFocus = fromItinerary && document.activeElement?.dataset.spot === id;
   let steps = schedule();
   if (!steps.some(step => step.spotIds.includes(id))) {
-    const otherDay = guide.days.find(day => day.startTime && day.events.some(event => event.duration && event.spotIds.includes(id)));
+    const otherDay = planDays().find(day => day.events.some(event => event.duration && event.spotIds.includes(id)));
     if (otherDay) { state.day = otherDay.id; steps = schedule(); }
   }
   const step = currentStep()?.spotIds.includes(id) ? currentStep() : steps.find(step => step.mode === 'visit' && step.spotIds.includes(id)) || steps.find(step => step.spotIds.includes(id));
@@ -324,7 +387,8 @@ function chooseSpot(id, fromItinerary = false) {
   updateMap();
   renderCaption();
   $('#map-search').open = false;
-  if (state.day !== previousDay) notify(`已切到${guide.days.find(day => day.id === state.day).shortDate}的行程`);
+  if (state.day !== previousDay) notify(`已切到${dayLabel(allDays().find(day => day.id === state.day))}的行程`);
+  else if (!step && state.plan === 'one-day') notify('该地点不在一天精华游安排中，可自由查看地图。');
   focusPoints([spot.position]);
   rippleSpot();
   if (restoreMapFocus) $(`#schematic [data-spot="${esc(id)}"]`).focus({ preventScroll: true });
@@ -334,7 +398,7 @@ function chooseSpot(id, fromItinerary = false) {
 function renderCaption() {
   const spot = locationInfo(state.spot);
   const step = currentStep();
-  $('#map-caption').innerHTML = `<p>${step ? `${clock(step.start)}—${clock(step.end)} · ${step.estimated ? '预计' : ''}${modeNames[step.mode]}${step.duration}分钟` : '沿线景点'}</p><h3>${esc(spot.name)}</h3>`;
+  $('#map-caption').innerHTML = `<p>${step ? `${clock(step.start)}—${clock(step.end)} · ${step.estimated ? '预计' : ''}${modeNames[step.mode]}${step.duration}分钟` : state.plan === 'one-day' ? '本计划未安排' : '沿线景点'}</p><h3>${esc(spot.name)}</h3>`;
 }
 
 function renderSearch() {
@@ -342,7 +406,8 @@ function renderSearch() {
   const points = locations().filter(spot => `${spot.name}${spot.valley || ''}`.includes(query));
   $('#spot-results').innerHTML = points.length ? points.map(spot => {
     const days = daysForSpot(spot);
-    return `<button type="button" data-spot="${esc(spot.id)}"><span class="spot-key${days.some(day => day.id === state.day) ? ' is-today' : ''}" aria-hidden="true"></span>${esc(spot.name)}<small class="result-day">${days.length > 1 ? '两天' : `第${days[0]?.id === 'day2' ? '二' : '一'}天`}</small></button>`;
+    const label = state.plan === 'one-day' ? days.length ? '一天精华游' : '未安排' : `${days.length > 1 ? '两天' : `第${days[0]?.id === 'day2' ? '二' : '一'}天`}${days.length ? ` · ${days.map(day => day.shortDate).join('／')}` : ''}`;
+    return `<button type="button" data-spot="${esc(spot.id)}"><span class="spot-key${days.some(day => day.id === state.day) ? ' is-today' : ''}" aria-hidden="true"></span>${esc(spot.name)}<small class="result-day">${esc(label)}</small></button>`;
   }).join('') : '<p class="empty">没有匹配地点，试试“长海”或“树正”。</p>';
 }
 
@@ -713,7 +778,11 @@ function bindMapGestures() {
 
 function renderNotes() {
   const costs = guide.costs;
-  $('#notes').innerHTML = `<div class="page-heading"><div><p>住宿、交通与票务</p><h1 id="notes-title" tabindex="-1">出行须知</h1></div><span class="checked">核对 ${esc(guide.checkedAt)}</span></div><section class="note-section"><h2>待落实</h2><ul class="pending-list">${guide.pending.map(item => `<li><h3>${esc(item.title)}</h3><p>${esc(item.detail)}</p></li>`).join('')}</ul></section><section class="note-section"><h2>两天游览与当天开放</h2><p>${esc(guide.park.note)}</p><p>${esc(guide.schedule.note)} 按10:00入园累计，第一天约16:22出沟，第二天约17:17出沟；实际可能因车流、观景和开放情况变化。</p></section><section class="note-section"><h2>两天门票与观光车</h2><p>每天每位成人：门票¥${guide.ticket.entrance}＋观光车¥${guide.ticket.bus}。两天每人¥${costs.perPersonTwoDays}，7人共¥${costs.teamTwoDays}。</p><p>${esc(guide.ticket.note)} ${esc(guide.ticket.validity)}</p>${external(guide.sources.find(source => source.id === 'tickets').url, '官方票务')}</section><section class="note-section"><h2>三晚住宿</h2><p>10月29、30日：${esc(guide.trip.hotel.name)}。${esc(guide.trip.hotel.note)}</p><p>前两晚预算每人每晚¥${guide.trip.hotelBudgetPerPersonNight}，全队两晚¥${costs.hotelTeamTwoNights}。</p><p>10月31日：${esc(guide.trip.stationHotel.name)}。${esc(guide.trip.stationHotel.note)} 第三晚及道路接送费用另行确认。</p></section><section class="note-section"><h2>道路接送与返程</h2>${guide.transport.map(item => `<div class="transport-item"><h3>${esc(item.title)}<small>${esc(item.badge)}</small></h3><p>${esc(item.text)}</p></div>`).join('')}<p>${esc(guide.trip.returnNote)}</p></section><details class="sources note-section"><summary>资料来源与地图说明</summary><p>${esc(guide.map.note)}</p>${guide.sources.map(source => `<div class="source-item">${external(source.url, source.title)}<p>${esc(source.note)}</p></div>`).join('')}</details>`;
+  const single = state.plan === 'one-day';
+  const estimates = planDays().map(day => `${day.date ? day.shortDate : day.label}：${state.starts.get(day.id) || day.startTime}入园，预计${clock(schedule(day.id).at(-1).end)}出沟`).join('；');
+  const tripNotes = single ? '' : `<section class="note-section"><h2>待落实</h2><ul class="pending-list">${guide.pending.map(item => `<li><h3>${esc(item.title)}</h3><p>${esc(item.detail)}</p></li>`).join('')}</ul></section>`;
+  const accommodation = single ? '' : `<section class="note-section"><h2>三晚住宿</h2><p>10月29、30日：${esc(guide.trip.hotel.name)}。${esc(guide.trip.hotel.note)}</p><p>前两晚预算每人每晚¥${guide.trip.hotelBudgetPerPersonNight}，全队两晚¥${costs.hotelTeamTwoNights}。</p><p>10月31日：${esc(guide.trip.stationHotel.name)}。${esc(guide.trip.stationHotel.note)} 第三晚及道路接送费用另行确认。</p></section><section class="note-section"><h2>道路接送与返程</h2>${guide.transport.map(item => `<div class="transport-item"><h3>${esc(item.title)}<small>${esc(item.badge)}</small></h3><p>${esc(item.text)}</p></div>`).join('')}<p>${esc(guide.trip.returnNote)}</p></section>`;
+  $('#notes').innerHTML = `<div class="page-heading"><div><p>${single ? '一天精华游参考' : '住宿、交通与票务'}</p><h1 id="notes-title" tabindex="-1">出行须知</h1></div><span class="checked">核对 ${esc(guide.checkedAt)}</span></div>${tripNotes}<section class="note-section"><h2>行程与当天开放</h2><p>${esc(single ? '开放时段、栈道与末班车以实际游览当天的预约页和现场公告为准。' : guide.park.note)}</p><p>${esc(single ? planDays()[0].note : guide.schedule.note)}</p><p>${esc(estimates)}。实际用时随车流、观景和开放情况变化。</p></section><section class="note-section"><h2>${single ? '当天' : '两天'}门票与观光车</h2><p>${single ? '现有旺季成人价格参考：' : '每天每位成人：'}门票¥${guide.ticket.entrance}＋观光车¥${guide.ticket.bus}。${single ? `当天每人¥${costs.perDay}。` : `两天每人¥${costs.perPersonTwoDays}，${guide.trip.people}人共¥${costs.teamTwoDays}。`}</p><p>${esc(single ? '请按实际出行日期及优惠资格核对官方票价并预约。' : guide.ticket.note)} ${single ? '' : esc(guide.ticket.validity)}</p>${external(guide.sources.find(source => source.id === 'tickets').url, '官方票务')}</section>${accommodation}<details class="sources note-section"><summary>资料来源与地图说明</summary><p>${esc(guide.map.note)}</p>${guide.sources.map(source => `<div class="source-item">${external(source.url, source.title)}<p>${esc(source.note)}</p></div>`).join('')}</details>`;
 }
 
 function navigate(target, focus = true) {
@@ -758,7 +827,7 @@ async function switchWeather(layer, force = false) {
 }
 
 function renderPrint() {
-  $('#print-itinerary').innerHTML = guide.days.map(day => `<section><h2>${esc(day.shortDate)} ${esc(day.weekday)} ${esc(day.label)}</h2><p>${esc(day.stay)}</p><ol>${day.events.map(event => {
+  $('#print-itinerary').innerHTML = printDays().map(day => `<section><h2>${esc(dayLabel(day))}${day.date ? ` ${esc(day.label)}` : ''}</h2><p>${esc(day.stay || day.note)}</p><ol>${day.events.map(event => {
     const timed = day.startTime && event.duration ? schedule(day.id).find(step => step.id === event.id) : null;
     return `<li><time>${timed ? `${clock(timed.start)}—${clock(timed.end)}` : esc(event.time)}</time><strong>${esc(event.title)}</strong>${event.duration ? `<span>${modeNames[event.mode]} ${event.duration}分钟</span>` : ''}<p>${esc(event.detail)}</p></li>`;
   }).join('')}</ol></section>`).join('');
@@ -767,7 +836,7 @@ function renderPrint() {
 function tripMoment() {
   const now = new Date();
   const iso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-  const day = guide.days.find(item => item.date === iso && item.startTime);
+  const day = planDays().find(item => item.date === iso);
   if (!day) return null;
   const minute = now.getHours() * 60 + now.getMinutes();
   const steps = schedule(day.id);
@@ -820,7 +889,7 @@ phone.addEventListener('change', () => {
   renderSchedule();
   resetDefaultMap();
 });
-async function shareGuide() { try { if (!navigator.clipboard?.writeText) throw new Error(); await navigator.clipboard.writeText(location.href.split('#')[0]); notify('攻略链接已复制'); } catch { notify('请复制地址栏链接分享'); } }
+async function shareGuide() { try { if (!navigator.clipboard?.writeText) throw new Error(); const url = new URL(location.href); url.hash = ''; url.searchParams.set('plan', state.plan); await navigator.clipboard.writeText(url.href); notify('攻略链接已复制'); } catch { notify('请复制地址栏链接分享'); } }
 function registerOffline() {
   if (!('serviceWorker' in navigator)) return;
   if (!(location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) return;
@@ -829,6 +898,15 @@ function registerOffline() {
 async function boot() {
   try {
     guide = await getJSON('/api/guide');
+    try { const saved = localStorage.getItem('jiuzhai-plan'); if (plans().some(plan => plan.id === saved)) state.plan = saved; } catch { /* Storage is optional. */ }
+    const sharedPlan = new URLSearchParams(location.search).get('plan');
+    if (plans().some(plan => plan.id === sharedPlan)) state.plan = sharedPlan;
+    if (state.plan !== 'two-days') {
+      state.day = planDays()[0].id;
+      const first = schedule().find(step => step.mode === 'visit') || schedule()[0];
+      state.step = first.id;
+      state.spot = stepSpot(first);
+    }
     const moment = tripMoment();
     if (moment) {
       state.day = moment.day.id;

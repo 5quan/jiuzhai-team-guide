@@ -47,6 +47,9 @@ main { max-width: 1680px; margin: auto; }
 .day-switch button > span { color: var(--muted); font-size: 12px; }
 .day-switch [aria-pressed=true] { border-bottom-color: var(--gold); color: var(--pine); }
 .day-switch [aria-pressed=false] { opacity: .62; }
+.plan-overview { display: flex; align-items: baseline; gap: 12px; min-height: 40px; padding: 6px 0; }
+.plan-overview > span { color: var(--muted); font-size: 11px; }
+.plan-note { max-width: 850px; padding-top: 0; }
 .landscape { position: relative; height: clamp(580px, calc(100svh - 170px), 860px); isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--canvas); }
 .map-viewport { position: absolute; inset: 0; overflow: hidden; overscroll-behavior: contain; touch-action: none; scrollbar-width: thin; cursor: grab; }
 .map-viewport:active { cursor: grabbing; }
@@ -331,6 +334,10 @@ main { max-width: 1680px; margin: auto; }
 .time-settings { position: relative; }
 .time-settings summary { cursor: pointer; min-height: 34px; padding: 7px 6px; font-size: 11px; list-style: none; }
 .time-settings > div { position: absolute; right: 0; top: 100%; z-index: 5; width: 210px; padding: 12px; background: var(--paper); border: 1px solid var(--line); }
+.plan-setting { margin: 0 0 8px; padding: 0 0 8px; border: 0; border-bottom: 1px solid var(--line); }
+.plan-setting legend { padding: 0; font-size: 12px; color: var(--muted); }
+.plan-setting label { display: flex; align-items: center; gap: 7px; min-height: 40px; font-size: 13px; cursor: pointer; }
+.plan-setting input { margin: 0; accent-color: var(--map-today); }
 /* Details never expand the always-visible itinerary. */
 .map-detail { position: absolute; z-index: 2; right: 32px; bottom: 76px; width: 250px; max-height: 35%; overflow: auto; padding: 10px 12px; background: rgba(255,252,245,.96); border: 1px solid var(--line); }
 .map-detail .step-detail { padding: 0; }
@@ -363,7 +370,7 @@ main { max-width: 1680px; margin: auto; }
   html, body { height: auto !important; overflow: visible !important; }
   main { height: auto !important; }
   body { padding: 0; background: #fff; font-size: 11px; }
-  .header, .bottom-nav, .skip, .toast, .location-pointer, .day-switch, .itinerary-inscription, .map-search, .map-caption, .map-detail, .map-controls, .journey-log, .quiet-button, [data-view=weather], [data-view=notes] { display: none !important; }
+  .header, .bottom-nav, .skip, .toast, .location-pointer, .day-switch, .itinerary-inscription, .map-search, .map-caption, .map-detail, .map-controls, .journey-log, .journey-actions, .quiet-button, [data-view=weather], [data-view=notes] { display: none !important; }
   [data-view=home][hidden] { display: block !important; }
   .journey-heading { padding: 10px 0; }
   .landscape { height: auto; min-height: 0; max-height: none; overflow: visible; border: 0; }

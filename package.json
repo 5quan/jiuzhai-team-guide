@@ -1,9 +1,9 @@
 {
   "name": "jiuzhai-team-guide",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "两天行程参考手册，提供便捷的天气和地图查看方式",
+  "description": "一天或两天行程参考手册，提供便捷的天气和地图查看方式",
   "engines": { "node": ">=22" },
   "scripts": {
     "start": "node server.mjs",

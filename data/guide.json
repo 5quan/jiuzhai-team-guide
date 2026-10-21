@@ -1188,6 +1188,434 @@
           }
         ],
         "note": "完整游览后出沟、取行李，再去黄龙九寨站附近酒店。"
+      },
+      {
+        "id": "s1-entry",
+        "locations": [
+          "park-gate",
+          "changhai"
+        ],
+        "legs": [
+          {
+            "id": "s1-entry-leg",
+            "from": "park-gate",
+            "to": "changhai",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "乘车途中车览上下季节海，不安排随意下车。",
+                "via": [
+                  "nuorilang-center",
+                  "lower-seasonal",
+                  "upper-seasonal"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "乘车途中车览上下季节海，不安排随意下车。"
+      },
+      {
+        "id": "s1-changhai",
+        "locations": [
+          "changhai",
+          "changhai-cypress",
+          "changhai-boardwalk"
+        ],
+        "legs": [],
+        "note": "按参考图游览独臂老人柏和临湖栈道。"
+      },
+      {
+        "id": "s1-pool-walk",
+        "locations": [
+          "changhai",
+          "wucaichi"
+        ],
+        "legs": [
+          {
+            "id": "s1-pool-walk-leg",
+            "from": "changhai",
+            "to": "wucaichi",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "沿开放栈道下行，台阶放慢。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "沿开放栈道下行，台阶放慢。"
+      },
+      {
+        "id": "s1-pool",
+        "locations": [
+          "wucaichi",
+          "wucaichi-boardwalk"
+        ],
+        "legs": [],
+        "note": "按参考图在临湖栈道观景。"
+      },
+      {
+        "id": "s1-pool-stop",
+        "locations": [
+          "wucaichi-boardwalk",
+          "wucaichi-stop"
+        ],
+        "legs": [
+          {
+            "id": "s1-pool-stop-leg",
+            "from": "wucaichi",
+            "to": "wucaichi-stop",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "看完五彩池，按指引走到实际上车点。",
+                "via": [
+                  "wucaichi-boardwalk"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "看完五彩池，按指引走到实际上车点。"
+      },
+      {
+        "id": "s1-center",
+        "locations": [
+          "wucaichi-stop",
+          "nuorilang-center"
+        ],
+        "legs": [
+          {
+            "id": "s1-center-leg",
+            "from": "wucaichi-stop",
+            "to": "nuorilang-center",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "mixed",
+                "label": "车＋步行",
+                "note": "参考图包含等车、乘车和换乘步行。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "参考图包含等车、乘车和换乘步行。"
+      },
+      {
+        "id": "s1-lunch",
+        "locations": [
+          "nuorilang-center"
+        ],
+        "legs": [],
+        "note": "五彩池返回诺日朗中心后，预留40分钟午餐与休息，再前往五花海。"
+      },
+      {
+        "id": "s1-wuhua-bus",
+        "locations": [
+          "nuorilang-center",
+          "wuhuahai"
+        ],
+        "legs": [
+          {
+            "id": "s1-wuhua-bus-leg",
+            "from": "nuorilang-center",
+            "to": "wuhuahai",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按一天精华版预留5分钟车程；实际停靠、候车和左右沟先后以现场调度为准。",
+                "via": [
+                  "mirror"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "按一天精华版预留5分钟车程；实际停靠、候车和左右沟先后以现场调度为准。"
+      },
+      {
+        "id": "s1-wuhua",
+        "locations": [
+          "wuhuahai",
+          "wuhua-boardwalk"
+        ],
+        "legs": [],
+        "note": "游览几个重点观景台，按一天精华版停留30分钟。"
+      },
+      {
+        "id": "s1-pearl-bus",
+        "locations": [
+          "wuhuahai",
+          "pearl-shoal"
+        ],
+        "legs": [
+          {
+            "id": "s1-pearl-bus-leg",
+            "from": "wuhuahai",
+            "to": "pearl-shoal",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按参考表等车并乘观光车前往珍珠滩，此段合计8分钟，不另加候车时间。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "按参考表等车并乘观光车前往珍珠滩，此段合计8分钟，不另加候车时间。"
+      },
+      {
+        "id": "s1-pearl",
+        "locations": [
+          "pearl-shoal",
+          "pearl"
+        ],
+        "legs": [],
+        "note": "参考图安排两个观景点位，滩流与瀑布连游。"
+      },
+      {
+        "id": "s1-parking",
+        "locations": [
+          "pearl",
+          "mirror-parking"
+        ],
+        "legs": [
+          {
+            "id": "s1-parking-leg",
+            "from": "pearl",
+            "to": "mirror-parking",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "从珍珠滩瀑布步行到镜海停车场，镜海默认车览；如临时下车游览，另预留15分钟，当前预计出沟时间未计入。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "从珍珠滩瀑布步行到镜海停车场，镜海默认车览；如临时下车游览，另预留15分钟，当前预计出沟时间未计入。"
+      },
+      {
+        "id": "s1-center-return",
+        "locations": [
+          "mirror-parking",
+          "nuorilang-center"
+        ],
+        "legs": [
+          {
+            "id": "s1-center-return-leg",
+            "from": "mirror-parking",
+            "to": "nuorilang-center",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按参考表等车并乘观光车回诺日朗中心，合计10分钟，不另加候车时间。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "按参考表等车并乘观光车回诺日朗中心，合计10分钟，不另加候车时间。"
+      },
+      {
+        "id": "s1-walk-falls",
+        "locations": [
+          "nuorilang-center",
+          "nuorilang"
+        ],
+        "legs": [
+          {
+            "id": "s1-walk-falls-leg",
+            "from": "nuorilang-center",
+            "to": "nuorilang",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "中心站与瀑布不同点，按开放步行指引前往。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "中心站与瀑布不同点，按开放步行指引前往。"
+      },
+      {
+        "id": "s1-nuorilang",
+        "locations": [
+          "nuorilang",
+          "nuorilang-view"
+        ],
+        "legs": [],
+        "note": "按参考图游览瀑布及诺日朗观景平台。"
+      },
+      {
+        "id": "s1-falls-stop",
+        "locations": [
+          "nuorilang",
+          "nuorilang-stop"
+        ],
+        "legs": [
+          {
+            "id": "s1-falls-stop-leg",
+            "from": "nuorilang",
+            "to": "nuorilang-stop",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "走到实际出沟方向站点，不在瀑布旁候车。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "走到实际出沟方向站点，不在瀑布旁候车。"
+      },
+      {
+        "id": "s1-rhino-bus",
+        "locations": [
+          "nuorilang-stop",
+          "rhino"
+        ],
+        "legs": [
+          {
+            "id": "s1-rhino-bus-leg",
+            "from": "nuorilang-stop",
+            "to": "rhino",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "按开放站点乘车，参考图此段为观光车。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "按开放站点乘车，参考图此段为观光车。"
+      },
+      {
+        "id": "s1-rhino",
+        "locations": [
+          "rhino",
+          "rhino-view"
+        ],
+        "legs": [],
+        "note": "下车后按参考图提示，向内侧观景台看湖面。"
+      },
+      {
+        "id": "s1-tree-bus",
+        "locations": [
+          "rhino",
+          "shuzheng-village"
+        ],
+        "legs": [
+          {
+            "id": "s1-tree-bus-leg",
+            "from": "rhino",
+            "to": "shuzheng-village",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "等车并乘观光车到树正寨，参考表此段合计8分钟，不另加候车时间。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "等车并乘观光车到树正寨，参考表此段合计8分钟，不另加候车时间。"
+      },
+      {
+        "id": "s1-tree",
+        "locations": [
+          "shuzheng-village",
+          "shuzheng",
+          "shuzheng-view"
+        ],
+        "legs": [],
+        "note": "游览树正寨和树正群海观景平台，参考25分钟。"
+      },
+      {
+        "id": "s1-inner",
+        "locations": [
+          "shuzheng",
+          "shuzheng-inner",
+          "spark"
+        ],
+        "legs": [
+          {
+            "id": "s1-inner-leg",
+            "from": "shuzheng",
+            "to": "spark",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "walk",
+                "label": "步行",
+                "note": "沿当天开放的内侧栈道，从树正群海走至火花海，参考60分钟。",
+                "via": [
+                  "shuzheng-inner"
+                ]
+              }
+            ]
+          }
+        ],
+        "note": "沿当天开放的内侧栈道，从树正群海走至火花海，参考60分钟。"
+      },
+      {
+        "id": "s1-spark",
+        "locations": [
+          "spark"
+        ],
+        "legs": [],
+        "note": "按一天精华版在火花海停留10分钟，再乘车出沟。"
+      },
+      {
+        "id": "s1-exit",
+        "locations": [
+          "spark",
+          "park-gate"
+        ],
+        "legs": [
+          {
+            "id": "s1-exit-leg",
+            "from": "spark",
+            "to": "park-gate",
+            "recommended": 0,
+            "options": [
+              {
+                "mode": "bus",
+                "label": "观光车",
+                "note": "等车并乘观光车出景区，参考表此段合计16分钟；后续交通自行安排。",
+                "via": []
+              }
+            ]
+          }
+        ],
+        "note": "等车并乘观光车出景区，参考表此段合计16分钟；后续交通自行安排。"
       }
     ]
   },
@@ -1196,5 +1624,451 @@
     "defaultEntry": "10:00",
     "lunchMinutes": 40,
     "note": "顺序、交通和逐段分钟数按用户提供的两天休闲版录入。钟点按预计入园时间累计，仅为估算；沿用原表逐行用时，不额外重复追加拍照或候车分钟。两天先后可互换，现场开放与调度优先。"
-  }
+  },
+  "plans": [
+    {
+      "id": "two-days",
+      "label": "两天慢游",
+      "dayIds": [
+        "day1",
+        "day2"
+      ]
+    },
+    {
+      "id": "one-day",
+      "label": "一天精华游",
+      "dayIds": [
+        "essence"
+      ]
+    }
+  ],
+  "referenceDays": [
+    {
+      "id": "essence",
+      "label": "一天精华游",
+      "subtitle": "三沟精华 · 约8小时",
+      "startTime": "10:00",
+      "spotIds": [
+        "changhai",
+        "changhai-cypress",
+        "changhai-boardwalk",
+        "wucaichi",
+        "wucaichi-boardwalk",
+        "wuhuahai",
+        "wuhua-boardwalk",
+        "pearl-shoal",
+        "pearl",
+        "nuorilang",
+        "nuorilang-view",
+        "rhino",
+        "rhino-view",
+        "shuzheng-village",
+        "shuzheng",
+        "shuzheng-view",
+        "shuzheng-inner",
+        "spark"
+      ],
+      "note": "按一天精华版逐行用时安排，已另留40分钟午餐；表中等车与车程不重复加时。左右沟先后可随现场调度调整。镜海默认车览，临时下车另预留15分钟（未计入预计出沟时间）。所有钟点为规划估算。",
+      "events": [
+        {
+          "id": "s1-entry",
+          "title": "入园，乘车前往长海",
+          "duration": 40,
+          "mode": "bus",
+          "spotIds": [
+            "park-gate",
+            "changhai"
+          ],
+          "detail": "乘车途中车览上下季节海，不安排随意下车。",
+          "from": "park-gate",
+          "to": "changhai",
+          "via": [
+            "nuorilang-center",
+            "lower-seasonal",
+            "upper-seasonal"
+          ],
+          "time": "10:00—10:40",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-entry"
+        },
+        {
+          "id": "s1-changhai",
+          "title": "长海",
+          "duration": 30,
+          "mode": "visit",
+          "spotIds": [
+            "changhai",
+            "changhai-cypress",
+            "changhai-boardwalk"
+          ],
+          "detail": "按参考图游览独臂老人柏和临湖栈道。",
+          "time": "10:40—11:10",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-changhai"
+        },
+        {
+          "id": "s1-pool-walk",
+          "title": "从长海步行到五彩池",
+          "duration": 20,
+          "mode": "walk",
+          "spotIds": [
+            "changhai",
+            "wucaichi"
+          ],
+          "detail": "沿开放栈道下行，台阶放慢。",
+          "from": "changhai",
+          "to": "wucaichi",
+          "via": [],
+          "time": "11:10—11:30",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-pool-walk"
+        },
+        {
+          "id": "s1-pool",
+          "title": "五彩池临湖栈道",
+          "duration": 10,
+          "mode": "visit",
+          "spotIds": [
+            "wucaichi",
+            "wucaichi-boardwalk"
+          ],
+          "detail": "按参考图在临湖栈道观景。",
+          "time": "11:30—11:40",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-pool"
+        },
+        {
+          "id": "s1-pool-stop",
+          "title": "步行到五彩池上车点",
+          "duration": 10,
+          "mode": "walk",
+          "spotIds": [
+            "wucaichi-boardwalk",
+            "wucaichi-stop"
+          ],
+          "detail": "看完五彩池，按指引走到实际上车点。",
+          "from": "wucaichi",
+          "to": "wucaichi-stop",
+          "via": [
+            "wucaichi-boardwalk"
+          ],
+          "time": "11:40—11:50",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-pool-stop"
+        },
+        {
+          "id": "s1-center",
+          "title": "返回诺日朗中心换乘",
+          "duration": 30,
+          "mode": "mixed",
+          "spotIds": [
+            "wucaichi-stop",
+            "nuorilang-center"
+          ],
+          "detail": "参考图包含等车、乘车和换乘步行。",
+          "from": "wucaichi-stop",
+          "to": "nuorilang-center",
+          "via": [],
+          "time": "11:50—12:20",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-center"
+        },
+        {
+          "id": "s1-lunch",
+          "title": "午餐与休息",
+          "duration": 40,
+          "mode": "rest",
+          "spotIds": [
+            "nuorilang-center"
+          ],
+          "detail": "五彩池返回诺日朗中心后，预留40分钟午餐与休息，再前往五花海。",
+          "time": "12:20—13:00",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-lunch"
+        },
+        {
+          "id": "s1-wuhua-bus",
+          "title": "从诺日朗乘车到五花海",
+          "duration": 5,
+          "mode": "bus",
+          "spotIds": [
+            "nuorilang-center",
+            "wuhuahai"
+          ],
+          "detail": "按一天精华版预留5分钟车程；实际停靠、候车和左右沟先后以现场调度为准。",
+          "from": "nuorilang-center",
+          "to": "wuhuahai",
+          "via": [
+            "mirror"
+          ],
+          "status": "一天精华版参考",
+          "routeId": "s1-wuhua-bus",
+          "time": "13:00—13:05",
+          "period": "morning"
+        },
+        {
+          "id": "s1-wuhua",
+          "title": "五花海",
+          "duration": 30,
+          "mode": "visit",
+          "spotIds": [
+            "wuhuahai",
+            "wuhua-boardwalk"
+          ],
+          "detail": "游览几个重点观景台，按一天精华版停留30分钟。",
+          "time": "13:05—13:35",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-wuhua"
+        },
+        {
+          "id": "s1-pearl-bus",
+          "title": "等车，前往珍珠滩",
+          "duration": 8,
+          "mode": "bus",
+          "spotIds": [
+            "wuhuahai",
+            "pearl-shoal"
+          ],
+          "detail": "按参考表等车并乘观光车前往珍珠滩，此段合计8分钟，不另加候车时间。",
+          "from": "wuhuahai",
+          "to": "pearl-shoal",
+          "via": [],
+          "time": "13:35—13:43",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-pearl-bus"
+        },
+        {
+          "id": "s1-pearl",
+          "title": "珍珠滩瀑布",
+          "duration": 25,
+          "mode": "visit",
+          "spotIds": [
+            "pearl-shoal",
+            "pearl"
+          ],
+          "detail": "参考图安排两个观景点位，滩流与瀑布连游。",
+          "time": "13:43—14:08",
+          "period": "morning",
+          "status": "一天精华版参考",
+          "routeId": "s1-pearl"
+        },
+        {
+          "id": "s1-parking",
+          "title": "步行至镜海停车场",
+          "duration": 15,
+          "mode": "walk",
+          "spotIds": [
+            "pearl",
+            "mirror-parking"
+          ],
+          "detail": "从珍珠滩瀑布步行到镜海停车场，镜海默认车览；如临时下车游览，另预留15分钟，当前预计出沟时间未计入。",
+          "from": "pearl",
+          "to": "mirror-parking",
+          "via": [],
+          "time": "14:08—14:23",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-parking"
+        },
+        {
+          "id": "s1-center-return",
+          "title": "等车，前往诺日朗中心",
+          "duration": 10,
+          "mode": "bus",
+          "spotIds": [
+            "mirror-parking",
+            "nuorilang-center"
+          ],
+          "detail": "按参考表等车并乘观光车回诺日朗中心，合计10分钟，不另加候车时间。",
+          "from": "mirror-parking",
+          "to": "nuorilang-center",
+          "via": [],
+          "time": "14:23—14:33",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-center-return"
+        },
+        {
+          "id": "s1-walk-falls",
+          "title": "从中心步行到诺日朗瀑布",
+          "duration": 15,
+          "mode": "walk",
+          "spotIds": [
+            "nuorilang-center",
+            "nuorilang"
+          ],
+          "detail": "中心站与瀑布不同点，按开放步行指引前往。",
+          "from": "nuorilang-center",
+          "to": "nuorilang",
+          "via": [],
+          "time": "14:33—14:48",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-walk-falls"
+        },
+        {
+          "id": "s1-nuorilang",
+          "title": "诺日朗瀑布与观景台",
+          "duration": 30,
+          "mode": "visit",
+          "spotIds": [
+            "nuorilang",
+            "nuorilang-view"
+          ],
+          "detail": "按参考图游览瀑布及诺日朗观景平台。",
+          "time": "14:48—15:18",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-nuorilang"
+        },
+        {
+          "id": "s1-falls-stop",
+          "title": "从瀑布步行到上车点",
+          "duration": 15,
+          "mode": "walk",
+          "spotIds": [
+            "nuorilang",
+            "nuorilang-stop"
+          ],
+          "detail": "走到实际出沟方向站点，不在瀑布旁候车。",
+          "from": "nuorilang",
+          "to": "nuorilang-stop",
+          "via": [],
+          "time": "15:18—15:33",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-falls-stop"
+        },
+        {
+          "id": "s1-rhino-bus",
+          "title": "等车，前往犀牛海",
+          "duration": 10,
+          "mode": "bus",
+          "spotIds": [
+            "nuorilang-stop",
+            "rhino"
+          ],
+          "detail": "按开放站点乘车，参考图此段为观光车。",
+          "from": "nuorilang-stop",
+          "to": "rhino",
+          "via": [],
+          "time": "15:33—15:43",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-rhino-bus"
+        },
+        {
+          "id": "s1-rhino",
+          "title": "犀牛海",
+          "duration": 15,
+          "mode": "visit",
+          "spotIds": [
+            "rhino",
+            "rhino-view"
+          ],
+          "detail": "下车后按参考图提示，向内侧观景台看湖面。",
+          "time": "15:43—15:58",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-rhino"
+        },
+        {
+          "id": "s1-tree-bus",
+          "title": "等车，前往树正寨",
+          "duration": 8,
+          "mode": "bus",
+          "spotIds": [
+            "rhino",
+            "shuzheng-village"
+          ],
+          "detail": "等车并乘观光车到树正寨，参考表此段合计8分钟，不另加候车时间。",
+          "from": "rhino",
+          "to": "shuzheng-village",
+          "via": [],
+          "time": "15:58—16:06",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-tree-bus"
+        },
+        {
+          "id": "s1-tree",
+          "title": "树正寨与群海观景台",
+          "duration": 25,
+          "mode": "visit",
+          "spotIds": [
+            "shuzheng-village",
+            "shuzheng",
+            "shuzheng-view"
+          ],
+          "detail": "游览树正寨和树正群海观景平台，参考25分钟。",
+          "time": "16:06—16:31",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-tree"
+        },
+        {
+          "id": "s1-inner",
+          "title": "树正群海内侧栈道至火花海",
+          "duration": 60,
+          "mode": "walk",
+          "spotIds": [
+            "shuzheng",
+            "shuzheng-inner",
+            "spark"
+          ],
+          "detail": "沿当天开放的内侧栈道，从树正群海走至火花海，参考60分钟。",
+          "from": "shuzheng",
+          "to": "spark",
+          "via": [
+            "shuzheng-inner"
+          ],
+          "time": "16:31—17:31",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-inner"
+        },
+        {
+          "id": "s1-spark",
+          "title": "火花海",
+          "duration": 10,
+          "mode": "visit",
+          "spotIds": [
+            "spark"
+          ],
+          "detail": "按一天精华版在火花海停留10分钟，再乘车出沟。",
+          "time": "17:31—17:41",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-spark"
+        },
+        {
+          "id": "s1-exit",
+          "title": "等车，乘车出沟",
+          "duration": 16,
+          "mode": "bus",
+          "spotIds": [
+            "spark",
+            "park-gate"
+          ],
+          "detail": "等车并乘观光车出景区，参考表此段合计16分钟；后续交通自行安排。",
+          "from": "spark",
+          "to": "park-gate",
+          "via": [],
+          "time": "17:41—17:57",
+          "period": "afternoon",
+          "status": "一天精华版参考",
+          "routeId": "s1-exit"
+        }
+      ]
+    }
+  ]
 }
