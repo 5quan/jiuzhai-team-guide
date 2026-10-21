@@ -50,14 +50,14 @@ const path = require('node:path');
         const input=document.querySelector('#entry-time').getBoundingClientRect();
         const exit=document.querySelector('#exit-time').getBoundingClientRect();
         const metas=[...list.querySelectorAll('.step-meta')];
-        const timesCollapsed=metas.length>0&&metas.every(meta=>meta.hidden);
+        const timesVisible=metas.length>0&&metas.every(meta=>!meta.hidden&&meta.getBoundingClientRect().height>0);
         const transports=[...list.querySelectorAll('.schedule-leg, .timeline-self-leg')];
         const transportVisible=transports.length>0&&transports.every(row=>row.getBoundingClientRect().height>0);
-        return { width: innerWidth, clientWidth:document.documentElement.clientWidth, page: document.documentElement.scrollWidth, mapTop:stage.top+scrollY, panelWidth:panel.width, panelRatio:panel.width/map.width, timesCollapsed, transportVisible, contentFits:list.scrollWidth<=list.clientWidth+1 && true, stageHeight: stage.height, mapRatio: map.width / stage.width, overlap: panel.left >= map.left && panel.right <= map.right && panel.top >= map.top && panel.bottom <= map.bottom + 1 };
+        return { width: innerWidth, clientWidth:document.documentElement.clientWidth, page: document.documentElement.scrollWidth, mapTop:stage.top+scrollY, panelWidth:panel.width, panelRatio:panel.width/map.width, timesVisible, transportVisible, contentFits:list.scrollWidth<=list.clientWidth+1 && true, stageHeight: stage.height, mapRatio: map.width / stage.width, overlap: panel.left >= map.left && panel.right <= map.right && panel.top >= map.top && panel.bottom <= map.bottom + 1 };
       });
-      assert.equal(layout.page, layout.clientWidth); assert.ok(layout.mapRatio > .99 && layout.overlap); assert.ok(layout.mapTop<=120 && layout.stageHeight <= 860, JSON.stringify(layout)); assert.ok(layout.contentFits && layout.timesCollapsed && layout.transportVisible); assert.ok(width<=700 ? layout.panelRatio<=.46 && layout.panelWidth<=184 : layout.panelWidth<=192); layouts.push(layout);
+      assert.equal(layout.page, layout.clientWidth); assert.ok(layout.mapRatio > .99 && layout.overlap); assert.ok(layout.mapTop<=120 && layout.stageHeight <= 860, JSON.stringify(layout)); assert.ok(layout.contentFits && layout.timesVisible && layout.transportVisible); assert.ok(width<=700 ? layout.panelRatio<=.46 && layout.panelWidth<=184 : layout.panelWidth<=192); layouts.push(layout);
     }
-    checks.push('320—1440px六档宽度无溢出；手机点线行程不超过46%画面，景点名默认收起时间、交通用时保持可见');
+    checks.push('320—1440px六档宽度无溢出；手机点线行程不超过46%画面，景点钟点常显、交通用时保持可见');
     checks.push('重复品牌栏已移除，分享与打印合并到小标题行；六档屏宽的地图起点不超过100px，复制链接正常');
     for (const testWidth of [1280,390]) {
       await page.setViewportSize({ width: testWidth, height: testWidth === 390 ? 844 : 1000 });
@@ -112,7 +112,7 @@ const path = require('node:path');
     await page.locator('[data-step="d1-wuhua"]').click();
     assert.match(await page.locator('#detail-d1-wuhua').innerText(), /吃一根烤肠/);
     assert.ok(await page.locator('#detail-d1-wuhua .spot-notes p').evaluate(node=>{
-      const text=node.getBoundingClientRect(),list=document.querySelector('#schedule-list').getBoundingClientRect();
+      const text=node.getBoundingClientRect(),list=document.querySelector('#map-detail').getBoundingClientRect();
       return text.top>=list.top && text.bottom<=list.bottom;
     }), 'The supplied food reminder should be visible when opening Wuhua Lake');
     assert.equal(await page.locator('#detail-d1-wuhua .note-empty').count(), 1);
@@ -137,7 +137,7 @@ const path = require('node:path');
     await page.mouse.up();
     assert.notEqual(await page.locator('#schematic .route-svg').evaluate(node=>node.style.transform),beforeDrag);
     assert.ok(await page.locator('#inscription').evaluate(node=>node.classList.contains('is-compact')));
-    assert.ok(await page.locator('#inscription').evaluate(node=>node.getBoundingClientRect().width<=150 && node.getBoundingClientRect().width<=innerWidth*.46));
+    assert.ok(await page.locator('#inscription').evaluate(node=>node.getBoundingClientRect().width<=184 && node.getBoundingClientRect().width<=innerWidth*.46));
     assert.equal(await page.locator('#inscription-settings').isVisible(),false);
     assert.equal(await page.locator('.inscription-heading').isVisible(),false);
     assert.equal(await page.locator('.step-detail:visible').count(),0);

@@ -90,15 +90,10 @@ main { max-width: 1680px; margin: auto; }
 .painting-title small { font: 15px var(--serif); letter-spacing: 4px; padding-top: 5px; }
 .painting-title i { display: none; padding: 4px 2px; margin-top: 74px; border: 1px solid var(--autumn); color: var(--autumn); font: normal 13px/1.2 var(--serif); }
 
-/* The itinerary hugs its widest line instead of keeping a fixed, emptier column. */
-.itinerary-inscription { position: absolute; top: var(--itinerary-top, 50%); left: 3.3%; width: var(--itinerary-width, fit-content); min-width: 132px; max-width: min(168px, calc(100% - 24px)); max-height: none; padding: 5px 7px 5px; border: 0; border-radius: 3px; color: var(--itinerary); display: flex; flex-direction: column; isolation: isolate; z-index: 2; background: radial-gradient(120% 80% at 18% 12%, rgba(255,255,255,.24), transparent 55%), repeating-linear-gradient(93deg, rgba(128,99,68,.028) 0 1px, transparent 1px 4px), rgba(250,246,237,.62); box-shadow: 0 0 18px rgba(250,246,237,.3); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); transition: top .18s ease; }
+/* A four-place itinerary overlays the painting with backing only behind text. */
+.itinerary-inscription { position: absolute; top: var(--itinerary-top, 50%); left: 3.3%; width: 192px; max-height: none; padding: 8px 10px; border: 0; background: none; color: var(--itinerary); display: flex; flex-direction: column; isolation: isolate; z-index: 2; }
 .timeline-ink { position: relative; display: inline-block; max-width: 100%; vertical-align: top; isolation: isolate; }
-/* Only the place name carries a small cream backing; times and transport stay plain. */
-.itinerary-inscription .place-name { padding: 0; margin: 0 -1px; border-radius: 2px; background: rgba(255,250,238,.9); box-shadow: 0 0 0 2px rgba(255,250,238,.52); word-break: keep-all; overflow-wrap: normal; }
-.itinerary-inscription .step-places .timeline-ink { word-break: keep-all; overflow-wrap: normal; }
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .itinerary-inscription { background-color: rgba(250,246,237,.78); }
-}
+.itinerary-inscription .timeline-ink::before { content: ''; position: absolute; inset: -1px -3px; z-index: -1; pointer-events: none; background: rgba(255,252,245,.82); border-radius: 3px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3px, #000 calc(100% - 3px), transparent); mask-image: linear-gradient(90deg, transparent, #000 3px, #000 calc(100% - 3px), transparent); }
 .inscription-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; }
 .inscription-heading p { font-size: 12px; color: var(--muted); }
 .inscription-heading .quiet-button { font-size: 12px; padding: 5px; flex-shrink: 0; min-height: 40px; }
@@ -112,7 +107,7 @@ main { max-width: 1680px; margin: auto; }
 .period-switch [aria-pressed=true] { color: var(--maple); border-bottom-color: var(--gold); font-weight: 600; }
 .itinerary-inscription .period-switch { border-bottom: 0; }
 .itinerary-inscription .period-switch [aria-pressed=true] { border-bottom-color: rgba(161,63,45,.45); }
-.schedule-list { list-style: none; padding: 0; margin: 0; max-height: var(--timeline-window, 306px); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: y proximity; scrollbar-width: thin; scrollbar-gutter: stable; scrollbar-color: rgba(128,99,68,.3) transparent; min-height: 0; }
+.schedule-list { list-style: none; padding: 0 5px 0 0; margin: 0; max-height: min(306px, var(--timeline-window, 306px)); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: y proximity; scrollbar-width: thin; scrollbar-color: rgba(128,99,68,.3) transparent; min-height: 70px; }
 .schedule-row { margin-bottom: 3px; }
 .schedule-row:last-child { border-bottom: 0; }
 .schedule-step { display: flex; align-items: baseline; gap: 7px; width: 100%; min-height: 44px; padding: 8px 0; border: 0; background: transparent; text-align: left; }
@@ -134,44 +129,44 @@ main { max-width: 1680px; margin: auto; }
 .spot-notes dt { color: var(--pine); font-size: 11px; letter-spacing: 1px; }
 .spot-notes dd { margin: 3px 0 0; font-size: 13px; color: var(--ink); line-height: 1.7; }
 .spot-notes .note-empty { height: 8px; border-bottom: 1px dotted var(--line); }
-.itinerary-inscription.is-compact { width: var(--itinerary-width, fit-content); }
+.itinerary-inscription.is-compact { width: 192px; }
+.is-compact .schedule-step { min-height: 40px; padding: 7px 0; }
 .is-compact .step-chevron { display: none; }
 
 /* Compact itinerary typography; map and system typography stay unchanged. */
 .itinerary-inscription { text-shadow: 0 1px 2px #fff; }
 .itinerary-inscription button, .itinerary-inscription input { text-shadow: inherit; }
-.itinerary-inscription .period-switch { gap: 10px; margin-bottom: 1px; }
-.itinerary-inscription .period-switch button { flex: 0 0 auto; min-height: 24px; padding: 1px 3px; line-height: 1.25; }
+.itinerary-inscription .period-switch { gap: 10px; margin-bottom: 2px; }
+.itinerary-inscription .period-switch button { flex: 0 0 auto; min-height: 30px; padding: 3px 5px; line-height: 1.3; }
 .itinerary-inscription .schedule-row { margin-bottom: 0; }
-.itinerary-inscription .schedule-step { display: block; min-height: 0; padding: 0; line-height: 1.25; }
-.itinerary-inscription .schedule-step strong { display: block; font-family: var(--serif); font-size: 15px; line-height: 1.25; }
-.itinerary-inscription .step-meta { margin-top: 0; font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; font-size: 11px; line-height: 1.3; white-space: normal; }
+.itinerary-inscription .schedule-step { display: block; min-height: 40px; padding: 0; line-height: 1.35; }
+.itinerary-inscription .schedule-step strong { display: block; font-family: var(--serif); font-size: 15px; line-height: 1.35; }
+.itinerary-inscription .step-meta { margin-top: 1px; font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; font-size: 11px; line-height: 1.35; white-space: normal; }
 .itinerary-inscription .step-meta time { white-space: nowrap; }
-.itinerary-inscription .step-detail { margin-left: 1px; padding: 3px 4px 4px 7px; border-left: 1px solid rgba(128,99,68,.34); border-radius: 0 2px 2px 0; background: rgba(255,250,238,.84); box-shadow: 0 0 0 2px rgba(255,250,238,.32); text-shadow: none; animation: detail-drop .16s ease-out; }
-.itinerary-inscription .step-places { gap: 1px 5px; margin-bottom: 2px; }
-.itinerary-inscription .step-places button { min-height: 22px; padding: 1px 0; font-family: var(--serif); font-size: 12px; line-height: 1.25; }
-.itinerary-inscription .spot-notes { gap: 4px; }
-.itinerary-inscription .spot-notes > div { display: block; }
-.itinerary-inscription .spot-notes dt { font-size: 11px; line-height: 1.35; letter-spacing: 0; }
-.itinerary-inscription .spot-notes dd { margin: 0; font-size: 12px; line-height: 1.5; }
+.itinerary-inscription .step-detail { padding-bottom: 5px; }
+.itinerary-inscription .step-places { gap: 2px 6px; margin-bottom: 3px; }
+.itinerary-inscription .step-places button { min-height: 30px; padding: 3px 0; font-family: var(--serif); font-size: 13px; line-height: 1.35; }
+.itinerary-inscription .spot-notes { gap: 3px; }
+.itinerary-inscription .spot-notes > div { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; column-gap: 5px; }
+.itinerary-inscription .spot-notes dt { font-size: 11px; line-height: 1.45; letter-spacing: 0; }
+.itinerary-inscription .spot-notes dd { margin: 0; font-size: 12px; line-height: 1.45; }
 .itinerary-inscription .spot-notes .is-empty { display: none; }
 .itinerary-inscription .inscription-heading { padding: 0 0 2px; }
 .itinerary-inscription .inscription-heading .quiet-button { min-height: 28px; padding: 2px 4px; }
-@keyframes detail-drop { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
-.timeline-stop { position: relative; padding: 0 0 1px 13px; scroll-snap-align: start; }
+.timeline-stop { position: relative; padding: 0 0 4px 16px; scroll-snap-align: start; }
 .timeline-stop::before { content: ''; position: absolute; left: 4px; top: 0; bottom: 0; width: 1px; background: rgba(128,99,68,.55); }
-.timeline-stop:last-child::before { bottom: 20px; }
+.timeline-stop:last-child::before { bottom: 28px; }
 .timeline-connection:empty { display: none; }
-.timeline-node { position: relative; display: block; min-height: 0; }
-.timeline-node::before { content: ''; position: absolute; left: -13px; top: 5px; width: 8px; height: 8px; border: 1px solid var(--gold-ink); border-radius: 50%; background: var(--paper); }
-.timeline-node::after { content: ''; position: absolute; left: -5px; top: 9px; width: 5px; height: 1px; background: rgba(128,99,68,.55); }
+.timeline-node { position: relative; display: block; min-height: 36px; }
+.timeline-node::before { content: ''; position: absolute; left: -16px; top: 6px; width: 8px; height: 8px; border: 1px solid var(--gold-ink); border-radius: 50%; background: var(--paper); }
+.timeline-node::after { content: ''; position: absolute; left: -8px; top: 10px; width: 8px; height: 1px; background: rgba(128,99,68,.55); }
 .timeline-stop.is-active .timeline-node::before { background: var(--maple); border-color: var(--maple); }
-.schedule-leg, .timeline-self-leg { position: relative; display: block; width: 100%; min-height: 0; padding: 0; border: 0; background: none; color: #71502d; font: 11px/1.35 "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; text-align: left; }
-.schedule-leg::before, .timeline-self-leg::before { content: ''; position: absolute; left: -9px; top: 7px; width: 5px; height: 1px; background: rgba(128,99,68,.55); }
+.schedule-leg, .timeline-self-leg { position: relative; display: block; width: 100%; min-height: 20px; padding: 0; border: 0; background: none; color: #71502d; font: 11px/1.5 "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; text-align: left; }
+.schedule-leg::before, .timeline-self-leg::before { content: ''; position: absolute; left: -11px; top: 10px; width: 7px; height: 1px; background: rgba(128,99,68,.55); }
 .schedule-row.selected .schedule-leg { color: var(--maple); font-weight: 600; }
 .travel-icon { width: 12px; height: 12px; margin-right: 3px; vertical-align: -1px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.itinerary-inscription .travel-icon { width: 11px; height: 11px; vertical-align: -1px; }
-.timeline-stop .step-detail { padding: 2px 0 4px 8px; }
+.itinerary-inscription .travel-icon { width: 11px; height: 11px; }
+.timeline-stop .step-detail { padding: 3px 0 6px; }
 
 
 .location-pointer { position: absolute; width: 24px; height: 40px; transform: translate(-50%, -100%); pointer-events: none; z-index: 1; filter: drop-shadow(0 1px 2px rgba(101,67,33,.2)); }
@@ -214,9 +209,6 @@ main { max-width: 1680px; margin: auto; }
 .map-legend small { font-size: 11px; }
 .map-footnote { padding: 14px 48px; font-size: 12px; color: var(--muted); }
 .map-footnote .text-link { margin-left: 12px; }
-.journey-log { margin: 4px 48px 28px; padding: 14px 0; border-top: 1px solid var(--line); }
-.journey-log > summary { cursor: pointer; font-size: 13px; }
-.journey-log > summary > span { color: var(--muted); margin-left: 18px; font-size: 12px; }
 .travel-days { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px; padding: 22px 0; }
 .travel-days h3 { font-family: var(--serif); font-size: 19px; margin-bottom: 5px; }
 .stay-note { color: var(--muted); font-size: 12px; }
@@ -289,8 +281,8 @@ main { max-width: 1680px; margin: auto; }
   .map-caption { top: 78px; right: 16px; max-width: 46%; padding: 6px 0 6px 9px; }
   .map-caption > p { font-size: 10px; }
   .map-caption h3 { font-size: 22px; margin: 3px 0; }
-  .itinerary-inscription { bottom: auto; left: 10px; width: var(--itinerary-width, fit-content); max-width: min(168px, calc(100% - 20px)); max-height: none; padding: 5px 6px; }
-  .itinerary-inscription.is-compact { width: var(--itinerary-width, fit-content); }
+  .itinerary-inscription { bottom: auto; left: 10px; width: min(184px, 46%); max-height: none; padding: 7px; }
+  .itinerary-inscription.is-compact { width: min(184px, 46%); }
 
   .inscription-heading { padding: 2px 0; }
   .inscription-heading p, .inscription-heading .quiet-button { font-size: 11px; }
@@ -300,7 +292,7 @@ main { max-width: 1680px; margin: auto; }
   .timing-warning { font-size: 11px; }
   .period-switch { gap: 0; }
   .period-switch button { min-height: 38px; padding: 6px 4px; font-size: 11px; }
-  .schedule-list { padding-right: 2px; -webkit-overflow-scrolling: touch; }
+  .schedule-list { padding-right: 5px; -webkit-overflow-scrolling: touch; }
   .schedule-step { min-height: 48px; padding: 8px 0; gap: 5px; }
   .schedule-step strong { font-size: 13px; }
   .step-meta { font-size: 11px; }
@@ -315,10 +307,6 @@ main { max-width: 1680px; margin: auto; }
   .map-controls button:first-child, .map-controls button:nth-child(2) { font-size: 18px; }
   .map-controls output { display: none; }
   .map-footnote { padding: 12px 16px; font-size: 11px; }
-  .journey-log { margin: 0 16px 20px; }
-  .journey-log > summary { font-size: 12px; }
-  .journey-log > summary > span { display: block; margin: 4px 0 0; font-size: 11px; }
-  .travel-days { grid-template-columns: 1fr; gap: 22px; }
   .secondary-view { padding: 24px max(16px, env(safe-area-inset-right)) 24px max(16px, env(safe-area-inset-left)); max-width: none; }
   .page-heading h1 { font-size: 28px; }
   .page-heading { gap: 8px; }
@@ -344,11 +332,17 @@ main { max-width: 1680px; margin: auto; }
 .plan-setting legend { padding: 0; font-size: 12px; color: var(--muted); }
 .plan-setting label { display: flex; align-items: center; gap: 7px; min-height: 40px; font-size: 13px; cursor: pointer; }
 .plan-setting input { margin: 0; accent-color: var(--map-today); }
-/* Expanded stops grow inside the inscription itself; no separate detail card. */
+/* Details never expand the always-visible itinerary. */
+.map-detail { position: absolute; z-index: 2; right: 32px; bottom: 76px; width: 250px; max-height: 35%; overflow: auto; padding: 10px 12px; background: rgba(255,252,245,.96); border: 1px solid var(--line); }
+.map-detail .step-detail { padding: 0; }
+.detail-title { font: 15px/1.4 var(--serif); margin-bottom: 6px; }
+.map-detail .spot-notes .is-empty { display: none; }
 .map-viewport.is-moving .route-svg { will-change: transform; }
 .itinerary-inscription .inscription-heading { display: none; }
 
 @media (max-width: 700px) {
+  .map-detail { right: 10px; bottom: 70px; width: calc(50% - 14px); max-height: 30%; padding: 8px; }
+  .map-detail .spot-notes dd { font-size: 12px; }
   .painting-title { gap: 6px; }
   .painting-title > span { font-size: 26px; letter-spacing: 3px; }
   .painting-title small { font-size: 11px; letter-spacing: 1px; }
@@ -358,9 +352,11 @@ main { max-width: 1680px; margin: auto; }
   .painting-title { display: none; }
   .itinerary-inscription { padding: 4px; }
   .itinerary-inscription .schedule-step strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2; }
-  .itinerary-inscription .step-meta { line-height: 1.2; }
+  .itinerary-inscription .step-meta { white-space: nowrap; line-height: 1.2; }
   .itinerary-inscription .timeline-stop { padding-bottom: 0; }
-  .itinerary-inscription .schedule-leg, .itinerary-inscription .timeline-self-leg { line-height: 1.3; }
+  .itinerary-inscription .timeline-node { min-height: 32px; }
+  .itinerary-inscription .schedule-step { min-height: 34px; }
+  .itinerary-inscription .schedule-leg, .itinerary-inscription .timeline-self-leg { min-height: 18px; line-height: 1.4; }
   .map-legend { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
@@ -368,7 +364,7 @@ main { max-width: 1680px; margin: auto; }
   html, body { height: auto !important; overflow: visible !important; }
   main { height: auto !important; }
   body { padding: 0; background: #fff; font-size: 11px; }
-  .header, .bottom-nav, .skip, .toast, .location-pointer, .day-switch, .itinerary-inscription, .map-search, .map-caption, .map-controls, .journey-log, .journey-actions, .quiet-button, [data-view=weather], [data-view=notes] { display: none !important; }
+  .header, .bottom-nav, .skip, .toast, .location-pointer, .day-switch, .itinerary-inscription, .map-search, .map-caption, .map-detail, .map-controls, .journey-log, .journey-actions, .quiet-button, [data-view=weather], [data-view=notes] { display: none !important; }
   [data-view=home][hidden] { display: block !important; }
   .journey-heading { padding: 10px 0; }
   .landscape { height: auto; min-height: 0; max-height: none; overflow: visible; border: 0; }

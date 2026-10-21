@@ -1,50 +1,37 @@
 {
-  "checkedAt": "2026-10-21T17:04:56.254Z",
+  "checkedAt": "2026-10-21T17:19:17.877Z",
   "collapsed": {
-    "panelBackground": "rgba(250, 246, 237, 0.62)",
-    "nameBackground": "rgba(255, 250, 238, 0.9)",
-    "names": 7,
-    "timesCollapsed": true,
+    "panelBackground": "rgba(0, 0, 0, 0)",
+    "panelWidth": 179.390625,
+    "panelHeight": 253,
+    "timesVisible": true,
     "transportVisible": true,
+    "backing": "rgba(255, 252, 245, 0.82)",
+    "backingInset": "-1px -3px",
     "currentOpacity": "1",
     "otherPeriodOpacity": "0.32",
     "otherDayOpacity": "0.32",
     "compact": true,
-    "panelWidth": 132,
-    "panelHeight": 142,
-    "panelTop": 433.328125,
-    "maxStopGap": 0
+    "fullLogPresent": false,
+    "mapFootnotePresent": false,
+    "detailCardPresent": true
   },
   "opened": {
     "expanded": "true",
-    "timeVisible": true,
     "detailVisible": true,
-    "detailInline": true,
-    "detailBelowRow": true,
-    "panelTop": 433.328125,
-    "panelHeight": 296,
-    "panelWidth": 132,
-    "compact": false
+    "detailInCard": true,
+    "cardVisible": true,
+    "panelWidth": 179.390625,
+    "panelHeight": 253
   },
   "closed": {
     "expanded": "false",
-    "timeHidden": true,
-    "compact": true,
-    "panelHeight": 142
+    "cardVisible": false,
+    "detailVisible": false
   },
   "fadedAfternoon": {
     "currentOpacity": "1",
     "morningOpacity": "0.32"
-  },
-  "expandedLayout": {
-    "left": 10,
-    "right": 142,
-    "top": 255.46875,
-    "bottom": 551.46875,
-    "width": 132,
-    "height": 296,
-    "navTop": 781.859375,
-    "viewport": 390
   },
   "errors": []
 }

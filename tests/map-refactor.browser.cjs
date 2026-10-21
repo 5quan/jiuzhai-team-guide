@@ -46,7 +46,7 @@ const fs = require('node:fs');
     }
     await page.setViewportSize({width:390,height:844});
     await page.locator('[data-step="d1-wuhua"]').click();
-    assert.equal(await page.locator('#inscription #detail-d1-wuhua').isVisible(),true);
+    assert.equal(await page.locator('#map-detail #detail-d1-wuhua').isVisible(),true);
     await page.screenshot({path:`${output}/same-screen-detail.png`});
     assert.equal(await page.locator('.terrain-land, .terrain-forest, .terrain-valley').count(),0);
     assert.equal(await page.locator('.mobile-artwork img').isVisible(),true);
