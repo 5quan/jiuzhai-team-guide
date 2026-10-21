@@ -50,12 +50,11 @@ main { max-width: 1680px; margin: auto; }
 .plan-overview { display: flex; align-items: baseline; gap: 12px; min-height: 40px; padding: 6px 0; }
 .plan-overview > span { color: var(--muted); font-size: 11px; }
 .plan-note { max-width: 850px; padding-top: 0; }
-.landscape { position: relative; height: clamp(580px, calc(100svh - 170px), 860px); isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--canvas); }
+.landscape { position: relative; height: clamp(580px, calc(100svh - 170px), 860px); isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(120% 70% at 28% 18%, #f4ecda 0%, rgba(244,236,218,0) 62%), radial-gradient(100% 65% at 74% 78%, #e6efe7 0%, rgba(230,239,231,0) 60%), var(--canvas); }
 .map-viewport { position: absolute; inset: 0; overflow: hidden; overscroll-behavior: contain; touch-action: none; scrollbar-width: thin; cursor: grab; }
 .map-viewport:active { cursor: grabbing; }
 .route-svg { display: block; width: 100%; height: auto; margin: 0 auto; user-select: none; }
-.map-artwork { pointer-events: none; }
-.mobile-artwork { display: none; }
+
 .map-terrain { pointer-events: none; }
 .terrain-contour { fill: none; stroke: #83916e; stroke-width: 2; stroke-opacity: .3; }
 .terrain-river-bank { fill: none; stroke: #e2efe0; stroke-width: 20; stroke-linecap: round; }
@@ -268,9 +267,7 @@ main { max-width: 1680px; margin: auto; }
   .day-switch strong { font-size: 16px; }
   .day-switch button > span { font-size: 11px; }
   .landscape { height: max(390px, calc(100svh - 151px - env(safe-area-inset-bottom))); }
-  .map-artwork { display: none; }
-  .mobile-artwork { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
-  .mobile-artwork img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; transform: scale(1.16); opacity: 1; }
+
   .painting-title { top: 24px; left: 16px; gap: 10px; }
   .painting-title > span { font-size: 31px; letter-spacing: 5px; }
   .painting-title small { font-size: 13px; letter-spacing: 3px; }
@@ -374,8 +371,6 @@ main { max-width: 1680px; margin: auto; }
   [data-view=home][hidden] { display: block !important; }
   .journey-heading { padding: 10px 0; }
   .landscape { height: auto; min-height: 0; max-height: none; overflow: visible; border: 0; }
-  .mobile-artwork { display: none !important; }
-  .map-artwork { display: block; }
   .map-viewport { position: relative; overflow: visible; height: auto; }
   .route-svg { width: 100% !important; transform: none !important; }
   .spot-node { opacity: 1; }
@@ -405,3 +400,7 @@ main { max-width: 1680px; margin: auto; }
 .buddy img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #fff; border: 2px solid #fff; box-shadow: 0 3px 14px rgba(83, 60, 40, .22); display: block; }
 @media (max-width: 600px) { .buddy { width: 62px; height: 62px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom)); } }
 @media print { .buddy { display: none !important; } }
+
+
+/* 主页天气一行 */
+.weather-now { margin: 3px 0 0; font-size: 12px; color: var(--muted); letter-spacing: .02em; }

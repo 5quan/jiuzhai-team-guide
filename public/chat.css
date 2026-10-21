@@ -42,7 +42,8 @@ summary { cursor: pointer; font-size: 13px; }
 #empty { text-align: center; padding: 8vh 0; font: 24px/1.8 "STSong", "SimSun", serif; }
 #empty span { font: 13px/1.6 "Microsoft YaHei", sans-serif; color: var(--muted); }
 .composer { border-top: 1px solid var(--line); padding-top: 16px; }
-textarea { resize: vertical; min-height: 85px; max-height: 240px; }
+textarea { resize: none; min-height: 44px; max-height: 120px; line-height: 1.5; padding: 10px 12px; overflow-y: auto; }
+.composer textarea { border-radius: 8px; }
 .composer-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
 .composer-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex-wrap: wrap; }
 .composer-right { display: flex; align-items: center; gap: 8px; }
@@ -74,7 +75,16 @@ textarea { resize: vertical; min-height: 85px; max-height: 240px; }
 
 /* 对话头像 */
 .message.assistant { display: flex; gap: 10px; align-items: flex-start; max-width: 92%; }
-.message.assistant .avatar { width: 34px; height: 34px; border-radius: 50%; flex: none; object-fit: cover; border: 1px solid var(--line); background: #fff; }
+.message.assistant .avatar { width: 40px; height: 40px; flex: none; object-fit: contain; background: none; border: 0; filter: drop-shadow(0 1px 2px rgba(83, 60, 40, .18)); }
 .message.assistant .body { min-width: 0; flex: 1; }
 .message.assistant.follow { padding-left: 44px; }
-@media (max-width: 600px) { .message.assistant .avatar { width: 30px; height: 30px; } .message.assistant.follow { padding-left: 40px; } }
+@media (max-width: 600px) { .message.assistant .avatar { width: 34px; height: 34px; } .message.assistant.follow { padding-left: 44px; } }
+
+
+/* 手绘背景移到聊天页：模糊后铺满，再压一层米色蒙版，只留氛围不抢内容 */
+body.chat-page { background: #faf6ed; }
+body.chat-page::before { content: ''; position: fixed; inset: 0; background: url('/chat-bg.webp') center / cover no-repeat; filter: blur(4px); transform: scale(1.06); pointer-events: none; z-index: 0; }
+body.chat-page::after { content: ''; position: fixed; inset: 0; background: rgba(250, 246, 237, .93); pointer-events: none; z-index: 0; }
+body.chat-page .chat-shell { position: relative; z-index: 1; }
+
+

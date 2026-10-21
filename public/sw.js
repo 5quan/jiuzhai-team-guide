@@ -1,5 +1,5 @@
-const CACHE = 'jiuzhai-web0.2.0-chat1';
-const SHELL = ['/', '/style.css', '/timeline.js', '/app.js', '/favicon.svg', '/paper-landscape-v1.webp'];
+const CACHE = 'jiuzhai-web0.2.0-chat2';
+const SHELL = ['/', '/style.css', '/timeline.js', '/app.js', '/favicon.svg'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));

@@ -8,6 +8,7 @@ import { createLimiter, createCache } from './lib/security.mjs';
 import { createChat } from './lib/chat.mjs';
 import { loadMemes } from './lib/memes.mjs';
 import { loadKnowledge } from './lib/knowledge.mjs';
+import { fetchWeatherNow } from './lib/weather.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const defaultGuide = path.join(root, 'data', 'guide.json');
@@ -19,7 +20,7 @@ function representation(body, type = 'application/json; charset=utf-8') {
   return { bytes, type, etag: `"${createHash('sha256').update(bytes).digest('base64url')}"` };
 }
 
-export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuide, cacheTtlMs = 1000, rateLimit = {}, guide = null, memes = loadMemes(path.join(root, 'public', 'memes')), knowledge = loadKnowledge(path.join(root, 'data', 'knowledge.json')), chat = process.env.CHAT_ENABLED === '1' ? {
+export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuide, cacheTtlMs = 1000, rateLimit = {}, guide = null, memes = loadMemes(path.join(root, 'public', 'memes')), knowledge = loadKnowledge(path.join(root, 'data', 'knowledge.json')), weatherFetch = fetch, chat = process.env.CHAT_ENABLED === '1' ? {
   dbFile: process.env.CHAT_DB || path.join(root, 'storage', 'chat.sqlite'),
   encryptionKey: process.env.CHAT_ENCRYPTION_KEY, inviteCode: process.env.CHAT_INVITE_CODE,
   publicOrigin: process.env.CHAT_ORIGIN, model: process.env.DEEPSEEK_MODEL || 'deepseek-flash',
@@ -31,6 +32,15 @@ export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuid
   // 挂到 server 上仅供测试与运维手动触发，不参与 HTTP 路由。
   const limit = createLimiter(rateLimit);
   const cache = createCache({ ttlMs: cacheTtlMs });
+  // 天气十分钟内复用，避免每次打开页面都打一次外部接口。
+  let weatherCache = { at: 0, data: null };
+  const weatherNow = async () => {
+    if (weatherCache.data && Date.now() - weatherCache.at < 10 * 60 * 1000) return weatherCache.data;
+    const spot = guide?.weather || {};
+    const data = await fetchWeatherNow({ lat: spot.lat ?? 33.2, lon: spot.lon ?? 103.9, fetchImpl: weatherFetch });
+    weatherCache = { at: Date.now(), data };
+    return data;
+  };
   const health = representation({ status: 'ok', service: 'jiuzhai-team-guide' });
   const snapshot = () => cache('guide', async () => {
     const guide = await loadGuide(guideFile);
@@ -87,6 +97,11 @@ export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuid
     }
     try {
       if (url.pathname === '/api/health') { send(200, health); return; }
+      if (url.pathname === '/api/weather/now') {
+        try { send(200, await weatherNow(), 'application/json; charset=utf-8', 'no-cache'); }
+        catch { send(503, { error: '天气暂时取不到，稍后再试。' }); }
+        return;
+      }
       if (url.pathname.startsWith('/api/')) {
         if (!['/api/guide', '/api/spots', '/api/weather'].includes(url.pathname)) { send(404, { error: 'Not found' }); return; }
         const layer = url.searchParams.get('layer') || 'clouds';
@@ -115,7 +130,7 @@ export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuid
       }
       // The deployed frontend has a fixed asset set; unknown paths do no disk I/O.
       const asset = pathname === '/' ? 'index.html' : pathname === '/chat' ? 'chat.html' : pathname === '/memory' ? 'memory.html' : pathname.slice(1);
-      if (!['index.html', 'app.js', 'timeline.js', 'splash.js', 'splash.gif', 'style.css', 'favicon.svg', 'sw.js', 'paper-landscape-v1.webp', 'avatar.webp', 'buddy.webp', 'chat.html', 'chat.js', 'chat.css', 'memory.html', 'memory.js', 'memory.css'].includes(asset)) { send(404, { error: 'Not found' }); return; }
+      if (!['index.html', 'app.js', 'timeline.js', 'splash.js', 'splash.gif', 'style.css', 'favicon.svg', 'sw.js', 'paper-landscape-v1.webp', 'chat-bg.webp', 'avatar.webp', 'buddy.webp', 'chat.html', 'chat.js', 'chat.css', 'memory.html', 'memory.js', 'memory.css'].includes(asset)) { send(404, { error: 'Not found' }); return; }
       const content = await cache(`asset:${asset}`, async () => {
         const publicRoot = await realpath(path.join(root, 'public'));
         const canonical = await realpath(path.join(publicRoot, asset));
@@ -153,3 +168,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   server.listen(port, host, () => console.log(`九寨同行已启动 http://localhost:${port}`));
   for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close(() => process.exit(0)));
 }
+
+
+

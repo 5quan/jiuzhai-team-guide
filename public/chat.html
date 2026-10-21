@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/chat.css">
   <script src="/chat.js" defer></script>
 </head>
-<body>
+<body class="chat-page">
   <main class="chat-shell">
     <header><div><a class="back" href="/">← 返回行程</a><h1>AI 助手</h1></div><div class="account" id="account" hidden><span id="username"></span><a class="back" href="/memory">她记得的事</a><button id="settings" type="button">Key 设置</button><button id="logout" type="button">退出</button></div></header>
     <p class="notice" id="notice" role="status" aria-live="polite">正在连接…</p>
@@ -37,7 +37,7 @@
       <form id="send-form" class="composer">
         <div id="attachments" class="attachments" hidden></div>
         <label class="sr-only" for="message">消息</label>
-        <textarea id="message" rows="3" maxlength="8000" placeholder="跟她说点什么…" required></textarea>
+        <textarea id="message" rows="1" maxlength="8000" placeholder="跟她说点什么…" required></textarea>
         <div class="composer-bar">
           <div class="composer-left">
             <label class="attach" id="attach" for="image-input">＋ 图片</label>

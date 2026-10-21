@@ -103,14 +103,13 @@ function render() {
   $('#main').innerHTML = `
     <div data-view="home">
       <section class="journey-heading" id="itinerary">
-        <div class="journey-title"><h1>九寨两日行记</h1><p class="travel-date">10.29—31 · 7人</p></div>
+        <div class="journey-title"><h1>九寨两日行记</h1><p class="travel-date">10.29—31 · 7人</p><p class="weather-now" id="weather-now" hidden></p></div>
         <div class="journey-actions"><a class="quiet-button" href="/chat">AI 助手</a><details class="time-settings"><summary>设置</summary><div id="inscription-settings"><fieldset class="plan-setting"><legend>行程计划</legend>${plans().map(plan => `<label><input type="radio" name="plan" value="${esc(plan.id)}"${state.plan === plan.id ? ' checked' : ''}>${esc(plan.label)}</label>`).join('')}</fieldset><div class="entry-setting"><label for="entry-time">入园</label><input id="entry-time" type="time" min="${esc(guide.park.open)}" max="${esc(guide.park.lastEntry)}" step="300"><span id="exit-time"></span></div><p class="timing-warning" id="timing-warning" hidden></p></div></details><button class="quiet-button" id="share-button" type="button" aria-label="复制攻略链接">分享</button><button class="quiet-button" id="print-button" type="button">打印</button></div>
       </section>
       <section id="route" aria-label="两天休闲游地图与时间行程">
         <div class="day-switch" role="group" aria-label="选择游览日期">
         </div>
         <div class="landscape" id="landscape">
-          <div class="mobile-artwork" aria-hidden="true"><img src="/paper-landscape-v1.webp" alt="" decoding="async"></div>
           <div class="map-viewport" id="schematic" tabindex="0" aria-label="九寨沟全景示意图，单指拖动，双指缩放，点按景点查看行程"></div>
           <div class="painting-title" aria-hidden="true"><span>九寨沟</span><small>循水慢游</small><i>两日</i></div>
           <aside class="itinerary-inscription" id="inscription" aria-label="当天时间行程">
@@ -150,6 +149,26 @@ function render() {
   $('#map-follow').addEventListener('click', () => { compactItinerary(); focusStep(); rippleSpot(); });
   $('#reload-weather').addEventListener('click', () => switchWeather(state.layer, true));
   navigate(location.hash.slice(1) || 'itinerary', false);
+  loadWeather();
+}
+
+// 主页那行天气：现在 + 下一小时。取不到就整行隐藏，不占位。
+let weatherOnce;
+async function loadWeather() {
+  const el = $('#weather-now');
+  if (!el) return;
+  try {
+    weatherOnce ??= fetch('/api/weather/now', { cache: 'no-store' })
+      .then(response => (response.ok ? response.json() : null))
+      .catch(() => null);
+    const data = await weatherOnce;
+    if (!data?.now || !el.isConnected) return;
+    const parts = [`现在 ${data.now.temp}° ${data.now.text}`];
+    const next = data.next?.[0];
+    if (next) parts.push(`${next.time} ${next.text}`);
+    el.textContent = parts.join(' · ');
+    el.hidden = false;
+  } catch { /* 天气失败不影响行程 */ }
 }
 
 function renderPlan() {
@@ -432,7 +451,6 @@ function renderMapTerrain() {
 function renderMap() {
   const { width, height } = guide.map.canvas;
   const mainNames = new Set(['changhai','wucaichi','forest','jianzhuhai','panda','wuhuahai','peacock','pearl','mirror','nuorilang','rhino','tiger','shuzheng','shuzheng-village','spark','double-falls','double-lake','reed','park-gate','nuorilang-center']);
-  const artwork = `<g class="map-artwork" aria-hidden="true"><image href="/paper-landscape-v1.webp" width="${width}" height="${height}" preserveAspectRatio="xMidYMid meet"/></g>`;
   const waters = guide.map.water.map(water => `<path class="lake-shape${water.seasonal ? ' seasonal-lake' : ''}" data-water="${esc(water.id)}" d="${esc(water.d)}"><title>${esc(locationInfo(water.id).name)}水面示意</title></path>`).join('');
   const roads = guide.map.paths.map(path => `<path class="road-underlay" d="${esc(path.d)}"/><path class="route-line" d="${esc(path.d)}"/>`).join('');
   const nodes = locations().map(spot => {
@@ -440,7 +458,7 @@ function renderMap() {
     const left = spot.labelSide === 'left';
     return `<g class="spot-node${mainNames.has(spot.id) ? '' : ' node-detail'}${spot.kind === 'facility' ? ' node-facility' : ''}" data-spot="${esc(spot.id)}" role="button" tabindex="0" aria-label="${esc(spot.name)}" aria-pressed="false"><circle class="hit-target" cx="${x}" cy="${y}" r="30"/><circle class="route-dot" cx="${x}" cy="${y}" r="12"/><text class="spot-label" x="${x + (left ? -24 : 24)}" y="${y + 7}" text-anchor="${left ? 'end' : 'start'}">${esc(spot.mapLabel || spot.name)}</text></g>`;
   }).join('');
-  $('#schematic').innerHTML = `<svg class="route-svg" viewBox="0 0 ${width} ${height}" role="group" aria-label="九寨沟三沟与湖泊全景示意图">${artwork}${renderMapTerrain()}<g class="map-geography" aria-hidden="true"><text x="580" y="370" transform="rotate(73 580 370)">则查洼沟</text><text x="1375" y="365" transform="rotate(-66 1375 365)">日则沟</text><text x="1050" y="850" transform="rotate(10 1050 850)">树正沟</text><text class="north-mark" x="1490" y="72">↑ 北</text></g><g class="map-water">${waters}</g><g aria-hidden="true">${roads}<path id="active-route" class="active-route"/></g>${nodes}<g id="map-ripple" aria-hidden="true" pointer-events="none"></g></svg><div class="location-pointer" id="location-pointer" aria-hidden="true" hidden><svg viewBox="0 0 24 40"><path d="M8 2H16V21H23L12 38L1 21H8Z"/></svg></div>`;
+  $('#schematic').innerHTML = `<svg class="route-svg" viewBox="0 0 ${width} ${height}" role="group" aria-label="九寨沟三沟与湖泊全景示意图">${renderMapTerrain()}<g class="map-geography" aria-hidden="true"><text x="580" y="370" transform="rotate(73 580 370)">则查洼沟</text><text x="1375" y="365" transform="rotate(-66 1375 365)">日则沟</text><text x="1050" y="850" transform="rotate(10 1050 850)">树正沟</text><text class="north-mark" x="1490" y="72">↑ 北</text></g><g class="map-water">${waters}</g><g aria-hidden="true">${roads}<path id="active-route" class="active-route"/></g>${nodes}<g id="map-ripple" aria-hidden="true" pointer-events="none"></g></svg><div class="location-pointer" id="location-pointer" aria-hidden="true" hidden><svg viewBox="0 0 24 40"><path d="M8 2H16V21H23L12 38L1 21H8Z"/></svg></div>`;
   bindMapGestures();
   updateMap();
 }

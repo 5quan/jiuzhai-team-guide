@@ -52,6 +52,7 @@ function showUser(value) {
   abortController?.abort();
   abortController = null;
   $('message').value = '';
+  $('message').style.height = '';
   $('attachments').replaceChildren();
   $('attachments').hidden = true;
   $('messages').replaceChildren();
@@ -395,7 +396,7 @@ async function sendMessage(request) {
         const existing = turns.findIndex(turn => turn.id === incoming.id);
         if (existing < 0) turns.push(incoming); else turns[existing] = incoming;
         streaming = null;
-        if ($('message').value.trim() === request.content) $('message').value = '';
+        if ($('message').value.trim() === request.content) { $('message').value = ''; $('message').style.height = ''; }
         pendingRequest = null;
         notice('');
         render(true);
@@ -417,7 +418,7 @@ async function sendMessage(request) {
       try {
         await loadMessages(false, true);
         if (turns.some(turn => turn.request_id === request.requestId)) {
-          if ($('message').value.trim() === request.content) $('message').value = '';
+          if ($('message').value.trim() === request.content) { $('message').value = ''; $('message').style.height = ''; }
           pendingRequest = null;
         }
       } catch { /* Keep the same request ID for an uncertain network retry. */ }
@@ -445,6 +446,14 @@ $('send-form').addEventListener('submit', event => {
 $('message').addEventListener('keydown', event => {
   if ((event.ctrlKey || event.metaKey) && event.key === 'Enter' && !event.isComposing) { event.preventDefault(); if (!$('send').disabled) $('send-form').requestSubmit(); }
 });
+
+// 输入框像微信一样：一行起，随内容长高，最多 120px。
+function autoGrow() {
+  const field = $('message');
+  field.style.height = 'auto';
+  field.style.height = `${Math.min(field.scrollHeight, 120)}px`;
+}
+$('message').addEventListener('input', autoGrow);
 $('load-more').addEventListener('click', async () => {
   $('load-more').disabled = true;
   try { await loadMessages(true); } catch (error) { notice(error.message, true); }
@@ -506,3 +515,4 @@ async function init() {
   catch (error) { if (!user) showUser(null); notice(error.message, error.message !== '请先登录。'); }
 }
 init();
+
