@@ -86,10 +86,12 @@ main { max-width: 1680px; margin: auto; }
 .painting-title i { display: none; padding: 4px 2px; margin-top: 74px; border: 1px solid var(--autumn); color: var(--autumn); font: normal 13px/1.2 var(--serif); }
 
 /* A four-place itinerary overlays the painting with backing only behind text. */
-.itinerary-inscription { position: absolute; top: var(--itinerary-top, 50%); left: 3.3%; width: 192px; max-height: none; padding: 8px 10px; border: 0; background: none; color: var(--itinerary); display: flex; flex-direction: column; isolation: isolate; z-index: 2; }
+.itinerary-inscription { position: absolute; top: var(--itinerary-top, 50%); left: 3.3%; width: 192px; max-height: none; padding: 8px 10px; border: 0; background: rgba(250, 246, 237, .72); border-radius: 6px; color: var(--itinerary); display: flex; flex-direction: column; isolation: isolate; z-index: 2; }
 .timeline-ink { position: relative; display: inline-block; max-width: 100%; vertical-align: top; isolation: isolate; }
 .itinerary-inscription .timeline-ink::before { content: none; }
-.itinerary-inscription .step-summary strong .timeline-ink::before { content: ''; position: absolute; inset: -2px -6px; z-index: -1; pointer-events: none; background: rgba(255, 252, 245, .94); border-radius: 4px; box-shadow: 0 0 0 1px rgba(217, 201, 168, .45); }
+/* 默认只留景点名；点开这一项才露出时间与时长。段间的交通行不受影响。 */
+.itinerary-inscription .step-meta { display: none; }
+.itinerary-inscription .timeline-stop.is-open .step-meta { display: block; }
 .inscription-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; }
 .inscription-heading p { font-size: 12px; color: var(--muted); }
 .inscription-heading .quiet-button { font-size: 12px; padding: 5px; flex-shrink: 0; min-height: 40px; }
@@ -281,8 +283,8 @@ main { max-width: 1680px; margin: auto; }
   .map-caption { top: 78px; right: 16px; max-width: 46%; padding: 6px 0 6px 9px; }
   .map-caption > p { font-size: 10px; }
   .map-caption h3 { font-size: 22px; margin: 3px 0; }
-  .itinerary-inscription { bottom: auto; left: 10px; width: min(184px, 46%); max-height: none; padding: 7px; }
-  .itinerary-inscription.is-compact { width: min(184px, 46%); }
+  .itinerary-inscription { top: auto; bottom: calc(62px + env(safe-area-inset-bottom)); left: 0; right: 0; width: auto; max-height: 40dvh; overflow-y: auto; overscroll-behavior: contain; padding: 10px 14px 12px; background: rgba(250, 246, 237, .95); border-radius: 14px 14px 0 0; box-shadow: 0 -4px 18px rgba(83, 60, 40, .1); z-index: 6; }
+  .itinerary-inscription.is-compact { width: auto; }
 
   .inscription-heading { padding: 2px 0; }
   .inscription-heading p, .inscription-heading .quiet-button { font-size: 11px; }
@@ -412,5 +414,10 @@ main { max-width: 1680px; margin: auto; }
 .has-dot { position: relative; }
 .has-dot::after { content: ''; position: absolute; top: 1px; right: 1px; width: 9px; height: 9px; border-radius: 50%; background: #cf4726; border: 2px solid #faf6ed; }
 .bottom-nav a.has-dot::after { top: 8px; right: calc(50% - 16px); }
+
+
+
+
+
 
 
