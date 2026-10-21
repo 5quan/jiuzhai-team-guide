@@ -50,7 +50,7 @@ main { max-width: 1680px; margin: auto; }
 .plan-overview { display: flex; align-items: baseline; gap: 12px; min-height: 40px; padding: 6px 0; }
 .plan-overview > span { color: var(--muted); font-size: 11px; }
 .plan-note { max-width: 850px; padding-top: 0; }
-.landscape { position: relative; height: clamp(580px, calc(100svh - 170px), 860px); isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(120% 70% at 28% 18%, #f4ecda 0%, rgba(244,236,218,0) 62%), radial-gradient(100% 65% at 74% 78%, #e6efe7 0%, rgba(230,239,231,0) 60%), var(--canvas); }
+.landscape { position: relative; height: clamp(580px, calc(100svh - 170px), 860px); isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); background: url('/paper-texture.webp') repeat, radial-gradient(120% 70% at 28% 18%, #f4ecda 0%, rgba(244,236,218,0) 62%), radial-gradient(100% 65% at 74% 78%, #e6efe7 0%, rgba(230,239,231,0) 60%), var(--canvas); }
 .map-viewport { position: absolute; inset: 0; overflow: hidden; overscroll-behavior: contain; touch-action: none; scrollbar-width: thin; cursor: grab; }
 .map-viewport:active { cursor: grabbing; }
 .route-svg { display: block; width: 100%; height: auto; margin: 0 auto; user-select: none; }
@@ -69,10 +69,10 @@ main { max-width: 1680px; margin: auto; }
 .road-underlay { fill: none; stroke: var(--paper); stroke-width: 9; }
 .route-line { fill: none; stroke: #b1822b; stroke-width: 3; stroke-linecap: round; }
 .active-route { fill: none; stroke: var(--autumn); stroke-width: 5; stroke-dasharray: 8 6; stroke-linecap: round; opacity: .85; pointer-events: none; }
-.spot-node { cursor: pointer; opacity: .9; }
-.spot-node.is-today, .spot-node.selected { opacity: 1; }
+.spot-node { cursor: pointer; opacity: .3; transition: opacity .18s ease; }
+.spot-node.is-today, .spot-node.selected, .spot-node.is-active { opacity: 1; }
 .hit-target { fill: transparent; }
-.route-dot { fill: var(--map-other-day); stroke: var(--paper); stroke-width: 2.5; }
+.route-dot { fill: var(--map-other-day); stroke: var(--paper); stroke-width: 2; }
 .spot-node.is-today .route-dot { fill: var(--map-today); }
 .spot-label { font-size: 22px; fill: var(--ink); font-weight: 500; paint-order: stroke; stroke: var(--canvas); stroke-width: 5px; stroke-linejoin: round; pointer-events: none; }
 .node-facility .spot-label { font-size: 19px; }
@@ -88,7 +88,8 @@ main { max-width: 1680px; margin: auto; }
 /* A four-place itinerary overlays the painting with backing only behind text. */
 .itinerary-inscription { position: absolute; top: var(--itinerary-top, 50%); left: 3.3%; width: 192px; max-height: none; padding: 8px 10px; border: 0; background: none; color: var(--itinerary); display: flex; flex-direction: column; isolation: isolate; z-index: 2; }
 .timeline-ink { position: relative; display: inline-block; max-width: 100%; vertical-align: top; isolation: isolate; }
-.itinerary-inscription .timeline-ink::before { content: ''; position: absolute; inset: -1px -3px; z-index: -1; pointer-events: none; background: rgba(255,252,245,.82); border-radius: 3px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3px, #000 calc(100% - 3px), transparent); mask-image: linear-gradient(90deg, transparent, #000 3px, #000 calc(100% - 3px), transparent); }
+.itinerary-inscription .timeline-ink::before { content: none; }
+.itinerary-inscription .step-summary strong .timeline-ink::before { content: ''; position: absolute; inset: -2px -6px; z-index: -1; pointer-events: none; background: rgba(255, 252, 245, .94); border-radius: 4px; box-shadow: 0 0 0 1px rgba(217, 201, 168, .45); }
 .inscription-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; }
 .inscription-heading p { font-size: 12px; color: var(--muted); }
 .inscription-heading .quiet-button { font-size: 12px; padding: 5px; flex-shrink: 0; min-height: 40px; }
@@ -411,3 +412,5 @@ main { max-width: 1680px; margin: auto; }
 .has-dot { position: relative; }
 .has-dot::after { content: ''; position: absolute; top: 1px; right: 1px; width: 9px; height: 9px; border-radius: 50%; background: #cf4726; border: 2px solid #faf6ed; }
 .bottom-nav a.has-dot::after { top: 8px; right: calc(50% - 16px); }
+
+

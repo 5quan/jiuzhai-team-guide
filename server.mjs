@@ -130,7 +130,7 @@ export function createServer({ guideFile = process.env.GUIDE_FILE || defaultGuid
       }
       // The deployed frontend has a fixed asset set; unknown paths do no disk I/O.
       const asset = pathname === '/' ? 'index.html' : pathname === '/chat' ? 'chat.html' : pathname === '/memory' ? 'memory.html' : pathname.slice(1);
-      if (!['index.html', 'app.js', 'timeline.js', 'splash.js', 'splash.gif', 'style.css', 'favicon.svg', 'sw.js', 'paper-landscape-v1.webp', 'chat-bg.webp', 'avatar.webp', 'buddy.webp', 'chat.html', 'chat.js', 'chat.css', 'memory.html', 'memory.js', 'memory.css'].includes(asset)) { send(404, { error: 'Not found' }); return; }
+      if (!['index.html', 'app.js', 'timeline.js', 'splash.js', 'splash.gif', 'style.css', 'favicon.svg', 'sw.js', 'paper-landscape-v1.webp', 'paper-texture.webp', 'chat-bg.webp', 'avatar.webp', 'buddy.webp', 'chat.html', 'chat.js', 'chat.css', 'memory.html', 'memory.js', 'memory.css'].includes(asset)) { send(404, { error: 'Not found' }); return; }
       const content = await cache(`asset:${asset}`, async () => {
         const publicRoot = await realpath(path.join(root, 'public'));
         const canonical = await realpath(path.join(publicRoot, asset));
@@ -168,6 +168,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   server.listen(port, host, () => console.log(`九寨同行已启动 http://localhost:${port}`));
   for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close(() => process.exit(0)));
 }
+
 
 
 
