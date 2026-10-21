@@ -26,12 +26,19 @@ const fs = require('node:fs');
             const nodes = [...list.querySelectorAll('.timeline-node')].map(n => n.getBoundingClientRect());
             const frame = list.getBoundingClientRect();
             const ink = list.querySelector('.timeline-ink');
-            return { count: nodes.length, visible: nodes.filter(n => n.top + 10 >= frame.top && n.top + 10 <= frame.bottom).length, bottom: panel.bottom, limit: nav.top, fits: panel.top >= 0 && panel.bottom <= nav.top && panel.left >= 0 && panel.right <= innerWidth, scroll: list.scrollHeight - list.clientHeight, overflow: document.documentElement.scrollWidth > innerWidth, panelBackground: getComputedStyle(document.querySelector('#inscription')).backgroundColor, textBackground: getComputedStyle(ink,'::before').backgroundColor };
+            const map = document.querySelector('#schematic').getBoundingClientRect();
+            const legend = document.querySelector('.map-legend').getBoundingClientRect();
+            const contentBottom = legend.height ? legend.top - 12 : map.bottom - 16;
+            return { count: nodes.length, visible: nodes.filter(n => n.top + 10 >= frame.top && n.top + 10 <= frame.bottom).length, bottom: panel.bottom, limit: nav.top, fits: panel.top >= 0 && panel.bottom <= nav.top && panel.bottom <= contentBottom + 1 && panel.left >= 0 && panel.right <= innerWidth, scroll: list.scrollHeight - list.clientHeight, overflow: document.documentElement.scrollWidth > innerWidth, panelBackground: getComputedStyle(document.querySelector('#inscription')).backgroundColor, textBackground: getComputedStyle(ink,'::before').backgroundColor, top: panel.top - map.top, midpoint: map.height / 2, centerFits: map.top + map.height / 2 + panel.height <= contentBottom, metaSize: getComputedStyle(list.querySelector('.step-meta')).fontSize, travelSize: getComputedStyle(list.querySelector('.schedule-leg, .timeline-self-leg')).fontSize };
           });
           layouts.push({width,height,day,period,...layout});
           assert.ok(layout.fits && !layout.overflow && layout.visible <= 4 && layout.visible > 0 && (layout.count <= 4 || layout.scroll > 0), JSON.stringify(layouts.at(-1)));
           assert.equal(layout.panelBackground,'rgba(0, 0, 0, 0)');
           assert.equal(layout.textBackground,'rgba(255, 252, 245, 0.82)');
+          assert.equal(layout.metaSize,'11px');
+          assert.equal(layout.travelSize,'11px');
+          assert.ok(layout.top <= layout.midpoint + 1);
+          if (layout.centerFits) assert.ok(Math.abs(layout.top - layout.midpoint) <= 1);
         }
       }
       await page.locator('[data-day="day1"]').click();

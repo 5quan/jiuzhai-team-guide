@@ -1,4 +1,4 @@
-const CACHE = 'jiuzhai-2026-10-21-text-backdrop-four-stops';
+const CACHE = 'jiuzhai-web0.1.0';
 const SHELL = ['/', '/style.css', '/timeline.js', '/app.js', '/favicon.svg', '/paper-landscape-v1.webp'];
 
 self.addEventListener('install', event => {

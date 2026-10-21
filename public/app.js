@@ -231,6 +231,12 @@ function fitTimelineWindow() {
   const spans = tops.slice(4).map((top, index) => top - tops[index]);
   if (spans.length) list.style.setProperty('--timeline-window', `${Math.floor(Math.min(...spans) - 1)}px`);
   else list.style.removeProperty('--timeline-window');
+  const panel = $('#inscription');
+  const frame = $('#schematic').getBoundingClientRect();
+  const legend = $('.map-legend').getBoundingClientRect();
+  const bottomSpace = legend.height ? frame.bottom - legend.top + 12 : 16;
+  const lastTop = frame.height - panel.getBoundingClientRect().height - bottomSpace;
+  panel.style.setProperty('--itinerary-top', `${Math.round(Math.max(8, Math.min(frame.height / 2, lastTop)))}px`);
 }
 
 function compactItinerary() {
