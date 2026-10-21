@@ -17,8 +17,10 @@
 | `/memory` 记忆页 | 可用 |
 | HTTPS + IP 证书 + 自动续期 | 可用 |
 | 表情包图片 | **占位图**，需要导入真实包 |
-| 地图装饰 | 待做 |
+| 地图装饰 | 部分完成（矢量山体、水系、栈道；未再加固定风景画） |
 | 检索工具（tool call） | 待做 |
+
+> **2026-10-22 本地改动，尚未发布**：行程栏改为半透明宣纸米色底；景点名单独小衬底；景点钟点默认收起、点开再展开，交通用时始终可见；非当前时段的景点圆点淡化。线上目前仍是 `web0.2.0` 的上一版行程页。
 
 ## 架构（按职责分文件）
 
@@ -33,6 +35,7 @@ lib/search.mjs          关键词触发 + DeepSeek /v1/tools/search
 lib/knowledge.mjs       景点常识库，按当天路线挑景点注入
 lib/weather.mjs         Open-Meteo 逐小时天气
 public/app.js           行程页逻辑：地图 SVG、时间线、天气行、红点
+public/timeline.js      把相邻抵达与游览合并成地点节点的小工具
 public/chat.js          聊天页：SSE 解析、分段渲染、图片、停止、轮询
 public/splash.js        开屏动画
 data/guide.json         行程数据（景点、路线、时间）
@@ -97,10 +100,11 @@ PLAYWRIGHT_MODULE=D:\project\fun\shot\node_modules\playwright node tests/chat.br
 
 ## 下一步建议（按优先级）
 
-1. **导入真实表情包** —— `node scripts/import-memes.mjs <解压目录> happy,like,surprised,confused,sad,baka,fool,see,sigh,sleep,meow,laugh`，再重建镜像
-2. **检索工具** —— 给 `chat/completions` 传 `tools`，处理 `tool_calls`；难点是流式下要等 tool_call 收完再续流
-3. **地图装饰** —— 纯代码可做：远山渐变阴影、海子从深蓝到浅青、纸纹噪点
-4. **关掉 666 明文端口** —— `.env` 改 `GUIDE_BIND=127.0.0.1`，`docker compose up -d`
+1. **发布本轮行程页改动** —— 本地验证通过后 `git push origin main`，服务器按下方部署步骤重建；线上仍是旧行程页
+2. **导入真实表情包** —— `node scripts/import-memes.mjs <解压目录> happy,like,surprised,confused,sad,baka,fool,see,sigh,sleep,meow,laugh`，再重建镜像
+3. **检索工具** —— 给 `chat/completions` 传 `tools`，处理 `tool_calls`；难点是流式下要等 tool_call 收完再续流
+4. **地图装饰** —— 纯代码可做：远山渐变阴影、海子从深蓝到浅青、纸纹噪点
+5. **关掉 666 明文端口** —— `.env` 改 `GUIDE_BIND=127.0.0.1`，`docker compose up -d`
 
 ## 容易踩的坑
 

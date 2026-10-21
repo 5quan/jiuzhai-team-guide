@@ -142,6 +142,7 @@ function render() {
     state.starts.set(state.day, event.target.value);
     state.period = schedule().find(step => step.id === state.step)?.period || 'morning';
     renderSchedule();
+    updateMap();
     renderCaption();
   });
   $$('input[name="plan"]').forEach(input => input.addEventListener('change', () => choosePlan(input.value)));
@@ -301,7 +302,7 @@ function renderSchedule() {
     }).join('');
     const duration = step.mode === 'visit' ? ` · 游览${step.duration}分钟` : step.mode === 'rest' ? ` · 休息${step.duration}分钟` : '';
     const time = moving ? `${clock(step.start)}—${clock(step.end)}` : clock(step.start);
-    return `<li class="timeline-stop${active ? ' is-active' : ''}" data-node-id="${esc(step.id)}">${moving ? '' : `<div class="timeline-connection">${incoming}</div>`}<div class="schedule-row${step.id === state.step ? ' selected' : ''}" data-step-row="${esc(step.id)}"><button type="button" class="schedule-step${moving ? ' is-moving' : ''}" data-step="${esc(step.id)}" aria-pressed="${step.id === state.step}" aria-expanded="${expanded}" aria-controls="detail-${esc(step.id)}">${moving ? `<span class="timeline-self-leg"><span class="timeline-ink">${timelineTravelMarkup(step)}</span></span>` : ''}<span class="timeline-node"><span class="step-summary"><strong><span class="timeline-ink">${esc(timelinePlace(stop))}${step.id === state.nowStep ? '<span class="step-now">现在</span>' : ''}</span></strong><span class="step-meta"><span class="timeline-ink"><time>${time}</time>${duration}</span></span></span></span></button>${renderTimelineDetail(step, expanded)}</div></li>`;
+    return `<li class="timeline-stop${active ? ' is-active' : ''}" data-node-id="${esc(step.id)}">${moving ? '' : `<div class="timeline-connection">${incoming}</div>`}<div class="schedule-row${step.id === state.step ? ' selected' : ''}" data-step-row="${esc(step.id)}"><button type="button" class="schedule-step${moving ? ' is-moving' : ''}" data-step="${esc(step.id)}" aria-pressed="${step.id === state.step}" aria-expanded="${expanded}" aria-controls="detail-${esc(step.id)}">${moving ? `<span class="timeline-self-leg"><span class="timeline-ink">${timelineTravelMarkup(step)}</span></span>` : ''}<span class="timeline-node"><span class="step-summary"><strong><span class="timeline-ink place-name">${esc(timelinePlace(stop))}${step.id === state.nowStep ? '<span class="step-now">现在</span>' : ''}</span></strong><span class="step-meta"${expanded ? '' : ' hidden'}><span class="timeline-ink"><time>${time}</time>${duration}</span></span></span></span></button>${renderTimelineDetail(step, expanded)}</div></li>`;
   }).join('') : '<li class="empty">该时段没有安排，请切换其他时段。</li>';
   $('#inscription').classList.toggle('is-compact', state.compact);
   $('#inscription').classList.toggle('has-detail', !state.compact && Boolean(state.expandedStep));
@@ -379,7 +380,7 @@ function chooseStep(id, fit = true) {
   state.step = id;
   state.spot = timelineSpot(step);
   state.period = step.period;
-  state.compact = false;
+  state.compact = !expand;
   state.expandedStep = expand ? id : null;
   const scroll = $('#schedule-list').scrollTop;
   renderSchedule();
@@ -481,10 +482,15 @@ function updateMap() {
   const dayIds = new Set(locations().filter(spot => daysForSpot(spot).some(day => day.id === state.day)).map(spot => spot.id));
   const step = currentStep();
   const active = new Set(step?.spotIds || []);
+  const periodSpots = new Set(schedule()
+    .filter(item => item.period === state.period)
+    .flatMap(item => [...item.spotIds, item.to])
+    .filter(Boolean));
   $$('#schematic .spot-node').forEach(node => {
     const id = node.dataset.spot;
     node.classList.toggle('is-today', dayIds.has(id));
     node.classList.toggle('is-active', active.has(id));
+    node.classList.toggle('is-other-time', !periodSpots.has(id));
     node.classList.toggle('selected', id === state.spot);
     node.setAttribute('aria-pressed', String(id === state.spot));
   });

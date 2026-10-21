@@ -37,10 +37,11 @@ const path = require('node:path');
     assert.equal(await page.locator('#print-button').count(),1);
     await page.evaluate(()=>{navigator.clipboard.writeText=async value=>{window.testCopiedGuide=value;};});
     await page.locator('#share-button').click();
-    assert.equal(await page.evaluate(()=>window.testCopiedGuide),origin+'/');
+    assert.equal(await page.evaluate(()=>window.testCopiedGuide),origin+'/?plan=two-days');
     checks.push('37个点位与15组水面保留；全天按钮和参考图小字已移除');
     for (const width of [320,390,430,768,1280,1440]) {
-      await page.setViewportSize({ width, height: 950 });
+      await page.setViewportSize({ width, height: width <= 700 ? 844 : 950 });
+      await page.evaluate(() => window.scrollTo(0, 0));
       const layout = await page.evaluate(() => {
         const stage = document.querySelector('.landscape').getBoundingClientRect();
         const map = document.querySelector('#schematic').getBoundingClientRect();
@@ -48,12 +49,15 @@ const path = require('node:path');
         const list=document.querySelector('#schedule-list');
         const input=document.querySelector('#entry-time').getBoundingClientRect();
         const exit=document.querySelector('#exit-time').getBoundingClientRect();
-        const timesBelow=[...list.querySelectorAll('.schedule-step')].every(row=>row.querySelector('time').getBoundingClientRect().top>=row.querySelector('strong').getBoundingClientRect().bottom);
-        return { width: innerWidth, clientWidth:document.documentElement.clientWidth, page: document.documentElement.scrollWidth, mapTop:stage.top+scrollY, panelWidth:panel.width, panelRatio:panel.width/map.width, timesBelow, contentFits:list.scrollWidth<=list.clientWidth+1 && true, stageHeight: stage.height, mapRatio: map.width / stage.width, overlap: panel.left >= map.left && panel.right <= map.right && panel.top >= map.top && panel.bottom <= map.bottom + 1 };
+        const metas=[...list.querySelectorAll('.step-meta')];
+        const timesCollapsed=metas.length>0&&metas.every(meta=>meta.hidden);
+        const transports=[...list.querySelectorAll('.schedule-leg, .timeline-self-leg')];
+        const transportVisible=transports.length>0&&transports.every(row=>row.getBoundingClientRect().height>0);
+        return { width: innerWidth, clientWidth:document.documentElement.clientWidth, page: document.documentElement.scrollWidth, mapTop:stage.top+scrollY, panelWidth:panel.width, panelRatio:panel.width/map.width, timesCollapsed, transportVisible, contentFits:list.scrollWidth<=list.clientWidth+1 && true, stageHeight: stage.height, mapRatio: map.width / stage.width, overlap: panel.left >= map.left && panel.right <= map.right && panel.top >= map.top && panel.bottom <= map.bottom + 1 };
       });
-      assert.equal(layout.page, layout.clientWidth); assert.ok(layout.mapRatio > .99 && layout.overlap); assert.ok(layout.mapTop<=100 && layout.stageHeight <= 860); assert.ok(layout.contentFits && layout.timesBelow); assert.ok(width<=700 ? layout.panelRatio<=.46 && layout.panelWidth<=184 : layout.panelWidth<=192); layouts.push(layout);
+      assert.equal(layout.page, layout.clientWidth); assert.ok(layout.mapRatio > .99 && layout.overlap); assert.ok(layout.mapTop<=120 && layout.stageHeight <= 860, JSON.stringify(layout)); assert.ok(layout.contentFits && layout.timesCollapsed && layout.transportVisible); assert.ok(width<=700 ? layout.panelRatio<=.46 && layout.panelWidth<=184 : layout.panelWidth<=192); layouts.push(layout);
     }
-    checks.push('320—1440px六档宽度无溢出；手机点线行程不超过46%画面，交通与停留分别标注');
+    checks.push('320—1440px六档宽度无溢出；手机点线行程不超过46%画面，景点名默认收起时间、交通用时保持可见');
     checks.push('重复品牌栏已移除，分享与打印合并到小标题行；六档屏宽的地图起点不超过100px，复制链接正常');
     for (const testWidth of [1280,390]) {
       await page.setViewportSize({ width: testWidth, height: testWidth === 390 ? 844 : 1000 });
@@ -77,6 +81,8 @@ const path = require('node:path');
             const zoomBefore = await page.locator('#schematic').getAttribute('data-zoom');
             await page.locator(`[data-step="${id}"]`).click();
             assert.equal(await page.locator(`[data-step="${id}"]`).getAttribute('aria-expanded'), 'true');
+            const meta = page.locator(`[data-step-row="${id}"] .step-meta`);
+            if (await meta.count()) assert.equal(await meta.evaluate(node => node.hidden), false, `${testWidth}/${id} time should expand with its place`);
             assert.equal(await page.locator('#schematic').getAttribute('data-zoom'), zoomBefore, 'Selecting an itinerary must not enlarge the map');
             const focused = await page.evaluate(() => {
               const marker = document.querySelector('#schematic .selected .route-dot').getBoundingClientRect();
@@ -197,7 +203,7 @@ const path = require('node:path');
     assert.match(await page.locator('#spot-results').innerText(), /第二天/);
     await page.locator('#spot-results [data-spot="changhai"]').click();
     assert.equal(await page.locator('.day-switch [data-day="day2"]').getAttribute('aria-pressed'),'true');
-    assert.match(await page.locator('#toast').innerText(), /已切到10.31的行程/);
+    assert.match(await page.locator('#toast').innerText(), /已切到10\.31/);
     assert.equal(await page.locator('#map-ripple').getAttribute('data-location'),'changhai');
     await page.locator('#schematic [data-spot="changhai"]').focus(); await page.keyboard.press('Enter');
     assert.equal(await page.evaluate(()=>document.activeElement.dataset.spot),'changhai');

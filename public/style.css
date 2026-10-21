@@ -79,6 +79,11 @@ main { max-width: 1680px; margin: auto; }
 .node-detail:not(.selected) .spot-label { display: none; }
 .spot-node.selected .route-dot { stroke: var(--pine); stroke-width: 4; }
 .spot-node.selected .spot-label { font-weight: 700; fill: var(--pine); }
+/* Only the places on the itinerary period being read stay fully present. */
+.spot-node.is-other-time { opacity: .32; }
+.spot-node.is-other-time .spot-label { opacity: .72; }
+.spot-node.selected.is-other-time { opacity: 1; }
+.spot-node.selected.is-other-time .spot-label { opacity: 1; }
 .spot-node.is-active .route-dot { stroke: var(--pine); }
 .painting-title { position: absolute; top: 32px; left: 3.3%; display: flex; gap: 14px; align-items: flex-start; color: var(--pine); pointer-events: none; }
 .painting-title > span { font: 34px/1.25 var(--serif); letter-spacing: 6px; }
@@ -86,9 +91,13 @@ main { max-width: 1680px; margin: auto; }
 .painting-title i { display: none; padding: 4px 2px; margin-top: 74px; border: 1px solid var(--autumn); color: var(--autumn); font: normal 13px/1.2 var(--serif); }
 
 /* A four-place itinerary overlays the painting with backing only behind text. */
-.itinerary-inscription { position: absolute; top: var(--itinerary-top, 50%); left: 3.3%; width: 192px; max-height: none; padding: 8px 10px; border: 0; background: none; color: var(--itinerary); display: flex; flex-direction: column; isolation: isolate; z-index: 2; }
+.itinerary-inscription { position: absolute; top: var(--itinerary-top, 50%); left: 3.3%; width: 192px; max-height: none; padding: 8px 10px; border: 0; border-radius: 3px; color: var(--itinerary); display: flex; flex-direction: column; isolation: isolate; z-index: 2; background: radial-gradient(120% 80% at 18% 12%, rgba(255,255,255,.24), transparent 55%), repeating-linear-gradient(93deg, rgba(128,99,68,.028) 0 1px, transparent 1px 4px), rgba(250,246,237,.62); box-shadow: 0 0 18px rgba(250,246,237,.3); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); }
 .timeline-ink { position: relative; display: inline-block; max-width: 100%; vertical-align: top; isolation: isolate; }
-.itinerary-inscription .timeline-ink::before { content: ''; position: absolute; inset: -1px -3px; z-index: -1; pointer-events: none; background: rgba(255,252,245,.82); border-radius: 3px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3px, #000 calc(100% - 3px), transparent); mask-image: linear-gradient(90deg, transparent, #000 3px, #000 calc(100% - 3px), transparent); }
+/* Only the place name carries a small cream backing; times and transport stay plain. */
+.itinerary-inscription .place-name { padding: 0 3px; margin: 0 -3px; border-radius: 2px; background: rgba(255,250,238,.9); box-shadow: 0 0 0 2px rgba(255,250,238,.52); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .itinerary-inscription { background-color: rgba(250,246,237,.78); }
+}
 .inscription-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; }
 .inscription-heading p { font-size: 12px; color: var(--muted); }
 .inscription-heading .quiet-button { font-size: 12px; padding: 5px; flex-shrink: 0; min-height: 40px; }
